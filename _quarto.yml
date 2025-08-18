@@ -4,10 +4,7 @@ project:
 
 website:
   title: "Kolkrabe"
-  navbar: 
-    left:
-      - href: index.qmd
-        text: Home
+  navbar: false
   sidebar:
     style: "docked"
     search: true

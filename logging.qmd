@@ -3,9 +3,9 @@ title: "Logging"
 editor: visual
 ---
 
-# Heading 1 Test
+# Logging
 
-Test 1
+* 2 types of Debugging 
 
 ## Heading 2 test
 

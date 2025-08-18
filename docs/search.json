@@ -6,7 +6,6 @@
     "section": "",
     "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
     "crumbs": [
-      "Home",
       "Welcome"
     ]
   },
@@ -22,10 +21,11 @@
     "href": "logging.html",
     "title": "Logging",
     "section": "",
-    "text": "Test 1",
+    "text": "2 types of Debugging",
     "crumbs": [
       "Home",
       "CCNP ENARSI",
+      "Infrastructure",
       "Logging"
     ]
   },
