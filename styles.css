@@ -1,1 +1,24 @@
 /* css styles */
+/* Make sidebar dark grey */
+.sidebar {
+  background-color: #2e2e2e;   /* dark grey */
+}
+
+/* Sidebar links text color */
+.sidebar .nav-link {
+  color: #ffffff;              /* white text */
+}
+
+/* Hover and active link highlight */
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #444444;   /* slightly lighter grey */
+  color: #ffffff;
+}
+
+/* Optional: search box background */
+.sidebar .search input {
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
