@@ -22,7 +22,12 @@
     "href": "logging.html",
     "title": "Logging",
     "section": "",
-    "text": "#logging stuff\nLogging debugging etc etc\n#debugging stuff"
+    "text": "Logging debugging etc etc",
+    "crumbs": [
+      "Home",
+      "CCNP ENARSI",
+      "Logging"
+    ]
   },
   {
     "objectID": "logging.html#yadadadad",
@@ -30,5 +35,29 @@
     "title": "Logging",
     "section": "yadadadad",
     "text": "yadadadad"
+  },
+  {
+    "objectID": "logging.html#logging-stuff",
+    "href": "logging.html#logging-stuff",
+    "title": "Logging",
+    "section": "",
+    "text": "Logging debugging etc etc",
+    "crumbs": [
+      "Home",
+      "CCNP ENARSI",
+      "Logging"
+    ]
+  },
+  {
+    "objectID": "logging.html#debugging-stuff",
+    "href": "logging.html#debugging-stuff",
+    "title": "Logging",
+    "section": "debugging stuff",
+    "text": "debugging stuff\n\nyadadadad",
+    "crumbs": [
+      "Home",
+      "CCNP ENARSI",
+      "Logging"
+    ]
   }
 ]
