@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Kolkrabe"
-  navbar: false
+  navbar: 
     left:
       - href: index.qmd
         text: Home
@@ -15,30 +15,24 @@ website:
       - text: "Welcome"
         href: index.qmd
       - section: "CCNP ENARSI"
-        href: index.qmd
         contents:
-          - index.qmd
-          - logging.qmd
-          - basics-knitr.qmd
-          - basics-jupyter.qmd
-      - section: "Layout"
-        contents:
-          - layout.qmd
-          - layout-knitr.qmd
-          - layout-jupyter.qmd
-      - section: advanced.qmd
+          - section: "Infrastructure"
+            contents:
+              - index.qmd
+              - logging.qmd
+              - section: "Layout"
+                contents:
+                  - layout.qmd
+                  - layout-knitr.qmd
+                  - layout-jupyter.qmd
+      - section: "Advanced"
         contents:
           - raw-code.qmd
           - custom-theme.qmd
       - acknowledgment.qmd
-  
-    
 
 format:
   html:
     theme: solar
     css: styles.css
     toc: true
-
-
-
