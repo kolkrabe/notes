@@ -1,1 +1,83 @@
 /* css styles */
+/* ==========================
+   Navbar
+========================== */
+.navbar {
+  background-color: #2e2e2e;  /* navbar background */
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #ffffff;             /* navbar link color */
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+  color: #dddddd;             /* hover/active color */
+}
+
+/* ==========================
+   Sidebar
+========================== */
+.sidebar-wrapper,
+.sidebar {
+  background-color: #2e2e2e;  /* match navbar */
+  color: #ffffff;
+}
+
+/* Sidebar links */
+.sidebar-wrapper .nav-link,
+.sidebar .nav-link {
+  color: #ffffff;
+}
+
+/* Hover and active links */
+.sidebar-wrapper .nav-link:hover,
+.sidebar-wrapper .nav-link.active,
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #444444;  /* slightly lighter grey */
+  color: #ffffff;
+}
+
+/* Sidebar headings (nested sections) */
+.sidebar-wrapper .sidebar-section > .sidebar-title,
+.sidebar .sidebar-section > .sidebar-title {
+  color: #ffffff;
+}
+
+/* Collapsible arrows */
+.sidebar-wrapper .collapse-toggle,
+.sidebar .collapse-toggle {
+  color: #ffffff;
+}
+
+/* Search box background in sidebar */
+.sidebar-wrapper .search input,
+.sidebar .search input {
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+/* Scrollbar for sidebar */
+.sidebar-wrapper::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track {
+  background: #2e2e2e;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #444444;
+  border-radius: 4px;
+}
+
+/* Optional: smooth transition for hover */
+.sidebar-wrapper .nav-link,
+.sidebar .nav-link {
+  transition: background-color 0.2s ease;
+}
