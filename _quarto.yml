@@ -3,16 +3,23 @@ project:
   output-dir: docs
 
 website:
+  title: "CCNP ENARSI Notes"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
   sidebar:
     style: "docked"
     search: true
     contents:
-      - text: "Introduction"
-        href: introduction.qmd
-      - section: "Basics"
-        href: basics-summary.qmd
+      - text: "Welcome"
+        href: index.qmd
+      - section: "CCNP ENARSI"
+        href: index.qmd
         contents:
           - index.qmd
+          - logging.qmd
           - basics-knitr.qmd
           - basics-jupyter.qmd
       - section: "Layout"
@@ -25,12 +32,7 @@ website:
           - raw-code.qmd
           - custom-theme.qmd
       - acknowledgment.qmd
-  title: "CCNP ENARSI Notes"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  
     
 
 format:

@@ -7,8 +7,7 @@
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
     "crumbs": [
       "Home",
-      "Basics",
-      "notes"
+      "Welcome"
     ]
   },
   {
@@ -17,5 +16,19 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "logging.html",
+    "href": "logging.html",
+    "title": "Logging",
+    "section": "",
+    "text": "#logging stuff\nLogging debugging etc etc\n#debugging stuff"
+  },
+  {
+    "objectID": "logging.html#yadadadad",
+    "href": "logging.html#yadadadad",
+    "title": "Logging",
+    "section": "yadadadad",
+    "text": "yadadadad"
   }
 ]

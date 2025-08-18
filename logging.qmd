@@ -1,0 +1,14 @@
+---
+title: "Logging"
+editor: visual
+---
+
+#logging stuff
+
+Logging debugging etc etc
+
+
+#debugging stuff
+
+yadadadad
+---
