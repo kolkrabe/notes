@@ -3,12 +3,12 @@ title: "Logging"
 editor: visual
 ---
 
-#logging stuff
+## logging stuff
 
-Logging debugging etc etc
+- Logging debugging etc etc
 
 
-#debugging stuff
+## debugging stuff
 
-yadadadad
+- yadadadad
 ---
