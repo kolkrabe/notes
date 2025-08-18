@@ -1,22 +1,28 @@
 /* css styles */
-/* Make sidebar dark grey */
+/* Left-hand sidebar */
+.sidebar-wrapper,
 .sidebar {
-  background-color: #2e2e2e;   /* dark grey */
-}
-
-/* Sidebar links text color */
-.sidebar .nav-link {
-  color: #ffffff;              /* white text */
-}
-
-/* Hover and active link highlight */
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
-  background-color: #444444;   /* slightly lighter grey */
+  background-color: #2e2e2e; /* dark grey */
   color: #ffffff;
 }
 
-/* Optional: search box background */
+/* Sidebar links text color */
+.sidebar-wrapper .nav-link,
+.sidebar .nav-link {
+  color: #ffffff;
+}
+
+/* Hover and active link highlight */
+.sidebar-wrapper .nav-link:hover,
+.sidebar-wrapper .nav-link.active,
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #444444; /* slightly lighter grey */
+  color: #ffffff;
+}
+
+/* Optional: search box background in sidebar */
+.sidebar-wrapper .search input,
 .sidebar .search input {
   background-color: #3a3a3a;
   color: #ffffff;
