@@ -3,9 +3,17 @@ title: "Device Management"
 editor: visual
 ---
 
-#Device Management
-##Console
+# Device Management
 
-*Console Config - no password by default, 
-*VTY
----
+## Console
+
+*Console Config - no password by default,* VTY ---
+* Baud 
+  - 
+
+## VTY
+
+
+
+
+
