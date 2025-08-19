@@ -18,9 +18,9 @@ website:
         href: index.qmd
       - section: "CCNP ENARSI"
         contents:
-          - section: "Infrastructure"
+          - section: "Infrastructure Services"
             contents:
-              - index.qmd
+              - device_management.qmd
               - logging.qmd
               - section: "Layout"
                 contents:

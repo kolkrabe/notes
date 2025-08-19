@@ -60,5 +60,18 @@
       "CCNP ENARSI",
       "Logging"
     ]
+  },
+  {
+    "objectID": "device_management.html",
+    "href": "device_management.html",
+    "title": "Device Management",
+    "section": "",
+    "text": "#Device Management ##Console\nConsole Config - no password by default, VTY —",
+    "crumbs": [
+      "Home",
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
   }
 ]

@@ -1,0 +1,11 @@
+---
+title: "Device Management"
+editor: visual
+---
+
+#Device Management
+##Console
+
+*Console Config - no password by default, 
+*VTY
+---
