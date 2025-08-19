@@ -27,11 +27,10 @@ website:
                   - layout.qmd
                   - layout-knitr.qmd
                   - layout-jupyter.qmd
-      - section: "Advanced"
+      - section: "Future Expansion"
         contents:
-          - raw-code.qmd
-          - custom-theme.qmd
-      - acknowledgment.qmd
+          - programming.qmd
+          - gaming.qmd
 
 format:
   html:
