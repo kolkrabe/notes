@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c3b5ba5be67392c758ce62e5f85a8fc1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f51cfc4e7d9d4d91a167ae1405766381.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,6 +93,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -104,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./index.html">Infrastructure</a></li><li class="breadcrumb-item"><a href="./logging.html">Logging</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./logging.html">Logging</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -142,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Infrastructure</span></a>
+ <span class="menu-text">Infrastructure Services</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -150,8 +154,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">notes</span></a>
+  <a href="./device_management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Device Management</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -187,22 +191,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Advanced</span></a>
+ <span class="menu-text">Future Expansion</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
- <span class="menu-text">raw-code.qmd</span>
+ <span class="menu-text">programming.qmd</span>
   </li>
           <li class="sidebar-item">
- <span class="menu-text">custom-theme.qmd</span>
+ <span class="menu-text">gaming.qmd</span>
   </li>
       </ul>
-  </li>
-        <li class="sidebar-item">
- <span class="menu-text">acknowledgment.qmd</span>
   </li>
     </ul>
     </div>
@@ -214,18 +215,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#logging" id="toc-logging" class="nav-link active" data-scroll-target="#logging">Logging</a>
-  <ul class="collapse">
-  <li><a href="#heading-2-test" id="toc-heading-2-test" class="nav-link" data-scroll-target="#heading-2-test">Heading 2 test</a></li>
-  <li><a href="#test-2" id="toc-test-2" class="nav-link" data-scroll-target="#test-2">Test 2</a></li>
-  </ul></li>
+  <li><a href="#syslog" id="toc-syslog" class="nav-link active" data-scroll-target="#syslog">Syslog</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./index.html">Infrastructure</a></li><li class="breadcrumb-item"><a href="./logging.html">Logging</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./logging.html">Logging</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Logging</h1>
 </div>
@@ -244,18 +241,46 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="logging" class="level1">
-<h1>Logging</h1>
+<section id="syslog" class="level1">
+<h1>Syslog</h1>
+<section id="general-notes" class="level4">
+<h4 class="anchored" data-anchor-id="general-notes">General Notes</h4>
 <ul>
-<li>2 types of Debugging</li>
+<li>Used to manage system logs and alerts</li>
+<li>Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server</li>
+<li>Logging levels:
+<ul>
+<li>Emergency: 0<br>
+</li>
+<li>Alert: 1<br>
+</li>
+<li>Critical: 2<br>
+</li>
+<li>Error: 3<br>
+</li>
+<li>Warning: 4<br>
+</li>
+<li>Notice: 5<br>
+</li>
+<li>Informational: 6<br>
+</li>
+<li>Debug: 7</li>
+</ul></li>
 </ul>
-<section id="heading-2-test" class="level2">
-<h2 class="anchored" data-anchor-id="heading-2-test">Heading 2 test</h2>
+<hr>
 </section>
-<section id="test-2" class="level2">
-<h2 class="anchored" data-anchor-id="test-2">Test 2</h2>
+<section id="useful-show-commands" class="level4">
+<h4 class="anchored" data-anchor-id="useful-show-commands">Useful show commands</h4>
+<ul>
+<li><code>show logging</code> — Shows information on local and external syslog</li>
+</ul>
+<hr>
+<section id="standard-syslog-config" class="level5">
+<h5 class="anchored" data-anchor-id="standard-syslog-config">Standard Syslog Config</h5>
+<p>```shell logging buffered 90000 # Increase local logging buffer size logging <logging-server> service timestamps debug datetime localtime show-timezone msec service timestamps log datetime localtime show-timezone msec logging trap warning # includes this level of message and all lower levels logging source-interface loopback0 exit ! show logging</logging-server></p>
 
 
+</section>
 </section>
 </section>
 

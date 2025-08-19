@@ -22,11 +22,11 @@
     "href": "logging.html",
     "title": "Logging",
     "section": "",
-    "text": "2 types of Debugging",
+    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels:\n\nEmergency: 0\n\nAlert: 1\n\nCritical: 2\n\nError: 3\n\nWarning: 4\n\nNotice: 5\n\nInformational: 6\n\nDebug: 7\n\n\n\n\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\nStandard Syslog Config\n```shell logging buffered 90000 # Increase local logging buffer size logging  service timestamps debug datetime localtime show-timezone msec service timestamps log datetime localtime show-timezone msec logging trap warning # includes this level of message and all lower levels logging source-interface loopback0 exit ! show logging",
     "crumbs": [
       "Home",
       "CCNP ENARSI",
-      "Infrastructure",
+      "Infrastructure Services",
       "Logging"
     ]
   },
