@@ -4,14 +4,10 @@ project:
 
 website:
   title: "Kolkrabe"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
-        text: About
+  navbar: false
   sidebar:
     style: "docked"
+    background: dark
     search: true
     contents:
       - text: "Welcome"
@@ -34,6 +30,6 @@ website:
 
 format:
   html:
-    theme: default
+    theme: solar
     css: styles.css
     toc: true
