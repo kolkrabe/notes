@@ -13,7 +13,6 @@ website:
   sidebar:
     style: "docked"
     search: true
-    background: grey
     contents:
       - text: "Welcome"
         href: index.qmd
@@ -35,6 +34,6 @@ website:
 
 format:
   html:
-    theme: solar
+    theme: default
     css: styles.css
     toc: true

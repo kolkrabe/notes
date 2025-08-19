@@ -1,23 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "notes",
-    "section": "",
-    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Home",
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
     "objectID": "logging.html",
     "href": "logging.html",
     "title": "Logging",
@@ -31,47 +13,47 @@
     ]
   },
   {
-    "objectID": "logging.html#yadadadad",
-    "href": "logging.html#yadadadad",
-    "title": "Logging",
-    "section": "yadadadad",
-    "text": "yadadadad"
-  },
-  {
-    "objectID": "logging.html#logging-stuff",
-    "href": "logging.html#logging-stuff",
-    "title": "Logging",
-    "section": "",
-    "text": "Logging debugging etc etc",
-    "crumbs": [
-      "Home",
-      "CCNP ENARSI",
-      "Logging"
-    ]
-  },
-  {
-    "objectID": "logging.html#debugging-stuff",
-    "href": "logging.html#debugging-stuff",
-    "title": "Logging",
-    "section": "debugging stuff",
-    "text": "debugging stuff\n\nyadadadad",
-    "crumbs": [
-      "Home",
-      "CCNP ENARSI",
-      "Logging"
-    ]
-  },
-  {
     "objectID": "device_management.html",
     "href": "device_management.html",
     "title": "Device Management",
     "section": "",
-    "text": "#Device Management ##Console\nConsole Config - no password by default, VTY —",
+    "text": "Console Config - no password by default, VTY — * Baud -",
     "crumbs": [
       "Home",
       "CCNP ENARSI",
       "Infrastructure Services",
       "Device Management"
+    ]
+  },
+  {
+    "objectID": "device_management.html#console",
+    "href": "device_management.html#console",
+    "title": "Device Management",
+    "section": "",
+    "text": "Console Config - no password by default, VTY — * Baud -",
+    "crumbs": [
+      "Home",
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "notes",
+    "section": "",
+    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "crumbs": [
+      "Home",
+      "Welcome"
     ]
   }
 ]
