@@ -29,7 +29,10 @@ editor: visual
 
 ##### Standard Syslog Config
 
-```
+!
+show logging
+
+````
 logging buffered 90000        # Increase local logging buffer size
 logging <logging-server>
 service timestamps debug datetime localtime show-timezone msec
@@ -37,6 +40,4 @@ service timestamps log datetime localtime show-timezone msec
 logging trap warning         # includes this level of message and all lower levels
 logging source-interface loopback0
 exit
-```
-!
-show logging
+````
