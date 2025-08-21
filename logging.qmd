@@ -33,7 +33,7 @@ format: html
 !
 show logging
 
-```default
+```
 logging buffered 90000        # Increase local logging buffer size
 logging <logging-server>
 service timestamps debug datetime localtime show-timezone msec
