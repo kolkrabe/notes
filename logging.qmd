@@ -36,7 +36,7 @@ These conditions can be nested (set interlace condition, then set IP/Mac conditi
 ------------------------------------------------------------------------
 
 
-##### Standard Syslog Config
+#### Standard Syslog Config
 
 ``` default
 logging buffered 90000        # Increase local logging buffer size
@@ -49,7 +49,7 @@ exit
 ```
 
 
-##### Standard timestamp config
+#### Standard timestamp config
 
 ``` default
 #service timestamps [debug|log] [datetime|uptime]
@@ -59,7 +59,7 @@ exit
 ```
 
 
-##### Conditional Debugging
+#### Conditional Debugging
 
 ``` default
 debug condition mac 1111.1111.1111                  ! this debugs based on the mac specified

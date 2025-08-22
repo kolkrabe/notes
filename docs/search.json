@@ -64,18 +64,35 @@
     "href": "dhcp.html",
     "title": "dhcp",
     "section": "",
-    "text": "int g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface"
+    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward towards the DHCP server\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\nDORA\nSARR\n\nUseful show commands\nshow ip dhcp binding           ! shows current dhcp ip bindings\nshow ip dhcp pool              ! shows configured dhcp pool\nshow ip dhcp conflict          ! shows ip conflicts \nStandard IPv4/IPv6 Configuration\nipv4\nipv6\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "dhcp"
+    ]
   },
   {
     "objectID": "logging.html",
     "href": "logging.html",
     "title": "Logging",
     "section": "",
-    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
+    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
       "Logging"
+    ]
+  },
+  {
+    "objectID": "dhcp.html#dhcp-operation",
+    "href": "dhcp.html#dhcp-operation",
+    "title": "dhcp",
+    "section": "",
+    "text": "DORA\nSARR\n\nUseful show commands\nshow ip dhcp binding           ! shows current dhcp ip bindings\nshow ip dhcp pool              ! shows configured dhcp pool\nshow ip dhcp conflict          ! shows ip conflicts \nStandard IPv4/IPv6 Configuration\nipv4\nipv6\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "dhcp"
     ]
   }
 ]
