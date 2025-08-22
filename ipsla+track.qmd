@@ -4,8 +4,6 @@ editor: visual
 code-block-bg: dark
 ---
 
-# IP SLA & Tracking
-
 -   IP-SLA is used to measure various parameters across the network for troubleshooting
 
     -   IP SLA instances
