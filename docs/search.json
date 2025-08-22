@@ -62,13 +62,13 @@
   {
     "objectID": "dhcp.html",
     "href": "dhcp.html",
-    "title": "dhcp",
+    "title": "DHCP",
     "section": "",
-    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward towards the DHCP server\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\nDORA\nSARR\n\nUseful show commands\nshow ip dhcp binding           ! shows current dhcp ip bindings\nshow ip dhcp pool              ! shows configured dhcp pool\nshow ip dhcp conflict          ! shows ip conflicts \nStandard IPv4/IPv6 Configuration\nipv4\nipv6\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "dhcp"
+      "DHCP"
     ]
   },
   {
@@ -86,13 +86,13 @@
   {
     "objectID": "dhcp.html#dhcp-operation",
     "href": "dhcp.html#dhcp-operation",
-    "title": "dhcp",
+    "title": "DHCP",
     "section": "",
-    "text": "DORA\nSARR\n\nUseful show commands\nshow ip dhcp binding           ! shows current dhcp ip bindings\nshow ip dhcp pool              ! shows configured dhcp pool\nshow ip dhcp conflict          ! shows ip conflicts \nStandard IPv4/IPv6 Configuration\nipv4\nipv6\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "dhcp"
+      "DHCP"
     ]
   }
 ]
