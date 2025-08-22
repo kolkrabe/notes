@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -193,10 +228,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#device-management" id="toc-device-management" class="nav-link active" data-scroll-target="#device-management">Device Management</a>
+  <li><a href="#console-vty-lines" id="toc-console-vty-lines" class="nav-link active" data-scroll-target="#console-vty-lines">Console &amp; VTY Lines</a>
   <ul class="collapse">
-  <li><a href="#console" id="toc-console" class="nav-link" data-scroll-target="#console">Console</a></li>
-  <li><a href="#vty" id="toc-vty" class="nav-link" data-scroll-target="#vty">VTY</a></li>
+  <li><a href="#console-line-connection-requirements" id="toc-console-line-connection-requirements" class="nav-link" data-scroll-target="#console-line-connection-requirements">Console line connection requirements</a>
+  <ul class="collapse">
+  <li><a href="#vty-line-troubleshooting" id="toc-vty-line-troubleshooting" class="nav-link" data-scroll-target="#vty-line-troubleshooting">VTY Line troubleshooting</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -223,16 +260,52 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="device-management" class="level1">
-<h1>Device Management</h1>
-<section id="console" class="level2">
-<h2 class="anchored" data-anchor-id="console">Console</h2>
-<p><em>Console Config - no password by default,</em> VTY — * Baud -</p>
+<section id="console-vty-lines" class="level1">
+<h1>Console &amp; VTY Lines</h1>
+<section id="console-line-connection-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="console-line-connection-requirements">Console line connection requirements</h2>
+<ul>
+<li><p>9600 Baud</p></li>
+<li><p>8 data bits</p></li>
+<li><p>1 stop bit</p></li>
+<li><p>no parity</p></li>
+<li><p>Generally no password by default. If line password is configured <code>Login</code> needs to be configured on the line.</p></li>
+<li><p><code>Login Local</code> - uses Local user DB <code>Login authentication xxx</code> - uses configured aaa servers.</p></li>
+</ul>
+<section id="vty-line-troubleshooting" class="level3">
+<h3 class="anchored" data-anchor-id="vty-line-troubleshooting">VTY Line troubleshooting</h3>
+<ol type="1">
+<li>Is it Reachable?</li>
+<li>Transport protocols permitted with allowed protocols?</li>
+</ol>
+<ul>
+<li><code>Transport input \[ssh/telnet\]</code></li>
+<li><code>show line vty \[line number\] \| include Allowed</code></li>
+</ul>
+<ol start="3" type="1">
+<li>Auth setup?</li>
+</ol>
+<ul>
+<li><code>Login</code> configured on line, line password configured</li>
+<li><code>Login local</code> configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”</li>
+</ul>
+<ol start="3" type="1">
+<li>ACL?</li>
+<li>VTY Lines Busy?
+<ol type="a">
+<li>“Show users” - will show active users</li>
+<li>“clear line [number]” used to clear a line</li>
+</ol></li>
+</ol>
+<p>Useful show commands</p>
+<p><code>Show users</code> - will show active users</p>
+<p>##Standard Line Config</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(config)# exec -enables the line </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>(config)# no exec -disables exec access to line line </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
 </section>
-<section id="vty" class="level2">
-<h2 class="anchored" data-anchor-id="vty">VTY</h2>
-
-
 </section>
 </section>
 
