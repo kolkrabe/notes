@@ -5,3 +5,57 @@ code-block-bg: dark
 ---
 
 # IP SLA & Tracking
+
+-   IP-SLA is used to measure various parameters across the network for troubleshooting
+-   
+
+------------------------------------------------------------------------
+
+## Useful Show Commands
+
+`show ip sla configuration` - shows config of all IP SLA's `show ip sla statistics` -show ip sla statistics `show track` - shows config and status of tracked objects (e.g. floating statics)
+
+## Configuration of Floating Static using IP SLA
+
+``` default
+ip sla 1 
+ icmp-echo 10.44.1.2                                    - pings 10.44.1.2
+ timeout 5000                                           - expecting a response within 5000ms
+ frequency 10                                           - every 10 seconds
+!
+ip sla schedule 1 start-time now life forever          - starts IP SLA
+!
+track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable
+ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met
+```
+
+## BrunBattery's awesome IPSLA w/ Track for HSRP
+
+``` default
+! Tracking line protocols of WAN interfaces
+track 11 interface GigabitEthernet8 line-protocol
+track 12 interface FastEthernet0 line-protocol
+! Tracking ip routing status of tunnel interfaces for backup route
+track 21 interface Tunnel1 ip routing
+track 22 interface Tunnel2 ip routing
+! Track 23 will be up if both tunnels are not routing - set up for backup route to be installed
+track 23 list boolean and
+ object 21 not
+ object 22 not
+! Tracking for IP SLA 101
+track 100 ip sla 101 reachability
+ delay down 15 up 60
+! Decrementing HSRP based on IP SLA and line protocols of WAN interfaces
+int vlan 100
+ standby 1 track 11 decrement 10
+ standby 1 track 12 decrement 10
+ standby 1 track 100 decrement 10
+! Routing management traffic to secondary router if neither tunnel is routing
+ip route 10.100.100.0 255.255.255.0 10.1.174.253 track 23
+! Testing reachability over DMVPN overlay and starting SLA
+ip sla 101
+ icmp-echo 172.16.1.254 source-interface Tunnel1
+ request-data-size 100
+ frequency 5
+ip sla schedule 101 life forever start-time now
+```
