@@ -1,0 +1,10 @@
+---
+title: "dhcp"
+editor: visual
+code-block-bg: dark
+---
+
+``` {.abc style="color: red"}
+int g0/0
+ipv6 address autoconfig            ! Enables SLAAC on an interface
+```
