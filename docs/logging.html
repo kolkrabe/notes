@@ -259,13 +259,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-notes" class="level4">
 <h4 class="anchored" data-anchor-id="general-notes">General Notes</h4>
 <ul>
-<li>Used to manage system logs and alerts</li>
-<li>Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server</li>
-<li>Logging levels:
+<li><p>Used to manage system logs and alerts</p></li>
+<li><p>Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server</p></li>
+<li><p>Logging levels:</p>
 <ul>
 <li>Emergency: <strong>0</strong><br>
 </li>
-<li>Alert: <strong>1</strong> **</li>
+<li>Alert: <strong>1</strong></li>
 <li>Critical: <strong>2</strong><br>
 </li>
 <li>Error: <strong>3</strong><br>
@@ -287,7 +287,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="standard-syslog-config" class="level5">
 <h5 class="anchored" data-anchor-id="standard-syslog-config">Standard Syslog Config</h5>
-<p>! show logging</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logging buffered 90000        # Increase local logging buffer size</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>logging &lt;logging-server&gt;</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>service timestamps debug datetime localtime show-timezone msec</span>
@@ -295,6 +294,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>logging trap warning         # includes this level of message and all lower levels</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>logging source-interface loopback0</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>exit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="standard-timestamp-config" class="level5">
+<h5 class="anchored" data-anchor-id="standard-timestamp-config">Standard timestamp config</h5>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>#service timestamps [debug|log] [datetime|uptime]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>*Datetime - includes date and time</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>*Uptime - time elapsed since last reboot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

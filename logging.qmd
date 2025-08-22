@@ -10,7 +10,8 @@ format: html
 
 - Used to manage system logs and alerts
 - Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server
-- Logging levels:
+- Logging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )
+
   - Emergency: **0**  
   - Alert: **1** 
   - Critical: **2**  
@@ -30,9 +31,6 @@ format: html
 
 ##### Standard Syslog Config
 
-!
-show logging
-
 ```default
 logging buffered 90000        # Increase local logging buffer size
 logging <logging-server>
@@ -41,4 +39,12 @@ service timestamps log datetime localtime show-timezone msec
 logging trap warning         # includes this level of message and all lower levels
 logging source-interface loopback0
 exit
+```
+
+##### Standard timestamp config
+```default
+#service timestamps [debug|log] [datetime|uptime]
+
+*Datetime - includes date and time
+*Uptime - time elapsed since last reboot
 ```
