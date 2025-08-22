@@ -2,7 +2,6 @@
 title: "snmp"
 editor: visual
 code-block-bg: dark
-code-block-
 ---
 
 ### SNMP
@@ -18,13 +17,13 @@ code-block-
 
 **show snmp host** - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications
 
-**show snmp group** - Displays SNMP group information (v3)
-**show snmp user** - Displays SNMP user information (v3)
+**show snmp group** - Displays SNMP group information (v3) **show snmp user** - Displays SNMP user information (v3)
 
----
+------------------------------------------------------------------------
 
 ##### Standard SNMP v2c Config
-```default
+
+``` default
 snmp ifmib ifindex persist\
 snmp-server location \<location\>\
 snmp-server contact \<contact-details\>\
@@ -34,7 +33,8 @@ snmp-server host 10.1.100.100 \[traps\|informs\] version 2c \<community-string\>
 ```
 
 ##### Standard SNMP v3 Config
-```default
+
+``` default
 snmp ifmib ifindex persist\
 snmp-server location \<location\>\
 snmp-server contact \<contact-details\>\
@@ -44,4 +44,3 @@ snmp-server group \<group-name\> v3 priv read \<view-name\> write \<view-name
 snmp-server user \<user-name\> \<group-name\> v3 auth sha \<password\> priv aes 256 \<password\>\
 snmp-server host 10.1.100.100 version 3 priv \<user-name\>
 ```
-
