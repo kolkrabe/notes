@@ -8,13 +8,25 @@ code-block-bg: dark
 
 -   IP-SLA is used to measure various parameters across the network for troubleshooting
 
--   
+    -   IP SLA instances
+
+    -   Interface Status / Reachability
+
+    -   Jitter / latency
+
+    -   Groups of things
+
+-   Used commonly for floating static default route (routes internet across different link if one fails.
+
+-   Great example below from Brunbattery on using it to monitor HSRP.
 
 ------------------------------------------------------------------------
 
 ## Useful Show Commands
 
-`show ip sla configuration` - shows config of all IP SLA's `show ip sla statistics` -show ip sla statistics `show track` - shows config and status of tracked objects (e.g. floating statics)
+-   `show ip sla configuration` - shows config of all IP SLA's
+-   `show ip sla statistics` -show ip sla statistics
+-   `show track` - shows config and status of tracked objects (e.g. floating statics)
 
 ## Configuration of Floating Static using IP SLA
 
