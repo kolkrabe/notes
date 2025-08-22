@@ -234,6 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#vty-line-troubleshooting" id="toc-vty-line-troubleshooting" class="nav-link" data-scroll-target="#vty-line-troubleshooting">VTY Line troubleshooting</a></li>
   </ul></li>
+  <li><a href="#standard-line-config" id="toc-standard-line-config" class="nav-link" data-scroll-target="#standard-line-config">Standard Line Config</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -265,13 +266,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="console-line-connection-requirements" class="level2">
 <h2 class="anchored" data-anchor-id="console-line-connection-requirements">Console line connection requirements</h2>
 <ul>
-<li><p>9600 Baud</p></li>
-<li><p>8 data bits</p></li>
-<li><p>1 stop bit</p></li>
-<li><p>no parity</p></li>
-<li><p>Generally no password by default. If line password is configured <code>Login</code> needs to be configured on the line.</p></li>
-<li><p><code>Login Local</code> - uses Local user DB <code>Login authentication xxx</code> - uses configured aaa servers.</p></li>
+<li>9600 Baud</li>
+<li>8 data bits</li>
+<li>1 stop bit</li>
+<li>no parity</li>
+<li>Generally no password by default. If line password is configured <code>Login</code> needs to be configured on the line.</li>
+<li><code>Login Local</code> - uses Local user DB <code>Login authentication xxx</code> - uses configured aaa servers.</li>
 </ul>
+<hr>
 <section id="vty-line-troubleshooting" class="level3">
 <h3 class="anchored" data-anchor-id="vty-line-troubleshooting">VTY Line troubleshooting</h3>
 <ol type="1">
@@ -297,15 +299,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>“clear line [number]” used to clear a line</li>
 </ol></li>
 </ol>
+<hr>
 <p>Useful show commands</p>
 <p><code>Show users</code> - will show active users</p>
-<p>##Standard Line Config</p>
+</section>
+</section>
+<section id="standard-line-config" class="level2">
+<h2 class="anchored" data-anchor-id="standard-line-config">Standard Line Config</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(config)# exec -enables the line </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>(config)# no exec -disables exec access to line line </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-</section>
 </section>
 </section>
 

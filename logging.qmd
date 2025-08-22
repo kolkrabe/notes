@@ -10,11 +10,8 @@ code-block-bg: dark
 #### General Notes
 
 -   Used to manage system logs and alerts
-
 -   Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server
-
 -   Logging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )
-
     -   Emergency: **0**
     -   Alert: **1**
     -   Critical: **2**
@@ -26,11 +23,18 @@ code-block-bg: dark
 
 ------------------------------------------------------------------------
 
+### Conditional Debugging
+
+Conditions can be configured to reduce the output you see when debugging. 
+These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)
+
+
 #### Useful show commands
 
 -   `show logging` — Shows information on local and external syslog
 
 ------------------------------------------------------------------------
+
 
 ##### Standard Syslog Config
 
@@ -44,6 +48,7 @@ logging source-interface loopback0
 exit
 ```
 
+
 ##### Standard timestamp config
 
 ``` default
@@ -53,14 +58,16 @@ exit
 *Uptime - time elapsed since last reboot
 ```
 
+
 ##### Conditional Debugging
 
-```default
-debug platform condition mac 1111.1111.1111                  ! this debugs based on the mac specified
-debug platform condition start                               ! starts conditional debugging
+``` default
+debug condition mac 1111.1111.1111                  ! this debugs based on the mac specified
+debug condition start                               ! starts conditional debugging
 !
-show platform condition                                      ! displays the current conditions set
+show condition                                      ! displays the current conditions set
 show debug
+!
+no debug condition interface g0/2                   ! this removes the condition
+no debug all                                        ! stops debugging however does not remove conditions
 ```
-
-

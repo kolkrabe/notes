@@ -228,7 +228,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syslog" id="toc-syslog" class="nav-link active" data-scroll-target="#syslog">Syslog</a></li>
+  <li><a href="#syslog" id="toc-syslog" class="nav-link active" data-scroll-target="#syslog">Syslog</a>
+  <ul class="collapse">
+  <li><a href="#conditional-debugging" id="toc-conditional-debugging" class="nav-link" data-scroll-target="#conditional-debugging">Conditional Debugging</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -259,9 +262,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-notes" class="level4">
 <h4 class="anchored" data-anchor-id="general-notes">General Notes</h4>
 <ul>
-<li><p>Used to manage system logs and alerts</p></li>
-<li><p>Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server</p></li>
-<li><p>Logging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )</p>
+<li>Used to manage system logs and alerts</li>
+<li>Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server</li>
+<li>Logging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )
 <ul>
 <li>Emergency: <strong>0</strong></li>
 <li>Alert: <strong>1</strong></li>
@@ -275,6 +278,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
+<section id="conditional-debugging" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-debugging">Conditional Debugging</h3>
+<p>Conditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)</p>
 <section id="useful-show-commands" class="level4">
 <h4 class="anchored" data-anchor-id="useful-show-commands">Useful show commands</h4>
 <ul>
@@ -298,15 +304,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>*Datetime - includes date and time</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>*Uptime - time elapsed since last reboot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="conditional-debugging" class="level5">
-<h5 class="anchored" data-anchor-id="conditional-debugging">Conditional Debugging</h5>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>debug platform condition mac 1111.1111.1111                  ! this debugs based on the mac specified</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>debug platform condition start                               ! starts conditional debugging</span>
+<section id="conditional-debugging-1" class="level5">
+<h5 class="anchored" data-anchor-id="conditional-debugging-1">Conditional Debugging</h5>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>debug condition mac 1111.1111.1111                  ! this debugs based on the mac specified</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>debug condition start                               ! starts conditional debugging</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>show platform condition                                      ! displays the current conditions set</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>show debug</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>show condition                                      ! displays the current conditions set</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>show debug</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>no debug condition interface g0/2                   ! this removes the condition</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>no debug all                                        ! stops debugging however does not remove conditions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 </section>
 </section>
