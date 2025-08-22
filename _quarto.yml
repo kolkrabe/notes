@@ -19,6 +19,7 @@ website:
               - device_management.qmd
               - logging.qmd
               - dhcp.qmd
+              - ipsla+track.qmd
               - section: "Layout"
                 contents:
                   - layout.qmd
