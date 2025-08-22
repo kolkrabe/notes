@@ -11,7 +11,43 @@
     "href": "ipsla+track.html",
     "title": "IP SLA & Tracking",
     "section": "",
-    "text": "IP SLA & Tracking",
+    "text": "IP-SLA is used to measure various parameters across the network for troubleshooting\n\n\n\n\n\nshow ip sla configuration - shows config of all IP SLA’s show ip sla statistics -show ip sla statistics show track - shows config and status of tracked objects (e.g. floating statics)\n\n\n\nip sla 1 \n icmp-echo 10.44.1.2                                    - pings 10.44.1.2\n timeout 5000                                           - expecting a response within 5000ms\n frequency 10                                           - every 10 seconds\n!\nip sla schedule 1 start-time now life forever          - starts IP SLA\n!\ntrack 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable\nip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met\n\n\n\n! Tracking line protocols of WAN interfaces\ntrack 11 interface GigabitEthernet8 line-protocol\ntrack 12 interface FastEthernet0 line-protocol\n! Tracking ip routing status of tunnel interfaces for backup route\ntrack 21 interface Tunnel1 ip routing\ntrack 22 interface Tunnel2 ip routing\n! Track 23 will be up if both tunnels are not routing - set up for backup route to be installed\ntrack 23 list boolean and\n object 21 not\n object 22 not\n! Tracking for IP SLA 101\ntrack 100 ip sla 101 reachability\n delay down 15 up 60\n! Decrementing HSRP based on IP SLA and line protocols of WAN interfaces\nint vlan 100\n standby 1 track 11 decrement 10\n standby 1 track 12 decrement 10\n standby 1 track 100 decrement 10\n! Routing management traffic to secondary router if neither tunnel is routing\nip route 10.100.100.0 255.255.255.0 10.1.174.253 track 23\n! Testing reachability over DMVPN overlay and starting SLA\nip sla 101\n icmp-echo 172.16.1.254 source-interface Tunnel1\n request-data-size 100\n frequency 5\nip sla schedule 101 life forever start-time now",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#useful-show-commands",
+    "href": "ipsla+track.html#useful-show-commands",
+    "title": "IP SLA & Tracking",
+    "section": "",
+    "text": "show ip sla configuration - shows config of all IP SLA’s show ip sla statistics -show ip sla statistics show track - shows config and status of tracked objects (e.g. floating statics)",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
+    "href": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
+    "title": "IP SLA & Tracking",
+    "section": "",
+    "text": "ip sla 1 \n icmp-echo 10.44.1.2                                    - pings 10.44.1.2\n timeout 5000                                           - expecting a response within 5000ms\n frequency 10                                           - every 10 seconds\n!\nip sla schedule 1 start-time now life forever          - starts IP SLA\n!\ntrack 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable\nip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#brunbatterys-awesome-ipsla-w-track-for-hsrp",
+    "href": "ipsla+track.html#brunbatterys-awesome-ipsla-w-track-for-hsrp",
+    "title": "IP SLA & Tracking",
+    "section": "",
+    "text": "! Tracking line protocols of WAN interfaces\ntrack 11 interface GigabitEthernet8 line-protocol\ntrack 12 interface FastEthernet0 line-protocol\n! Tracking ip routing status of tunnel interfaces for backup route\ntrack 21 interface Tunnel1 ip routing\ntrack 22 interface Tunnel2 ip routing\n! Track 23 will be up if both tunnels are not routing - set up for backup route to be installed\ntrack 23 list boolean and\n object 21 not\n object 22 not\n! Tracking for IP SLA 101\ntrack 100 ip sla 101 reachability\n delay down 15 up 60\n! Decrementing HSRP based on IP SLA and line protocols of WAN interfaces\nint vlan 100\n standby 1 track 11 decrement 10\n standby 1 track 12 decrement 10\n standby 1 track 100 decrement 10\n! Routing management traffic to secondary router if neither tunnel is routing\nip route 10.100.100.0 255.255.255.0 10.1.174.253 track 23\n! Testing reachability over DMVPN overlay and starting SLA\nip sla 101\n icmp-echo 172.16.1.254 source-interface Tunnel1\n request-data-size 100\n frequency 5\nip sla schedule 101 life forever start-time now",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
