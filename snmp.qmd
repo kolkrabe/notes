@@ -1,0 +1,47 @@
+---
+title: "snmp"
+editor: visual
+code-block-bg: dark
+code-block-
+---
+
+### SNMP
+
+-   V2 - old, uses community string on both ends for config (not encrypted, transferred in plaintext
+-   V3 - newer, supports more advanced authentication & encryption
+-   SNMP traps unreliable (no confirmation required from receiving server).
+-   SNMP informs are reliable (must be confirmed by receiving server).
+
+**\`Ifindex persist\` -** Prevents SNMP index ID's from changing after reboot (if components are added etc.)  keeps consistency of mapped
+
+##### Useful Show commands
+
+**show snmp host** - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications
+
+**show snmp group** - Displays SNMP group information (v3)
+**show snmp user** - Displays SNMP user information (v3)
+
+---
+
+##### Standard SNMP v2c Config
+```default
+snmp ifmib ifindex persist\
+snmp-server location \<location\>\
+snmp-server contact \<contact-details\>\
+snmp-server community \<community-string\> \[RO\|RW\] \[ACL\]\
+snmp-server enable traps\
+snmp-server host 10.1.100.100 \[traps\|informs\] version 2c \<community-string\>
+```
+
+##### Standard SNMP v3 Config
+```default
+snmp ifmib ifindex persist\
+snmp-server location \<location\>\
+snmp-server contact \<contact-details\>\
+no snmp-server system-shutdown ! prevents device being shutdown via SNMP\
+snmp-server view \<view-name\> iso included ! iso included allows all values\
+snmp-server group \<group-name\> v3 priv read \<view-name\> write \<view-name\>\
+snmp-server user \<user-name\> \<group-name\> v3 auth sha \<password\> priv aes 256 \<password\>\
+snmp-server host 10.1.100.100 version 3 priv \<user-name\>
+```
+

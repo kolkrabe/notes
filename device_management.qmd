@@ -1,6 +1,7 @@
 ---
 title: "Device Management"
 editor: visual
+code-block-bg: dark
 ---
 
 # Console & VTY Lines
@@ -8,41 +9,37 @@ editor: visual
 ## Console line connection requirements
 
 -   9600 Baud
-
 -   8 data bits
-
 -   1 stop bit
-
 -   no parity
-
 -   Generally no password by default. If line password is configured `Login` needs to be configured on the line.
-
 -   `Login Local` - uses Local user DB `Login authentication xxx` - uses configured aaa servers.
 
 ### VTY Line troubleshooting
 
 1)  Is it Reachable?
-2)  Transport protocols permitted with allowed protocols? 
- - `Transport input \[ssh/telnet\]`
- - `show line vty \[line number\] \| include Allowed`
+2)  Transport protocols permitted with allowed protocols?
+
+-   `Transport input \[ssh/telnet\]`
+-   `show line vty \[line number\] \| include Allowed`
 
 3)  Auth setup?
- - `Login` configured on line, line password configured
- - `Login local` configured - refer to local user DB 
- • If Login specified but no password set -error - "Password required but none set"
 
-3) ACL?
-4) VTY Lines Busy? 
-    a. "Show users" - will show active users
-    b. "clear line [number]" used to clear a line
+-   `Login` configured on line, line password configured
+-   `Login local` configured - refer to local user DB • If Login specified but no password set -error - "Password required but none set"
+
+3)  ACL?
+4)  VTY Lines Busy?
+    a.  "Show users" - will show active users
+    b.  "clear line \[number\]" used to clear a line
 
 Useful show commands
 
 `Show users` - will show active users
 
-##Standard Line Config
+## Standard Line Config
 
-```default
+``` default
 (config)# exec -enables the line 
 (config)# no exec -disables exec access to line line 
 (config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity

@@ -2,6 +2,7 @@
 title: "Logging"
 editor: visual
 format: html
+code-block-bg: dark
 ---
 
 # Syslog
