@@ -1,0 +1,10 @@
+---
+title: "netflow"
+editor: visual
+---
+
+::: {style="background-color: lightgray; padding:10px; border-left: 3px solid #888;"}
+Some highlighted or code-like content here.
+:::
+
+------------------------------------------------------------------------
