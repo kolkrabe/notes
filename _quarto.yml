@@ -21,7 +21,7 @@ website:
               - dhcp.qmd
               - ipsla+track.qmd
               - netflow.qmd
-              - section: "Layout"
+      - section: Infrastructure Security
                 contents:
                   - layout.qmd
                   - layout-knitr.qmd
