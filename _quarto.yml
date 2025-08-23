@@ -22,10 +22,10 @@ website:
               - ipsla+track.qmd
               - netflow.qmd
       - section: Infrastructure Security
-                contents:
-                  - layout.qmd
-                  - layout-knitr.qmd
-                  - layout-jupyter.qmd
+        contents:
+         - layout.qmd
+         - layout-knitr.qmd
+         - layout-jupyter.qmd
       - section: "Future Expansion"
         contents:
           - programming.qmd
