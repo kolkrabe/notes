@@ -21,9 +21,34 @@ code-block-bg: dark
 
 # Flexible Netflow
 
--   Can determine traffic in the same was as Netflow + more...
+-   Can determine traffic in the same was as Netflow + more. things simultaneously
 
-    -   use **Flow Records** to group parameters together
+-   **Flexible netflow**
+
+    -   Used to allow more customization of the traffic parameters to be captured
+
+    -   Consists of records, exporters, samplers and monitors
+
+    -   **Records**
+
+        -   Define what parameters will be captured by netflow
+
+        -   Can use pre-defined records or define your own
+
+    -   **Exporters**
+
+        -   Used to set up exportation of the netflow information to the flow collector
+
+    -   **Samplers**
+
+        -   Used to limit the number of monitored packets if desired for performance reasons
+
+    -   **Monitors**
+
+        -   Used to apply netflow records to desired interfaces
+        -   References specific flow record and flow exporter
+
+---
 
 ## Useful Show + Other Commands
 
@@ -42,6 +67,8 @@ code-block-bg: dark
 -   `clear ip flow stats` - clears netflow statistics from device.
 
 ---
+
+## Flexible Netflow
 
 -   `show flow record`  - used to verify match and collect conditions of the flow record
 -   `show running-config flow record` - also can show this info
