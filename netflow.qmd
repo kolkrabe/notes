@@ -26,25 +26,16 @@ code-block-bg: dark
 -   **Flexible netflow**
 
     -   Used to allow more customization of the traffic parameters to be captured
-
     -   Consists of records, exporters, samplers and monitors
-
     -   **Records**
-
         -   Define what parameters will be captured by netflow
 
         -   Can use pre-defined records or define your own
-
     -   **Exporters**
-
         -   Used to set up exportation of the netflow information to the flow collector
-
     -   **Samplers**
-
         -   Used to limit the number of monitored packets if desired for performance reasons
-
     -   **Monitors**
-
         -   Used to apply netflow records to desired interfaces
         -   References specific flow record and flow exporter
 
@@ -74,7 +65,7 @@ code-block-bg: dark
 -   `show running-config flow record` - also can show this info
 -   `show flow monitor` - used to verify which *pre-defined'* flow record is being used.
 
---
+---
 
 ## Standard Netflow Config
 
