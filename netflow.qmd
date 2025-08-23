@@ -3,8 +3,88 @@ title: "netflow"
 editor: visual
 ---
 
-::: {style="background-color: lightgray; padding:10px; border-left: 3px solid #888;"}
-Some highlighted or code-like content here.
-:::
+# Netflow
 
-------------------------------------------------------------------------
+-   Netflow is a tool to observce traffic flows in the network
+-   A Flow is a series of packets with shared head information such as
+    -   source/destination IP
+    -   protocol numbers
+    -   port numbers
+    -   Type of Service (ToS) field information.
+    -   ingress/egress interface
+    -   QoS
+    -   All entering the same interface on the device.
+-   Netflow data is stored on local device's **flow cache** and can be viewed on CLI
+-   Once flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.
+-   Flows removed after max age expires (Default **30 minutes)**
+
+# Flexible Netflow
+
+-   Can determine traffic in the same was as Netflow + more...
+
+    -   use **Flow Records** to group parameters together
+
+## Useful Show + Other Commands
+
+-   `show ip cache flow` - shows contents of local router flow cache
+
+-   `show ip flow interface` - used to verify netflow enabled interfaces and direction of capture
+
+-   `show ip flow export` - used to verify export source and destination details
+
+-   `ip flow-cache entries [number]` - change the size of the flow cache (if it's filling up often
+
+-    `ip flow-cache timeout active [minutes]` - used to modify the max age of a flow.
+
+-   `ip flow-cache timeout inactive [seconds]` - used to modify idle timer (default **15 seconds)**
+
+-   `clear ip flow stats` - clears netflow statistics from device.
+
+---
+
+-   `show flow record`  - used to verify match and collect conditions of the flow record
+-   `show running-config flow record` - also can show this info
+-   `show flow monitor` - used to verify which *pre-defined'* flow record is being used.
+
+--
+
+## Standard Netflow Config
+
+``` default
+int fa 0/0
+ ip flow [ingress|egress]
+ exit
+ip flow-export source lo 0
+ip flow-export version [5|9]
+ip flow-export destination <collector-ip> 5000
+```
+
+## Flexible Netflow Config
+
+``` deFAULT
+flow exporter EXPORTER
+ destination <Collector-IP>
+ export-protocol netflow-v9
+ source Vlan100
+ transport udp 2055
+!
+flow record RECORD
+ match ipv4 tos
+ match ipv4 protocol
+ match ipv4 source address
+ match ipv4 destination address
+ match transport source-port
+ match transport destination-port
+ match interface input
+ collect interface output
+ collect counter bytes
+ collect counter packets
+!
+flow monitor IPv4_NETFLOW
+ record RECORD
+ exporter EXPORTER
+ cache timeout active 60
+!
+interface fa0/0
+ ip flow monitor IPv4_NETFLOW input
+```

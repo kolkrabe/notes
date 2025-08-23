@@ -20,6 +20,7 @@ website:
               - logging.qmd
               - dhcp.qmd
               - ipsla+track.qmd
+              - netflow.qmd
               - section: "Layout"
                 contents:
                   - layout.qmd

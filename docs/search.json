@@ -7,6 +7,95 @@
     "text": "SNMP\n\nV2 - old, uses community string on both ends for config (not encrypted, transferred in plaintext\nV3 - newer, supports more advanced authentication & encryption\nSNMP traps unreliable (no confirmation required from receiving server).\nSNMP informs are reliable (must be confirmed by receiving server).\n\n`Ifindex persist` - Prevents SNMP index ID’s from changing after reboot (if components are added etc.)  keeps consistency of mapped\n\nUseful Show commands\nshow snmp host - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications\nshow snmp group - Displays SNMP group information (v3) show snmp user - Displays SNMP user information (v3)\n\n\n\nStandard SNMP v2c Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nsnmp-server community \\&lt;community-string\\&gt; \\[RO\\|RW\\] \\[ACL\\]\\\nsnmp-server enable traps\\\nsnmp-server host 10.1.100.100 \\[traps\\|informs\\] version 2c \\&lt;community-string\\&gt;\n\n\nStandard SNMP v3 Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nno snmp-server system-shutdown ! prevents device being shutdown via SNMP\\\nsnmp-server view \\&lt;view-name\\&gt; iso included ! iso included allows all values\\\nsnmp-server group \\&lt;group-name\\&gt; v3 priv read \\&lt;view-name\\&gt; write \\&lt;view-name\\&gt;\\\nsnmp-server user \\&lt;user-name\\&gt; \\&lt;group-name\\&gt; v3 auth sha \\&lt;password\\&gt; priv aes 256 \\&lt;password\\&gt;\\\nsnmp-server host 10.1.100.100 version 3 priv \\&lt;user-name\\&gt;"
   },
   {
+    "objectID": "logging.html",
+    "href": "logging.html",
+    "title": "Logging",
+    "section": "",
+    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Logging"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "notes",
+    "section": "",
+    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "device_management.html",
+    "href": "device_management.html",
+    "title": "Device Management",
+    "section": "",
+    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users\n\n\n\n\n(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
+  },
+  {
+    "objectID": "device_management.html#console-line-connection-requirements",
+    "href": "device_management.html#console-line-connection-requirements",
+    "title": "Device Management",
+    "section": "",
+    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
+  },
+  {
+    "objectID": "device_management.html#standard-line-config",
+    "href": "device_management.html#standard-line-config",
+    "title": "Device Management",
+    "section": "",
+    "text": "(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "dhcp.html",
+    "href": "dhcp.html",
+    "title": "DHCP",
+    "section": "",
+    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "DHCP"
+    ]
+  },
+  {
+    "objectID": "dhcp.html#dhcp-operation",
+    "href": "dhcp.html#dhcp-operation",
+    "title": "DHCP",
+    "section": "",
+    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "DHCP"
+    ]
+  },
+  {
     "objectID": "ipsla+track.html",
     "href": "ipsla+track.html",
     "title": "IP SLA & Tracking",
@@ -55,99 +144,51 @@
     ]
   },
   {
-    "objectID": "dhcp.html",
-    "href": "dhcp.html",
-    "title": "DHCP",
-    "section": "",
-    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "DHCP"
-    ]
-  },
-  {
-    "objectID": "dhcp.html#dhcp-operation",
-    "href": "dhcp.html#dhcp-operation",
-    "title": "DHCP",
-    "section": "",
-    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "DHCP"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "device_management.html",
-    "href": "device_management.html",
-    "title": "Device Management",
-    "section": "",
-    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users\n\n\n\n\n(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "Device Management"
-    ]
-  },
-  {
-    "objectID": "device_management.html#console-line-connection-requirements",
-    "href": "device_management.html#console-line-connection-requirements",
-    "title": "Device Management",
-    "section": "",
-    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "Device Management"
-    ]
-  },
-  {
-    "objectID": "device_management.html#standard-line-config",
-    "href": "device_management.html#standard-line-config",
-    "title": "Device Management",
-    "section": "",
-    "text": "(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "Device Management"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "notes",
-    "section": "",
-    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "logging.html",
-    "href": "logging.html",
-    "title": "Logging",
-    "section": "",
-    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "Logging"
-    ]
-  },
-  {
     "objectID": "netflow.html",
     "href": "netflow.html",
     "title": "netflow",
     "section": "",
-    "text": "Some highlighted or code-like content here."
+    "text": "Netflow is a tool to observce traffic flows in the network\nA Flow is a series of packets with shared head information such as\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "netflow"
+    ]
+  },
+  {
+    "objectID": "netflow.html#useful-show-other-commands",
+    "href": "netflow.html#useful-show-other-commands",
+    "title": "netflow",
+    "section": "Useful Show + Other Commands",
+    "text": "Useful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.\n\n\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.\n\n–",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "netflow"
+    ]
+  },
+  {
+    "objectID": "netflow.html#standard-netflow-config",
+    "href": "netflow.html#standard-netflow-config",
+    "title": "netflow",
+    "section": "Standard Netflow Config",
+    "text": "Standard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "netflow"
+    ]
+  },
+  {
+    "objectID": "netflow.html#flexible-netflow-config",
+    "href": "netflow.html#flexible-netflow-config",
+    "title": "netflow",
+    "section": "Flexible Netflow Config",
+    "text": "Flexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "netflow"
+    ]
   }
 ]
