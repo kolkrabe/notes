@@ -106,3 +106,23 @@ flow monitor IPv4_NETFLOW
 interface fa0/0
  ip flow monitor IPv4_NETFLOW input
 ```
+
+---
+
+## BFD - BiDirectionForwarding
+
+-   BFD is a lightweight *(small fixed packets)* protocol used to determine a link failure between L3 non-directly connected routers.
+
+-   Connection types in question
+
+    -   L2 Switched Network
+    -   VPN Tunnels
+    -   DMVPN without LOS Propagation
+
+-   Works with all Media Types, routing protocols, topologies and encapsulations.
+
+-   Requrements
+
+    -   **CEP + IP Routing** must be enabled
+
+    -   IP Routing protocol supported by BFD must be configured before BFD is configured

@@ -236,6 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whitepapers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">whitepapers</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -253,6 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#flexible-netflow-1" id="toc-flexible-netflow-1" class="nav-link" data-scroll-target="#flexible-netflow-1">Flexible Netflow</a></li>
   <li><a href="#standard-netflow-config" id="toc-standard-netflow-config" class="nav-link" data-scroll-target="#standard-netflow-config">Standard Netflow Config</a></li>
   <li><a href="#flexible-netflow-config" id="toc-flexible-netflow-config" class="nav-link" data-scroll-target="#flexible-netflow-config">Flexible Netflow Config</a></li>
+  <li><a href="#bfd---bidirectionforwarding" id="toc-bfd---bidirectionforwarding" class="nav-link" data-scroll-target="#bfd---bidirectionforwarding">BFD - BiDirectionForwarding</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -301,25 +308,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="flexible-netflow" class="level1">
 <h1>Flexible Netflow</h1>
 <ul>
-<li><p>Can determine traffic in the same was as Netflow + more. things simultaneously</p></li>
-<li><p><strong>Flexible netflow</strong></p>
+<li>Can determine traffic in the same was as Netflow + more. things simultaneously</li>
+<li>Requires <strong>CEF</strong> (Cisco Express Forwarding) to be enabled</li>
+<li><strong>Flexible netflow</strong>
 <ul>
-<li><p>Used to allow more customization of the traffic parameters to be captured</p></li>
-<li><p>Consists of records, exporters, samplers and monitors</p></li>
-<li><p><strong>Records</strong></p>
+<li>Used to allow more customization of the traffic parameters to be captured</li>
+<li>Consists of records, exporters, samplers and monitors</li>
+<li><strong>Records</strong>
 <ul>
 <li><p>Define what parameters will be captured by netflow</p></li>
 <li><p>Can use pre-defined records or define your own</p></li>
 </ul></li>
-<li><p><strong>Exporters</strong></p>
+<li><strong>Exporters</strong>
 <ul>
 <li>Used to set up exportation of the netflow information to the flow collector</li>
 </ul></li>
-<li><p><strong>Samplers</strong></p>
+<li><strong>Samplers</strong>
 <ul>
 <li>Used to limit the number of monitored packets if desired for performance reasons</li>
 </ul></li>
-<li><p><strong>Monitors</strong></p>
+<li><strong>Monitors</strong>
 <ul>
 <li>Used to apply netflow records to desired interfaces</li>
 <li>References specific flow record and flow exporter</li>
@@ -347,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>show running-config flow record</code> - also can show this info</li>
 <li><code>show flow monitor</code> - used to verify which <em>pre-defined’</em> flow record is being used.</li>
 </ul>
-<p>–</p>
+<hr>
 </section>
 <section id="standard-netflow-config" class="level2">
 <h2 class="anchored" data-anchor-id="standard-netflow-config">Standard Netflow Config</h2>
@@ -385,6 +393,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>!</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>interface fa0/0</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> ip flow monitor IPv4_NETFLOW input</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="bfd---bidirectionforwarding" class="level2">
+<h2 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h2>
+<ul>
+<li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p></li>
+<li><p>Connection types in question</p>
+<ul>
+<li>L2 Switched Network</li>
+<li>VPN Tunnels</li>
+<li>DMVPN without LOS Propagation</li>
+</ul></li>
+<li><p>Works with all Media Types, routing protocols, topologies and encapsulations.</p></li>
+<li><p>Requrements</p>
+<ul>
+<li><p><strong>CEP + IP Routing</strong> must be enabled</p></li>
+<li><p>IP Routing protocol supported by BFD must be configured before BFD is configured</p></li>
+</ul></li>
+</ul>
 
 
 </section>

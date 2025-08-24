@@ -30,6 +30,7 @@ website:
         contents:
           - programming.qmd
           - gaming.qmd
+      - whitepapers.qmd
 
 format:
   html:

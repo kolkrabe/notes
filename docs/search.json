@@ -1,98 +1,84 @@
 [
   {
-    "objectID": "snmp.html",
-    "href": "snmp.html",
-    "title": "snmp",
+    "objectID": "whitepapers.html",
+    "href": "whitepapers.html",
+    "title": "whitepapers",
     "section": "",
-    "text": "SNMP\n\nV2 - old, uses community string on both ends for config (not encrypted, transferred in plaintext\nV3 - newer, supports more advanced authentication & encryption\nSNMP traps unreliable (no confirmation required from receiving server).\nSNMP informs are reliable (must be confirmed by receiving server).\n\n`Ifindex persist` - Prevents SNMP index ID’s from changing after reboot (if components are added etc.)  keeps consistency of mapped\n\nUseful Show commands\nshow snmp host - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications\nshow snmp group - Displays SNMP group information (v3) show snmp user - Displays SNMP user information (v3)\n\n\n\nStandard SNMP v2c Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nsnmp-server community \\&lt;community-string\\&gt; \\[RO\\|RW\\] \\[ACL\\]\\\nsnmp-server enable traps\\\nsnmp-server host 10.1.100.100 \\[traps\\|informs\\] version 2c \\&lt;community-string\\&gt;\n\n\nStandard SNMP v3 Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nno snmp-server system-shutdown ! prevents device being shutdown via SNMP\\\nsnmp-server view \\&lt;view-name\\&gt; iso included ! iso included allows all values\\\nsnmp-server group \\&lt;group-name\\&gt; v3 priv read \\&lt;view-name\\&gt; write \\&lt;view-name\\&gt;\\\nsnmp-server user \\&lt;user-name\\&gt; \\&lt;group-name\\&gt; v3 auth sha \\&lt;password\\&gt; priv aes 256 \\&lt;password\\&gt;\\\nsnmp-server host 10.1.100.100 version 3 priv \\&lt;user-name\\&gt;"
-  },
-  {
-    "objectID": "logging.html",
-    "href": "logging.html",
-    "title": "Logging",
-    "section": "",
-    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
+    "text": "Links & White Papers\nExam Topics - https://learningnetwork.cisco.com/s/enarsi-exam-topics\n\nWhite Papers from https://www.reddit.com/r/ccnp/comments/1jtt2lt/ccnp_enterprise_completed/\nBGP:\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/200153-BGP-Route-Reflection-and-Multiple-Cluste.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/25160-bgp-maximum-prefix.html#:~:text=The%20BGP%20Maximum%2DPrefix%20feature%20allows%20you%20to%20control%20how,the%20configured%20Maximum%2DPrefix%20limit\nhttps://journey2theccie.wordpress.com/2021/02/19/configuring-bgp-best-path-algorithm-on-cisco-ios-a-deep-dive/\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-16/irg-xe-16-book/configuring-internal-bgp-features.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5242-bgp-ospf-redis.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5242-bgp-ospf-redis.html#anc17\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html#toc-hId--463182681\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5816-bgpfaq-5816.html#nineteen\nEIGRP:\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/command/ire-cr-book/ire-i1.html#wp3835409071\nhttps://www.cisco.com/en/US/technologies/tk648/tk365/technologies_white_paper0900aecd8023df6f.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/configuration/xe-3s/asr1000/ire-xe-3s-asr1000/ire-ipfrr.html#:~:text=Shared%20Risk%20Link,group%20share%20risks\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/configuration/xe-3se/3650/ire-xe-3se-3650-book/ire-eigrp-stub-rtg.pdf\nhttps://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/221548-configure-eigrp-to-influence-path-select.html\nOSPF:\nhttps://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/6208-nssa.html\nhttps://www.cisco.com/en/US/docs/ios-xml/ios/ipv6/configuration/15-1sg/ip6-ospf.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book/iro-sham-link.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13703-8.html#toc-hId-358006861\nhttps://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13685-13.html\nInfrastructure Security:\nhttps://www.cisco.com/c/en/us/td/docs/ios/12_0s/feature/guide/fs_bfd.html#wp1053332\nhttps://www.cisco.com/en/US/technologies/tk648/tk365/tk480/technologies_white_paper0900aecd80244005.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/debug/command/a1/db-a1-cr-book/db-a1.html#wp4169369695\nhttps://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-sy/dhcp-15-sy-book/ip6-dhcpv6-guard.pdf\nhttps://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html#anc13\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/xe-3e/ip6f-xe-3e-book/ip6f-xe-3e-book_chapter_0110.pdf\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_conavd/configuration/xe-3s/qos-conavd-xe-3s-book/qos-conavd-wred-ecn.html#GUID-BA921D9F-ED71-4246-8911-65617C718D06\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/xe-3se/3850/snmp-xe-3se-3850-book/nm-snmp-snmpv3.html#GUID-1CC99199-5205-4099-BE12-06B9A9C202E2\nhttps://www.cisco.com/c/en/us/support/docs/dial-access/integrated-services-digital-networks-isdn-channel-associated-signaling-cas/10374-debug.html\nhttps://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html\nhttps://www.cisco.com/c/en/us/td/docs/routers/asr920/configuration/guide/sec-data-urpf/17-1-1/b-sec-data-urpf-xe-17-1-asr920/b-sec-data-urpf-xe-17-1-asr920_chapter_00.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/xe-16/ip6f-xe-16-book/ip6-src-guard.pdf\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/15-s/ip6-fhs-bind-table.html\nhttps://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-3SY/config_guide/sup6T/15_3_sy_swcg_6T/control_plane_policing_copp.pdf\nMPLS:\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mpls/command/mp-cr-book/mp-m2.html#wp1359271466\nhttps://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/5_x/nx-os/mpls/configuration/guide/mpls_cg/mp_mpls_overview.html#52246\nhttps://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/mpls/provisioning/guide/PGmpls1.html#wp1028584\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mp_basic/configuration/xe-16/mp-basic-xe-16-book.html\nhttps://www.cisco.com/c/en/us/support/docs/multiprotocol-label-switching-mpls/mpls/4649-mpls-faq-4649.html\nhttps://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/asr9k-r7-5/lxvpn/configuration/guide/b-l3vpn-cg-asr9000-75x/implementing-generic-routing-encapsulation.html#concept_24E35446999A46D18AB6AA05DB70A560\nhttps://www.cisco.com/c/en/us/td/docs/ios/12_2sb/12_2sba/feature/guide/sbadpaut.html\nhttps://www.cisco.com/c/en/us/support/docs/multiprotocol-label-switching-mpls/mpls/12492-mpls-tsh.html\nhttps://www.cisco.com/c/en/us/td/docs/ios/mpls/configuration/guide/convert/mp_ldp_book/mp_ldp_overview.html\nPBR + Route-maps:\nhttps://howdoesinternetwork.com/2013/configuration-of-pbr-policy-based-routing\nhttps://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-0SY/configuration/guide/15_0_sy_swcg/policy_based_routing_pbr.pdf\nhttps://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/49111-route-map-bestp.html\nhttps://www.cisco.com/c/en/us/td/docs/switches/lan/csbms/CBS_250_350/CLI/cbs-350-cli-/route-map-commands.pdf\nVPN:\nhttps://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/29240-dcmvpn.html\nhttps://www.cisco.com/en/US/docs/ios-xml/ios/ipv6/configuration/15-1sg/ip6-tunnel.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nhrp/configuration/xe-16-9/nhrp-xe-16-9-book/config-nhrp.html\nhttps://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ip6-mgre-tunls.html\nhttps://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/22327-gre-flap.html\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nhrp/configuration/xe-16/nhrp-xe-16-book.pdf\nMISC:\nhttps://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/dna-center/2-3-3/install_guide/2ndgen/b_cisco_dna_center_install_guide_2_3_3_2ndGen/m_troubleshoot_deployment_2_3_3_2ndgen.html#task_c3x_ycw_sfb\nhttps://www.cisco.com/c/en/us/td/docs/ios/fundamentals/command/reference/cf_book/cf_r1.html#wp1030116\nhttps://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/iri-pi-event-damp.html\nhttps://www.cisco.com/c/en/us/td/docs/optical/15000r8_0/ethernet/454/guide/d80ether/r8vrf.pdf",
     "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "Logging"
+      "whitepapers"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "notes",
+    "objectID": "netflow.html",
+    "href": "netflow.html",
+    "title": "netflow",
     "section": "",
-    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam.\nIdea and formatting borrowed from BrunB…\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "device_management.html",
-    "href": "device_management.html",
-    "title": "Device Management",
-    "section": "",
-    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users\n\n\n\n\n(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "text": "Netflow is a tool to observce traffic flows in the network\nA Flow is a series of packets with shared head information such as\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "Device Management"
+      "netflow"
     ]
   },
   {
-    "objectID": "device_management.html#console-line-connection-requirements",
-    "href": "device_management.html#console-line-connection-requirements",
-    "title": "Device Management",
-    "section": "",
-    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users",
+    "objectID": "netflow.html#useful-show-other-commands",
+    "href": "netflow.html#useful-show-other-commands",
+    "title": "netflow",
+    "section": "Useful Show + Other Commands",
+    "text": "Useful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "Device Management"
+      "netflow"
     ]
   },
   {
-    "objectID": "device_management.html#standard-line-config",
-    "href": "device_management.html#standard-line-config",
-    "title": "Device Management",
-    "section": "",
-    "text": "(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "objectID": "netflow.html#flexible-netflow-1",
+    "href": "netflow.html#flexible-netflow-1",
+    "title": "netflow",
+    "section": "Flexible Netflow",
+    "text": "Flexible Netflow\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "Device Management"
+      "netflow"
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "dhcp.html",
-    "href": "dhcp.html",
-    "title": "DHCP",
-    "section": "",
-    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "objectID": "netflow.html#standard-netflow-config",
+    "href": "netflow.html#standard-netflow-config",
+    "title": "netflow",
+    "section": "Standard Netflow Config",
+    "text": "Standard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "DHCP"
+      "netflow"
     ]
   },
   {
-    "objectID": "dhcp.html#dhcp-operation",
-    "href": "dhcp.html#dhcp-operation",
-    "title": "DHCP",
-    "section": "",
-    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "objectID": "netflow.html#flexible-netflow-config",
+    "href": "netflow.html#flexible-netflow-config",
+    "title": "netflow",
+    "section": "Flexible Netflow Config",
+    "text": "Flexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "DHCP"
+      "netflow"
+    ]
+  },
+  {
+    "objectID": "netflow.html#bfd---bidirectionforwarding",
+    "href": "netflow.html#bfd---bidirectionforwarding",
+    "title": "netflow",
+    "section": "BFD - BiDirectionForwarding",
+    "text": "BFD - BiDirectionForwarding\n\nBFD is a lightweight (small fixed packets) protocol used to determine a link failure between L3 non-directly connected routers.\nConnection types in question\n\nL2 Switched Network\nVPN Tunnels\nDMVPN without LOS Propagation\n\nWorks with all Media Types, routing protocols, topologies and encapsulations.\nRequrements\n\nCEP + IP Routing must be enabled\nIP Routing protocol supported by BFD must be configured before BFD is configured",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "netflow"
     ]
   },
   {
@@ -144,63 +130,99 @@
     ]
   },
   {
-    "objectID": "netflow.html",
-    "href": "netflow.html",
-    "title": "netflow",
+    "objectID": "dhcp.html",
+    "href": "dhcp.html",
+    "title": "DHCP",
     "section": "",
-    "text": "Netflow is a tool to observce traffic flows in the network\nA Flow is a series of packets with shared head information such as\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)",
+    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "netflow"
+      "DHCP"
     ]
   },
   {
-    "objectID": "netflow.html#useful-show-other-commands",
-    "href": "netflow.html#useful-show-other-commands",
-    "title": "netflow",
-    "section": "Useful Show + Other Commands",
-    "text": "Useful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.",
+    "objectID": "dhcp.html#dhcp-operation",
+    "href": "dhcp.html#dhcp-operation",
+    "title": "DHCP",
+    "section": "",
+    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "netflow"
+      "DHCP"
     ]
   },
   {
-    "objectID": "netflow.html#flexible-netflow-1",
-    "href": "netflow.html#flexible-netflow-1",
-    "title": "netflow",
-    "section": "Flexible Netflow",
-    "text": "Flexible Netflow\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.\n\n–",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "device_management.html",
+    "href": "device_management.html",
+    "title": "Device Management",
+    "section": "",
+    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users\n\n\n\n\n(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "netflow"
+      "Device Management"
     ]
   },
   {
-    "objectID": "netflow.html#standard-netflow-config",
-    "href": "netflow.html#standard-netflow-config",
-    "title": "netflow",
-    "section": "Standard Netflow Config",
-    "text": "Standard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000",
+    "objectID": "device_management.html#console-line-connection-requirements",
+    "href": "device_management.html#console-line-connection-requirements",
+    "title": "Device Management",
+    "section": "",
+    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "netflow"
+      "Device Management"
     ]
   },
   {
-    "objectID": "netflow.html#flexible-netflow-config",
-    "href": "netflow.html#flexible-netflow-config",
-    "title": "netflow",
-    "section": "Flexible Netflow Config",
-    "text": "Flexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input",
+    "objectID": "device_management.html#standard-line-config",
+    "href": "device_management.html#standard-line-config",
+    "title": "Device Management",
+    "section": "",
+    "text": "(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
-      "netflow"
+      "Device Management"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "notes",
+    "section": "",
+    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam.\nIdea and formatting borrowed from BrunB…\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "logging.html",
+    "href": "logging.html",
+    "title": "Logging",
+    "section": "",
+    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Logging"
+    ]
+  },
+  {
+    "objectID": "snmp.html",
+    "href": "snmp.html",
+    "title": "snmp",
+    "section": "",
+    "text": "SNMP\n\nV2 - old, uses community string on both ends for config (not encrypted, transferred in plaintext\nV3 - newer, supports more advanced authentication & encryption\nSNMP traps unreliable (no confirmation required from receiving server).\nSNMP informs are reliable (must be confirmed by receiving server).\n\n`Ifindex persist` - Prevents SNMP index ID’s from changing after reboot (if components are added etc.)  keeps consistency of mapped\n\nUseful Show commands\nshow snmp host - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications\nshow snmp group - Displays SNMP group information (v3) show snmp user - Displays SNMP user information (v3)\n\n\n\nStandard SNMP v2c Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nsnmp-server community \\&lt;community-string\\&gt; \\[RO\\|RW\\] \\[ACL\\]\\\nsnmp-server enable traps\\\nsnmp-server host 10.1.100.100 \\[traps\\|informs\\] version 2c \\&lt;community-string\\&gt;\n\n\nStandard SNMP v3 Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nno snmp-server system-shutdown ! prevents device being shutdown via SNMP\\\nsnmp-server view \\&lt;view-name\\&gt; iso included ! iso included allows all values\\\nsnmp-server group \\&lt;group-name\\&gt; v3 priv read \\&lt;view-name\\&gt; write \\&lt;view-name\\&gt;\\\nsnmp-server user \\&lt;user-name\\&gt; \\&lt;group-name\\&gt; v3 auth sha \\&lt;password\\&gt; priv aes 256 \\&lt;password\\&gt;\\\nsnmp-server host 10.1.100.100 version 3 priv \\&lt;user-name\\&gt;"
   }
 ]

@@ -2,7 +2,7 @@
 title: "notes"
 ---
 
-This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam. 
+This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam.
 
 Idea and formatting borrowed from BrunB...
 

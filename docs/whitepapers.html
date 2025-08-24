@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>snmp – Kolkrabe</title>
+<title>whitepapers – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,7 +39,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-acc20bd0d7528895cabc19d4908f1763.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b4a681d58bd082a299108a8a12684248.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -116,9 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Kolkrabe
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./whitepapers.html">whitepapers</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -240,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whitepapers.html" class="sidebar-item-text sidebar-link">
+  <a href="./whitepapers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">whitepapers</span></a>
   </div>
 </li>
@@ -254,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#snmp" id="toc-snmp" class="nav-link active" data-scroll-target="#snmp">SNMP</a></li>
+  <li><a href="#links-white-papers" id="toc-links-white-papers" class="nav-link active" data-scroll-target="#links-white-papers">Links &amp; White Papers</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">snmp</h1>
+<h1 class="title">whitepapers</h1>
 </div>
 
 
@@ -280,43 +243,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="snmp" class="level3">
-<h3 class="anchored" data-anchor-id="snmp">SNMP</h3>
-<ul>
-<li>V2 - old, uses community string on both ends for config (not encrypted, transferred in plaintext</li>
-<li>V3 - newer, supports more advanced authentication &amp; encryption</li>
-<li>SNMP traps unreliable (no confirmation required from receiving server).</li>
-<li>SNMP informs are reliable (must be confirmed by receiving server).</li>
-</ul>
-<p><strong>`Ifindex persist` -</strong> Prevents SNMP index ID’s from changing after reboot (if components are added etc.)&nbsp; keeps consistency of mapped</p>
-<section id="useful-show-commands" class="level5">
-<h5 class="anchored" data-anchor-id="useful-show-commands">Useful Show commands</h5>
-<p><strong>show snmp host</strong> - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications</p>
-<p><strong>show snmp group</strong> - Displays SNMP group information (v3) <strong>show snmp user</strong> - Displays SNMP user information (v3)</p>
+<section id="links-white-papers" class="level1">
+<h1>Links &amp; White Papers</h1>
+<p>Exam Topics - <a href="https://learningnetwork.cisco.com/s/enarsi-exam-topics" class="uri">https://learningnetwork.cisco.com/s/enarsi-exam-topics</a></p>
 <hr>
-</section>
-<section id="standard-snmp-v2c-config" class="level5">
-<h5 class="anchored" data-anchor-id="standard-snmp-v2c-config">Standard SNMP v2c Config</h5>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>snmp ifmib ifindex persist\</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>snmp-server location&nbsp;\&lt;location\&gt;\</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>snmp-server contact&nbsp;\&lt;contact-details\&gt;\</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>snmp-server community \&lt;community-string\&gt; \[RO\|RW\] \[ACL\]\</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>snmp-server enable traps\</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>snmp-server host 10.1.100.100 \[traps\|informs\] version 2c \&lt;community-string\&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="standard-snmp-v3-config" class="level5">
-<h5 class="anchored" data-anchor-id="standard-snmp-v3-config">Standard SNMP v3 Config</h5>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>snmp ifmib ifindex persist\</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>snmp-server location&nbsp;\&lt;location\&gt;\</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>snmp-server contact&nbsp;\&lt;contact-details\&gt;\</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>no snmp-server system-shutdown ! prevents device being shutdown via SNMP\</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>snmp-server view&nbsp;\&lt;view-name\&gt;&nbsp;iso included ! iso included allows all values\</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>snmp-server group \&lt;group-name\&gt; v3 priv read&nbsp;\&lt;view-name\&gt;&nbsp;write&nbsp;\&lt;view-name\&gt;\</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>snmp-server user \&lt;user-name\&gt; \&lt;group-name\&gt; v3 auth sha \&lt;password\&gt; priv aes 256 \&lt;password\&gt;\</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>snmp-server host 10.1.100.100 version 3 priv \&lt;user-name\&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>White Papers from <a href="https://www.reddit.com/r/ccnp/comments/1jtt2lt/ccnp_enterprise_completed/" class="uri">https://www.reddit.com/r/ccnp/comments/1jtt2lt/ccnp_enterprise_completed/</a></p>
+<p><strong>BGP:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/200153-BGP-Route-Reflection-and-Multiple-Cluste.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/200153-BGP-Route-Reflection-and-Multiple-Cluste.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/25160-bgp-maximum-prefix.html#:~:text=The%20BGP%20Maximum%2DPrefix%20feature%20allows%20you%20to%20control%20how,the%20configured%20Maximum%2DPrefix%20limit" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/25160-bgp-maximum-prefix.html#:~:text=The%20BGP%20Maximum%2DPrefix%20feature%20allows%20you%20to%20control%20how,the%20configured%20Maximum%2DPrefix%20limit</a></p>
+<p><a href="https://journey2theccie.wordpress.com/2021/02/19/configuring-bgp-best-path-algorithm-on-cisco-ios-a-deep-dive/" class="uri">https://journey2theccie.wordpress.com/2021/02/19/configuring-bgp-best-path-algorithm-on-cisco-ios-a-deep-dive/</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-16/irg-xe-16-book/configuring-internal-bgp-features.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-16/irg-xe-16-book/configuring-internal-bgp-features.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5242-bgp-ospf-redis.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5242-bgp-ospf-redis.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5242-bgp-ospf-redis.html#anc17" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5242-bgp-ospf-redis.html#anc17</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html#toc-hId--463182681" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html#toc-hId--463182681</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5816-bgpfaq-5816.html#nineteen" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/5816-bgpfaq-5816.html#nineteen</a></p>
+<p><strong>EIGRP:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/command/ire-cr-book/ire-i1.html#wp3835409071" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/command/ire-cr-book/ire-i1.html#wp3835409071</a></p>
+<p><a href="https://www.cisco.com/en/US/technologies/tk648/tk365/technologies_white_paper0900aecd8023df6f.html" class="uri">https://www.cisco.com/en/US/technologies/tk648/tk365/technologies_white_paper0900aecd8023df6f.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/configuration/xe-3s/asr1000/ire-xe-3s-asr1000/ire-ipfrr.html#:~:text=Shared%20Risk%20Link,group%20share%20risks" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/configuration/xe-3s/asr1000/ire-xe-3s-asr1000/ire-ipfrr.html#:~:text=Shared%20Risk%20Link,group%20share%20risks</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/configuration/xe-3se/3650/ire-xe-3se-3650-book/ire-eigrp-stub-rtg.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_eigrp/configuration/xe-3se/3650/ire-xe-3se-3650-book/ire-eigrp-stub-rtg.pdf</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/221548-configure-eigrp-to-influence-path-select.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/221548-configure-eigrp-to-influence-path-select.html</a></p>
+<p><strong>OSPF:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/6208-nssa.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/6208-nssa.html</a></p>
+<p><a href="https://www.cisco.com/en/US/docs/ios-xml/ios/ipv6/configuration/15-1sg/ip6-ospf.html" class="uri">https://www.cisco.com/en/US/docs/ios-xml/ios/ipv6/configuration/15-1sg/ip6-ospf.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book/iro-sham-link.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book/iro-sham-link.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13703-8.html#toc-hId-358006861" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13703-8.html#toc-hId-358006861</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13685-13.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13685-13.html</a></p>
+<p><strong>Infrastructure Security:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios/12_0s/feature/guide/fs_bfd.html#wp1053332" class="uri">https://www.cisco.com/c/en/us/td/docs/ios/12_0s/feature/guide/fs_bfd.html#wp1053332</a></p>
+<p><a href="https://www.cisco.com/en/US/technologies/tk648/tk365/tk480/technologies_white_paper0900aecd80244005.html" class="uri">https://www.cisco.com/en/US/technologies/tk648/tk365/tk480/technologies_white_paper0900aecd80244005.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/debug/command/a1/db-a1-cr-book/db-a1.html#wp4169369695" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/debug/command/a1/db-a1-cr-book/db-a1.html#wp4169369695</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html" class="uri">https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-sy/dhcp-15-sy-book/ip6-dhcpv6-guard.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-sy/dhcp-15-sy-book/ip6-dhcpv6-guard.pdf</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html#anc13" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html#anc13</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/xe-3e/ip6f-xe-3e-book/ip6f-xe-3e-book_chapter_0110.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/xe-3e/ip6f-xe-3e-book/ip6f-xe-3e-book_chapter_0110.pdf</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_conavd/configuration/xe-3s/qos-conavd-xe-3s-book/qos-conavd-wred-ecn.html#GUID-BA921D9F-ED71-4246-8911-65617C718D06" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_conavd/configuration/xe-3s/qos-conavd-xe-3s-book/qos-conavd-wred-ecn.html#GUID-BA921D9F-ED71-4246-8911-65617C718D06</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/xe-3se/3850/snmp-xe-3se-3850-book/nm-snmp-snmpv3.html#GUID-1CC99199-5205-4099-BE12-06B9A9C202E2" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/xe-3se/3850/snmp-xe-3se-3850-book/nm-snmp-snmpv3.html#GUID-1CC99199-5205-4099-BE12-06B9A9C202E2</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/dial-access/integrated-services-digital-networks-isdn-channel-associated-signaling-cas/10374-debug.html" class="uri">https://www.cisco.com/c/en/us/support/docs/dial-access/integrated-services-digital-networks-isdn-channel-associated-signaling-cas/10374-debug.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html" class="uri">https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/asr920/configuration/guide/sec-data-urpf/17-1-1/b-sec-data-urpf-xe-17-1-asr920/b-sec-data-urpf-xe-17-1-asr920_chapter_00.html" class="uri">https://www.cisco.com/c/en/us/td/docs/routers/asr920/configuration/guide/sec-data-urpf/17-1-1/b-sec-data-urpf-xe-17-1-asr920/b-sec-data-urpf-xe-17-1-asr920_chapter_00.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/xe-16/ip6f-xe-16-book/ip6-src-guard.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/xe-16/ip6f-xe-16-book/ip6-src-guard.pdf</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/15-s/ip6-fhs-bind-table.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_fhsec/configuration/15-s/ip6-fhs-bind-table.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-3SY/config_guide/sup6T/15_3_sy_swcg_6T/control_plane_policing_copp.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-3SY/config_guide/sup6T/15_3_sy_swcg_6T/control_plane_policing_copp.pdf</a></p>
+<p><strong>MPLS:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mpls/command/mp-cr-book/mp-m2.html#wp1359271466" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mpls/command/mp-cr-book/mp-m2.html#wp1359271466</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/5_x/nx-os/mpls/configuration/guide/mpls_cg/mp_mpls_overview.html#52246" class="uri">https://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/5_x/nx-os/mpls/configuration/guide/mpls_cg/mp_mpls_overview.html#52246</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/mpls/provisioning/guide/PGmpls1.html#wp1028584" class="uri">https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/mpls/provisioning/guide/PGmpls1.html#wp1028584</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mp_basic/configuration/xe-16/mp-basic-xe-16-book.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mp_basic/configuration/xe-16/mp-basic-xe-16-book.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/multiprotocol-label-switching-mpls/mpls/4649-mpls-faq-4649.html" class="uri">https://www.cisco.com/c/en/us/support/docs/multiprotocol-label-switching-mpls/mpls/4649-mpls-faq-4649.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/asr9k-r7-5/lxvpn/configuration/guide/b-l3vpn-cg-asr9000-75x/implementing-generic-routing-encapsulation.html#concept_24E35446999A46D18AB6AA05DB70A560" class="uri">https://www.cisco.com/c/en/us/td/docs/routers/asr9000/software/asr9k-r7-5/lxvpn/configuration/guide/b-l3vpn-cg-asr9000-75x/implementing-generic-routing-encapsulation.html#concept_24E35446999A46D18AB6AA05DB70A560</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/12_2sba/feature/guide/sbadpaut.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/12_2sba/feature/guide/sbadpaut.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/multiprotocol-label-switching-mpls/mpls/12492-mpls-tsh.html" class="uri">https://www.cisco.com/c/en/us/support/docs/multiprotocol-label-switching-mpls/mpls/12492-mpls-tsh.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios/mpls/configuration/guide/convert/mp_ldp_book/mp_ldp_overview.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios/mpls/configuration/guide/convert/mp_ldp_book/mp_ldp_overview.html</a></p>
+<p><strong>PBR + Route-maps:</strong></p>
+<p><a href="https://howdoesinternetwork.com/2013/configuration-of-pbr-policy-based-routing" class="uri">https://howdoesinternetwork.com/2013/configuration-of-pbr-policy-based-routing</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-0SY/configuration/guide/15_0_sy_swcg/policy_based_routing_pbr.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-0SY/configuration/guide/15_0_sy_swcg/policy_based_routing_pbr.pdf</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/49111-route-map-bestp.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/49111-route-map-bestp.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/csbms/CBS_250_350/CLI/cbs-350-cli-/route-map-commands.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/switches/lan/csbms/CBS_250_350/CLI/cbs-350-cli-/route-map-commands.pdf</a></p>
+<p><strong>VPN:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/29240-dcmvpn.html" class="uri">https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/29240-dcmvpn.html</a></p>
+<p><a href="https://www.cisco.com/en/US/docs/ios-xml/ios/ipv6/configuration/15-1sg/ip6-tunnel.html" class="uri">https://www.cisco.com/en/US/docs/ios-xml/ios/ipv6/configuration/15-1sg/ip6-tunnel.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nhrp/configuration/xe-16-9/nhrp-xe-16-9-book/config-nhrp.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nhrp/configuration/xe-16-9/nhrp-xe-16-9-book/config-nhrp.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ip6-mgre-tunls.html" class="uri">https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ip6-mgre-tunls.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/22327-gre-flap.html" class="uri">https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/22327-gre-flap.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nhrp/configuration/xe-16/nhrp-xe-16-book.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_nhrp/configuration/xe-16/nhrp-xe-16-book.pdf</a></p>
+<p><strong>MISC:</strong></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/dna-center/2-3-3/install_guide/2ndgen/b_cisco_dna_center_install_guide_2_3_3_2ndGen/m_troubleshoot_deployment_2_3_3_2ndgen.html#task_c3x_ycw_sfb" class="uri">https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/dna-center/2-3-3/install_guide/2ndgen/b_cisco_dna_center_install_guide_2_3_3_2ndGen/m_troubleshoot_deployment_2_3_3_2ndgen.html#task_c3x_ycw_sfb</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios/fundamentals/command/reference/cf_book/cf_r1.html#wp1030116" class="uri">https://www.cisco.com/c/en/us/td/docs/ios/fundamentals/command/reference/cf_book/cf_r1.html#wp1030116</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/iri-pi-event-damp.html" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/iri-pi-event-damp.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/optical/15000r8_0/ethernet/454/guide/d80ether/r8vrf.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/optical/15000r8_0/ethernet/454/guide/d80ether/r8vrf.pdf</a></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
