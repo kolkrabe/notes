@@ -1,7 +1,42 @@
 ---
-title: "eigrp"
+title: "Eigrp"
 editor: visual
 code-block-bg: dark
 ---
 
 # EIGRP
+
+-   AD 90internal, 170External
+-   Timers
+    -   Hello-default 5 secs),
+-   Load balance over unequal paths using `variance` unlike OSPF (equal only)
+-   Uses Metr
+-   Supports VLSM by sending mask
+-   Communicates via Multicast to neighbours (**Hello**)
+    -   Can configure neighbour specifically to use Unicast
+-   Uses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow
+-   Uses DUAL (Difussing identifies neighbour with lowest Feasible Distance
+-   3 Data Structures
+    -   `Neighbour Table` - Who our EIGRP neighbours are
+    -   `Interface Table` - which interfaces are participating
+    -   `Topology Table` - shows routes known to EIGRP
+
+## Messages & Timers 
+
+*Help Up Queeg, Rimmer, Really Aces*
+
+-   **Hello** - used to discover neighbours
+
+    -   Hello Interval - time between sending hellos to neighbour - Default 5 seconds
+    -   Hold Time - time I tell my neighbor to wait for me - Default 15 Seconds
+    -   This is different to OSPF where the dead timer is how long I wait.
+
+-   **Update -**
+
+-   **Query**
+
+-   **Request**
+
+-   **Reply** -
+
+-   **Acknowledge** -
