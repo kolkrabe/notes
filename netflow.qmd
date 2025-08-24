@@ -22,9 +22,8 @@ code-block-bg: dark
 # Flexible Netflow
 
 -   Can determine traffic in the same was as Netflow + more. things simultaneously
-
+-   Requires **CEF** (Cisco Express Forwarding) to be enabled
 -   **Flexible netflow**
-
     -   Used to allow more customization of the traffic parameters to be captured
     -   Consists of records, exporters, samplers and monitors
     -   **Records**
@@ -39,7 +38,7 @@ code-block-bg: dark
         -   Used to apply netflow records to desired interfaces
         -   References specific flow record and flow exporter
 
----
+------------------------------------------------------------------------
 
 ## Useful Show + Other Commands
 
@@ -51,21 +50,21 @@ code-block-bg: dark
 
 -   `ip flow-cache entries [number]` - change the size of the flow cache (if it's filling up often
 
--    `ip flow-cache timeout active [minutes]` - used to modify the max age of a flow.
+-   `ip flow-cache timeout active [minutes]` - used to modify the max age of a flow.
 
 -   `ip flow-cache timeout inactive [seconds]` - used to modify idle timer (default **15 seconds)**
 
 -   `clear ip flow stats` - clears netflow statistics from device.
 
----
+------------------------------------------------------------------------
 
 ## Flexible Netflow
 
--   `show flow record`  - used to verify match and collect conditions of the flow record
+-   `show flow record` - used to verify match and collect conditions of the flow record
 -   `show running-config flow record` - also can show this info
 -   `show flow monitor` - used to verify which *pre-defined'* flow record is being used.
 
----
+------------------------------------------------------------------------
 
 ## Standard Netflow Config
 
@@ -80,7 +79,7 @@ ip flow-export destination <collector-ip> 5000
 
 ## Flexible Netflow Config
 
-``` deFAULT
+``` default
 flow exporter EXPORTER
  destination <Collector-IP>
  export-protocol netflow-v9
