@@ -14,6 +14,9 @@ website:
         href: index.qmd
       - section: "CCNP ENARSI"
         contents:
+          - section: "Layer 3 Technologies"
+            contents: 
+              - eigrp.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd
@@ -26,10 +29,6 @@ website:
          - layout.qmd
          - layout-knitr.qmd
          - layout-jupyter.qmd
-      - section: "Future Expansion"
-        contents:
-          - programming.qmd
-          - gaming.qmd
       - whitepapers.qmd
 
 format:
