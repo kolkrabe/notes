@@ -28,7 +28,6 @@ code-block-bg: dark
     -   Consists of records, exporters, samplers and monitors
     -   **Records**
         -   Define what parameters will be captured by netflow
-
         -   Can use pre-defined records or define your own
     -   **Exporters**
         -   Used to set up exportation of the netflow information to the flow collector

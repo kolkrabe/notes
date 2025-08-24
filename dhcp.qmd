@@ -20,7 +20,7 @@ code-block-bg: dark
     -   **Request** - Client request the offered IP details.
     -   **Acknowledge** - DHCP server acknowledges clients request and records the details
 
--   SARR
+-   SARR (IPv6)
 
     -   **Solicit** - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2
     -   **Advertise** - Servers respond to solicit message with a unicast advertise, offering addressing info
