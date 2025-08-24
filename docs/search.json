@@ -132,13 +132,61 @@
   {
     "objectID": "eigrp.html",
     "href": "eigrp.html",
-    "title": "eigrp",
+    "title": "Eigrp",
     "section": "",
-    "text": "EIGRP",
+    "text": "AD 90internal, 170External\nHello’s are Multicast on 224.0.0.10, port 88\nTimers\n\nHello-default 5 secs),\n\nLoad balance over unequal paths using variance unlike OSPF (equal only)\nUses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU)\n\nMostly uses\n\nK1 - Bandwidth - slowest in path\nK3 - Delay - cumulative\n\n\nSupports VLSM by sending mask\n\nCan configure neighbour specifically to use Unicast\n\nUses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow\nUses DUAL (Difussing identifies neighbour with lowest Feasible Distance\n3 Data Structures\n\nNeighbour Table - Who our EIGRP neighbours are\nInterface Table - which interfaces are participating\nTopology Table - shows routes known to EIGRP\n\n\n\n\nHelp Up Queeg, Rimmer, Really Aces\n\nHello - used to discover neighbours, (Hold time = how long neighbour should wait, different to\nUpdate -\nQuery -\nRequest -\nReply -\nAcknowledge -\n\n\n\n\n\nReported Distance - cost to destination from neighbouring router\nFeasible Distance - RD + path cost to get to neighbouring router.\nSuccessor Route - the lowest cost path to route\nSuccessor - First Hop route on that path\nFeasibility Condition - That the RD must be less than the FD (loop prevention)\nFeasible Successor - route which passes the feasibility condition.\n\n\n\n\n\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces are configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n\n\n\nshow ip route\nshow ip eigrp interfaces\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbour has died.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
-      "eigrp"
+      "Eigrp"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#messages-timers",
+    "href": "eigrp.html#messages-timers",
+    "title": "Eigrp",
+    "section": "",
+    "text": "Help Up Queeg, Rimmer, Really Aces\n\nHello - used to discover neighbours, (Hold time = how long neighbour should wait, different to\nUpdate -\nQuery -\nRequest -\nReply -\nAcknowledge -",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Eigrp"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#path-selection",
+    "href": "eigrp.html#path-selection",
+    "title": "Eigrp",
+    "section": "",
+    "text": "Reported Distance - cost to destination from neighbouring router\nFeasible Distance - RD + path cost to get to neighbouring router.\nSuccessor Route - the lowest cost path to route\nSuccessor - First Hop route on that path\nFeasibility Condition - That the RD must be less than the FD (loop prevention)\nFeasible Successor - route which passes the feasibility condition.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Eigrp"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#eigrp---traditional-ipv4-configuration",
+    "href": "eigrp.html#eigrp---traditional-ipv4-configuration",
+    "title": "Eigrp",
+    "section": "",
+    "text": "router eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces are configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Eigrp"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#useful-show-commands",
+    "href": "eigrp.html#useful-show-commands",
+    "title": "Eigrp",
+    "section": "",
+    "text": "show ip route\nshow ip eigrp interfaces\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbour has died.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Eigrp"
     ]
   },
   {

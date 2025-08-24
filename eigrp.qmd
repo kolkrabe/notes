@@ -7,13 +7,19 @@ code-block-bg: dark
 # EIGRP
 
 -   AD 90internal, 170External
+-   **Hello**'s are Multicast on **224.0.0.10**, port **88**
 -   Timers
     -   Hello-default 5 secs),
 -   Load balance over unequal paths using `variance` unlike OSPF (equal only)
--   Uses Metr
+-   Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU)
+    -   Mostly uses
+
+        -   K1 - Bandwidth - slowest in path
+        -   K3 - Delay - cumulative
 -   Supports VLSM by sending mask
--   Communicates via Multicast to neighbours (**Hello**)
-    -   Can configure neighbour specifically to use Unicast
+
+Can configure neighbour specifically to use **Unicast**
+
 -   Uses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow
 -   Uses DUAL (Difussing identifies neighbour with lowest Feasible Distance
 -   3 Data Structures
@@ -21,22 +27,41 @@ code-block-bg: dark
     -   `Interface Table` - which interfaces are participating
     -   `Topology Table` - shows routes known to EIGRP
 
-## Messages & Timers 
+## Messages & Timers
 
 *Help Up Queeg, Rimmer, Really Aces*
 
--   **Hello** - used to discover neighbours
-
-    -   Hello Interval - time between sending hellos to neighbour - Default 5 seconds
-    -   Hold Time - time I tell my neighbor to wait for me - Default 15 Seconds
-    -   This is different to OSPF where the dead timer is how long I wait.
-
--   **Update -**
-
--   **Query**
-
--   **Request**
-
+-   **Hello** - used to discover neighbours, (Hold time = how long neighbour should wait, different to
+-   **Update** -
+-   **Query** -
+-   **Request** -
 -   **Reply** -
-
 -   **Acknowledge** -
+
+## Path Selection
+
+-   **Reported Distance** - cost to destination from neighbouring router
+-   **Feasible Distance** - RD + path cost to get to neighbouring router.
+-   **Successor Route** - the lowest cost path to route
+-   **Successor** - First Hop route on that path
+-   **Feasibility Condition** - That the **RD** must be less than the **FD** (loop prevention)
+-   **Feasible Successor** - route which passes the feasibility condition.
+
+------------------------------------------------------------------------
+
+## EIGRP - Traditional IPv4 Configuration
+
+``` default
+router eigrp 10 
+network 10.1.1.0 0.0.0.255           - If any interfaces are configured/up they should participate in EIGRP
+network 172.16.1.0 0.0.0.3
+network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP
+```
+
+## Useful Show Commands
+
+`show ip route`
+
+`show ip eigrp interfaces`
+
+Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbour has died.

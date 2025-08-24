@@ -106,7 +106,7 @@ interface fa0/0
  ip flow monitor IPv4_NETFLOW input
 ```
 
----
+------------------------------------------------------------------------
 
 ## BFD - BiDirectionForwarding
 
