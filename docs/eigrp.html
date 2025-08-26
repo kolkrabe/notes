@@ -252,10 +252,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#eigrp" id="toc-eigrp" class="nav-link active" data-scroll-target="#eigrp">EIGRP</a>
+  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
-  <li><a href="#messages-timers" id="toc-messages-timers" class="nav-link" data-scroll-target="#messages-timers">Messages &amp; Timers</a></li>
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
+  <li><a href="#route-filtering" id="toc-route-filtering" class="nav-link" data-scroll-target="#route-filtering">Route Filtering</a></li>
+  <li><a href="#loop-prevention" id="toc-loop-prevention" class="nav-link" data-scroll-target="#loop-prevention">Loop Prevention</a></li>
+  <li><a href="#redistribution---see-redib" id="toc-redistribution---see-redib" class="nav-link" data-scroll-target="#redistribution---see-redib">Redistribution - see redib</a></li>
+  <li><a href="#summerization" id="toc-summerization" class="nav-link" data-scroll-target="#summerization">Summerization</a></li>
+  <li><a href="#stub" id="toc-stub" class="nav-link" data-scroll-target="#stub">Stub</a></li>
+  <li><a href="#stub-site" id="toc-stub-site" class="nav-link" data-scroll-target="#stub-site">Stub Site</a></li>
+  <li><a href="#load-balancing" id="toc-load-balancing" class="nav-link" data-scroll-target="#load-balancing">Load balancing</a></li>
+  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
   <li><a href="#eigrp---traditional-ipv4-configuration" id="toc-eigrp---traditional-ipv4-configuration" class="nav-link" data-scroll-target="#eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</a></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   </ul></li>
@@ -284,8 +293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="eigrp" class="level1">
-<h1>EIGRP</h1>
+<section id="general" class="level1">
+<h1>General</h1>
 <ul>
 <li>Classic/Named Mode
 <ul>
@@ -321,19 +330,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>Topology Table</code> - shows routes known to EIGRP</li>
 </ul></li>
 <li>Router-ID (highest configured + active Loopback, then any IPv4”</li>
-</ul>
-<section id="messages-timers" class="level2">
-<h2 class="anchored" data-anchor-id="messages-timers">Messages &amp; Timers</h2>
-<p><em>Help Up Queeg, Rimmer, Really Aces</em></p>
+<li>Path Selection
 <ul>
-<li><strong>Hello</strong> - used to discover neighbours, (Hold time = how long neighbour should wait, different to</li>
-<li><strong>Update</strong> -</li>
-<li><strong>Query</strong> -</li>
-<li><strong>Request</strong> -</li>
-<li><strong>Reply</strong> -</li>
-<li><strong>Acknowledge</strong> -</li>
+<li><strong>Reported Distance</strong> - cost to destination from neighbouring router</li>
+<li><strong>Feasible Distance</strong> - RD + path cost to get to neighbouring router.</li>
+<li><strong>Successor Route</strong> - the lowest cost path to route</li>
+<li><strong>Successor</strong> - First Hop route on that path</li>
+<li><strong>Feasibility Condition</strong> - That the <strong>RD</strong> must be less than the <strong>FD</strong> (loop prevention)</li>
+<li><strong>Feasible Successor</strong> - route which passes the feasibility condition.</li>
+</ul></li>
 </ul>
 </section>
+<section id="features" class="level1">
+<h1>Features</h1>
 <section id="path-selection" class="level2">
 <h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
 <ul>
@@ -346,32 +355,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
+<section id="authentication" class="level2">
+<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
+<ul>
+<li><p>Supports plaintext + hash based auth - MD5 &amp; SHA-256 auth (named) or just MD5 (classic)</p></li>
+<li><p>MD5 configuration done with key chain in global config</p></li>
+<li><p>Key-id numbers must match for successful auth</p></li>
+<li><p>Applied under physical interfaces in classic mode or af-interfaces in named mode</p></li>
+</ul>
+<pre><code>key chain MD5_KEYS  
+ key 1   
+   key-string MD5_PASS 
+! 
+router eigrp MULTI-AF  
+!  
+ address-family ipv4 unicast autonomous-system 100   
+  !  
+  af-interface default    
+   authentication mode hmac-sha-256 SHA_DEFAULT  
+  exit-af-interface   
+  !   
+  af-interface GigabitEthernet1.58
+  authentication mode md5    
+  authentication key-chain MD5_KEYS   
+  exit-af-interface</code></pre>
+</section>
+<section id="route-filtering" class="level2">
+<h2 class="anchored" data-anchor-id="route-filtering">Route Filtering</h2>
+<p>route maps in EIGRP?</p>
+</section>
+<section id="loop-prevention" class="level2">
+<h2 class="anchored" data-anchor-id="loop-prevention">Loop Prevention</h2>
+<ul>
+<li><p>Split-Horizon - stops a route being learned on the interface it was advertised on.</p></li>
+<li><p>Use of Feasibility condition.</p></li>
+<li><p>Can disable on P2P link - <code>no ip split-horizon eigrp [AS]</code></p></li>
+</ul>
+</section>
+<section id="redistribution---see-redib" class="level2">
+<h2 class="anchored" data-anchor-id="redistribution---see-redib">Redistribution - see redib</h2>
+</section>
+<section id="summerization" class="level2">
+<h2 class="anchored" data-anchor-id="summerization">Summerization</h2>
+</section>
+<section id="stub" class="level2">
+<h2 class="anchored" data-anchor-id="stub">Stub</h2>
+</section>
+<section id="stub-site" class="level2">
+<h2 class="anchored" data-anchor-id="stub-site">Stub Site</h2>
+</section>
+<section id="load-balancing" class="level2">
+<h2 class="anchored" data-anchor-id="load-balancing">Load balancing</h2>
+</section>
+<section id="metrics" class="level2">
+<h2 class="anchored" data-anchor-id="metrics">Metrics</h2>
+<hr>
+</section>
 <section id="eigrp---traditional-ipv4-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>CLASSIC</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>router eigrp 10 </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces match &amp; configured/up they should participate in EIGRP</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>network 172.16.1.0 0.0.0.3</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>moDERN</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> !</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 100</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>   passive-interface</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>   no passive-interface</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  topology base</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  exit-af-topology</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  network 10.1.1.2 255.255.255.255</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  eigrp router-id 150.1.5.5</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> exit-address-family</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CLASSIC</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>router eigrp 10 </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces match &amp; configured/up they should participate in EIGRP</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>network 172.16.1.0 0.0.0.3</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>moDERN</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> !</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 100</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>   passive-interface</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>   no passive-interface</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  topology base</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  exit-af-topology</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  network 10.1.1.2 255.255.255.255</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  eigrp router-id 150.1.5.5</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a> exit-address-family</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="useful-show-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>

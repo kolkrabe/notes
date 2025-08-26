@@ -4,7 +4,7 @@ editor: visual
 code-block-bg: dark
 ---
 
-# EIGRP
+# General
 
 -   Classic/Named Mode
     -   Classic: Commands under router process + Interfaces
@@ -29,17 +29,15 @@ code-block-bg: dark
     -   `Interface Table` - which interfaces are participating
     -   `Topology Table` - shows routes known to EIGRP
 -   Router-ID (highest configured + active Loopback, then any IPv4"
+-   Path Selection
+    -   **Reported Distance** - cost to destination from neighbouring router
+    -   **Feasible Distance** - RD + path cost to get to neighbouring router.
+    -   **Successor Route** - the lowest cost path to route
+    -   **Successor** - First Hop route on that path
+    -   **Feasibility Condition** - That the **RD** must be less than the **FD** (loop prevention)
+    -   **Feasible Successor** - route which passes the feasibility condition.
 
-## Messages & Timers
-
-*Help Up Queeg, Rimmer, Really Aces*
-
--   **Hello** - used to discover neighbours, (Hold time = how long neighbour should wait, different to
--   **Update** -
--   **Query** -
--   **Request** -
--   **Reply** -
--   **Acknowledge** -
+# Features
 
 ## Path Selection
 
@@ -49,6 +47,61 @@ code-block-bg: dark
 -   **Successor** - First Hop route on that path
 -   **Feasibility Condition** - That the **RD** must be less than the **FD** (loop prevention)
 -   **Feasible Successor** - route which passes the feasibility condition.
+
+------------------------------------------------------------------------
+
+## Authentication
+
+-   Supports plaintext + hash based auth - MD5 & SHA-256 auth (named) or just MD5 (classic)
+
+-   MD5 configuration done with key chain in global config
+
+-   Key-id numbers must match for successful auth
+
+-   Applied under physical interfaces in classic mode or af-interfaces in named mode
+
+```         
+key chain MD5_KEYS  
+ key 1   
+   key-string MD5_PASS 
+! 
+router eigrp MULTI-AF  
+!  
+ address-family ipv4 unicast autonomous-system 100   
+  !  
+  af-interface default    
+   authentication mode hmac-sha-256 SHA_DEFAULT  
+  exit-af-interface   
+  !   
+  af-interface GigabitEthernet1.58
+  authentication mode md5    
+  authentication key-chain MD5_KEYS   
+  exit-af-interface
+```
+
+## Route Filtering
+
+route maps in EIGRP?
+
+## Loop Prevention
+
+-   Split-Horizon - stops a route being learned on the interface it was advertised on.
+
+-   Use of Feasibility condition.
+
+-   Can disable on P2P link - `no ip split-horizon eigrp [AS]`
+
+## Redistribution - see redib
+
+## Summerization
+
+## Stub
+
+## Stub Site
+
+## Load balancing
+
+## Metrics
 
 ------------------------------------------------------------------------
 

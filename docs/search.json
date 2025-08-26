@@ -134,19 +134,7 @@
     "href": "eigrp.html",
     "title": "EIGRP",
     "section": "",
-    "text": "Classic/Named Mode\n\nClassic: Commands under router process + Interfaces\nNamed: Config in SubSections - Address Family, Interface & Topology\n\nAD 90internal, 170External\nHello’s are Multicast on 224.0.0.10, port 88\nTimers\n\nHello-default 5 secs),\n\nLoad balance over unequal paths using variance unlike OSPF (equal only)\nUses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU)\n\nMostly uses\n\nK1 - Bandwidth - slowest in path\nK3 - Delay - cumulative\n\n\nSupports VLSM by sending mask\nCan configure neighbour specifically to use Unicast\nUses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow\nUses DUAL (Difussing identifies neighbour with lowest Feasible Distance\n\nFD set to Infinity to indicate the router is in transition & seeking alternative paths\n\n3 Data Structures\n\nNeighbour Table - Who our EIGRP neighbours are\nInterface Table - which interfaces are participating\nTopology Table - shows routes known to EIGRP\n\nRouter-ID (highest configured + active Loopback, then any IPv4”\n\n\n\nHelp Up Queeg, Rimmer, Really Aces\n\nHello - used to discover neighbours, (Hold time = how long neighbour should wait, different to\nUpdate -\nQuery -\nRequest -\nReply -\nAcknowledge -\n\n\n\n\n\nReported Distance - cost to destination from neighbouring router\nFeasible Distance - RD + path cost to get to neighbouring router.\nSuccessor Route - the lowest cost path to route\nSuccessor - First Hop route on that path\nFeasibility Condition - That the RD must be less than the FD (loop prevention)\nFeasible Successor - route which passes the feasibility condition.\n\n\n\n\n\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n\nmoDERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 100\n  !\n  af-interface default\n   passive-interface\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface\n  exit-af-interface\n  !\n  topology base\n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  eigrp router-id 150.1.5.5\n exit-address-family\n\n\n\nshow ip route EIGRP - shows EIGRP routes installed into the RIB\nshow ip eigrp interfaces - shows active EIGRP interfaces\nshow ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition)\nshow ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died.",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Layer 3 Technologies",
-      "EIGRP"
-    ]
-  },
-  {
-    "objectID": "eigrp.html#messages-timers",
-    "href": "eigrp.html#messages-timers",
-    "title": "EIGRP",
-    "section": "",
-    "text": "Help Up Queeg, Rimmer, Really Aces\n\nHello - used to discover neighbours, (Hold time = how long neighbour should wait, different to\nUpdate -\nQuery -\nRequest -\nReply -\nAcknowledge -",
+    "text": "Classic/Named Mode\n\nClassic: Commands under router process + Interfaces\nNamed: Config in SubSections - Address Family, Interface & Topology\n\nAD 90internal, 170External\nHello’s are Multicast on 224.0.0.10, port 88\nTimers\n\nHello-default 5 secs),\n\nLoad balance over unequal paths using variance unlike OSPF (equal only)\nUses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU)\n\nMostly uses\n\nK1 - Bandwidth - slowest in path\nK3 - Delay - cumulative\n\n\nSupports VLSM by sending mask\nCan configure neighbour specifically to use Unicast\nUses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow\nUses DUAL (Difussing identifies neighbour with lowest Feasible Distance\n\nFD set to Infinity to indicate the router is in transition & seeking alternative paths\n\n3 Data Structures\n\nNeighbour Table - Who our EIGRP neighbours are\nInterface Table - which interfaces are participating\nTopology Table - shows routes known to EIGRP\n\nRouter-ID (highest configured + active Loopback, then any IPv4”\nPath Selection\n\nReported Distance - cost to destination from neighbouring router\nFeasible Distance - RD + path cost to get to neighbouring router.\nSuccessor Route - the lowest cost path to route\nSuccessor - First Hop route on that path\nFeasibility Condition - That the RD must be less than the FD (loop prevention)\nFeasible Successor - route which passes the feasibility condition.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -157,8 +145,116 @@
     "objectID": "eigrp.html#path-selection",
     "href": "eigrp.html#path-selection",
     "title": "EIGRP",
-    "section": "",
-    "text": "Reported Distance - cost to destination from neighbouring router\nFeasible Distance - RD + path cost to get to neighbouring router.\nSuccessor Route - the lowest cost path to route\nSuccessor - First Hop route on that path\nFeasibility Condition - That the RD must be less than the FD (loop prevention)\nFeasible Successor - route which passes the feasibility condition.",
+    "section": "Path Selection",
+    "text": "Path Selection\n\nReported Distance - cost to destination from neighbouring router\nFeasible Distance - RD + path cost to get to neighbouring router.\nSuccessor Route - the lowest cost path to route\nSuccessor - First Hop route on that path\nFeasibility Condition - That the RD must be less than the FD (loop prevention)\nFeasible Successor - route which passes the feasibility condition.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#authentication",
+    "href": "eigrp.html#authentication",
+    "title": "EIGRP",
+    "section": "Authentication",
+    "text": "Authentication\n\nSupports plaintext + hash based auth - MD5 & SHA-256 auth (named) or just MD5 (classic)\nMD5 configuration done with key chain in global config\nKey-id numbers must match for successful auth\nApplied under physical interfaces in classic mode or af-interfaces in named mode\n\nkey chain MD5_KEYS  \n key 1   \n   key-string MD5_PASS \n! \nrouter eigrp MULTI-AF  \n!  \n address-family ipv4 unicast autonomous-system 100   \n  !  \n  af-interface default    \n   authentication mode hmac-sha-256 SHA_DEFAULT  \n  exit-af-interface   \n  !   \n  af-interface GigabitEthernet1.58\n  authentication mode md5    \n  authentication key-chain MD5_KEYS   \n  exit-af-interface",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#route-filtering",
+    "href": "eigrp.html#route-filtering",
+    "title": "EIGRP",
+    "section": "Route Filtering",
+    "text": "Route Filtering\nroute maps in EIGRP?",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#loop-prevention",
+    "href": "eigrp.html#loop-prevention",
+    "title": "EIGRP",
+    "section": "Loop Prevention",
+    "text": "Loop Prevention\n\nSplit-Horizon - stops a route being learned on the interface it was advertised on.\nUse of Feasibility condition.\nCan disable on P2P link - no ip split-horizon eigrp [AS]",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#redistribution---see-redib",
+    "href": "eigrp.html#redistribution---see-redib",
+    "title": "EIGRP",
+    "section": "Redistribution - see redib",
+    "text": "Redistribution - see redib",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#summerization",
+    "href": "eigrp.html#summerization",
+    "title": "EIGRP",
+    "section": "Summerization",
+    "text": "Summerization",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#stub",
+    "href": "eigrp.html#stub",
+    "title": "EIGRP",
+    "section": "Stub",
+    "text": "Stub",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#stub-site",
+    "href": "eigrp.html#stub-site",
+    "title": "EIGRP",
+    "section": "Stub Site",
+    "text": "Stub Site",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#load-balancing",
+    "href": "eigrp.html#load-balancing",
+    "title": "EIGRP",
+    "section": "Load balancing",
+    "text": "Load balancing",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#metrics",
+    "href": "eigrp.html#metrics",
+    "title": "EIGRP",
+    "section": "Metrics",
+    "text": "Metrics",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -169,8 +265,8 @@
     "objectID": "eigrp.html#eigrp---traditional-ipv4-configuration",
     "href": "eigrp.html#eigrp---traditional-ipv4-configuration",
     "title": "EIGRP",
-    "section": "",
-    "text": "CLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n\nmoDERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 100\n  !\n  af-interface default\n   passive-interface\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface\n  exit-af-interface\n  !\n  topology base\n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  eigrp router-id 150.1.5.5\n exit-address-family",
+    "section": "EIGRP - Traditional IPv4 Configuration",
+    "text": "EIGRP - Traditional IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n\nmoDERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 100\n  !\n  af-interface default\n   passive-interface\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface\n  exit-af-interface\n  !\n  topology base\n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  eigrp router-id 150.1.5.5\n exit-address-family",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -181,8 +277,8 @@
     "objectID": "eigrp.html#useful-show-commands",
     "href": "eigrp.html#useful-show-commands",
     "title": "EIGRP",
-    "section": "",
-    "text": "show ip route EIGRP - shows EIGRP routes installed into the RIB\nshow ip eigrp interfaces - shows active EIGRP interfaces\nshow ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition)\nshow ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died.",
+    "section": "Useful Show Commands",
+    "text": "Useful Show Commands\nshow ip route EIGRP - shows EIGRP routes installed into the RIB\nshow ip eigrp interfaces - shows active EIGRP interfaces\nshow ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition)\nshow ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
