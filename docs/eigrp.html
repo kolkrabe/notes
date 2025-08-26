@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Eigrp – Kolkrabe</title>
+<title>EIGRP – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./eigrp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./eigrp.html">Eigrp</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./eigrp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./eigrp.html">EIGRP</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./eigrp.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Eigrp</span></a>
+ <span class="menu-text">EIGRP</span></a>
   </div>
 </li>
       </ul>
@@ -265,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./eigrp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./eigrp.html">Eigrp</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./eigrp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./eigrp.html">EIGRP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Eigrp</h1>
+<h1 class="title">EIGRP</h1>
 </div>
 
 
@@ -287,6 +287,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="eigrp" class="level1">
 <h1>EIGRP</h1>
 <ul>
+<li>Classic/Named Mode
+<ul>
+<li>Classic: Commands under router process + Interfaces</li>
+<li>Named: Config in SubSections - Address Family, Interface &amp; Topology</li>
+</ul></li>
 <li>AD 90internal, 170External</li>
 <li><strong>Hello</strong>’s are Multicast on <strong>224.0.0.10</strong>, port <strong>88</strong></li>
 <li>Timers
@@ -303,17 +308,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul></li>
 <li>Supports VLSM by sending mask</li>
-</ul>
-<p>Can configure neighbour specifically to use <strong>Unicast</strong></p>
-<ul>
+<li>Can configure neighbour specifically to use <strong>Unicast</strong></li>
 <li>Uses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow</li>
-<li>Uses DUAL (Difussing identifies neighbour with lowest Feasible Distance</li>
+<li>Uses DUAL (Difussing identifies neighbour with lowest Feasible Distance
+<ul>
+<li>FD set to <strong>Infinity</strong> to indicate the router is in transition &amp; seeking alternative paths</li>
+</ul></li>
 <li>3 Data Structures
 <ul>
 <li><code>Neighbour Table</code> - Who our EIGRP neighbours are</li>
 <li><code>Interface Table</code> - which interfaces are participating</li>
 <li><code>Topology Table</code> - shows routes known to EIGRP</li>
 </ul></li>
+<li>Router-ID (highest configured + active Loopback, then any IPv4”</li>
 </ul>
 <section id="messages-timers" class="level2">
 <h2 class="anchored" data-anchor-id="messages-timers">Messages &amp; Timers</h2>
@@ -341,16 +348,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="eigrp---traditional-ipv4-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>router eigrp 10 </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces are configured/up they should participate in EIGRP</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>network 172.16.1.0 0.0.0.3</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>CLASSIC</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>router eigrp 10 </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces match &amp; configured/up they should participate in EIGRP</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>network 172.16.1.0 0.0.0.3</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>moDERN</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> !</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 100</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>   passive-interface</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>   no passive-interface</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  topology base</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  exit-af-topology</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  network 10.1.1.2 255.255.255.255</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  eigrp router-id 150.1.5.5</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> exit-address-family</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="useful-show-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
-<p><code>show ip route</code></p>
-<p><code>show ip eigrp interfaces</code></p>
-<p>Stuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbour has died.</p>
+<p><code>show ip route EIGRP</code> - shows EIGRP routes installed into the RIB</p>
+<p><code>show ip eigrp interfaces</code> - shows active EIGRP interfaces</p>
+<p><code>show ip eigrp topology all-links</code> - shows all additional paths to network (failed Feasibility Condition)</p>
+<p><code>show ip protocols</code> - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints</p>
+<p>Stuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died.</p>
 
 
 </section>

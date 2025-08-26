@@ -1,11 +1,14 @@
 ---
-title: "Eigrp"
+title: "EIGRP"
 editor: visual
 code-block-bg: dark
 ---
 
 # EIGRP
 
+-   Classic/Named Mode
+    -   Classic: Commands under router process + Interfaces
+    -   Named: Config in SubSections - Address Family, Interface & Topology
 -   AD 90internal, 170External
 -   **Hello**'s are Multicast on **224.0.0.10**, port **88**
 -   Timers
@@ -17,15 +20,15 @@ code-block-bg: dark
         -   K1 - Bandwidth - slowest in path
         -   K3 - Delay - cumulative
 -   Supports VLSM by sending mask
-
-Can configure neighbour specifically to use **Unicast**
-
+-   Can configure neighbour specifically to use **Unicast**
 -   Uses RTP (reliable transport protocol - confirms messages neighbour received messages but not hellow
 -   Uses DUAL (Difussing identifies neighbour with lowest Feasible Distance
+    -   FD set to **Infinity** to indicate the router is in transition & seeking alternative paths
 -   3 Data Structures
     -   `Neighbour Table` - Who our EIGRP neighbours are
     -   `Interface Table` - which interfaces are participating
     -   `Topology Table` - shows routes known to EIGRP
+-   Router-ID (highest configured + active Loopback, then any IPv4"
 
 ## Messages & Timers
 
@@ -52,16 +55,40 @@ Can configure neighbour specifically to use **Unicast**
 ## EIGRP - Traditional IPv4 Configuration
 
 ``` default
+CLASSIC
 router eigrp 10 
-network 10.1.1.0 0.0.0.255           - If any interfaces are configured/up they should participate in EIGRP
+network 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP
 network 172.16.1.0 0.0.0.3
 network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP
+
+moDERN
+router eigrp [NAME]
+ !
+ address-family ipv4 unicast autonomous-system 100
+  !
+  af-interface default
+   passive-interface
+  exit-af-interface
+  !
+  af-interface GigabitEthernet0/1
+   no passive-interface
+  exit-af-interface
+  !
+  topology base
+  exit-af-topology
+  network 10.1.1.2 255.255.255.255
+  eigrp router-id 150.1.5.5
+ exit-address-family
 ```
 
 ## Useful Show Commands
 
-`show ip route`
+`show ip route EIGRP` - shows EIGRP routes installed into the RIB
 
-`show ip eigrp interfaces`
+`show ip eigrp interfaces` - shows active EIGRP interfaces
 
-Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbour has died.
+`show ip eigrp topology all-links` - shows all additional paths to network (failed Feasibility Condition)
+
+`show ip protocols` - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints
+
+Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died.
