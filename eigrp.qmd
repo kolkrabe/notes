@@ -132,6 +132,7 @@ router eigrp [NAME]
   exit-af-interface
   !
   topology base
+  variance 2
   exit-af-topology
   network 10.1.1.2 255.255.255.255
   eigrp router-id 150.1.5.5
@@ -143,6 +144,8 @@ router eigrp [NAME]
 `show ip route EIGRP` - shows EIGRP routes installed into the RIB
 
 `show ip eigrp interfaces` - shows active EIGRP interfaces
+
+`show ip eigrp interfaces detail` - shows detailed interface info (hold time, split-horizon enabled etc.
 
 `show ip eigrp topology all-links` - shows all additional paths to network (failed Feasibility Condition)
 
