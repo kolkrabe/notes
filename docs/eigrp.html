@@ -310,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Load balance over unequal paths using <code>variance</code> unlike OSPF (equal only)</li>
 <li>Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU)
 <ul>
-<li><p>Mostly uses</p>
+<li>Mostly uses
 <ul>
 <li>K1 - Bandwidth - slowest in path</li>
 <li>K3 - Delay - cumulative</li>
@@ -358,27 +358,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="authentication" class="level2">
 <h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
 <ul>
-<li><p>Supports plaintext + hash based auth - MD5 &amp; SHA-256 auth (named) or just MD5 (classic)</p></li>
-<li><p>MD5 configuration done with key chain in global config</p></li>
-<li><p>Key-id numbers must match for successful auth</p></li>
-<li><p>Applied under physical interfaces in classic mode or af-interfaces in named mode</p></li>
+<li>Supports plaintext + hash based auth - MD5 &amp; SHA-256 auth (named) or just MD5 (classic)</li>
+<li>MD5 configuration done with key chain in global config</li>
+<li>Key-id numbers must match for successful auth</li>
+<li>Applied under physical interfaces in classic mode or af-interfaces in named mode</li>
 </ul>
-<pre><code>key chain MD5_KEYS  
- key 1   
-   key-string MD5_PASS 
-! 
-router eigrp MULTI-AF  
-!  
- address-family ipv4 unicast autonomous-system 100   
-  !  
-  af-interface default    
-   authentication mode hmac-sha-256 SHA_DEFAULT  
-  exit-af-interface   
-  !   
-  af-interface GigabitEthernet1.58
-  authentication mode md5    
-  authentication key-chain MD5_KEYS   
-  exit-af-interface</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>key chain MD5_KEYS  </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> key 1   </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   key-string MD5_PASS </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>router eigrp MULTI-AF  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>!  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 100   </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  !  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  af-interface default    </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>   authentication mode hmac-sha-256 SHA_DEFAULT  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  exit-af-interface   </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  !   </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet1.58</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  authentication mode md5    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  authentication key-chain MD5_KEYS   </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="route-filtering" class="level2">
 <h2 class="anchored" data-anchor-id="route-filtering">Route Filtering</h2>

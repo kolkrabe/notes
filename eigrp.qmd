@@ -16,7 +16,6 @@ code-block-bg: dark
 -   Load balance over unequal paths using `variance` unlike OSPF (equal only)
 -   Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU)
     -   Mostly uses
-
         -   K1 - Bandwidth - slowest in path
         -   K3 - Delay - cumulative
 -   Supports VLSM by sending mask
@@ -53,14 +52,11 @@ code-block-bg: dark
 ## Authentication
 
 -   Supports plaintext + hash based auth - MD5 & SHA-256 auth (named) or just MD5 (classic)
-
 -   MD5 configuration done with key chain in global config
-
 -   Key-id numbers must match for successful auth
-
 -   Applied under physical interfaces in classic mode or af-interfaces in named mode
 
-```         
+``` default
 key chain MD5_KEYS  
  key 1   
    key-string MD5_PASS 
