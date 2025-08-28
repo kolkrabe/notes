@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
   <li><a href="#route-filtering" id="toc-route-filtering" class="nav-link" data-scroll-target="#route-filtering">Route Filtering</a></li>
   <li><a href="#loop-prevention" id="toc-loop-prevention" class="nav-link" data-scroll-target="#loop-prevention">Loop Prevention</a></li>
-  <li><a href="#redistribution---see-redib" id="toc-redistribution---see-redib" class="nav-link" data-scroll-target="#redistribution---see-redib">Redistribution - see redib</a></li>
+  <li><a href="#redistribution---see-redistribution" id="toc-redistribution---see-redistribution" class="nav-link" data-scroll-target="#redistribution---see-redistribution">Redistribution - see redistribution</a></li>
   <li><a href="#summerization" id="toc-summerization" class="nav-link" data-scroll-target="#summerization">Summerization</a></li>
   <li><a href="#stub" id="toc-stub" class="nav-link" data-scroll-target="#stub">Stub</a></li>
   <li><a href="#stub-site" id="toc-stub-site" class="nav-link" data-scroll-target="#stub-site">Stub Site</a></li>
@@ -392,11 +392,15 @@ router eigrp MULTI-AF
 <li><p>Can disable on P2P link - <code>no ip split-horizon eigrp [AS]</code></p></li>
 </ul>
 </section>
-<section id="redistribution---see-redib" class="level2">
-<h2 class="anchored" data-anchor-id="redistribution---see-redib">Redistribution - see redib</h2>
+<section id="redistribution---see-redistribution" class="level2">
+<h2 class="anchored" data-anchor-id="redistribution---see-redistribution">Redistribution - see redistribution</h2>
 </section>
 <section id="summerization" class="level2">
 <h2 class="anchored" data-anchor-id="summerization">Summerization</h2>
+<ul>
+<li><p>Can be implemented anywhere</p></li>
+<li><p>Manual or Auto (classful).</p></li>
+</ul>
 </section>
 <section id="stub" class="level2">
 <h2 class="anchored" data-anchor-id="stub">Stub</h2>
@@ -422,14 +426,14 @@ router eigrp MULTI-AF
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>moDERN</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> !</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 100</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 1</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  !</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>   passive-interface</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>   passive-interface                 - Sets all intefaces as passive.</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  !</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>   no passive-interface</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>   no passive-interface               - enables interface for EIGRP</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  !</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  topology base</span>

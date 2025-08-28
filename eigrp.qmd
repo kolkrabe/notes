@@ -91,9 +91,13 @@ route maps in EIGRP?
 
 -   Can disable on P2P link - `no ip split-horizon eigrp [AS]`
 
-## Redistribution - see redib
+## Redistribution - see redistribution
 
 ## Summerization
+
+-   Can be implemented anywhere
+
+-   Manual or Auto (classful).
 
 ## Stub
 
@@ -117,14 +121,14 @@ network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP
 moDERN
 router eigrp [NAME]
  !
- address-family ipv4 unicast autonomous-system 100
+ address-family ipv4 unicast autonomous-system 1
   !
   af-interface default
-   passive-interface
+   passive-interface                 - Sets all intefaces as passive.
   exit-af-interface
   !
   af-interface GigabitEthernet0/1
-   no passive-interface
+   no passive-interface               - enables interface for EIGRP
   exit-af-interface
   !
   topology base

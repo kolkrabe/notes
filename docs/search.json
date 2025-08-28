@@ -206,7 +206,7 @@
     "href": "eigrp.html#summerization",
     "title": "EIGRP",
     "section": "Summerization",
-    "text": "Summerization",
+    "text": "Summerization\n\nCan be implemented anywhere\nManual or Auto (classful).",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -266,7 +266,7 @@
     "href": "eigrp.html#eigrp---traditional-ipv4-configuration",
     "title": "EIGRP",
     "section": "EIGRP - Traditional IPv4 Configuration",
-    "text": "EIGRP - Traditional IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n\nmoDERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 100\n  !\n  af-interface default\n   passive-interface\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface\n  exit-af-interface\n  !\n  topology base\n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  eigrp router-id 150.1.5.5\n exit-address-family",
+    "text": "EIGRP - Traditional IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n\nmoDERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 1\n  !\n  af-interface default\n   passive-interface                 - Sets all intefaces as passive.\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface               - enables interface for EIGRP\n  exit-af-interface\n  !\n  topology base\n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  eigrp router-id 150.1.5.5\n exit-address-family",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -380,5 +380,17 @@
     "title": "snmp",
     "section": "",
     "text": "SNMP\n\nV2 - old, uses community string on both ends for config (not encrypted, transferred in plaintext\nV3 - newer, supports more advanced authentication & encryption\nSNMP traps unreliable (no confirmation required from receiving server).\nSNMP informs are reliable (must be confirmed by receiving server).\n\n`Ifindex persist` - Prevents SNMP index ID’s from changing after reboot (if components are added etc.)  keeps consistency of mapped\n\nUseful Show commands\nshow snmp host - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications\nshow snmp group - Displays SNMP group information (v3) show snmp user - Displays SNMP user information (v3)\n\n\n\nStandard SNMP v2c Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nsnmp-server community \\&lt;community-string\\&gt; \\[RO\\|RW\\] \\[ACL\\]\\\nsnmp-server enable traps\\\nsnmp-server host 10.1.100.100 \\[traps\\|informs\\] version 2c \\&lt;community-string\\&gt;\n\n\nStandard SNMP v3 Config\nsnmp ifmib ifindex persist\\\nsnmp-server location \\&lt;location\\&gt;\\\nsnmp-server contact \\&lt;contact-details\\&gt;\\\nno snmp-server system-shutdown ! prevents device being shutdown via SNMP\\\nsnmp-server view \\&lt;view-name\\&gt; iso included ! iso included allows all values\\\nsnmp-server group \\&lt;group-name\\&gt; v3 priv read \\&lt;view-name\\&gt; write \\&lt;view-name\\&gt;\\\nsnmp-server user \\&lt;user-name\\&gt; \\&lt;group-name\\&gt; v3 auth sha \\&lt;password\\&gt; priv aes 256 \\&lt;password\\&gt;\\\nsnmp-server host 10.1.100.100 version 3 priv \\&lt;user-name\\&gt;"
+  },
+  {
+    "objectID": "eigrp.html#redistribution---see-redistribution",
+    "href": "eigrp.html#redistribution---see-redistribution",
+    "title": "EIGRP",
+    "section": "Redistribution - see redistribution",
+    "text": "Redistribution - see redistribution",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
   }
 ]
