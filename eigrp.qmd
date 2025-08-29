@@ -32,7 +32,7 @@ code-block-bg: dark
 
 # Features
 
-## Path Selection
+##### Path Selection
 
 -   **Reported Distance** - cost to destination from neighbouring router
 -   **Feasible Distance** - RD + path cost to get to neighbouring router.
@@ -43,7 +43,7 @@ code-block-bg: dark
 
 ------------------------------------------------------------------------
 
-## Authentication
+##### Authentication
 
 -   Supports plaintext + hash based auth - MD5 & SHA-256 auth (named) or just MD5 (classic)
 -   MD5 configuration done with key chain in global config
@@ -69,22 +69,22 @@ router eigrp MULTI-AF
   exit-af-interface
 ```
 
-## Route Filtering
+##### Route Filtering
 
 -   Can be advertised with quad 0 summary route under interface
 -   Can also be redistributed from static route
 
-## Loop Prevention
+##### Loop Prevention
 
 -   Split-Horizon - stops a route being learned on the interface it was advertised on.
 -   Use of Feasibility condition.
 -   Can disable on P2P link - `no ip split-horizon eigrp [AS]`
 
-## Redistribution - see redistribution
+##### Redistribution - see redistribution
 
 -   see [Redistribution Page](https://kolkrabe.github.io/notes/redistribution.html)
 
-## Summarization
+##### Summarization
 
 -   Possible anywhere in topology
 -   Manual or Auto (auto is classful).
@@ -94,7 +94,7 @@ router eigrp MULTI-AF
 -   Null0 installed on router to match summary address to prevent loops
 -   Can define metric on summary-address with the `summary-metric` command under topology base
 
-## Stub
+##### Stub
 
 -   Prevents advertisment of anything other than connected routes *by default*
 -   Prevents site from being used for transit
@@ -102,7 +102,7 @@ router eigrp MULTI-AF
 -   Best used when sites have no downstream neighbors
 -   Can use leak-maps to advertise normally suppressed routes
 
-## Stub Site
+##### Stub Site
 
 -   Allows advertisement of routes learned on LAN but not WAN interfaces
 -   Limits EIGRP query-domain and prevents site from being used for transit
@@ -110,11 +110,11 @@ router eigrp MULTI-AF
     -   Mutually exclusive with `eigrp stub`
 -   Interfaces towards hub/WAN identified with `stub-site wan-interface` under af-interface
 
-## Load balancing
+##### Load balancing
 
 -   Variance
 
-## Metrics
+##### Metrics
 
 -   wide-metrics  - used to scale eigrp for modern bandwidths, NAMED Mode only.
 
@@ -122,7 +122,11 @@ router eigrp MULTI-AF
 
 configure under address family
 
-\`\`
+##### **Offset-lists**
+
+-   Can be used to increase metric for a specific route/interface
+-   Configured under topology base with:
+    -   `offset-list <access-list> in <metric> <interface>`
 
 ------------------------------------------------------------------------
 

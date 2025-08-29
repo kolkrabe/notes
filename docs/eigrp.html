@@ -255,16 +255,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
   <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
-  <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
-  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-  <li><a href="#route-filtering" id="toc-route-filtering" class="nav-link" data-scroll-target="#route-filtering">Route Filtering</a></li>
-  <li><a href="#loop-prevention" id="toc-loop-prevention" class="nav-link" data-scroll-target="#loop-prevention">Loop Prevention</a></li>
-  <li><a href="#redistribution---see-redistribution" id="toc-redistribution---see-redistribution" class="nav-link" data-scroll-target="#redistribution---see-redistribution">Redistribution - see redistribution</a></li>
-  <li><a href="#summarization" id="toc-summarization" class="nav-link" data-scroll-target="#summarization">Summarization</a></li>
-  <li><a href="#stub" id="toc-stub" class="nav-link" data-scroll-target="#stub">Stub</a></li>
-  <li><a href="#stub-site" id="toc-stub-site" class="nav-link" data-scroll-target="#stub-site">Stub Site</a></li>
-  <li><a href="#load-balancing" id="toc-load-balancing" class="nav-link" data-scroll-target="#load-balancing">Load balancing</a></li>
-  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
   <li><a href="#eigrp---traditional-ipv4-configuration" id="toc-eigrp---traditional-ipv4-configuration" class="nav-link" data-scroll-target="#eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</a></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   </ul></li>
@@ -335,8 +325,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="features" class="level1">
 <h1>Features</h1>
-<section id="path-selection" class="level2">
-<h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
+<section id="path-selection" class="level5">
+<h5 class="anchored" data-anchor-id="path-selection">Path Selection</h5>
 <ul>
 <li><strong>Reported Distance</strong> - cost to destination from neighbouring router</li>
 <li><strong>Feasible Distance</strong> - RD + path cost to get to neighbouring router.</li>
@@ -347,8 +337,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
+<section id="authentication" class="level5">
+<h5 class="anchored" data-anchor-id="authentication">Authentication</h5>
 <ul>
 <li>Supports plaintext + hash based auth - MD5 &amp; SHA-256 auth (named) or just MD5 (classic)</li>
 <li>MD5 configuration done with key chain in global config</li>
@@ -372,29 +362,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  authentication key-chain MD5_KEYS   </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="route-filtering" class="level2">
-<h2 class="anchored" data-anchor-id="route-filtering">Route Filtering</h2>
+<section id="route-filtering" class="level5">
+<h5 class="anchored" data-anchor-id="route-filtering">Route Filtering</h5>
 <ul>
 <li>Can be advertised with quad 0 summary route under interface</li>
 <li>Can also be redistributed from static route</li>
 </ul>
 </section>
-<section id="loop-prevention" class="level2">
-<h2 class="anchored" data-anchor-id="loop-prevention">Loop Prevention</h2>
+<section id="loop-prevention" class="level5">
+<h5 class="anchored" data-anchor-id="loop-prevention">Loop Prevention</h5>
 <ul>
 <li>Split-Horizon - stops a route being learned on the interface it was advertised on.</li>
 <li>Use of Feasibility condition.</li>
 <li>Can disable on P2P link - <code>no ip split-horizon eigrp [AS]</code></li>
 </ul>
 </section>
-<section id="redistribution---see-redistribution" class="level2">
-<h2 class="anchored" data-anchor-id="redistribution---see-redistribution">Redistribution - see redistribution</h2>
+<section id="redistribution---see-redistribution" class="level5">
+<h5 class="anchored" data-anchor-id="redistribution---see-redistribution">Redistribution - see redistribution</h5>
 <ul>
 <li>see <a href="https://kolkrabe.github.io/notes/redistribution.html">Redistribution Page</a></li>
 </ul>
 </section>
-<section id="summarization" class="level2">
-<h2 class="anchored" data-anchor-id="summarization">Summarization</h2>
+<section id="summarization" class="level5">
+<h5 class="anchored" data-anchor-id="summarization">Summarization</h5>
 <ul>
 <li>Possible anywhere in topology</li>
 <li>Manual or Auto (auto is classful).</li>
@@ -407,8 +397,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Can define metric on summary-address with the <code>summary-metric</code> command under topology base</li>
 </ul>
 </section>
-<section id="stub" class="level2">
-<h2 class="anchored" data-anchor-id="stub">Stub</h2>
+<section id="stub" class="level5">
+<h5 class="anchored" data-anchor-id="stub">Stub</h5>
 <ul>
 <li>Prevents advertisment of anything other than connected routes <em>by default</em></li>
 <li>Prevents site from being used for transit</li>
@@ -417,8 +407,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Can use leak-maps to advertise normally suppressed routes</li>
 </ul>
 </section>
-<section id="stub-site" class="level2">
-<h2 class="anchored" data-anchor-id="stub-site">Stub Site</h2>
+<section id="stub-site" class="level5">
+<h5 class="anchored" data-anchor-id="stub-site">Stub Site</h5>
 <ul>
 <li>Allows advertisement of routes learned on LAN but not WAN interfaces</li>
 <li>Limits EIGRP query-domain and prevents site from being used for transit</li>
@@ -429,20 +419,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Interfaces towards hub/WAN identified with <code>stub-site wan-interface</code> under af-interface</li>
 </ul>
 </section>
-<section id="load-balancing" class="level2">
-<h2 class="anchored" data-anchor-id="load-balancing">Load balancing</h2>
+<section id="load-balancing" class="level5">
+<h5 class="anchored" data-anchor-id="load-balancing">Load balancing</h5>
 <ul>
 <li>Variance</li>
 </ul>
 </section>
-<section id="metrics" class="level2">
-<h2 class="anchored" data-anchor-id="metrics">Metrics</h2>
+<section id="metrics" class="level5">
+<h5 class="anchored" data-anchor-id="metrics">Metrics</h5>
 <ul>
 <li><p>wide-metrics - used to scale eigrp for modern bandwidths, NAMED Mode only.</p></li>
 <li><p>Introduces K6 value.</p></li>
 </ul>
 <p>configure under address family</p>
-<p>``</p>
+</section>
+<section id="offset-lists" class="level5">
+<h5 class="anchored" data-anchor-id="offset-lists"><strong>Offset-lists</strong></h5>
+<ul>
+<li>Can be used to increase metric for a specific route/interface</li>
+<li>Configured under topology base with:
+<ul>
+<li><code>offset-list &lt;access-list&gt; in &lt;metric&gt; &lt;interface&gt;</code></li>
+</ul></li>
+</ul>
 <hr>
 </section>
 <section id="eigrp---traditional-ipv4-configuration" class="level2">
