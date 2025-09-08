@@ -138,6 +138,9 @@ router eigrp 10
 network 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP
 network 172.16.1.0 0.0.0.3
 network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP
+  interface G0/1
+    ip hello-interval eigrp 10 3
+    ip hold-interval eigrp 10 15
 
 moDERN
 router eigrp [NAME]
@@ -176,5 +179,3 @@ router eigrp [NAME]
 -   Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died.
 
 -   EIGRP routes with same `router-id` will form an adjacency but won't accept routes from one another. Investigate using `debug ip eigrp`
-
-
