@@ -256,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
   <li><a href="#eigrp---traditional-ipv4-configuration" id="toc-eigrp---traditional-ipv4-configuration" class="nav-link" data-scroll-target="#eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</a></li>
-  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
+  <li><a href="#useful-show-commands-info" id="toc-useful-show-commands-info" class="nav-link" data-scroll-target="#useful-show-commands-info">Useful Show Commands + Info</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -451,36 +451,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces match &amp; configured/up they should participate in EIGRP</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>network 172.16.1.0 0.0.0.3</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>moDERN</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> !</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 1</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>   passive-interface                 - Sets all intefaces as passive.</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>   no passive-interface               - enables interface for EIGRP</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  topology base</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  variance 2</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  exit-af-topology</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  network 10.1.1.2 255.255.255.255</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  m</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  eigrp router-id 150.1.5.5</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a> exit-address-family</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  interface G0/1</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ip hello-interval eigrp 10 3</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ip hold-interval eigrp 10 15</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>MODERN</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a> !</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 1</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   passive-interface                 - Sets all intefaces as passive.</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>   ip hello-interval eigrp 10 3       - Can be here or af-interface section below</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>   ip hold-interval eigrp 10 15</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>   no passive-interface               - enables interface for EIGRP</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>   ip hello-interval eigrp 10 3</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>   ip hold-interval eigrp 10 15</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  !</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  topology base</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  variance 2</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  exit-af-topology</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  network 10.1.1.2 255.255.255.255</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  m</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  eigrp router-id 150.1.5.5</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a> exit-address-family</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="useful-show-commands" class="level2">
-<h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
+<section id="useful-show-commands-info" class="level2">
+<h2 class="anchored" data-anchor-id="useful-show-commands-info">Useful Show Commands + Info</h2>
 <p><code>show ip route EIGRP</code> - shows EIGRP routes installed into the RIB</p>
 <p><code>show ip eigrp interfaces</code> - shows active EIGRP interfaces</p>
 <p><code>show ip eigrp interfaces detail</code> - shows detailed interface info (hold time, split-horizon enabled etc.</p>
 <p><code>show ip eigrp topology all-links</code> - shows all additional paths to network (failed Feasibility Condition)</p>
 <p><code>show ip protocols</code> - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints</p>
-<p>Stuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died.</p>
+<ul>
+<li><p>Stuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died.</p></li>
+<li><p>EIGRP routes with same <code>router-id</code> will form an adjacency but won’t accept routes from one another. Investigate using <code>debug ip eigrp</code></p></li>
+</ul>
 
 
 </section>
