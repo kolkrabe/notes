@@ -91,12 +91,13 @@ router eigrp MULTI-AF
 -   Configured with `summary-address <network> <mask>` under af-interface in named mode, under physical interface in classic mode
 -   Leak map can be used to leak longer mask prefixes included in summary
     -   `summary-address 0.0.0.0 0.0.0.0 leak-map <route-map>`
--   Null0 installed on router to match summary address to prevent loops
+-   "Discard Route" installed with destination Null0 -  match summary address to prevent loops (AD set to 5)
 -   Can define metric on summary-address with the `summary-metric` command under topology base
 
 ##### Stub
 
--   Prevents advertisment of anything other than connected routes *by default*
+-   Prevents advertisement of anything other than connected routes + summary routes *by default*
+-   If route goes active the router doesn't send EIGRP Queries to Stub
 -   Prevents site from being used for transit
 -   Breaks query domain
 -   Best used when sites have no downstream neighbors
@@ -104,11 +105,17 @@ router eigrp MULTI-AF
 
 ##### Stub Site
 
+-   Only on named mode
 -   Allows advertisement of routes learned on LAN but not WAN interfaces
 -   Limits EIGRP query-domain and prevents site from being used for transit
 -   Enabled with `eigrp stub-site`
     -   Mutually exclusive with `eigrp stub`
 -   Interfaces towards hub/WAN identified with `stub-site wan-interface` under af-interface
+
+##### Split Horizon
+-   Prevents route being advertised out of the interface they were learned from.
+-   Stops routing loops
+-   Can be disabled `no ip split-horizon eigrp [AS]` - Useful for Hub & Spoke networks
 
 ##### Load balancing
 
@@ -141,6 +148,8 @@ network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP
   interface G0/1
     ip hello-interval eigrp 10 3
     ip hold-interval eigrp 10 15
+    timers active-time 2
+eigrp stub                            - for stub site
 
 ---
 
@@ -148,6 +157,7 @@ MODERN
 router eigrp [NAME]
  !
  address-family ipv4 unicast autonomous-system 1
+ eigrp stub                           - for stub site
   !
   af-interface default
    passive-interface                 - Sets all intefaces as passive.
@@ -163,6 +173,7 @@ router eigrp [NAME]
   !
   topology base
   variance 2
+    timers active-time 2              - 3 mins by default, 
   exit-af-topology
   network 10.1.1.2 255.255.255.255
   m
@@ -182,6 +193,6 @@ router eigrp [NAME]
 
 `show ip protocols` - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints
 
--   Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died.
+-   Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours
 
 -   EIGRP routes with same `router-id` will form an adjacency but won't accept routes from one another. Investigate using `debug ip eigrp`
