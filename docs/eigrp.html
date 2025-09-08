@@ -505,8 +505,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="useful-show-commands-info" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands-info">Useful Show Commands + Info</h2>
-<p><code>show ip route EIGRP</code> - shows EIGRP routes installed into the RIB <code>show ip eigrp interfaces</code> - shows active EIGRP interfaces <code>show ip eigrp interfaces detail</code> - shows detailed interface info (hold time, split-horizon enabled etc. <code>show ip eigrp topology all-links</code> - shows all additional paths to network (failed Feasibility Condition) <code>show ip protocols</code> - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints</p>
 <ul>
+<li><code>show ip route EIGRP</code> - shows EIGRP routes installed into the RIB</li>
+<li><code>show ip eigrp interfaces</code> - shows active EIGRP interfaces</li>
+<li><code>show ip eigrp interfaces detail</code> - shows detailed interface info (hold time, split-horizon enabled etc.</li>
+<li><code>show ip eigrp topology all-links</code> - shows all additional paths to network (failed Feasibility Condition)</li>
+<li><code>show ip protocols</code> - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints</li>
 <li>Stuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours</li>
 <li>EIGRP routes with same <code>router-id</code> will form an adjacency but won’t accept routes from one another. Investigate using <code>debug ip eigrp</code></li>
 </ul>

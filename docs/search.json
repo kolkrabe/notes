@@ -158,7 +158,7 @@
     "href": "eigrp.html#useful-show-commands-info",
     "title": "EIGRP",
     "section": "Useful Show Commands + Info",
-    "text": "Useful Show Commands + Info\nshow ip route EIGRP - shows EIGRP routes installed into the RIB show ip eigrp interfaces - shows active EIGRP interfaces show ip eigrp interfaces detail - shows detailed interface info (hold time, split-horizon enabled etc. show ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition) show ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\n\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours\nEIGRP routes with same router-id will form an adjacency but won’t accept routes from one another. Investigate using debug ip eigrp",
+    "text": "Useful Show Commands + Info\n\nshow ip route EIGRP - shows EIGRP routes installed into the RIB\nshow ip eigrp interfaces - shows active EIGRP interfaces\nshow ip eigrp interfaces detail - shows detailed interface info (hold time, split-horizon enabled etc.\nshow ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition)\nshow ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours\nEIGRP routes with same router-id will form an adjacency but won’t accept routes from one another. Investigate using debug ip eigrp",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
