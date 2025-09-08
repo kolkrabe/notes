@@ -188,10 +188,15 @@ router eigrp [NAME]
 ## Useful Show Commands + Info
 
 -   `show ip route EIGRP` - shows EIGRP routes installed into the RIB
+
 -   `show ip eigrp interfaces` - shows active EIGRP interfaces
+
 -   `show ip eigrp interfaces detail` - shows detailed interface info (hold time, split-horizon enabled etc.
+
 -   `show ip eigrp topology all-links` - shows all additional paths to network (failed Feasibility Condition)
+
 -   `show ip protocols` - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints
 
 -   Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours
+
 -   EIGRP routes with same `router-id` will form an adjacency but won't accept routes from one another. Investigate using `debug ip eigrp`
