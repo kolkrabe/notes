@@ -91,7 +91,7 @@ router eigrp MULTI-AF
 -   Configured with `summary-address <network> <mask>` under af-interface in named mode, under physical interface in classic mode
 -   Leak map can be used to leak longer mask prefixes included in summary
     -   `summary-address 0.0.0.0 0.0.0.0 leak-map <route-map>`
--   "Discard Route" installed with destination Null0 -  match summary address to prevent loops (AD set to 5)
+-   "Discard Route" installed with destination Null0 - match summary address to prevent loops (AD set to 5)
 -   Can define metric on summary-address with the `summary-metric` command under topology base
 
 ##### Stub
@@ -113,6 +113,7 @@ router eigrp MULTI-AF
 -   Interfaces towards hub/WAN identified with `stub-site wan-interface` under af-interface
 
 ##### Split Horizon
+
 -   Prevents route being advertised out of the interface they were learned from.
 -   Stops routing loops
 -   Can be disabled `no ip split-horizon eigrp [AS]` - Useful for Hub & Spoke networks
@@ -124,16 +125,16 @@ router eigrp MULTI-AF
 ##### Metrics
 
 -   wide-metrics - used to scale eigrp for modern bandwidths, NAMED Mode only.
-
 -   Introduces K6 value.
+-   configure under address family
 
-configure under address family
+##### Offset-lists
 
-##### **Offset-lists**
-
+-   Used for traffic steering
+-   Can modify path attributes based on *direction of update* / *PREFIX* / combination of both.
 -   Can be used to increase metric for a specific route/interface
--   Configured under topology base with:
-    -   `offset-list <access-list> in <metric> <interface>`
+-   Configured under topology base (modifying metric) with for Modern / Under process for Classic
+    -   `offset-list [access-list] [in/out] [metric] [interface]`
 
 ------------------------------------------------------------------------
 
@@ -183,16 +184,7 @@ router eigrp [NAME]
 
 ## Useful Show Commands + Info
 
-`show ip route EIGRP` - shows EIGRP routes installed into the RIB
-
-`show ip eigrp interfaces` - shows active EIGRP interfaces
-
-`show ip eigrp interfaces detail` - shows detailed interface info (hold time, split-horizon enabled etc.
-
-`show ip eigrp topology all-links` - shows all additional paths to network (failed Feasibility Condition)
-
-`show ip protocols` - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints
+`show ip route EIGRP` - shows EIGRP routes installed into the RIB `show ip eigrp interfaces` - shows active EIGRP interfaces `show ip eigrp interfaces detail` - shows detailed interface info (hold time, split-horizon enabled etc. `show ip eigrp topology all-links` - shows all additional paths to network (failed Feasibility Condition) `show ip protocols` - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints
 
 -   Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours
-
 -   EIGRP routes with same `router-id` will form an adjacency but won't accept routes from one another. Investigate using `debug ip eigrp`
