@@ -14,7 +14,7 @@ code-block-bg: dark
 -   Timers
     -   Hello - default 5 secs, (60 on Slow interfaces)
     -   Hold - default 15 secs, (180 on slow interfaces)
--   Load balance over unequal paths using `variance`  - only IGRP that can do this.
+-   Load balance over unequal paths using `variance` - only IGRP that can do this.
 -   Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with `metric-weights`
     -   Mostly uses
         -   K1 - Bandwidth - slowest in path
@@ -116,7 +116,7 @@ router eigrp MULTI-AF
 
 ##### Metrics
 
--   wide-metrics  - used to scale eigrp for modern bandwidths, NAMED Mode only.
+-   wide-metrics - used to scale eigrp for modern bandwidths, NAMED Mode only.
 
 -   Introduces K6 value.
 
@@ -161,7 +161,7 @@ router eigrp [NAME]
  exit-address-family
 ```
 
-## Useful Show Commands
+## Useful Show Commands + Info
 
 `show ip route EIGRP` - shows EIGRP routes installed into the RIB
 
@@ -173,4 +173,8 @@ router eigrp [NAME]
 
 `show ip protocols` - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints
 
-Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died.
+-   Stuck in Active - router sends query about network, doesn't hear back and thinks it's neighbor has died.
+
+-   EIGRP routes with same `router-id` will form an adjacency but won't accept routes from one another. Investigate using `debug ip eigrp`
+
+
