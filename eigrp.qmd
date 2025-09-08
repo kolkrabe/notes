@@ -120,11 +120,14 @@ router eigrp MULTI-AF
 
 ##### Load balancing
 
--   Variance
+- Equal cost load balancing enabled by default (max 4 paths by default)
+  - alter max number of equal cost/metric routes using `maximum-paths [x]`
+-   Variance used to enable load balancing between unequal paths, installs feasible successor routes and puts them into the routing table
+  - variance is a multiplier of Feasible Distance. Verify (and show traffic share) with `show ip route [network]`
 
 ##### Metrics
 
--   wide-metrics - used to scale eigrp for modern bandwidths, NAMED Mode only.
+-   wide-metrics - used to scale EIGRP for modern bandwidths, NAMED Mode only.
 -   Introduces K6 value.
 -   configure under address family
 

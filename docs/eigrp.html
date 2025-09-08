@@ -432,13 +432,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-balancing" class="level5">
 <h5 class="anchored" data-anchor-id="load-balancing">Load balancing</h5>
 <ul>
-<li>Variance</li>
+<li>Equal cost load balancing enabled by default (max 4 paths by default)
+<ul>
+<li>alter max number of equal cost/metric routes using <code>maximum-paths [x]</code></li>
+</ul></li>
+<li>Variance used to enable load balancing between unequal paths, installs feasible successor routes and puts them into the routing table</li>
+<li>variance is a multiplier of Feasible Distance. Verify (and show traffic share) with <code>show ip route [network]</code></li>
 </ul>
 </section>
 <section id="metrics" class="level5">
 <h5 class="anchored" data-anchor-id="metrics">Metrics</h5>
 <ul>
-<li>wide-metrics - used to scale eigrp for modern bandwidths, NAMED Mode only.</li>
+<li>wide-metrics - used to scale EIGRP for modern bandwidths, NAMED Mode only.</li>
 <li>Introduces K6 value.</li>
 <li>configure under address family</li>
 </ul>
