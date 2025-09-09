@@ -263,6 +263,8 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Hello - 10</li>
 <li>Dead Interval - 40 (How long local router waits to hear neighbours Hello</li>
+<li>Wait Timer - 40 (How long to wait for DR/BDR to be elected before triggering election)</li>
+<li>Retransmit - 5 (how long to wait to retransmit OSPF packet which hasn’t been acknowledged)</li>
 </ul></li>
 <li><p>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast)</p></li>
 <li><p>224.0.0.6 - Broadcast for All Designates Routers</p></li>
@@ -285,7 +287,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Highest IP on interface that’s UP</li>
 </ul></li>
 </ul></li>
-<li></li>
+<li><p>Metric Calculation</p>
+<ul>
+<li>Bandwidth \ References Bandwidth - Default ref is 100Mb (all interfaces &gt; 100M have same ref cost.
+<ul>
+<li>Change ref bandwith with <code>auto-cost reference bandwidth [value]</code> big kev recommends 2TB!</li>
+<li>Should match across topology but won’t stop neighbourships forming.</li>
+</ul></li>
+</ul></li>
 </ul>
 <hr>
 </section>

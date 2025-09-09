@@ -7,15 +7,11 @@ code-block-bg: dark
 -   IP-SLA is used to measure various parameters across the network for troubleshooting
 
     -   IP SLA instances
-
     -   Interface Status / Reachability
-
     -   Jitter / latency
-
     -   Groups of things
 
 -   Used commonly for floating static default route (routes internet across different link if one fails.
-
 -   Great example below from Brunbattery on using it to monitor HSRP.
 
 ------------------------------------------------------------------------

@@ -20,6 +20,8 @@ code-block-bg: dark
 
     -   Hello - 10
     -   Dead Interval - 40 (How long local router waits to hear neighbours Hello
+    -   Wait Timer - 40 (How long to wait for DR/BDR to be elected before triggering election)
+    -   Retransmit - 5 (how long to wait to retransmit OSPF packet which hasn't been acknowledged)
 
 -   224.0.0.5 - Broadcast for All OSPF Routers (Broadcast)
 
@@ -42,7 +44,11 @@ code-block-bg: dark
         -   Highest IP on Loopback Int
         -   Highest IP on interface that's UP
 
--   
+-   Metric Calculation
+
+    -   Bandwidth \\ References Bandwidth - Default ref is 100Mb (all interfaces \> 100M have same ref cost.
+        -   Change ref bandwith with `auto-cost reference bandwidth [value]` big kev recommends 2TB!
+        -   Should match across topology but won't stop neighbourships forming.
 
 ------------------------------------------------------------------------
 
