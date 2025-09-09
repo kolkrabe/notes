@@ -1,0 +1,21 @@
+---
+title: "OSPF"
+editor: visual
+code-block-bg: dark
+---
+
+Hello there
+
+General Notes
+
+----------------------
+
+OSPFv2 Config
+
+------------------------
+
+OSPFv3 Config
+
+------------------
+
+Useful Show Commands

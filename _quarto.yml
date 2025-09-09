@@ -17,6 +17,7 @@ website:
           - section: "Layer 3 Technologies"
             contents: 
               - eigrp.qmd
+              - ospf.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd
