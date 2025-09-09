@@ -4,18 +4,50 @@ editor: visual
 code-block-bg: dark
 ---
 
-Hello there
+# General Notes
 
-General Notes
+-   Link State Routing Protocol - makes routing decisions based on the state of links.
 
-----------------------
+-   Once adjacency formed each router has the same **Link State Database.**
 
-OSPFv2 Config
+-   Reacts only to changes, no constant flooding of updates.
 
-------------------------
+-   AD - 110 for Internal & External
 
-OSPFv3 Config
+-   Process-ID - **Locally** significant.
 
-------------------
+-   Timers (Default):
 
-Useful Show Commands
+    -   Hello - 10
+    -   Dead Interval - 40 (How long local router waits to hear neighbours Hello
+
+-   224.0.0.5 - Broadcast for All OSPF Routers (Broadcast)
+
+-   224.0.0.6 - Broadcast for All Designates Routers
+
+-   Neighbourship Requirements
+
+    -   Matching Area
+    -   Matching Auth Parameters
+    -   Matching Subnet
+    -   Matching Timers
+    -   Matching Stub Flags
+    -   Matching MTU (Exstart/Exchange State)
+
+-   DR/BDR to optimise adjacencies
+
+    -   DR/BDR Election
+        -   Highest Priority value (0 to remove from election)
+        -   Highest Router-ID
+        -   Highest IP on Loopback Int
+        -   Highest IP on interface that's UP
+
+-   
+
+------------------------------------------------------------------------
+
+# Features
+
+------------------------------------------------------------------------
+
+# OSPF Configuration

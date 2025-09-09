@@ -13,7 +13,7 @@ code-block-bg: dark
 -   **Hello**'s are Multicast on **224.0.0.10**, port **88**
 -   Timers
     -   Hello - default 5 secs, (60 on Slow interfaces)
-    -   Hold - default 15 secs, (180 on slow interfaces)
+    -   Hold - default 15 secs, (180 on slow interfaces) - How long we tell neighbour to wait for us.
 -   Load balance over unequal paths using `variance` - only IGRP that can do this.
 -   Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with `metric-weights`
     -   Mostly uses

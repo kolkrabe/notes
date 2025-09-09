@@ -218,8 +218,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-notes" id="toc-general-notes" class="nav-link active" data-scroll-target="#general-notes">General Notes</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
+  <li><a href="#ospf-configuration" id="toc-ospf-configuration" class="nav-link" data-scroll-target="#ospf-configuration">OSPF Configuration</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -243,16 +251,53 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Hello there</p>
-<p>General Notes</p>
+<section id="general-notes" class="level1">
+<h1>General Notes</h1>
+<ul>
+<li><p>Link State Routing Protocol - makes routing decisions based on the state of links.</p></li>
+<li><p>Once adjacency formed each router has the same <strong>Link State Database.</strong></p></li>
+<li><p>Reacts only to changes, no constant flooding of updates.</p></li>
+<li><p>AD - 110 for Internal &amp; External</p></li>
+<li><p>Process-ID - <strong>Locally</strong> significant.</p></li>
+<li><p>Timers (Default):</p>
+<ul>
+<li>Hello - 10</li>
+<li>Dead Interval - 40 (How long local router waits to hear neighbours Hello</li>
+</ul></li>
+<li><p>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast)</p></li>
+<li><p>224.0.0.6 - Broadcast for All Designates Routers</p></li>
+<li><p>Neighbourship Requirements</p>
+<ul>
+<li>Matching Area</li>
+<li>Matching Auth Parameters</li>
+<li>Matching Subnet</li>
+<li>Matching Timers</li>
+<li>Matching Stub Flags</li>
+<li>Matching MTU (Exstart/Exchange State)</li>
+</ul></li>
+<li><p>DR/BDR to optimise adjacencies</p>
+<ul>
+<li>DR/BDR Election
+<ul>
+<li>Highest Priority value (0 to remove from election)</li>
+<li>Highest Router-ID</li>
+<li>Highest IP on Loopback Int</li>
+<li>Highest IP on interface that’s UP</li>
+</ul></li>
+</ul></li>
+<li></li>
+</ul>
 <hr>
-<p>OSPFv2 Config</p>
+</section>
+<section id="features" class="level1">
+<h1>Features</h1>
 <hr>
-<p>OSPFv3 Config</p>
-<hr>
-<p>Useful Show Commands</p>
+</section>
+<section id="ospf-configuration" class="level1">
+<h1>OSPF Configuration</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
