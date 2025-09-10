@@ -95,7 +95,7 @@ code-block-bg: dark
 
 -   configured with:
 
-```         
+``` default
 R1(config)#router ospf 1
 R1(config-router)#area 1 virtual-link 192.168.23.2     (IP of interface in the area you want to form an adjacency with)
 
@@ -119,7 +119,7 @@ Intra AREA
 
 # OSPF Configuration
 
-```         
+``` default
 router ospf 1                             - Process ID is locally significant
  router-id 1.1.1.1                        - Not an IP, just an ID.
  network 192.168.1.0 0.0.0.255 area 0     - Advertise interface within this network
