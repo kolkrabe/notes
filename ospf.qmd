@@ -98,9 +98,31 @@ code-block-bg: dark
 
 -   MD5 Hash - combination of key value + password.
 
--   
+``` default
+PLAINTEXT (AREA)
+area [area id] authentication
 
--   
+PLAINTEXT (interface)
+int g0/1
+ip ospf authentication  
+ip ospf authentication-key [password] 
+
+
+MD5
+area [area id] authentication message-digest                - enables MD5
+int g0/1
+ip ospf authentication message-digest                       - Sets MD5 auth for that interface
+ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password 
+
+
+
+WITH KEY CHAIN
+key chain OSPF_KEY
+ key 1
+  key-string [psk]
+  cryptographic-algorithm hmac-sha-256
+ip ospf authentication key-chain OSPF_KEY
+```
 
 ## Virtual Links
 
