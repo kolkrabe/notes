@@ -296,21 +296,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-notes" class="level1">
 <h1>General Notes</h1>
 <ul>
-<li><p>Link State Routing Protocol - makes routing decisions based on the state of links.</p></li>
-<li><p>Once adjacency formed each router has the same <strong>Link State Database.</strong></p></li>
-<li><p>Reacts only to changes, no constant flooding of updates.</p></li>
-<li><p>AD - 110 for Internal &amp; External</p></li>
-<li><p>Process-ID - <strong>Locally</strong> significant.</p></li>
-<li><p>Timers (Default - dead = 4 x Hello)</p>
+<li>Link State Routing Protocol - makes routing decisions based on the state of links.</li>
+<li>Once adjacency formed each router has the same <strong>Link State Database.</strong></li>
+<li>Reacts only to changes, no constant flooding of updates.</li>
+<li>AD - 110 for Internal &amp; External</li>
+<li>Process-ID - <strong>Locally</strong> significant.</li>
+<li>Timers (Default - dead = 4 x Hello)
 <ul>
 <li>Hello - 10</li>
 <li>Dead Interval - 40 (How long local router waits to hear neighbours Hello</li>
 <li>Wait Timer - 40 (How long to wait for DR/BDR to be elected before triggering election)</li>
 <li>Retransmit - 5 (how long to wait to retransmit OSPF packet which hasn’t been acknowledged)</li>
 </ul></li>
-<li><p>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast), <strong>Port 89</strong></p></li>
-<li><p>224.0.0.6 - Broadcast for All Designates Routers, <strong>Port 89</strong></p></li>
-<li><p>Neighbourship Requirements</p>
+<li>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast), <strong>Port 89</strong></li>
+<li>224.0.0.6 - Broadcast for All Designates Routers, <strong>Port 89</strong></li>
+<li>Neighbourship Requirements
 <ul>
 <li>Matching Area</li>
 <li>Matching Auth Parameters</li>
@@ -319,8 +319,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Matching Stub Flags</li>
 <li>Matching MTU (Exstart/Exchange State)</li>
 </ul></li>
-<li><p><strong>DR/BDR Election</strong> - Highest Priority value (0 to remove from election) - Highest Router-ID - Highest IP on Loopback Int - Highest IP on interface that’s UP</p></li>
-<li><p><strong>Metric Calculation</strong></p>
+<li><strong>DR/BDR Election</strong> - Highest Priority value (0 to remove from election) - Highest Router-ID - Highest IP on Loopback Int - Highest IP on interface that’s UP</li>
+<li><strong>Metric Calculation</strong>
 <ul>
 <li>Bandwidth \ References Bandwidth - Default ref is 100Mb (all interfaces &gt; 100M have same ref cost.
 <ul>
@@ -328,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Should match across topology but won’t stop neighbourships forming.</li>
 </ul></li>
 </ul></li>
-<li><p>Network Type (don’t have to match)</p>
+<li>Network Type (don’t have to match)
 <ul>
 <li>Broadcast - ethernet -Default for OSPF - DR/BDR</li>
 <li>Point-to-Point - Default for non-Frame Relay serial interface, no DR/BDR required</li>
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Point-to-Multipoint - No DR/BDR required, hello 30 secs</li>
 <li>When mixing - might have to adjust timers.</li>
 </ul></li>
-<li><p><strong>LSAs</strong></p>
+<li><strong>LSAs</strong>
 <ul>
 <li><p><strong>Type 1 - Router LSA</strong> (Intra-Area)</p>
 <ul>
@@ -362,13 +362,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Type 1=E1 - Cost the ASBR reports plus cost to ASBR</li>
 <li>Type 2=E2 - Cost to the ASBR only, if tiebreak cost to ASBR included.</li>
 </ul></li>
-<li><p><strong>Type 7 - NSSA External LSA</strong></p>
-<ul>
-<li></li>
-</ul></li>
+<li><h2 id="type-7---nssa-external-lsa" class="anchored" data-anchor-id="general-notes"><strong>Type 7 - NSSA External LSA</strong></h2></li>
 </ul></li>
 <li></li>
-<li><p>Troubleshooting - <strong>TAN MAT</strong> (<strong>T</strong>imers, <strong>A</strong>rea, <strong>N</strong>etwork Add, <strong>M</strong>TU, <strong>A</strong>uth, <strong>T</strong>ype)</p></li>
+<li>Troubleshooting - <strong>TAN MAT</strong> (<strong>T</strong>imers, <strong>A</strong>rea, <strong>N</strong>etwork Add, <strong>M</strong>TU, <strong>A</strong>uth, <strong>T</strong>ype)</li>
 </ul>
 <hr>
 </section>
@@ -377,39 +374,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="authentication" class="level2">
 <h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
 <ul>
-<li><p>Enabled per Interface or for all interfaces in an area</p></li>
-<li><p>Plain text (pointless)</p></li>
-<li><p>MD5 Hash - combination of key value + password.</p></li>
+<li>Enabled per Interface or for all interfaces in an area</li>
+<li>Plain text (pointless)</li>
+<li>MD5 Hash - combination of key value + password. (Key + Password must <strong>both</strong> match).</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>PLAINTEXT (AREA)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>area [area id] authentication</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>PLAINTEXT (interface)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>int g0/1</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ip ospf authentication  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ip ospf authentication-key [password] </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>router ospf 1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>area [area id] authentication</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  int g0/1</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ip ospf authentication  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    ip ospf authentication-key [password] </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>MD5</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>MD5 (AREA)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>router ospf 1</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>area [area id] authentication message-digest                - enables MD5</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>int g0/1</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ip ospf authentication message-digest                       - Sets MD5 auth for that interface</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  int g0/1</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    ip ospf authentication message-digest                       - Sets MD5 auth for that interface</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password </span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>WITH KEY CHAIN</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> key 1</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  key-string [psk]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  key-string [password]</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm hmac-sha-256</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>ip ospf authentication key-chain OSPF_KEY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="virtual-links" class="level2">
 <h2 class="anchored" data-anchor-id="virtual-links">Virtual Links</h2>
 <ul>
-<li><p>Allows adjacency with non directly connected neighbour.</p></li>
-<li><p>configured with:</p></li>
+<li>Allows adjacency with non directly connected neighbour.</li>
+<li>configured with:</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R1(config)#router ospf 1</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>R1(config-router)#area 1 virtual-link 192.168.23.2&nbsp;&nbsp;&nbsp;&nbsp; (IP of int in area you want to form adjacency with)</span>
