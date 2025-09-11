@@ -392,15 +392,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  int g0/1</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    ip ospf authentication message-digest                       - Sets MD5 auth for that interface</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>WITH KEY CHAIN</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> key 1</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  key-string [password]</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm hmac-sha-256</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>ip ospf authentication key-chain OSPF_KEY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>OSPFv3</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>WITH KEY CHAIN</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> key 1</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  key-string [password]</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm hmac-sha-256</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ip ospf authentication key-chain OSPF_KEY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="virtual-links" class="level2">
 <h2 class="anchored" data-anchor-id="virtual-links">Virtual Links</h2>
@@ -417,6 +422,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="summerisation" class="level2">
 <h2 class="anchored" data-anchor-id="summerisation">Summerisation</h2>
+<ul>
+<li><p>Summerisation only possible at ABR + ASBR</p></li>
+<li><p>Inter-Area Summerisation, reduces Type 3 LSAs, summerised metric = lowest metric of networks by default</p>
+<ul>
+<li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process.</li>
+</ul></li>
+<li><p>can use <code>not-advertise</code> to prevent prefixes being advertised</p></li>
+<li><p>External router summerisation at ASBR (LSA 5)</p>
+<ul>
+<li>configured with <code>summary-address [network + mask]</code> under OSPF process.</li>
+</ul></li>
+<li><p>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)</p></li>
+</ul>
 </section>
 <section id="path-selection" class="level2">
 <h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
@@ -429,12 +447,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="useful-commands" class="level1">
 <h1>Useful commands</h1>
 <ul>
-<li><code>show ip protocol</code> - shows general info on active routing protocols</li>
-<li><code>show ip ospf</code> -</li>
-<li><code>show ip ospf interface [brief]</code> - shows detailed info on OSFP enabled interfaces</li>
-<li><code>show ip ospf database</code> - shows the OSPF database for this area</li>
-<li><code>show ip ospf neighbour [detail]</code> - shows list of OSPF neighbours plus states</li>
-<li><code>show ip ospf database router self-originate</code></li>
+<li><p><code>show ip protocol</code> - shows general info on active routing protocols</p></li>
+<li><p><code>show ip ospf</code> - shows detailed info on OSPF protocol, timers, metric etc.</p></li>
+<li><p><code>show ip ospf interface [brief]</code> - shows detailed/brief info on OSFP enabled interfaces, hold/wait timer etc.</p></li>
+<li><p><code>show ip ospf database</code> - shows the OSPF database for this area</p></li>
+<li><p><code>show ip ospf neighbour [detail]</code> - shows list of OSPF neighbours plus states</p></li>
+<li><p><code>show ip ospf database router self-originate</code></p></li>
+<li><p><code>debug ip ospf adj</code> - debugs OSPF adjacency</p></li>
+<li><p><code>debug ip ospf packet</code> - debugs all OSPF packets</p></li>
+<li><p><code>show ip ospf database router self-originate</code> - Useful to see routes advertised by local device</p></li>
 <li></li>
 </ul>
 <hr>
