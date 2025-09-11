@@ -26,7 +26,7 @@
     "href": "ospf.html#authentication",
     "title": "OSPF",
     "section": "Authentication",
-    "text": "Authentication\n\nEnabled per Interface or for all interfaces in an area\nPlain text (pointless)\nMD5 Hash - combination of key value + password. (Key + Password must both match).\n\nPLAINTEXT (AREA)\nrouter ospf 1\narea [area id] authentication\n  int g0/1\n    ip ospf authentication  \n    ip ospf authentication-key [password] \n\n\nMD5 (AREA)\nrouter ospf 1\narea [area id] authentication message-digest                - enables MD5\n  int g0/1\n    ip ospf authentication message-digest                       - Sets MD5 auth for that interface\n    ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password \n    \n  \nOSPFv3\nint g0/0\n  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]\n\n\n\nWITH KEY CHAIN\nkey chain OSPF_KEY\n key 1\n  key-string [password]\n  cryptographic-algorithm hmac-sha-256\nip ospf authentication key-chain OSPF_KEY",
+    "text": "Authentication\n\nEnabled per Interface or for all interfaces in an area\nPlain text (pointless)\nMD5 Hash - combination of key value + password. (Key + Password must both match).\nHMAC with SHA (requires key chain)\n\nPLAINTEXT (AREA)\nrouter ospf 1\narea [area id] authentication\n  int g0/1\n    ip ospf authentication  \n    ip ospf authentication-key [password] \n\n\nMD5 (AREA)\nrouter ospf 1\narea [area id] authentication message-digest                - enables MD5\n  int g0/1\n    ip ospf authentication message-digest                       - Sets MD5 auth for that interface\n    ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password \n    \n  \nOSPFv3\narea 0 authentication ipsec spi [value] sha1 0 [40char key]\nint g0/0\n  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]\n\n\n\nWITH KEY CHAIN\nkey chain OSPF_KEY\n key 1\n  key-string [password]\n  cryptographic-algorithm hmac-sha-256\nip ospf authentication key-chain OSPF_KEY",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -50,7 +50,19 @@
     "href": "ospf.html#summerisation",
     "title": "OSPF",
     "section": "Summerisation",
-    "text": "Summerisation\n\nSummerisation only possible at ABR + ASBR\nInter-Area Summerisation, reduces Type 3 LSAs, summerised metric = lowest metric of networks by default\n\nconfigured with area [area-id] range [network + mask] cost [metric] under OSPF process.\n\ncan use not-advertise to prevent prefixes being advertised\nExternal router summerisation at ASBR (LSA 5)\n\nconfigured with summary-address [network + mask] under OSPF process.\n\n“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)",
+    "text": "Summerisation\n\nSummerisation only possible at ABR + ASBR\nInter-Area Summerisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default\n\nconfigured with area [area-id] range [network + mask] cost [metric] under OSPF process.\n\ncan use not-advertise to prevent prefixes being advertised\nExternal router summerisation at ASBR (LSA 5)\n\nconfigured with summary-address [network + mask] under OSPF process.\n\n“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "OSPF"
+    ]
+  },
+  {
+    "objectID": "ospf.html#nssa",
+    "href": "ospf.html#nssa",
+    "title": "OSPF",
+    "section": "NSSA",
+    "text": "NSSA\n\nNot So Stubby Area, RFC1587 (https://www.ietf.org/rfc/rfc1587.txt)",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -62,7 +74,7 @@
     "href": "ospf.html#path-selection",
     "title": "OSPF",
     "section": "Path Selection",
-    "text": "Path Selection\nIntra Area preferred\nInter Area next\nIntra AREA",
+    "text": "Path Selection\nIntra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\nInter Area next\nIntra AREA",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

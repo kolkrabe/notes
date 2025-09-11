@@ -76,6 +76,7 @@ code-block-bg: dark
 -   Enabled per Interface or for all interfaces in an area
 -   Plain text (pointless)
 -   MD5 Hash - combination of key value + password. (Key + Password must **both** match).
+-   HMAC with SHA (requires key chain)
 
 ``` default
 PLAINTEXT (AREA)
@@ -95,6 +96,7 @@ area [area id] authentication message-digest                - enables MD5
     
   
 OSPFv3
+area 0 authentication ipsec spi [value] sha1 0 [40char key]
 int g0/0
   ospfv3 authentication ipsec spi [value] sha1 0 [40char key]
 
@@ -127,7 +129,7 @@ links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no he
 
 -   Summerisation only possible at ABR + ASBR
 
--   Inter-Area Summerisation, reduces Type 3 LSAs, summerised metric = lowest metric of networks by default
+-   Inter-Area Summerisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
 
     -   configured with `area [area-id] range [network + mask] cost [metric]` under OSPF process.
 
@@ -137,11 +139,17 @@ links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no he
 
     -   configured with `summary-address [network + mask]` under OSPF process.
 
--   "Discard Route" installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)
+-   "Discard Route" installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external
+
+-   
+
+## NSSA 
+
+-   Not So Stubby Area, RFC1587 (<https://www.ietf.org/rfc/rfc1587.txt>)
 
 ## Path Selection
 
-Intra Area preferred
+Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 Inter Area next
 
@@ -180,4 +188,17 @@ OR
 int g0/2
 ip ospf network point-to-point
 ospf 1 area 0
+
+
+ADDRESS FAMILIES
+ipv6
+router ospfv3 1
+router-id 1.1.1.1
+passive-interface g0/1
+address-family ipv4
+address-family ipv6
+int g0/1
+  ospfv3 1 ipv4 area 0
+  ospfv3 1 ipv6 area 0
+i
 ```

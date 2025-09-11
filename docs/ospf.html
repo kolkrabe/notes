@@ -264,6 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
   <li><a href="#virtual-links" id="toc-virtual-links" class="nav-link" data-scroll-target="#virtual-links">Virtual Links</a></li>
   <li><a href="#summerisation" id="toc-summerisation" class="nav-link" data-scroll-target="#summerisation">Summerisation</a></li>
+  <li><a href="#nssa" id="toc-nssa" class="nav-link" data-scroll-target="#nssa">NSSA</a></li>
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
   </ul></li>
   <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands">Useful commands</a></li>
@@ -377,6 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Enabled per Interface or for all interfaces in an area</li>
 <li>Plain text (pointless)</li>
 <li>MD5 Hash - combination of key value + password. (Key + Password must <strong>both</strong> match).</li>
+<li>HMAC with SHA (requires key chain)</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>PLAINTEXT (AREA)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>router ospf 1</span>
@@ -395,17 +397,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>OSPFv3</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>area 0 authentication ipsec spi [value] sha1 0 [40char key]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>WITH KEY CHAIN</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> key 1</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  key-string [password]</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm hmac-sha-256</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ip ospf authentication key-chain OSPF_KEY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>WITH KEY CHAIN</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> key 1</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  key-string [password]</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm hmac-sha-256</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ip ospf authentication key-chain OSPF_KEY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="virtual-links" class="level2">
 <h2 class="anchored" data-anchor-id="virtual-links">Virtual Links</h2>
@@ -424,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="summerisation">Summerisation</h2>
 <ul>
 <li><p>Summerisation only possible at ABR + ASBR</p></li>
-<li><p>Inter-Area Summerisation, reduces Type 3 LSAs, summerised metric = lowest metric of networks by default</p>
+<li><p>Inter-Area Summerisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default</p>
 <ul>
 <li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process.</li>
 </ul></li>
@@ -433,12 +436,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>configured with <code>summary-address [network + mask]</code> under OSPF process.</li>
 </ul></li>
-<li><p>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)</p></li>
+<li><p>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external</p></li>
+<li></li>
+</ul>
+</section>
+<section id="nssa" class="level2">
+<h2 class="anchored" data-anchor-id="nssa">NSSA</h2>
+<ul>
+<li>Not So Stubby Area, RFC1587 (<a href="https://www.ietf.org/rfc/rfc1587.txt" class="uri">https://www.ietf.org/rfc/rfc1587.txt</a>)</li>
 </ul>
 </section>
 <section id="path-selection" class="level2">
 <h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
-<p>Intra Area preferred</p>
+<p>Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</p>
 <p>Inter Area next</p>
 <p>Intra AREA</p>
 <hr>
@@ -472,7 +482,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>int g0/2</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ip ospf network point-to-point</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ospf 1 area 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ospf 1 area 0</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ADDRESS FAMILIES</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ipv6</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>router ospfv3 1</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>router-id 1.1.1.1</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>passive-interface g0/1</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>address-family ipv4</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>address-family ipv6</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>int g0/1</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  ospfv3 1 ipv4 area 0</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  ospfv3 1 ipv6 area 0</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
