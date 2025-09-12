@@ -125,27 +125,46 @@ R2(config-router)#area 1 virtual-link 1.1.1.1      (IP of int in area you w
 
 links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no hello or refresh messages.
 
-## Summerisation
+## Summarisation
 
--   Summerisation only possible at ABR + ASBR
+-   Summarisation only possible at ABR + ASBR
 
--   Inter-Area Summerisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
+-   Inter-Area Summrrisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
 
     -   configured with `area [area-id] range [network + mask] cost [metric]` under OSPF process.
 
 -   can use `not-advertise` to prevent prefixes being advertised
 
--   External router summerisation at ASBR (LSA 5)
+-   External router summarisation ndefined at ASBR
 
     -   configured with `summary-address [network + mask]` under OSPF process.
 
 -   "Discard Route" installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external
 
--   
+## Stub Areas
 
-## NSSA 
+-   Blocks LSA Types 4 (ASBR) and 5 (External)
+-   My ABR originates default route as Type 3 LSA, ABR can reach ASBR and ASBR can reach external route so I don't need details of external route & ASBR.
+-   Can't redistribute any prefixes from within a Stub Area
+-   Configured with `area [area #] stub`
+
+## Totally Stubby Area
+
+-   Blocks LSA Types 3 (Inter-Area), 4 (ASBR) and 5 (External)
+
+-   Cisco Propriety
+
+-   configured with `area [area #] stub no-summary`
+
+## NSSA
 
 -   Not So Stubby Area, RFC1587 (<https://www.ietf.org/rfc/rfc1587.txt>)
+
+## Default Route
+
+-   Configured with `default-information originate [always]`
+
+-   Use of `always` advertises the default route even if one doesn't exist in the routing table.
 
 ## Path Selection
 
@@ -160,12 +179,19 @@ Intra AREA
 # Useful commands
 
 -   `show ip protocol` - shows general info on active routing protocols
+
 -   `show ip ospf` - shows detailed info on OSPF protocol, timers, metric etc.
+
 -   `show ip ospf interface [brief]` - shows detailed/brief info on OSFP enabled interfaces, hold/wait timer etc.
+
 -   `show ip ospf database` - shows the OSPF database for this area
+
 -   `show ip ospf neighbour [detail]` - shows list of OSPF neighbours plus states
+
 -   `show ip ospf database router self-originate`
+
 -   `debug ip ospf adj` - debugs OSPF adjacency
+
 -   `debug ip ospf packet` - debugs all OSPF packets
 
 -   `show ip ospf database router self-originate` - Useful to see routes advertised by local device

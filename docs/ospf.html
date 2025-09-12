@@ -263,8 +263,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
   <li><a href="#virtual-links" id="toc-virtual-links" class="nav-link" data-scroll-target="#virtual-links">Virtual Links</a></li>
-  <li><a href="#summerisation" id="toc-summerisation" class="nav-link" data-scroll-target="#summerisation">Summerisation</a></li>
+  <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
+  <li><a href="#stub-areas" id="toc-stub-areas" class="nav-link" data-scroll-target="#stub-areas">Stub Areas</a></li>
+  <li><a href="#totally-stubby-area" id="toc-totally-stubby-area" class="nav-link" data-scroll-target="#totally-stubby-area">Totally Stubby Area</a></li>
   <li><a href="#nssa" id="toc-nssa" class="nav-link" data-scroll-target="#nssa">NSSA</a></li>
+  <li><a href="#default-route" id="toc-default-route" class="nav-link" data-scroll-target="#default-route">Default Route</a></li>
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
   </ul></li>
   <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands">Useful commands</a></li>
@@ -423,27 +426,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>R2(config-router)#area 1 virtual-link 1.1.1.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (IP of int in area you want to form adjacency with)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>links shows “DNA” in DB - Do Not Age - reduced traffic flowing over link - no hello or refresh messages.</p>
 </section>
-<section id="summerisation" class="level2">
-<h2 class="anchored" data-anchor-id="summerisation">Summerisation</h2>
+<section id="summarisation" class="level2">
+<h2 class="anchored" data-anchor-id="summarisation">Summarisation</h2>
 <ul>
-<li><p>Summerisation only possible at ABR + ASBR</p></li>
-<li><p>Inter-Area Summerisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default</p>
+<li><p>Summarisation only possible at ABR + ASBR</p></li>
+<li><p>Inter-Area Summrrisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default</p>
 <ul>
 <li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process.</li>
 </ul></li>
 <li><p>can use <code>not-advertise</code> to prevent prefixes being advertised</p></li>
-<li><p>External router summerisation at ASBR (LSA 5)</p>
+<li><p>External router summarisation ndefined at ASBR</p>
 <ul>
 <li>configured with <code>summary-address [network + mask]</code> under OSPF process.</li>
 </ul></li>
 <li><p>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external</p></li>
-<li></li>
+</ul>
+</section>
+<section id="stub-areas" class="level2">
+<h2 class="anchored" data-anchor-id="stub-areas">Stub Areas</h2>
+<ul>
+<li>Blocks LSA Types 4 (ASBR) and 5 (External)</li>
+<li>My ABR originates default route as Type 3 LSA, ABR can reach ASBR and ASBR can reach external route so I don’t need details of external route &amp; ASBR.</li>
+<li>Can’t redistribute any prefixes from within a Stub Area</li>
+<li>Configured with <code>area [area #] stub</code></li>
+</ul>
+</section>
+<section id="totally-stubby-area" class="level2">
+<h2 class="anchored" data-anchor-id="totally-stubby-area">Totally Stubby Area</h2>
+<ul>
+<li><p>Blocks LSA Types 3 (Inter-Area), 4 (ASBR) and 5 (External)</p></li>
+<li><p>Cisco Propriety</p></li>
+<li><p>configured with <code>area [area #] stub no-summary</code></p></li>
 </ul>
 </section>
 <section id="nssa" class="level2">
 <h2 class="anchored" data-anchor-id="nssa">NSSA</h2>
 <ul>
 <li>Not So Stubby Area, RFC1587 (<a href="https://www.ietf.org/rfc/rfc1587.txt" class="uri">https://www.ietf.org/rfc/rfc1587.txt</a>)</li>
+</ul>
+</section>
+<section id="default-route" class="level2">
+<h2 class="anchored" data-anchor-id="default-route">Default Route</h2>
+<ul>
+<li><p>Configured with <code>default-information originate [always]</code></p></li>
+<li><p>Use of <code>always</code> advertises the default route even if one doesn’t exist in the routing table.</p></li>
 </ul>
 </section>
 <section id="path-selection" class="level2">
