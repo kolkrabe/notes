@@ -177,6 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">OSPF</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./redistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Redistribution</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -268,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#totally-stubby-area" id="toc-totally-stubby-area" class="nav-link" data-scroll-target="#totally-stubby-area">Totally Stubby Area</a></li>
   <li><a href="#nssa" id="toc-nssa" class="nav-link" data-scroll-target="#nssa">NSSA</a></li>
   <li><a href="#default-route" id="toc-default-route" class="nav-link" data-scroll-target="#default-route">Default Route</a></li>
-  <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
+  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
   </ul></li>
   <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands">Useful commands</a></li>
   <li><a href="#ospf-configuration" id="toc-ospf-configuration" class="nav-link" data-scroll-target="#ospf-configuration">OSPF Configuration</a></li>
@@ -456,7 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>Blocks LSA Types 3 (Inter-Area), 4 (ASBR) and 5 (External)</p></li>
 <li><p>Cisco Propriety</p></li>
-<li><p>configured with <code>area [area #] stub no-summary</code></p></li>
+<li><p>configured with <code>area [area #] stub no-summary</code> on ABR, other routers in area as above.</p></li>
+<li><p>Default route tuning: <code>area [area #] default-cost [metric]</code></p></li>
 </ul>
 </section>
 <section id="nssa" class="level2">
@@ -472,8 +479,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Use of <code>always</code> advertises the default route even if one doesn’t exist in the routing table.</p></li>
 </ul>
 </section>
-<section id="path-selection" class="level2">
-<h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
+<section id="filtering" class="level2">
+<h2 class="anchored" data-anchor-id="filtering">Filtering</h2>
+<ul>
+<li><p>Inter-area filtering possible only at ABRs, filtering LSA3s</p></li>
+<li><p>Performed with <code>area &lt;area#&gt; filter-list prefix &lt;prefix-list&gt; [in|out]</code></p></li>
+<li><p>Inter-area filtering also possible with area range and <code>not-advertise</code> flag as described above</p></li>
+<li><p>Can also use distribute lists to filter inbound into the RIB, <strong>not the OSPF database</strong></p>
+<ul>
+<li><p>Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag</p></li>
+<li><p>For example:</p></li>
+</ul>
+<pre><code>access-list 3 permit 155.1.146.0 
+access-list 4 permit 155.1.0.4 
+!
+route-map DENY_VLAN146_FROM_R4 deny 10
+  match ip address 3  
+  match ip next-hop 4 
+!         
+route-map DENY_VLAN146_FROM_R4 permit 20 
+! 
+router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in</code></pre>
+<ul>
+<li><p>Note again distribute-lists <strong>ONLY AFFECTS LOCAL RIB</strong>, not OSPF database</p></li>
+<li><p>Easy to create traffic black holes if not careful with this feature</p></li>
+</ul></li>
+</ul>
 <p>Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</p>
 <p>Inter Area next</p>
 <p>Intra AREA</p>
@@ -498,30 +529,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ospf-configuration" class="level1">
 <h1>OSPF Configuration</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>router ospf 1                             - Process ID is locally significant</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> router-id 1.1.1.1                        - Not an IP, just an ID.</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> network 192.168.1.0 0.0.0.255 area 0     - Advertise interface within this network</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> passive-interface default                - stops neighbour adjacency forming.</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> no passive-interface gig 0/1             - int participates in ospf  </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>OR</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>int g0/2</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ip ospf network point-to-point</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ospf 1 area 0</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ADDRESS FAMILIES</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ipv6</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>router ospfv3 1</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>router-id 1.1.1.1</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>passive-interface g0/1</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>address-family ipv4</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>address-family ipv6</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>int g0/1</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  ospfv3 1 ipv4 area 0</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  ospfv3 1 ipv6 area 0</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>router ospf 1                             - Process ID is locally significant</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> router-id 1.1.1.1                        - Not an IP, just an ID.</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> network 192.168.1.0 0.0.0.255 area 0     - Advertise interface within this network</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> passive-interface default                - stops neighbour adjacency forming.</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> no passive-interface gig 0/1             - int participates in ospf  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>OR</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>int g0/2</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>ip ospf network point-to-point</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>ospf 1 area 0</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>ADDRESS FAMILIES</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>ipv6</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>router ospfv3 1</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>router-id 1.1.1.1</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>passive-interface g0/1</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>address-family ipv4</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>address-family ipv6</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>int g0/1</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  ospfv3 1 ipv4 area 0</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  ospfv3 1 ipv6 area 0</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

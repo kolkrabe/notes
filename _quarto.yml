@@ -18,6 +18,7 @@ website:
             contents: 
               - eigrp.qmd
               - ospf.qmd
+              - redistribution.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd

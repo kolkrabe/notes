@@ -154,7 +154,9 @@ links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no he
 
 -   Cisco Propriety
 
--   configured with `area [area #] stub no-summary`
+-   configured with `area [area #] stub no-summary` on ABR, other routers in area as above.
+
+-   Default route tuning: `area [area #] default-cost [metric]`
 
 ## NSSA
 
@@ -166,7 +168,36 @@ links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no he
 
 -   Use of `always` advertises the default route even if one doesn't exist in the routing table.
 
-## Path Selection
+## Filtering
+
+-   Inter-area filtering possible only at ABRs, filtering LSA3s
+
+-   Performed with `area <area#> filter-list prefix <prefix-list> [in|out]`
+
+-   Inter-area filtering also possible with area range and `not-advertise` flag as described above
+
+-   Can also use distribute lists to filter inbound into the RIB, **not the OSPF database**
+
+    -   Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag
+
+    -   For example:
+
+    ```         
+    access-list 3 permit 155.1.146.0 
+    access-list 4 permit 155.1.0.4 
+    !
+    route-map DENY_VLAN146_FROM_R4 deny 10
+      match ip address 3  
+      match ip next-hop 4 
+    !         
+    route-map DENY_VLAN146_FROM_R4 permit 20 
+    ! 
+    router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in
+    ```
+
+    -   Note again distribute-lists **ONLY AFFECTS LOCAL RIB**, not OSPF database
+
+    -   Easy to create traffic black holes if not careful with this feature
 
 Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
