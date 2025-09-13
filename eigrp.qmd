@@ -72,7 +72,24 @@ router eigrp MULTI-AF
 ##### Route Filtering
 
 -   Can be advertised with quad 0 summary route under interface
+
 -   Can also be redistributed from static route
+
+-   Use of Distribute-list stops route being added to topology & routing table - `distribute-list prefix [prefix-list] [in/out] [interface]`
+
+-   Can also use route-maps to match on tags, metric
+
+    -   For example:
+
+    ``` default
+    route-map FILTER_ON_TAGS deny 10  
+      match tag 4 
+    ! 
+    route-map FILTER_ON_TAGS permit 20 
+    ! 
+    router eigrp 100
+      distribute-list route-map FILTER_ON_TAGS in
+    ```
 
 ##### Loop Prevention
 
