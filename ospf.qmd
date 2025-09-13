@@ -171,18 +171,13 @@ links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no he
 ## Filtering
 
 -   Inter-area filtering possible only at ABRs, filtering LSA3s
-
 -   Performed with `area <area#> filter-list prefix <prefix-list> [in|out]`
-
 -   Inter-area filtering also possible with area range and `not-advertise` flag as described above
-
 -   Can also use distribute lists to filter inbound into the RIB, **not the OSPF database**
-
-    -   Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag
-
+-   Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag
     -   For example:
 
-    ```         
+``` default
     access-list 3 permit 155.1.146.0 
     access-list 4 permit 155.1.0.4 
     !
@@ -193,11 +188,10 @@ links shows "DNA" in DB - Do Not Age - reduced traffic flowing over link - no he
     route-map DENY_VLAN146_FROM_R4 permit 20 
     ! 
     router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in
-    ```
+```
 
-    -   Note again distribute-lists **ONLY AFFECTS LOCAL RIB**, not OSPF database
-
-    -   Easy to create traffic black holes if not careful with this feature
+-   Note again distribute-lists **ONLY AFFECTS LOCAL RIB**, not OSPF database
+-   Easy to create traffic black holes if not careful with this feature
 
 Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
@@ -210,23 +204,14 @@ Intra AREA
 # Useful commands
 
 -   `show ip protocol` - shows general info on active routing protocols
-
 -   `show ip ospf` - shows detailed info on OSPF protocol, timers, metric etc.
-
 -   `show ip ospf interface [brief]` - shows detailed/brief info on OSFP enabled interfaces, hold/wait timer etc.
-
 -   `show ip ospf database` - shows the OSPF database for this area
-
 -   `show ip ospf neighbour [detail]` - shows list of OSPF neighbours plus states
-
 -   `show ip ospf database router self-originate`
-
 -   `debug ip ospf adj` - debugs OSPF adjacency
-
 -   `debug ip ospf packet` - debugs all OSPF packets
-
 -   `show ip ospf database router self-originate` - Useful to see routes advertised by local device
-
 -   
 
 ------------------------------------------------------------------------

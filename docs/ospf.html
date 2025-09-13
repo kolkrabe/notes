@@ -482,28 +482,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="filtering" class="level2">
 <h2 class="anchored" data-anchor-id="filtering">Filtering</h2>
 <ul>
-<li><p>Inter-area filtering possible only at ABRs, filtering LSA3s</p></li>
-<li><p>Performed with <code>area &lt;area#&gt; filter-list prefix &lt;prefix-list&gt; [in|out]</code></p></li>
-<li><p>Inter-area filtering also possible with area range and <code>not-advertise</code> flag as described above</p></li>
-<li><p>Can also use distribute lists to filter inbound into the RIB, <strong>not the OSPF database</strong></p>
+<li>Inter-area filtering possible only at ABRs, filtering LSA3s</li>
+<li>Performed with <code>area &lt;area#&gt; filter-list prefix &lt;prefix-list&gt; [in|out]</code></li>
+<li>Inter-area filtering also possible with area range and <code>not-advertise</code> flag as described above</li>
+<li>Can also use distribute lists to filter inbound into the RIB, <strong>not the OSPF database</strong></li>
+<li>Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag
 <ul>
-<li><p>Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag</p></li>
-<li><p>For example:</p></li>
-</ul>
-<pre><code>access-list 3 permit 155.1.146.0 
-access-list 4 permit 155.1.0.4 
-!
-route-map DENY_VLAN146_FROM_R4 deny 10
-  match ip address 3  
-  match ip next-hop 4 
-!         
-route-map DENY_VLAN146_FROM_R4 permit 20 
-! 
-router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in</code></pre>
-<ul>
-<li><p>Note again distribute-lists <strong>ONLY AFFECTS LOCAL RIB</strong>, not OSPF database</p></li>
-<li><p>Easy to create traffic black holes if not careful with this feature</p></li>
+<li>For example:</li>
 </ul></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    access-list 3 permit 155.1.146.0 </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    access-list 4 permit 155.1.0.4 </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    !</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    route-map DENY_VLAN146_FROM_R4 deny 10</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      match ip address 3  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      match ip next-hop 4 </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    !         </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    route-map DENY_VLAN146_FROM_R4 permit 20 </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ! </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note again distribute-lists <strong>ONLY AFFECTS LOCAL RIB</strong>, not OSPF database</li>
+<li>Easy to create traffic black holes if not careful with this feature</li>
 </ul>
 <p>Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</p>
 <p>Inter Area next</p>
@@ -514,15 +514,15 @@ router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in</code></pre>
 <section id="useful-commands" class="level1">
 <h1>Useful commands</h1>
 <ul>
-<li><p><code>show ip protocol</code> - shows general info on active routing protocols</p></li>
-<li><p><code>show ip ospf</code> - shows detailed info on OSPF protocol, timers, metric etc.</p></li>
-<li><p><code>show ip ospf interface [brief]</code> - shows detailed/brief info on OSFP enabled interfaces, hold/wait timer etc.</p></li>
-<li><p><code>show ip ospf database</code> - shows the OSPF database for this area</p></li>
-<li><p><code>show ip ospf neighbour [detail]</code> - shows list of OSPF neighbours plus states</p></li>
-<li><p><code>show ip ospf database router self-originate</code></p></li>
-<li><p><code>debug ip ospf adj</code> - debugs OSPF adjacency</p></li>
-<li><p><code>debug ip ospf packet</code> - debugs all OSPF packets</p></li>
-<li><p><code>show ip ospf database router self-originate</code> - Useful to see routes advertised by local device</p></li>
+<li><code>show ip protocol</code> - shows general info on active routing protocols</li>
+<li><code>show ip ospf</code> - shows detailed info on OSPF protocol, timers, metric etc.</li>
+<li><code>show ip ospf interface [brief]</code> - shows detailed/brief info on OSFP enabled interfaces, hold/wait timer etc.</li>
+<li><code>show ip ospf database</code> - shows the OSPF database for this area</li>
+<li><code>show ip ospf neighbour [detail]</code> - shows list of OSPF neighbours plus states</li>
+<li><code>show ip ospf database router self-originate</code></li>
+<li><code>debug ip ospf adj</code> - debugs OSPF adjacency</li>
+<li><code>debug ip ospf packet</code> - debugs all OSPF packets</li>
+<li><code>show ip ospf database router self-originate</code> - Useful to see routes advertised by local device</li>
 <li></li>
 </ul>
 <hr>
