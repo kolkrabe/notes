@@ -187,24 +187,24 @@ router ospf 2
 
 -   Configured using `distribute-list prefix [name] [in/out] [interface]`
 
-    ``` default
-    ACL
-    access-list 1 deny 28.0.0.0 0.255.255.255
-    access-list 1 permit any
-    !
-    router ospf 1
+``` default
+ ACL
+access-list 1 deny 28.0.0.0 0.255.255.255
+access-list 1 permit any
+!
+router ospf 1
       distribute-list 1 in 
     ```
 
 -   Example with Prefix List
 
- ``` default
+``` default
 PREFIX-LIST
 ip prefix-list BLOCK_GERMANY deny 10.49.1.0/24 le32
 ip prefix-list BLOCK_GERMANY permit 0.0.0.0/0 le 32
 !
 router ospf 1
- distribute-list prefix BLOCK_GERMANY in
+distribute-list prefix BLOCK_GERMANY in
 ```
 
 -   
