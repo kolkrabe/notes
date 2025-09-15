@@ -16,6 +16,7 @@ website:
         contents:
           - section: "Layer 3 Technologies"
             contents: 
+              - bgp.qmd
               - eigrp.qmd
               - ospf.qmd
               - redistribution.qmd
