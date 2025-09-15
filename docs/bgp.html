@@ -268,6 +268,25 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="general-info" class="level1">
 <h1>General Info</h1>
+<ul>
+<li><p>Used <strong>TCP 179</strong> <strong>to</strong> establish session.</p></li>
+<li><p>Use of TCP allows for adjacencies with non directly connected neighbour.</p></li>
+<li><p>Multi-hop session require underlying routes from RIB (dynamic or static)</p>
+<p>Must explicitly configure neighbour relationships</p>
+<ul>
+<li>TCP session established</li>
+<li>Advertises Address Prefix &amp; Length (called Network Layer Reachability Information - NLRI)</li>
+</ul></li>
+<li><p>Hold Time: <strong>180s</strong>, Keepalive: <strong>60s</strong> (1/3 ratio)</p>
+<ul>
+<li>vvvvvvAdjust under bgp process with <code>timers bgp 5 20</code> - keepalive 5 / hold 20</li>
+</ul></li>
+<li><p>Uses Address families to</p></li>
+<li><p>AFI/SAFI - Address &amp; Subsequent Address Family Identifiers</p></li>
+<li><p>Modern BGP sets DF bit (do not fragment) to prevent fragmentation.</p></li>
+<li><p>NLRI - Network Layer Reachability Information = Prefix Length + Prefix</p></li>
+<li></li>
+</ul>
 <section id="features" class="level2">
 <h2 class="anchored" data-anchor-id="features">Features</h2>
 <hr>
