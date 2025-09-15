@@ -6,6 +6,19 @@ code-block-bg: dark
 
 # General Info
 
+-   Used **TCP 179** **to** establish session.
+-   Use of TCP allows for adjacencies with non directly connected neighbour.
+-   Multi-hop session require underlying routes from RIB (dynamic or static)
+-    Must explicitly configure neighbour relationships
+    -   TCP session established
+    -   Advertises Address Prefix & Length (called Network Layer Reachability Information - NLRI)
+-   Hold Time: **180s**, Keepalive: **60s** (1/3 ratio)
+    -   Adjust under bgp process with `timers bgp 5 20`  - keepalive 5 / hold 20
+-   Uses Address families to
+-   AFI/SAFI - Address & Subsequent Address Family Identifiers
+-   Modern BGP sets DF bit (do not fragment) to prevent fragmentation.
+-   NLRI - Network Layer Reachability Information
+
 ## Features
 
 ---
