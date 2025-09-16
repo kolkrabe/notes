@@ -19,24 +19,51 @@ code-block-bg: dark
 
 -   Hold Time: **180s**, Keepalive: **60s** (1/3 ratio)
 
-    -   vvvvvvAdjust under bgp process with `timers bgp 5 20`  - keepalive 5 / hold 20
+    -   Adjust under bgp process with `timers bgp 5 20` - keepalive 5 / hold 20
 
 -   Uses Address families to
 
--   AFI/SAFI - Address & Subsequent Address Family Identifiers
+-   AFI/SAFI - Address & Subsequent Address Family Identifiers (ipv4 unicast etc).
 
 -   Modern BGP sets DF bit (do not fragment) to prevent fragmentation.
 
 -   NLRI - Network Layer Reachability Information = Prefix Length + Prefix
 
--   
+-   BGP RID - If not manually configured (which is recommended)
 
-## Features
+    -   Highest IP on Loopback int that's up
+    -   Highest IP on any other Interface thats up
 
----
+-   BGP Synchronisation - disabled on modern devices by default
+
+    -   RULE: Only advertise routes learned from iBGP peer to an eBGP peer when there is an exact match of that route learned from an IGP in the routing table.
+
+# Features
+
+## Path Selection
+
+-   Highest Weight
+-   Highest Local Preference (LOCAL_PREF)
+-   Originates from Local Router
+-   Shortest AS path
+-   Lowest Origin Code (i then e then ?)
+-   Lowest MED
+-   Prefer eBGP over iBGP
+-   Choose route through nearest IGP neighbour by lowest metric
+-   Chose the oldest route
+-   Choose path through neighbour with **lowest** RID
+-   Choose path with minimum cluster list length
+-   Choose path through neighbour with lowest IP address
+
+------------------------------------------------------------------------
 
 # BGP Configuration
 
----
+------------------------------------------------------------------------
 
 # Useful Show Commmands
+
+-   `show bgp ipv4 unicast` - shows the bgp table
+-   `show bgp ipv4 unicast neighbors 10.1.1.2 advertised-routes` - shows which routes are being advertised to neighbour 10.1.1.2
+-   `show bgp ipv4 unicast summary` - shows exchange of routes between nodes
+-   
