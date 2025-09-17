@@ -239,6 +239,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
+  <li><a href="#route-reflector" id="toc-route-reflector" class="nav-link" data-scroll-target="#route-reflector">Route Reflector</a></li>
   </ul></li>
   <li><a href="#bgp-configuration" id="toc-bgp-configuration" class="nav-link" data-scroll-target="#bgp-configuration">BGP Configuration</a></li>
   <li><a href="#useful-show-commmands" id="toc-useful-show-commmands" class="nav-link" data-scroll-target="#useful-show-commmands">Useful Show Commmands</a></li>
@@ -270,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="general-info" class="level1">
 <h1>General Info</h1>
 <ul>
-<li><p>Used <strong>TCP 179</strong> <strong>to</strong> establish session.</p></li>
+<li><p>Used <strong>TCP 179</strong> <strong>to</strong> establish session. TTL=1</p></li>
 <li><p>Use of TCP allows for adjacencies with non directly connected neighbour.</p></li>
 <li><p>Multi-hop session require underlying routes from RIB (dynamic or static)</p>
 <p>Must explicitly configure neighbour relationships</p>
@@ -295,6 +296,19 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>RULE: Only advertise routes learned from iBGP peer to an eBGP peer when there is an exact match of that route learned from an IGP in the routing table.</li>
 </ul></li>
+<li><p><strong>iBGP</strong></p>
+<ul>
+<li>TTL = 255</li>
+</ul></li>
+<li><p><strong>eBGP</strong></p>
+<ul>
+<li>TTL = 1, this can be increased using <code>neighbor [ip] ebgp-multihop [1-255]</code></li>
+<li>Can also use <code>neighbor [ip] ttl-security hops [hop-count]</code></li>
+<li>Difference = <code>eBGP-multihop</code> = sets <em>maximum range</em> allowed, <code>TTL-security</code> sets <em>exact range</em></li>
+</ul></li>
+<li><p>If peering with different update source but not through additional hops, can use <code>neighbor &lt;ip&gt; disable-connected-check</code></p></li>
+<li><p>Does change next-hop by default</p></li>
+<li><p>It’s recommended to update source to a loopback for resiliency <code>neighbor [ip] update-source [loopback]</code></p></li>
 </ul>
 </section>
 <section id="features" class="level1">
@@ -314,6 +328,13 @@ ul.task-list li input[type="checkbox"] {
 <li>Choose path through neighbour with <strong>lowest</strong> RID</li>
 <li>Choose path with minimum cluster list length</li>
 <li>Choose path through neighbour with lowest IP address</li>
+</ul>
+</section>
+<section id="route-reflector" class="level2">
+<h2 class="anchored" data-anchor-id="route-reflector">Route Reflector</h2>
+<ul>
+<li>Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN</li>
+<li>Configured using <code>neighbour [ip] route-reflector-client</code> -</li>
 </ul>
 <hr>
 </section>

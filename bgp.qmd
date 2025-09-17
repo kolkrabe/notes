@@ -6,7 +6,7 @@ code-block-bg: dark
 
 # General Info
 
--   Used **TCP 179** **to** establish session.
+-   Used **TCP 179** **to** establish session. TTL=1
 
 -   Use of TCP allows for adjacencies with non directly connected neighbour.
 
@@ -38,6 +38,22 @@ code-block-bg: dark
 
     -   RULE: Only advertise routes learned from iBGP peer to an eBGP peer when there is an exact match of that route learned from an IGP in the routing table.
 
+-   **iBGP**
+
+    -   TTL = 255
+
+-   **eBGP**
+
+    -   TTL = 1, this can be increased using `neighbor [ip] ebgp-multihop [1-255]`
+    -   Can also use `neighbor [ip] ttl-security hops [hop-count]`
+    -   Difference = `eBGP-multihop` = sets *maximum range* allowed, `TTL-security` sets *exact range*
+
+-   If peering with different update source but not through additional hops, can use `neighbor <ip> disable-connected-check`
+
+-   Does change next-hop by default
+
+-   It's recommended to update source to a loopback for resiliency `neighbor [ip] update-source [loopback]`
+
 # Features
 
 ## Path Selection
@@ -54,6 +70,11 @@ code-block-bg: dark
 -   Choose path through neighbour with **lowest** RID
 -   Choose path with minimum cluster list length
 -   Choose path through neighbour with lowest IP address
+
+## Route Reflector
+
+-   Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN
+-   Configured using `neighbour [ip] route-reflector-client` -
 
 ------------------------------------------------------------------------
 
