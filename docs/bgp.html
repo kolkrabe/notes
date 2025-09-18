@@ -240,6 +240,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
   <li><a href="#route-reflector" id="toc-route-reflector" class="nav-link" data-scroll-target="#route-reflector">Route Reflector</a></li>
+  <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
   </ul></li>
   <li><a href="#bgp-configuration" id="toc-bgp-configuration" class="nav-link" data-scroll-target="#bgp-configuration">BGP Configuration</a></li>
   <li><a href="#useful-show-commmands" id="toc-useful-show-commmands" class="nav-link" data-scroll-target="#useful-show-commmands">Useful Show Commmands</a></li>
@@ -272,8 +273,9 @@ ul.task-list li input[type="checkbox"] {
 <h1>General Info</h1>
 <ul>
 <li>Used <strong>TCP 179</strong> <strong>to</strong> establish session. TTL=1</li>
+<li>Admin Distance: iBGP AD = <strong>200</strong>, eBGP AD = <strong>20</strong></li>
 <li>Use of TCP allows for adjacencies with non directly connected neighbour.</li>
-<li>Multi-hop session require underlying routes from RIB (dynamic or static) Must explicitly configure neighbour relationships
+<li>Multi-hop session require underlying routes………………. from RIB (dynamic or static) Must explicitly configure neighbour relationships
 <ul>
 <li>TCP session established</li>
 <li>Advertises Address Prefix &amp; Length (called Network Layer Reachability Information - NLRI)</li>
@@ -298,6 +300,10 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>iBGP</strong>
 <ul>
 <li>TTL = 255</li>
+<li>Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
+<ul>
+<li>A route learned from 1 iBGP won’t be forwarded to another iBGP peer by default.</li>
+</ul></li>
 </ul></li>
 <li><strong>eBGP</strong>
 <ul>
@@ -334,6 +340,16 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN</li>
 <li>Configured using <code>neighbour [ip] route-reflector-client</code> -</li>
+</ul>
+</section>
+<section id="summarisation" class="level2">
+<h2 class="anchored" data-anchor-id="summarisation">Summarisation</h2>
+<ul>
+<li>Configured on AS Edge Routers.</li>
+<li>configured with <code>aggregate-address 10.0.0.0 255.0.0.0 [summary-only]</code>
+<ul>
+<li>use of <code>summary-only</code> advertises only summary route, not the aggregated networks</li>
+</ul></li>
 </ul>
 <hr>
 </section>
