@@ -338,8 +338,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="route-reflector" class="level2">
 <h2 class="anchored" data-anchor-id="route-reflector">Route Reflector</h2>
 <ul>
-<li>Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN</li>
-<li>Configured using <code>neighbour [ip] route-reflector-client</code> -</li>
+<li>Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN - negates need for full mesh</li>
+<li>Configured using <code>neighbour [ip] route-reflector-client</code> on the route reflector</li>
+<li>3 rules:
+<ul>
+<li>Routes learned from eBGP peers can be sent to other eBGP peers, clients, and non-clients.</li>
+<li>Routes learned from client peers can be sent to eBGP peers, other client peers, and non-clients.</li>
+<li>Routes learned from non-client peers can be sent to eBGP peers, and client peers,&nbsp;<em>but not other non-clients</em>.</li>
+</ul></li>
+<li><code>next-hop-self</code> only affects eBGP routes when used with route reflectors.</li>
 </ul>
 </section>
 <section id="summarisation" class="level2">
@@ -350,6 +357,9 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>use of <code>summary-only</code> advertises only summary route, not the aggregated networks</li>
 </ul></li>
+<li>These routes are assigned the <strong><em>ATOMIC_AGGREGATE</em></strong> attribute to indicate they are aggregates</li>
+<li>The summarising router adds an entry in their RIB with destination Null0 to avoid loops.</li>
+<li></li>
 </ul>
 <hr>
 </section>

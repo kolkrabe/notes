@@ -249,7 +249,7 @@
     "href": "bgp.html#route-reflector",
     "title": "BGP",
     "section": "Route Reflector",
-    "text": "Route Reflector\n\nAllows route learned from iBGP neighbour can be reflected to neighbours in same ASN\nConfigured using neighbour [ip] route-reflector-client -",
+    "text": "Route Reflector\n\nAllows route learned from iBGP neighbour can be reflected to neighbours in same ASN - negates need for full mesh\nConfigured using neighbour [ip] route-reflector-client on the route reflector\n3 rules:\n\nRoutes learned from eBGP peers can be sent to other eBGP peers, clients, and non-clients.\nRoutes learned from client peers can be sent to eBGP peers, other client peers, and non-clients.\nRoutes learned from non-client peers can be sent to eBGP peers, and client peers, but not other non-clients.\n\nnext-hop-self only affects eBGP routes when used with route reflectors.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -261,7 +261,7 @@
     "href": "bgp.html#summarisation",
     "title": "BGP",
     "section": "Summarisation",
-    "text": "Summarisation\n\nConfigured on AS Edge Routers.\nconfigured with aggregate-address 10.0.0.0 255.0.0.0 [summary-only]\n\nuse of summary-only advertises only summary route, not the aggregated networks",
+    "text": "Summarisation\n\nConfigured on AS Edge Routers.\nconfigured with aggregate-address 10.0.0.0 255.0.0.0 [summary-only]\n\nuse of summary-only advertises only summary route, not the aggregated networks\n\nThese routes are assigned the ATOMIC_AGGREGATE attribute to indicate they are aggregates\nThe summarising router adds an entry in their RIB with destination Null0 to avoid loops.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

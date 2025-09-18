@@ -54,14 +54,22 @@ code-block-bg: dark
 
 ## Route Reflector
 
--   Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN
--   Configured using `neighbour [ip] route-reflector-client` -
+-   Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN - negates need for full mesh
+-   Configured using `neighbour [ip] route-reflector-client` on the route reflector
+-   3 rules:
+    -   Routes learned from eBGP peers can be sent to other eBGP peers, clients, and non-clients.
+    -   Routes learned from client peers can be sent to eBGP peers, other client peers, and non-clients.
+    -   Routes learned from non-client peers can be sent to eBGP peers, and client peers, *but not other non-clients*.
+-   `next-hop-self` only affects eBGP routes when used with route reflectors.
 
 ## Summarisation
 
 -   Configured on AS Edge Routers.
 -   configured with `aggregate-address 10.0.0.0 255.0.0.0 [summary-only]`
     -   use of `summary-only` advertises only summary route, not the aggregated networks
+-   These routes are assigned the ***ATOMIC_AGGREGATE*** attribute to indicate they are aggregates
+-   The summarising router adds an entry in their RIB with destination Null0 to avoid loops.
+-   
 
 ------------------------------------------------------------------------
 
