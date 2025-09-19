@@ -6,10 +6,11 @@ code-block-bg: dark
 
 # General Info
 
--   Used **TCP 179** **to** establish session. TTL=1
+-   Used **TCP 179** **to** establish session.
 -   Admin Distance: iBGP AD = **200**, eBGP AD = **20**
 -   Use of TCP allows for adjacencies with non directly connected neighbour.
--   Multi-hop session require underlying routes................... from RIB (dynamic or static) Must explicitly configure neighbour relationships
+-   Only **Best route** + **next hop** are advertised, not all routes.
+-   Multi-hop session require underlying routes from RIB (dynamic or static) Must explicitly configure neighbour relationships
     -   TCP session established
     -   Advertises Address Prefix & Length (called Network Layer Reachability Information - NLRI)
 -   Hold Time: **180s**, Keepalive: **60s** (1/3 ratio)
@@ -17,7 +18,6 @@ code-block-bg: dark
 -   Uses Address families to
 -   AFI/SAFI - Address & Subsequent Address Family Identifiers (ipv4 unicast etc).
 -   Modern BGP sets DF bit (do not fragment) to prevent fragmentation.
--   NLRI - Network Layer Reachability Information = Prefix Length + Prefix
 -   BGP RID - If not manually configured (which is recommended)
     -   Highest IP on Loopback int that's up
     -   Highest IP on any other Interface thats up
@@ -27,6 +27,7 @@ code-block-bg: dark
     -   TTL = 255
     -   Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
         -   A route learned from 1 iBGP won't be forwarded to another iBGP peer by default.
+        -   This can be overcome with route-reflectors
 -   **eBGP**
     -   TTL = 1, this can be increased using `neighbor [ip] ebgp-multihop [1-255]`
     -   Can also use `neighbor [ip] ttl-security hops [hop-count]`
@@ -37,20 +38,22 @@ code-block-bg: dark
 
 # Features
 
-## Path Selection
+## Path Selection 
 
--   Highest Weight
--   Highest Local Preference (LOCAL_PREF)
--   Originates from Local Router
--   Shortest AS path
--   Lowest Origin Code (i then e then ?)
--   Lowest MED
--   Prefer eBGP over iBGP
--   Choose route through nearest IGP neighbour by lowest metric
--   Chose the oldest route
--   Choose path through neighbour with **lowest** RID
--   Choose path with minimum cluster list length
--   Choose path through neighbour with lowest IP address
+**W**e **L**ove **O**ranges **AS** **O**ranges **M**ean **P**ure **R**efreshment
+
+1.  Weight (Highest)
+2.  Local Preference (Highest)
+3.  Originated locally
+4.  AS_PATH (Shortest)
+5.  Origin code (IGP \> EGP \> ?)
+6.  MED (Lowest)
+7.  Path (eBGP \> iBGP)
+8.  IGP metric (Lowest)
+9.  Route age (Oldest, only compared when routes from different eBGP peers)
+10. RID (Lowest)
+11. Choose path with minimum cluster list length
+12. Choose path through neighbour with lowest IP address
 
 ## Route Reflector
 
