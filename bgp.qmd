@@ -6,7 +6,7 @@ code-block-bg: dark
 
 # General Info
 
--   Used **TCP 179** **to** establish session.
+-   Used **TCP 179** **to** establish session. Unicast
 -   Admin Distance: iBGP AD = **200**, eBGP AD = **20**
 -   Use of TCP allows for adjacencies with non directly connected neighbour.
 -   Only **Best route** + **next hop** are advertised, not all routes.
@@ -28,6 +28,7 @@ code-block-bg: dark
     -   Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
         -   A route learned from 1 iBGP won't be forwarded to another iBGP peer by default.
         -   This can be overcome with route-reflectors
+    -   NRLI's from iBGP peer can only be forwarded to eBGP peer.
 -   **eBGP**
     -   TTL = 1, this can be increased using `neighbor [ip] ebgp-multihop [1-255]`
     -   Can also use `neighbor [ip] ttl-security hops [hop-count]`
@@ -35,10 +36,11 @@ code-block-bg: dark
 -   If peering with different update source but not through additional hops, can use `neighbor <ip> disable-connected-check`
 -   Does change next-hop by default
 -   It's recommended to update source to a loopback for resiliency `neighbor [ip] update-source [loopback]`
+-   NRLI from eBGP can be shared onto all other peers.
 
 # Features
 
-## Path Selection 
+## Path Selection
 
 **W**e **L**ove **O**ranges **AS** **O**ranges **M**ean **P**ure **R**efreshment
 
@@ -68,11 +70,12 @@ code-block-bg: dark
 ## Summarisation
 
 -   Configured on AS Edge Routers.
--   configured with `aggregate-address 10.0.0.0 255.0.0.0 [summary-only]`
+-   configured with `aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]`
     -   use of `summary-only` advertises only summary route, not the aggregated networks
+    -   use of `[as-set]` carries over AS_Path attributes from component routes.
 -   These routes are assigned the ***ATOMIC_AGGREGATE*** attribute to indicate they are aggregates
 -   The summarising router adds an entry in their RIB with destination Null0 to avoid loops.
--   
+-   AS_Path, MED +communities aren't included in new prefix info
 
 ------------------------------------------------------------------------
 
