@@ -272,10 +272,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="general-info" class="level1">
 <h1>General Info</h1>
 <ul>
-<li>Used <strong>TCP 179</strong> <strong>to</strong> establish session. TTL=1</li>
+<li>Used <strong>TCP 179</strong> <strong>to</strong> establish session. Unicast</li>
 <li>Admin Distance: iBGP AD = <strong>200</strong>, eBGP AD = <strong>20</strong></li>
 <li>Use of TCP allows for adjacencies with non directly connected neighbour.</li>
-<li>Multi-hop session require underlying routes………………. from RIB (dynamic or static) Must explicitly configure neighbour relationships
+<li>Only <strong>Best route</strong> + <strong>next hop</strong> are advertised, not all routes.</li>
+<li>Multi-hop session require underlying routes from RIB (dynamic or static) Must explicitly configure neighbour relationships
 <ul>
 <li>TCP session established</li>
 <li>Advertises Address Prefix &amp; Length (called Network Layer Reachability Information - NLRI)</li>
@@ -287,7 +288,6 @@ ul.task-list li input[type="checkbox"] {
 <li>Uses Address families to</li>
 <li>AFI/SAFI - Address &amp; Subsequent Address Family Identifiers (ipv4 unicast etc).</li>
 <li>Modern BGP sets DF bit (do not fragment) to prevent fragmentation.</li>
-<li>NLRI - Network Layer Reachability Information = Prefix Length + Prefix</li>
 <li>BGP RID - If not manually configured (which is recommended)
 <ul>
 <li>Highest IP on Loopback int that’s up</li>
@@ -303,7 +303,9 @@ ul.task-list li input[type="checkbox"] {
 <li>Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
 <ul>
 <li>A route learned from 1 iBGP won’t be forwarded to another iBGP peer by default.</li>
+<li>This can be overcome with route-reflectors</li>
 </ul></li>
+<li>NRLI’s from iBGP peer can only be forwarded to eBGP peer.</li>
 </ul></li>
 <li><strong>eBGP</strong>
 <ul>
@@ -314,26 +316,28 @@ ul.task-list li input[type="checkbox"] {
 <li>If peering with different update source but not through additional hops, can use <code>neighbor &lt;ip&gt; disable-connected-check</code></li>
 <li>Does change next-hop by default</li>
 <li>It’s recommended to update source to a loopback for resiliency <code>neighbor [ip] update-source [loopback]</code></li>
+<li>NRLI from eBGP can be shared onto all other peers.</li>
 </ul>
 </section>
 <section id="features" class="level1">
 <h1>Features</h1>
 <section id="path-selection" class="level2">
 <h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
-<ul>
-<li>Highest Weight</li>
-<li>Highest Local Preference (LOCAL_PREF)</li>
-<li>Originates from Local Router</li>
-<li>Shortest AS path</li>
-<li>Lowest Origin Code (i then e then ?)</li>
-<li>Lowest MED</li>
-<li>Prefer eBGP over iBGP</li>
-<li>Choose route through nearest IGP neighbour by lowest metric</li>
-<li>Chose the oldest route</li>
-<li>Choose path through neighbour with <strong>lowest</strong> RID</li>
+<p><strong>W</strong>e <strong>L</strong>ove <strong>O</strong>ranges <strong>AS</strong> <strong>O</strong>ranges <strong>M</strong>ean <strong>P</strong>ure <strong>R</strong>efreshment</p>
+<ol type="1">
+<li>Weight (Highest)</li>
+<li>Local Preference (Highest)</li>
+<li>Originated locally</li>
+<li>AS_PATH (Shortest)</li>
+<li>Origin code (IGP &gt; EGP &gt; ?)</li>
+<li>MED (Lowest)</li>
+<li>Path (eBGP &gt; iBGP)</li>
+<li>IGP metric (Lowest)</li>
+<li>Route age (Oldest, only compared when routes from different eBGP peers)</li>
+<li>RID (Lowest)</li>
 <li>Choose path with minimum cluster list length</li>
 <li>Choose path through neighbour with lowest IP address</li>
-</ul>
+</ol>
 </section>
 <section id="route-reflector" class="level2">
 <h2 class="anchored" data-anchor-id="route-reflector">Route Reflector</h2>
@@ -353,13 +357,15 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="summarisation">Summarisation</h2>
 <ul>
 <li>Configured on AS Edge Routers.</li>
-<li>configured with <code>aggregate-address 10.0.0.0 255.0.0.0 [summary-only]</code>
+<li>configured with <code>aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]</code>
 <ul>
 <li>use of <code>summary-only</code> advertises only summary route, not the aggregated networks</li>
+<li>use of <code>[as-set]</code> carries over AS_Path attributes from component routes.</li>
 </ul></li>
-<li>These routes are assigned the <strong><em>ATOMIC_AGGREGATE</em></strong> attribute to indicate they are aggregates</li>
+<li>These routes are assigned the <strong><em>ATOMIC_AGGREGATE</em></strong> attribute to indicate they are aggregates &amp; that loss of path info has occurred.</li>
 <li>The summarising router adds an entry in their RIB with destination Null0 to avoid loops.</li>
-<li></li>
+<li>AS_Path, MED +communities aren’t included in new prefix info</li>
+<li>Can include AS_Path info using <code>as-set</code></li>
 </ul>
 <hr>
 </section>

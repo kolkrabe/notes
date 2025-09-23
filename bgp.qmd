@@ -73,9 +73,10 @@ code-block-bg: dark
 -   configured with `aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]`
     -   use of `summary-only` advertises only summary route, not the aggregated networks
     -   use of `[as-set]` carries over AS_Path attributes from component routes.
--   These routes are assigned the ***ATOMIC_AGGREGATE*** attribute to indicate they are aggregates
+-   These routes are assigned the ***ATOMIC_AGGREGATE*** attribute to indicate they are aggregates & that loss of path info has occurred.
 -   The summarising router adds an entry in their RIB with destination Null0 to avoid loops.
 -   AS_Path, MED +communities aren't included in new prefix info
+-   Can include AS_Path info using `as-set`
 
 ------------------------------------------------------------------------
 
