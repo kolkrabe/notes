@@ -269,6 +269,18 @@
     ]
   },
   {
+    "objectID": "bgp.html#bgp-regexp",
+    "href": "bgp.html#bgp-regexp",
+    "title": "BGP",
+    "section": "BGP regexp",
+    "text": "BGP regexp\n\nCan be used to search for specifc AS-PATHs in table - for example: show ip bgp regexp ^$\nAbove will show prefixes originated locally with the AS. Cheat sheet here.\nCan be used to filter with ACLs with ip as-path: ip as-path access-list 1 permit _54$\nThen use match as-path under a route-map to apply modifications",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "BGP"
+    ]
+  },
+  {
     "objectID": "dhcp.html",
     "href": "dhcp.html",
     "title": "DHCP",

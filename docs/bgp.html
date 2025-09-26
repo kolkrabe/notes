@@ -241,6 +241,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
   <li><a href="#route-reflector" id="toc-route-reflector" class="nav-link" data-scroll-target="#route-reflector">Route Reflector</a></li>
   <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
+  <li><a href="#bgp-regexp" id="toc-bgp-regexp" class="nav-link" data-scroll-target="#bgp-regexp"><strong>BGP regexp</strong></a></li>
   </ul></li>
   <li><a href="#bgp-configuration" id="toc-bgp-configuration" class="nav-link" data-scroll-target="#bgp-configuration">BGP Configuration</a></li>
   <li><a href="#useful-show-commmands" id="toc-useful-show-commmands" class="nav-link" data-scroll-target="#useful-show-commmands">Useful Show Commmands</a></li>
@@ -366,6 +367,15 @@ ul.task-list li input[type="checkbox"] {
 <li>The summarising router adds an entry in their RIB with destination Null0 to avoid loops.</li>
 <li>AS_Path, MED +communities aren’t included in new prefix info</li>
 <li>Can include AS_Path info using <code>as-set</code></li>
+</ul>
+</section>
+<section id="bgp-regexp" class="level2">
+<h2 class="anchored" data-anchor-id="bgp-regexp"><strong>BGP regexp</strong></h2>
+<ul>
+<li>Can be used to search for specifc AS-PATHs in table - for example: <code>show ip bgp regexp ^$</code></li>
+<li>Above will show prefixes originated locally with the AS. Cheat sheet <a href="http://gponsolution.com/bgp-regular-expressions-cheat-sheet.html">here.</a></li>
+<li>Can be used to filter with ACLs with ip as-path: <code>ip as-path access-list 1 permit _54$</code></li>
+<li>Then use <code>match as-path</code> under a route-map to apply modifications</li>
 </ul>
 <hr>
 </section>
