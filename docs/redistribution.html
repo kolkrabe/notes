@@ -265,6 +265,19 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="general-info" class="level1">
 <h1>General Info</h1>
+<ul>
+<li>Configured under Destination Protocol, specifying source protocol.</li>
+<li>Redistribution is <strong>NOT</strong> transitive on a single router.
+<ul>
+<li>R1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.</li>
+</ul></li>
+<li>Sequential Protocol Redistribution is possible
+<ul>
+<li>Redistribution over multiple protocols using multiple routers.</li>
+</ul></li>
+<li>Routes must exist in RIB</li>
+<li></li>
+</ul>
 <hr>
 </section>
 <section id="configuration" class="level1">

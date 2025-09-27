@@ -14,7 +14,7 @@
     "href": "redistribution.html",
     "title": "Redistribution",
     "section": "",
-    "text": "General Info\n\n\n\nConfiguration\n\n\n\nUseful Show Commands",
+    "text": "General Info\n\nConfigured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\n\n\n\n\n\nConfiguration\n\n\n\nUseful Show Commands",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -273,7 +273,7 @@
     "href": "bgp.html#bgp-regexp",
     "title": "BGP",
     "section": "BGP regexp",
-    "text": "BGP regexp\n\nCan be used to search for specifc AS-PATHs in table - for example: show ip bgp regexp ^$\nAbove will show prefixes originated locally with the AS. Cheat sheet here.\nOriginated in AS 100: _100$, Learned from AS 100: ^100_\nCan be used to filter with ACLs with ip as-path: ip as-path access-list 1 permit _54$\nThen use match as-path under a route-map to apply modifications",
+    "text": "BGP regexp\n\nCan be used to search for specifc AS-PATHs in table - for example: show ip bgp regexp ^$\nAbove will show prefixes originated locally with the AS. Cheat sheet here.\nOriginated in AS 100: _100$, Learned from AS 100: ^100_\nCan be used to filter with ACLs with IP as-path: ip as-path access-list 1 permit _54$\nThen use match as-path under a route-map to apply modifications\nTIP: Summarise Address without using aggregate-adresss\n\nCreate static route for the summarised address with destination Null0\nRedistribute Static under the BGP precess.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

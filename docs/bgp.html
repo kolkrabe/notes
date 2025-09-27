@@ -375,8 +375,13 @@ ul.task-list li input[type="checkbox"] {
 <li>Can be used to search for specifc AS-PATHs in table - for example: <code>show ip bgp regexp ^$</code></li>
 <li>Above will show prefixes originated locally with the AS. Cheat sheet <a href="http://gponsolution.com/bgp-regular-expressions-cheat-sheet.html">here.</a></li>
 <li>Originated in AS 100: <code>_100$</code>, Learned from AS 100: <code>^100_</code></li>
-<li>Can be used to filter with ACLs with ip as-path: <code>ip as-path access-list 1 permit _54$</code></li>
+<li>Can be used to filter with ACLs with IP as-path: <code>ip as-path access-list 1 permit _54$</code></li>
 <li>Then use <code>match as-path</code> under a route-map to apply modifications</li>
+<li>TIP: Summarise Address without using aggregate-adresss
+<ul>
+<li><p>Create static route for the summarised address with destination Null0</p></li>
+<li><p>Redistribute Static under the BGP precess.</p></li>
+</ul></li>
 </ul>
 <hr>
 </section>

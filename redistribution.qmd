@@ -6,6 +6,14 @@ code-block-bg: dark
 
 # General Info
 
+-   Configured under Destination Protocol, specifying source protocol.
+-   Redistribution is **NOT** transitive on a single router.
+    -   R1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won't receive P1's routes.
+-   Sequential Protocol Redistribution is possible
+    -   Redistribution over multiple protocols using multiple routers.
+-   Routes must exist in RIB
+-   
+
 ------------------------------------------------------------------------
 
 # Configuration
