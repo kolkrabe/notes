@@ -270,15 +270,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#netflow" id="toc-netflow" class="nav-link active" data-scroll-target="#netflow">Netflow</a></li>
-  <li><a href="#flexible-netflow" id="toc-flexible-netflow" class="nav-link" data-scroll-target="#flexible-netflow">Flexible Netflow</a>
-  <ul class="collapse">
+  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
+  <li><a href="#flexible-netflow" id="toc-flexible-netflow" class="nav-link" data-scroll-target="#flexible-netflow">Flexible Netflow</a></li>
   <li><a href="#useful-show-other-commands" id="toc-useful-show-other-commands" class="nav-link" data-scroll-target="#useful-show-other-commands">Useful Show + Other Commands</a></li>
   <li><a href="#flexible-netflow-1" id="toc-flexible-netflow-1" class="nav-link" data-scroll-target="#flexible-netflow-1">Flexible Netflow</a></li>
   <li><a href="#standard-netflow-config" id="toc-standard-netflow-config" class="nav-link" data-scroll-target="#standard-netflow-config">Standard Netflow Config</a></li>
   <li><a href="#flexible-netflow-config" id="toc-flexible-netflow-config" class="nav-link" data-scroll-target="#flexible-netflow-config">Flexible Netflow Config</a></li>
   <li><a href="#bfd---bidirectionforwarding" id="toc-bfd---bidirectionforwarding" class="nav-link" data-scroll-target="#bfd---bidirectionforwarding">BFD - BiDirectionForwarding</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -304,8 +302,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="netflow" class="level1">
-<h1>Netflow</h1>
+<section id="general" class="level3">
+<h3 class="anchored" data-anchor-id="general">General</h3>
 <ul>
 <li>Netflow is a tool to observce traffic flows in the network</li>
 <li>A Flow is a series of packets with shared head information such as
@@ -323,8 +321,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Flows removed after max age expires (Default <strong>30 minutes)</strong></li>
 </ul>
 </section>
-<section id="flexible-netflow" class="level1">
-<h1>Flexible Netflow</h1>
+<section id="flexible-netflow" class="level3">
+<h3 class="anchored" data-anchor-id="flexible-netflow">Flexible Netflow</h3>
 <ul>
 <li>Can determine traffic in the same was as Netflow + more. things simultaneously</li>
 <li>Requires <strong>CEF</strong> (Cisco Express Forwarding) to be enabled</li>
@@ -353,21 +351,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <hr>
-<section id="useful-show-other-commands" class="level2">
-<h2 class="anchored" data-anchor-id="useful-show-other-commands">Useful Show + Other Commands</h2>
+</section>
+<section id="useful-show-other-commands" class="level3">
+<h3 class="anchored" data-anchor-id="useful-show-other-commands">Useful Show + Other Commands</h3>
 <ul>
-<li><p><code>show ip cache flow</code> - shows contents of local router flow cache</p></li>
-<li><p><code>show ip flow interface</code> - used to verify netflow enabled interfaces and direction of capture</p></li>
-<li><p><code>show ip flow export</code> - used to verify export source and destination details</p></li>
-<li><p><code>ip flow-cache entries [number]</code> - change the size of the flow cache (if it’s filling up often</p></li>
-<li><p><code>ip flow-cache timeout active [minutes]</code> - used to modify the max age of a flow.</p></li>
-<li><p><code>ip flow-cache timeout inactive [seconds]</code> - used to modify idle timer (default <strong>15 seconds)</strong></p></li>
-<li><p><code>clear ip flow stats</code> - clears netflow statistics from device.</p></li>
+<li><code>show ip cache flow</code> - shows contents of local router flow cache</li>
+<li><code>show ip flow interface</code> - used to verify netflow enabled interfaces and direction of capture</li>
+<li><code>show ip flow export</code> - used to verify export source and destination details</li>
+<li><code>ip flow-cache entries [number]</code> - change the size of the flow cache (if it’s filling up often</li>
+<li><code>ip flow-cache timeout active [minutes]</code> - used to modify the max age of a flow.</li>
+<li><code>ip flow-cache timeout inactive [seconds]</code> - used to modify idle timer (default <strong>15 seconds)</strong></li>
+<li><code>clear ip flow stats</code> - clears netflow statistics from device.</li>
 </ul>
 <hr>
 </section>
-<section id="flexible-netflow-1" class="level2">
-<h2 class="anchored" data-anchor-id="flexible-netflow-1">Flexible Netflow</h2>
+<section id="flexible-netflow-1" class="level3">
+<h3 class="anchored" data-anchor-id="flexible-netflow-1">Flexible Netflow</h3>
 <ul>
 <li><code>show flow record</code> - used to verify match and collect conditions of the flow record</li>
 <li><code>show running-config flow record</code> - also can show this info</li>
@@ -375,8 +374,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="standard-netflow-config" class="level2">
-<h2 class="anchored" data-anchor-id="standard-netflow-config">Standard Netflow Config</h2>
+<section id="standard-netflow-config" class="level3">
+<h3 class="anchored" data-anchor-id="standard-netflow-config">Standard Netflow Config</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>int fa 0/0</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> ip flow [ingress|egress]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> exit</span>
@@ -384,8 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ip flow-export version [5|9]</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ip flow-export destination &lt;collector-ip&gt; 5000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="flexible-netflow-config" class="level2">
-<h2 class="anchored" data-anchor-id="flexible-netflow-config">Flexible Netflow Config</h2>
+<section id="flexible-netflow-config" class="level3">
+<h3 class="anchored" data-anchor-id="flexible-netflow-config">Flexible Netflow Config</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flow exporter EXPORTER</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> destination &lt;Collector-IP&gt;</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> export-protocol netflow-v9</span>
@@ -413,8 +412,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> ip flow monitor IPv4_NETFLOW input</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="bfd---bidirectionforwarding" class="level2">
-<h2 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h2>
+<section id="bfd---bidirectionforwarding" class="level3">
+<h3 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h3>
 <ul>
 <li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p></li>
 <li><p>Connection types in question</p>
@@ -424,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>DMVPN without LOS Propagation</li>
 </ul></li>
 <li><p>Works with all Media Types, routing protocols, topologies and encapsulations.</p></li>
-<li><p>Requrements</p>
+<li><p>Requirements</p>
 <ul>
 <li><p><strong>CEP + IP Routing</strong> must be enabled</p></li>
 <li><p>IP Routing protocol supported by BFD must be configured before BFD is configured</p></li>
@@ -432,7 +431,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

@@ -4,7 +4,7 @@ editor: visual
 code-block-bg: dark
 ---
 
-# Netflow
+### General
 
 -   Netflow is a tool to observce traffic flows in the network
 -   A Flow is a series of packets with shared head information such as
@@ -19,7 +19,7 @@ code-block-bg: dark
 -   Once flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.
 -   Flows removed after max age expires (Default **30 minutes)**
 
-# Flexible Netflow
+### Flexible Netflow
 
 -   Can determine traffic in the same was as Netflow + more. things simultaneously
 -   Requires **CEF** (Cisco Express Forwarding) to be enabled
@@ -39,25 +39,19 @@ code-block-bg: dark
 
 ------------------------------------------------------------------------
 
-## Useful Show + Other Commands
+### Useful Show + Other Commands
 
 -   `show ip cache flow` - shows contents of local router flow cache
-
 -   `show ip flow interface` - used to verify netflow enabled interfaces and direction of capture
-
 -   `show ip flow export` - used to verify export source and destination details
-
 -   `ip flow-cache entries [number]` - change the size of the flow cache (if it's filling up often
-
 -   `ip flow-cache timeout active [minutes]` - used to modify the max age of a flow.
-
 -   `ip flow-cache timeout inactive [seconds]` - used to modify idle timer (default **15 seconds)**
-
 -   `clear ip flow stats` - clears netflow statistics from device.
 
 ------------------------------------------------------------------------
 
-## Flexible Netflow
+### Flexible Netflow
 
 -   `show flow record` - used to verify match and collect conditions of the flow record
 -   `show running-config flow record` - also can show this info
@@ -65,7 +59,7 @@ code-block-bg: dark
 
 ------------------------------------------------------------------------
 
-## Standard Netflow Config
+### Standard Netflow Config
 
 ``` default
 int fa 0/0
@@ -76,7 +70,7 @@ ip flow-export version [5|9]
 ip flow-export destination <collector-ip> 5000
 ```
 
-## Flexible Netflow Config
+### Flexible Netflow Config
 
 ``` default
 flow exporter EXPORTER
@@ -108,7 +102,7 @@ interface fa0/0
 
 ------------------------------------------------------------------------
 
-## BFD - BiDirectionForwarding
+### BFD - BiDirectionForwarding
 
 -   BFD is a lightweight *(small fixed packets)* protocol used to determine a link failure between L3 non-directly connected routers.
 
@@ -120,7 +114,7 @@ interface fa0/0
 
 -   Works with all Media Types, routing protocols, topologies and encapsulations.
 
--   Requrements
+-   Requirements
 
     -   **CEP + IP Routing** must be enabled
 

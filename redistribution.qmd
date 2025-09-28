@@ -4,7 +4,7 @@ editor: visual
 code-block-bg: dark
 ---
 
-# General Info
+## General Info
 
 -   Configured under Destination Protocol, specifying source protocol.
 -   Redistribution is **NOT** transitive on a single router.
@@ -12,12 +12,54 @@ code-block-bg: dark
 -   Sequential Protocol Redistribution is possible
     -   Redistribution over multiple protocols using multiple routers.
 -   Routes must exist in RIB
--   
+-   Seed metric used to allow calculation of metric from Source Protocol
+    -   EIGRP/RIP = Infinity (not installed into EIGRP topology table
+    -   OSPF = 20 (1 for BGP)
+    -   BGP = Uses IGP metric
+-   `redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]`
 
 ------------------------------------------------------------------------
 
-# Configuration
+## Configuration
+
+### Route Map
+
+### EIGRP
+
+``` default
+router eigrp 100
+ default-metric 1000000 1 255 1 1500
+ network 10.23.1.0 0.0.0.255
+ redistribute ospf 1
+-------------------------------------
+
+router eigrp EIGRP-NAMED
+ addres-family ipv4
+  default-metric 1000000 1 255 1 1500
+  redistribute ospf 1
+ exit-af-topology
+ network 10.23.1.0 0.0.0.255
+-------------------------------------
+router eigrp EIGRP-NAMED
+ addres-family ipv4
+  redistribute bgp 65100 metric 1000000 1 255 1 1500
+ exit-af-topology
+ network 10.23.1.0 0.0.0.255
+```
+
+### OSPF 
+
+### BGP
+
+``` default
+router bgp 65100
+  address-family ipv4
+    redistribute connected route-map RM-LOOPBACK
+!
+route-map RM-LOOPBACK
+  match interface Loopback0
+```
 
 ------------------------------------------------------------------------
 
-# Useful Show Commands
+## Useful Show Commands

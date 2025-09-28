@@ -94,6 +94,8 @@ code-block-bg: dark
 
 # BGP Configuration
 
+`bgp redistribute-internal` - all BGP routes redistributes
+
 ------------------------------------------------------------------------
 
 # Useful Show Commmands

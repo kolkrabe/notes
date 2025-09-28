@@ -14,7 +14,43 @@
     "href": "redistribution.html",
     "title": "Redistribution",
     "section": "",
-    "text": "General Info\n\nConfigured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\n\n\n\n\n\nConfiguration\n\n\n\nUseful Show Commands",
+    "text": "Configured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\nSeed metric used to allow calculation of metric from Source Protocol\n\nEIGRP/RIP = Infinity (not installed into EIGRP topology table\nOSPF = 20 (1 for BGP)\nBGP = Uses IGP metric\n\nredistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Redistribution"
+    ]
+  },
+  {
+    "objectID": "redistribution.html#general-info",
+    "href": "redistribution.html#general-info",
+    "title": "Redistribution",
+    "section": "",
+    "text": "Configured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\nSeed metric used to allow calculation of metric from Source Protocol\n\nEIGRP/RIP = Infinity (not installed into EIGRP topology table\nOSPF = 20 (1 for BGP)\nBGP = Uses IGP metric\n\nredistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Redistribution"
+    ]
+  },
+  {
+    "objectID": "redistribution.html#configuration",
+    "href": "redistribution.html#configuration",
+    "title": "Redistribution",
+    "section": "Configuration",
+    "text": "Configuration\n\nRoute Map\n\n\nEIGRP\nrouter eigrp 100\n default-metric 1000000 1 255 1 1500\n network 10.23.1.0 0.0.0.255\n redistribute ospf 1\n-------------------------------------\n\nrouter eigrp EIGRP-NAMED\n addres-family ipv4\n  default-metric 1000000 1 255 1 1500\n  redistribute ospf 1\n exit-af-topology\n network 10.23.1.0 0.0.0.255\n-------------------------------------\nrouter eigrp EIGRP-NAMED\n addres-family ipv4\n  redistribute bgp 65100 metric 1000000 1 255 1 1500\n exit-af-topology\n network 10.23.1.0 0.0.0.255\n\n\nOSPF\n\n\nBGP\nrouter bgp 65100\n  address-family ipv4\n    redistribute connected route-map RM-LOOPBACK\n!\nroute-map RM-LOOPBACK\n  match interface Loopback0",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Redistribution"
+    ]
+  },
+  {
+    "objectID": "redistribution.html#useful-show-commands",
+    "href": "redistribution.html#useful-show-commands",
+    "title": "Redistribution",
+    "section": "Useful Show Commands",
+    "text": "Useful Show Commands",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -26,67 +62,7 @@
     "href": "netflow.html",
     "title": "netflow",
     "section": "",
-    "text": "Netflow is a tool to observce traffic flows in the network\nA Flow is a series of packets with shared head information such as\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "netflow"
-    ]
-  },
-  {
-    "objectID": "netflow.html#useful-show-other-commands",
-    "href": "netflow.html#useful-show-other-commands",
-    "title": "netflow",
-    "section": "Useful Show + Other Commands",
-    "text": "Useful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "netflow"
-    ]
-  },
-  {
-    "objectID": "netflow.html#flexible-netflow-1",
-    "href": "netflow.html#flexible-netflow-1",
-    "title": "netflow",
-    "section": "Flexible Netflow",
-    "text": "Flexible Netflow\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "netflow"
-    ]
-  },
-  {
-    "objectID": "netflow.html#standard-netflow-config",
-    "href": "netflow.html#standard-netflow-config",
-    "title": "netflow",
-    "section": "Standard Netflow Config",
-    "text": "Standard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "netflow"
-    ]
-  },
-  {
-    "objectID": "netflow.html#flexible-netflow-config",
-    "href": "netflow.html#flexible-netflow-config",
-    "title": "netflow",
-    "section": "Flexible Netflow Config",
-    "text": "Flexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "netflow"
-    ]
-  },
-  {
-    "objectID": "netflow.html#bfd---bidirectionforwarding",
-    "href": "netflow.html#bfd---bidirectionforwarding",
-    "title": "netflow",
-    "section": "BFD - BiDirectionForwarding",
-    "text": "BFD - BiDirectionForwarding\n\nBFD is a lightweight (small fixed packets) protocol used to determine a link failure between L3 non-directly connected routers.\nConnection types in question\n\nL2 Switched Network\nVPN Tunnels\nDMVPN without LOS Propagation\n\nWorks with all Media Types, routing protocols, topologies and encapsulations.\nRequrements\n\nCEP + IP Routing must be enabled\nIP Routing protocol supported by BFD must be configured before BFD is configured",
+    "text": "General\n\nNetflow is a tool to observce traffic flows in the network\nA Flow is a series of packets with shared head information such as\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)\n\n\n\nFlexible Netflow\n\nCan determine traffic in the same was as Netflow + more. things simultaneously\nRequires CEF (Cisco Express Forwarding) to be enabled\nFlexible netflow\n\nUsed to allow more customization of the traffic parameters to be captured\nConsists of records, exporters, samplers and monitors\nRecords\n\nDefine what parameters will be captured by netflow\nCan use pre-defined records or define your own\n\nExporters\n\nUsed to set up exportation of the netflow information to the flow collector\n\nSamplers\n\nUsed to limit the number of monitored packets if desired for performance reasons\n\nMonitors\n\nUsed to apply netflow records to desired interfaces\nReferences specific flow record and flow exporter\n\n\n\n\n\n\nUseful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.\n\n\n\n\nFlexible Netflow\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.\n\n\n\n\nStandard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000\n\n\nFlexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input\n\n\n\nBFD - BiDirectionForwarding\n\nBFD is a lightweight (small fixed packets) protocol used to determine a link failure between L3 non-directly connected routers.\nConnection types in question\n\nL2 Switched Network\nVPN Tunnels\nDMVPN without LOS Propagation\n\nWorks with all Media Types, routing protocols, topologies and encapsulations.\nRequirements\n\nCEP + IP Routing must be enabled\nIP Routing protocol supported by BFD must be configured before BFD is configured",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
