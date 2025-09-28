@@ -312,6 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>R1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.</li>
 </ul></li>
+<li>Redistribution between EIGRP to EIGRP or OSPF to OSPF preserves the path metrics</li>
 <li>Sequential Protocol Redistribution is possible
 <ul>
 <li>Redistribution over multiple protocols using multiple routers.</li>
@@ -324,6 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>BGP = Uses IGP metric</li>
 </ul></li>
 <li><code>redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]</code></li>
+<li>Intor OSPF = <code>subnets</code> allows classless networks to be redistributes</li>
 </ul>
 <hr>
 </section>
@@ -351,7 +353,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> addres-family ipv4</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  redistribute bgp 65100 metric 1000000 1 255 1 1500</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> exit-af-topology</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>!!! With Route Map Setting Metric !!!</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> redistribute ospf 1 route-map OSPF-2-EIGRP</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>route-map OSPF-2-EIGRP permit 10</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> set metric 1000000 1 255 1 1500</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="ospf" class="level3">
 <h3 class="anchored" data-anchor-id="ospf">OSPF</h3>
