@@ -271,12 +271,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
-  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a>
+  <li><a href="#per-protocol-info" id="toc-per-protocol-info" class="nav-link" data-scroll-target="#per-protocol-info">Per Protocol Info</a>
   <ul class="collapse">
-  <li><a href="#route-map" id="toc-route-map" class="nav-link" data-scroll-target="#route-map">Route Map</a></li>
   <li><a href="#eigrp" id="toc-eigrp" class="nav-link" data-scroll-target="#eigrp">EIGRP</a></li>
   <li><a href="#ospf" id="toc-ospf" class="nav-link" data-scroll-target="#ospf">OSPF</a></li>
   <li><a href="#bgp" id="toc-bgp" class="nav-link" data-scroll-target="#bgp">BGP</a></li>
+  </ul></li>
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a>
+  <ul class="collapse">
+  <li><a href="#route-map" id="toc-route-map" class="nav-link" data-scroll-target="#route-map">Route Map</a></li>
+  <li><a href="#eigrp-1" id="toc-eigrp-1" class="nav-link" data-scroll-target="#eigrp-1">EIGRP</a></li>
+  <li><a href="#ospf-1" id="toc-ospf-1" class="nav-link" data-scroll-target="#ospf-1">OSPF</a></li>
+  <li><a href="#bgp-1" id="toc-bgp-1" class="nav-link" data-scroll-target="#bgp-1">BGP</a></li>
   </ul></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   </ul>
@@ -325,17 +331,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>BGP = Uses IGP metric</li>
 </ul></li>
 <li><code>redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]</code></li>
-<li>Intor OSPF = <code>subnets</code> allows classless networks to be redistributes</li>
+<li>Into OSPF = <code>subnets</code> allows classless networks to be redistributes</li>
 </ul>
 <hr>
+</section>
+<section id="per-protocol-info" class="level2">
+<h2 class="anchored" data-anchor-id="per-protocol-info">Per Protocol Info</h2>
+<section id="eigrp" class="level3">
+<h3 class="anchored" data-anchor-id="eigrp">EIGRP</h3>
+<ul>
+<li>Redistribution configurable anywhere in topology</li>
+<li>Redistributed routes marked as External (AD 170)</li>
+<li>Default Metric = Infinity so not installed, <strong>MUST</strong> configure metric as follows:
+<ul>
+<li>Set under router ospf config</li>
+<li>under address-family config</li>
+<li>within redistribute config line</li>
+<li>with Route Map (<strong>PREFERRED</strong> if multiple are configured)</li>
+</ul></li>
+</ul>
+</section>
+<section id="ospf" class="level3">
+<h3 class="anchored" data-anchor-id="ospf">OSPF</h3>
+<ul>
+<li>Redistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router</li>
+<li>External routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR</li>
+<li>By default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm</li>
+<li>Must use the <code>subnets</code> flag or only classful routes will be redistributed</li>
+</ul>
+</section>
+<section id="bgp" class="level3">
+<h3 class="anchored" data-anchor-id="bgp">BGP</h3>
+<ul>
+<li>No seed metric required</li>
+<li>Don’t redistribute eBGP into IGP as they can’t handle the volume of routes</li>
+<li>Use <code>bgp redistribute-internal</code> to force BGP to redistribute iBGP routers into another IGP</li>
+<li>Origin set to incomplete, Weight to 32768, MED to path metric of source protocol</li>
+<li>Redistribution from OSPF to BGP doesn’t include OSPF External routes by default
+<ul>
+<li>must user <code>match external [1|2]</code> to redistribute OSPF externals</li>
+</ul></li>
+</ul>
+<hr>
+</section>
 </section>
 <section id="configuration" class="level2">
 <h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
 <section id="route-map" class="level3">
 <h3 class="anchored" data-anchor-id="route-map">Route Map</h3>
 </section>
-<section id="eigrp" class="level3">
-<h3 class="anchored" data-anchor-id="eigrp">EIGRP</h3>
+<section id="eigrp-1" class="level3">
+<h3 class="anchored" data-anchor-id="eigrp-1">EIGRP</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> default-metric 1000000 1 255 1 1500</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
@@ -349,36 +395,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> exit-af-topology</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>router eigrp EIGRP-NAMED</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> addres-family ipv4</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  redistribute bgp 65100 metric 1000000 1 255 1 1500</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> exit-af-topology</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>!!! With Route Map Setting Metric !!!</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> redistribute ospf 1 route-map OSPF-2-EIGRP</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>route-map OSPF-2-EIGRP permit 10</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> set metric 1000000 1 255 1 1500</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>router eigrp EIGRP-NAMED</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> addres-family ipv4</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  redistribute bgp 65100 metric 1000000 1 255 1 1500</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> exit-af-topology</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>!!! With Route Map Setting Metric !!!</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> redistribute ospf 1 route-map OSPF-2-EIGRP</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>route-map OSPF-2-EIGRP permit 10</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> set metric 1000000 1 255 1 1500</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="ospf" class="level3">
-<h3 class="anchored" data-anchor-id="ospf">OSPF</h3>
+<section id="ospf-1" class="level3">
+<h3 class="anchored" data-anchor-id="ospf-1">OSPF</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>router ospf 2</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> network 10.41.1.0 0.0.0.255 area 0</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> redistribute eigrp 100 subnets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="bgp" class="level3">
-<h3 class="anchored" data-anchor-id="bgp">BGP</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>router bgp 65100</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  address-family ipv4</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    redistribute connected route-map RM-LOOPBACK</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>route-map RM-LOOPBACK</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  match interface Loopback0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="bgp-1" class="level3">
+<h3 class="anchored" data-anchor-id="bgp-1">BGP</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>router bgp 65100</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  address-family ipv4</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    redistribute connected route-map RM-LOOPBACK</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>route-map RM-LOOPBACK</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  match interface Loopback0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
 <section id="useful-show-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
+<p><code>show ip protocol</code> - shows redistribution under each protocol</p>
+<p><code>show ip route profile</code> -</p>
 
 
 </section>

@@ -14,7 +14,7 @@
     "href": "redistribution.html",
     "title": "Redistribution",
     "section": "",
-    "text": "Configured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nRedistribution between EIGRP to EIGRP or OSPF to OSPF preserves the path metrics\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\nSeed metric used to allow calculation of metric from Source Protocol\n\nEIGRP/RIP = Infinity (not installed into EIGRP topology table\nOSPF = 20 (1 for BGP)\nBGP = Uses IGP metric\n\nredistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]\nIntor OSPF = subnets allows classless networks to be redistributes",
+    "text": "Configured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nRedistribution between EIGRP to EIGRP or OSPF to OSPF preserves the path metrics\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\nSeed metric used to allow calculation of metric from Source Protocol\n\nEIGRP/RIP = Infinity (not installed into EIGRP topology table\nOSPF = 20 (1 for BGP)\nBGP = Uses IGP metric\n\nredistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]\nInto OSPF = subnets allows classless networks to be redistributes",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -26,7 +26,19 @@
     "href": "redistribution.html#general-info",
     "title": "Redistribution",
     "section": "",
-    "text": "Configured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nRedistribution between EIGRP to EIGRP or OSPF to OSPF preserves the path metrics\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\nSeed metric used to allow calculation of metric from Source Protocol\n\nEIGRP/RIP = Infinity (not installed into EIGRP topology table\nOSPF = 20 (1 for BGP)\nBGP = Uses IGP metric\n\nredistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]\nIntor OSPF = subnets allows classless networks to be redistributes",
+    "text": "Configured under Destination Protocol, specifying source protocol.\nRedistribution is NOT transitive on a single router.\n\nR1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.\n\nRedistribution between EIGRP to EIGRP or OSPF to OSPF preserves the path metrics\nSequential Protocol Redistribution is possible\n\nRedistribution over multiple protocols using multiple routers.\n\nRoutes must exist in RIB\nSeed metric used to allow calculation of metric from Source Protocol\n\nEIGRP/RIP = Infinity (not installed into EIGRP topology table\nOSPF = 20 (1 for BGP)\nBGP = Uses IGP metric\n\nredistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]\nInto OSPF = subnets allows classless networks to be redistributes",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "Redistribution"
+    ]
+  },
+  {
+    "objectID": "redistribution.html#per-protocol-info",
+    "href": "redistribution.html#per-protocol-info",
+    "title": "Redistribution",
+    "section": "Per Protocol Info",
+    "text": "Per Protocol Info\n\nEIGRP\n\nRedistribution configurable anywhere in topology\nRedistributed routes marked as External (AD 170)\nDefault Metric = Infinity so not installed, MUST configure metric as follows:\n\nSet under router ospf config\nunder address-family config\nwithin redistribute config line\nwith Route Map (PREFERRED if multiple are configured)\n\n\n\n\nOSPF\n\nRedistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router\nExternal routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR\nBy default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm\nMust use the subnets flag or only classful routes will be redistributed\n\n\n\nBGP\n\nNo seed metric required\nDon’t redistribute eBGP into IGP as they can’t handle the volume of routes\nUse bgp redistribute-internal to force BGP to redistribute iBGP routers into another IGP\nOrigin set to incomplete, Weight to 32768, MED to path metric of source protocol\nRedistribution from OSPF to BGP doesn’t include OSPF External routes by default\n\nmust user match external [1|2] to redistribute OSPF externals",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -38,7 +50,7 @@
     "href": "redistribution.html#configuration",
     "title": "Redistribution",
     "section": "Configuration",
-    "text": "Configuration\n\nRoute Map\n\n\nEIGRP\nrouter eigrp 100\n default-metric 1000000 1 255 1 1500\n network 10.23.1.0 0.0.0.255\n redistribute ospf 1\n-------------------------------------\n\nrouter eigrp EIGRP-NAMED\n addres-family ipv4\n  default-metric 1000000 1 255 1 1500\n  redistribute ospf 1\n exit-af-topology\n network 10.23.1.0 0.0.0.255\n-------------------------------------\nrouter eigrp EIGRP-NAMED\n addres-family ipv4\n  redistribute bgp 65100 metric 1000000 1 255 1 1500\n exit-af-topology\n network 10.23.1.0 0.0.0.255\n\n!!! With Route Map Setting Metric !!!\nrouter eigrp 100\n network 10.23.1.0 0.0.0.255\n redistribute ospf 1 route-map OSPF-2-EIGRP\n \nroute-map OSPF-2-EIGRP permit 10\n set metric 1000000 1 255 1 1500\n\n\nOSPF\n\n\nBGP\nrouter bgp 65100\n  address-family ipv4\n    redistribute connected route-map RM-LOOPBACK\n!\nroute-map RM-LOOPBACK\n  match interface Loopback0",
+    "text": "Configuration\n\nRoute Map\n\n\nEIGRP\nrouter eigrp 100\n default-metric 1000000 1 255 1 1500\n network 10.23.1.0 0.0.0.255\n redistribute ospf 1\n-------------------------------------\n\nrouter eigrp EIGRP-NAMED\n addres-family ipv4\n  default-metric 1000000 1 255 1 1500\n  redistribute ospf 1\n exit-af-topology\n network 10.23.1.0 0.0.0.255\n-------------------------------------\n\nrouter eigrp EIGRP-NAMED\n addres-family ipv4\n  redistribute bgp 65100 metric 1000000 1 255 1 1500\n exit-af-topology\n network 10.23.1.0 0.0.0.255\n-------------------------------------\n\n!!! With Route Map Setting Metric !!!\nrouter eigrp 100\n network 10.23.1.0 0.0.0.255\n redistribute ospf 1 route-map OSPF-2-EIGRP\n \nroute-map OSPF-2-EIGRP permit 10\n set metric 1000000 1 255 1 1500\n\n\nOSPF\nrouter ospf 2\n network 10.41.1.0 0.0.0.255 area 0\n redistribute eigrp 100 subnets\n\n\nBGP\nrouter bgp 65100\n  address-family ipv4\n    redistribute connected route-map RM-LOOPBACK\n!\nroute-map RM-LOOPBACK\n  match interface Loopback0",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -50,7 +62,7 @@
     "href": "redistribution.html#useful-show-commands",
     "title": "Redistribution",
     "section": "Useful Show Commands",
-    "text": "Useful Show Commands",
+    "text": "Useful Show Commands\nshow ip protocol - shows redistribution under each protocol\nshow ip route profile -",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

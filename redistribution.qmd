@@ -18,7 +18,37 @@ code-block-bg: dark
     -   OSPF = 20 (1 for BGP)
     -   BGP = Uses IGP metric
 -   `redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]`
--   Intor OSPF = `subnets` allows classless networks to be redistributes
+-   Into OSPF = `subnets` allows classless networks to be redistributes
+
+--------------------
+
+## Per Protocol Info
+
+### EIGRP
+
+-   Redistribution configurable anywhere in topology
+-   Redistributed routes marked as External (AD 170)
+-   Default Metric = Infinity so not installed, **MUST** configure metric as follows:
+    -   Set under router ospf config
+    -   under address-family config
+    -   within redistribute config line
+    -   with Route Map (**PREFERRED** if multiple are configured)
+
+### OSPF
+
+-   Redistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router
+-   External routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR
+-   By default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm
+-   Must use the `subnets` flag or only classful routes will be redistributed
+
+### BGP
+
+-   No seed metric required
+-   Don't redistribute eBGP into IGP as they can't handle the volume of routes
+-   Use `bgp redistribute-internal` to force BGP to redistribute iBGP routers into another IGP
+-   Origin set to incomplete, Weight to 32768, MED to path metric of source protocol
+-   Redistribution from OSPF to BGP doesn't include OSPF External routes by default
+    -   must user `match external [1|2]` to redistribute OSPF externals
 
 ------------------------------------------------------------------------
 
@@ -42,11 +72,13 @@ router eigrp EIGRP-NAMED
  exit-af-topology
  network 10.23.1.0 0.0.0.255
 -------------------------------------
+
 router eigrp EIGRP-NAMED
  addres-family ipv4
   redistribute bgp 65100 metric 1000000 1 255 1 1500
  exit-af-topology
  network 10.23.1.0 0.0.0.255
+-------------------------------------
 
 !!! With Route Map Setting Metric !!!
 router eigrp 100
@@ -57,7 +89,13 @@ route-map OSPF-2-EIGRP permit 10
  set metric 1000000 1 255 1 1500
 ```
 
-### OSPF 
+### OSPF
+
+``` default
+router ospf 2
+ network 10.41.1.0 0.0.0.255 area 0
+ redistribute eigrp 100 subnets
+```
 
 ### BGP
 
@@ -73,3 +111,7 @@ route-map RM-LOOPBACK
 ------------------------------------------------------------------------
 
 ## Useful Show Commands
+
+`show ip protocol` - shows redistribution under each protocol
+
+`show ip route profile` -
