@@ -20,7 +20,7 @@ code-block-bg: dark
 -   `redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]`
 -   Into OSPF = `subnets` allows classless networks to be redistributes
 
---------------------
+------------------------------------------------------------------------
 
 ## Per Protocol Info
 
@@ -28,11 +28,11 @@ code-block-bg: dark
 
 -   Redistribution configurable anywhere in topology
 -   Redistributed routes marked as External (AD 170)
--   Default Metric = Infinity so not installed, **MUST** configure metric as follows:
+-   Default Metric = Infinity so not installed, **MUST** configure metric as follows for OSPF/BGP redist, not required for static + connected
     -   Set under router ospf config
     -   under address-family config
     -   within redistribute config line
-    -   with Route Map (**PREFERRED** if multiple are configured)
+    -   with Route Map (**PREFERRED** if multiple are configured, then distribute command metric then default-metric)
 
 ### OSPF
 
@@ -63,6 +63,8 @@ router eigrp 100
  default-metric 1000000 1 255 1 1500
  network 10.23.1.0 0.0.0.255
  redistribute ospf 1
+ distance 165 10.1.1.1 0.0.0.0                                       (Changes AD for external (redistributed) routes)
+ distance 165 170                                                   (sets AD for internal then external routes)
 -------------------------------------
 
 router eigrp EIGRP-NAMED
@@ -89,12 +91,15 @@ route-map OSPF-2-EIGRP permit 10
  set metric 1000000 1 255 1 1500
 ```
 
-### OSPF
+### OSPF 
 
 ``` default
 router ospf 2
  network 10.41.1.0 0.0.0.255 area 0
- redistribute eigrp 100 subnets
+ redistribute eigrp 100 subnets                             (allows classless network redistribution from EIGRP)
+ distance ospf external 171                                 ! for AD manipulation if required
+ 
+ 
 ```
 
 ### BGP
@@ -106,6 +111,13 @@ router bgp 65100
 !
 route-map RM-LOOPBACK
   match interface Loopback0
+  
+----
+redistribute connected / static etc.
+redistrivute ospf 100 match external 1 external 2                                               - Redistributes OSPF E1 + E2
+
+distance bgp external-ad internal-ad local-routes             Sets AD for network types
+distance AD source-ip source-wildcardmask                     Sets AD of routes learned from IP
 ```
 
 ------------------------------------------------------------------------
