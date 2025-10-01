@@ -1,0 +1,29 @@
+---
+title: "Route Maps & PBR"
+editor: visual
+code-block-bg: dark
+---
+
+## General Info
+
+-   ACL Subnet Mask - IGP's use this to define the smallest prefix length, BGP uses it to match the subnet mask for the route
+-   Standard ACL **(1-99, 1300-1999)**: Defines based solely on source network
+-   Extended ACL **(100-100, 2000-2699)** : Defines based on source, destination, protocol, port or combination of other packet attributes.
+-   Either can be Named
+-   
+
+## Features
+
+## 
+
+## Config
+
+``` default
+PRefix list matchign default route
+ ipv4: ip prefix-list DEFAULTROUTE permit 0.0.0.0/0                          (The quad 0 matches anything the /0 only matches the default route)
+ ipv6: ip prefix-list DEFAULTROUTE permit ::/0
+
+Prefix list matching all routes
+ ipv4: ip prefix-list ALLROUTES permit 0.0.0.0/0 le32                        (The quad 0 matches anything and the le32 states so long as the mask is less than 32)
+ ipv5: ip prefix-list ALLROUTES permit ::/0 le 128
+```

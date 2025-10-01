@@ -20,6 +20,7 @@ website:
               - eigrp.qmd
               - ospf.qmd
               - redistribution.qmd
+              - routemap-pbr.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd

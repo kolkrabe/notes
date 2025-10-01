@@ -91,7 +91,7 @@ route-map OSPF-2-EIGRP permit 10
  set metric 1000000 1 255 1 1500
 ```
 
-### OSPF 
+### OSPF
 
 ``` default
 router ospf 2
