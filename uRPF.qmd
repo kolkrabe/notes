@@ -1,0 +1,36 @@
+---
+title: "uRFP"
+editor: visual
+code-block-bg: dark
+---
+
+## General Info
+
+-   Unicast Reverse Path Forwarding
+-   Security mechanism to inspect and validate source IP of packet by checking return path in
+-   Requires CEF to be enabled
+
+## **uRPF Modes**
+
+-   **Strict mode**
+    -   If the return path to the source IP of the traffic does not match the ingress interface, the traffic will be discarded
+    -   Configured with the `rx` flag on the `ip verify unicast source` command
+-   **Loose mode**
+    -   If a return path to the source IP of the traffic does not exist in the routing table, the traffic will be discarded
+    -   Configured with the `any` flag on the `ip verify unicast source` command
+-   **Allow-default**
+    -   Used to allow a default route to be used as a return path - by default this is not allowed with uRPF
+    -   Configured with the `allow-default` flag on the `ip verify unicast source` command
+
+## Useful Show Commands
+
+-   `show cef interface [int]` - shows whether uRPF & CEF are enabled
+
+## Standard Config
+
+``` default
+int gi0/1
+ip verify unicast source reachable-via [rx | any] [allow-default]
+```
+
+## 
