@@ -1,0 +1,35 @@
+---
+title: "AAA"
+editor: visual
+code-block-bg: dark
+---
+
+## General Info
+
+-   AAA = Authentication, Authorisation, Accounting
+-   Who are they, what can they do, what did they do...
+-   
+
+## 
+
+## Features
+
+## 
+
+## 
+
+## Config
+
+AAA
+
+``` default
+aaa new-model
+
+aaa group server tacacs+ TACACS_GROUP
+  server name TACACS1
+  ip tacacs
+```
+
+## 
+
+## Useful show commands

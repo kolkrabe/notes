@@ -30,9 +30,9 @@ website:
               - netflow.qmd
       - section: Infrastructure Security
         contents:
-         - layout.qmd
-         - layout-knitr.qmd
-         - layout-jupyter.qmd
+         - aaa.qmd
+         - uRPF.qmd
+         - CoPP.qmd
       - whitepapers.qmd
 
 format:
