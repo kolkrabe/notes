@@ -318,6 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Unicast Reverse Path Forwarding</li>
 <li>Security mechanism to inspect and validate source IP of packet by checking return path in</li>
 <li>Requires CEF to be enabled</li>
+<li>Stops router pinging itself when enabled (can be permitted using <code>allow-self-ping</code> flag</li>
 </ul>
 </section>
 <section id="urpf-modes" class="level2">
@@ -343,6 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="useful-show-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
 <ul>
+<li><code>show ip traffic</code> - shows drops</li>
 <li><code>show cef interface [int]</code> - shows whether uRPF &amp; CEF are enabled</li>
 </ul>
 </section>

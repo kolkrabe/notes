@@ -539,7 +539,7 @@
     "href": "uRPF.html",
     "title": "uRFP",
     "section": "",
-    "text": "Unicast Reverse Path Forwarding\nSecurity mechanism to inspect and validate source IP of packet by checking return path in\nRequires CEF to be enabled",
+    "text": "Unicast Reverse Path Forwarding\nSecurity mechanism to inspect and validate source IP of packet by checking return path in\nRequires CEF to be enabled\nStops router pinging itself when enabled (can be permitted using allow-self-ping flag",
     "crumbs": [
       "Infrastructure Security",
       "uRFP"
@@ -550,7 +550,7 @@
     "href": "uRPF.html#general-info",
     "title": "uRFP",
     "section": "",
-    "text": "Unicast Reverse Path Forwarding\nSecurity mechanism to inspect and validate source IP of packet by checking return path in\nRequires CEF to be enabled",
+    "text": "Unicast Reverse Path Forwarding\nSecurity mechanism to inspect and validate source IP of packet by checking return path in\nRequires CEF to be enabled\nStops router pinging itself when enabled (can be permitted using allow-self-ping flag",
     "crumbs": [
       "Infrastructure Security",
       "uRFP"
@@ -572,7 +572,7 @@
     "href": "uRPF.html#useful-show-commands",
     "title": "uRFP",
     "section": "Useful Show Commands",
-    "text": "Useful Show Commands\n\nshow cef interface [int] - shows whether uRPF & CEF are enabled",
+    "text": "Useful Show Commands\n\nshow ip traffic - shows drops\nshow cef interface [int] - shows whether uRPF & CEF are enabled",
     "crumbs": [
       "Infrastructure Security",
       "uRFP"
