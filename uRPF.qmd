@@ -9,6 +9,7 @@ code-block-bg: dark
 -   Unicast Reverse Path Forwarding
 -   Security mechanism to inspect and validate source IP of packet by checking return path in
 -   Requires CEF to be enabled
+-   Stops router pinging itself when enabled (can be permitted using `allow-self-ping` flag
 
 ## **uRPF Modes**
 
@@ -24,6 +25,7 @@ code-block-bg: dark
 
 ## Useful Show Commands
 
+-   `show ip traffic` - shows drops
 -   `show cef interface [int]` - shows whether uRPF & CEF are enabled
 
 ## Standard Config
