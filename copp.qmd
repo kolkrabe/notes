@@ -1,0 +1,69 @@
+---
+title: "CoPP"
+editor: visual
+code-block-bg: dark
+---
+
+## General info
+
+-   Control Plane Policing
+-   Used to protect control plane from DDoS and other attacks.
+-   Utilises Policy-Maps in a top down fashion, once matched the evaluation stops
+-   Class map match statement (used when multiple match statements exist)
+    -   `match-all` - must match all match commands
+    -   `match-any` - can match any match commands
+-   
+
+Standard CoPP Configuration
+
+1.   Create **ACL** to define interesting traffic
+2.   Create **class maps** to define traffic class
+3.  Create **policy maps** to define a service policy
+4.  Apply **service policy** to control plane
+
+``` default
+ *** Configure ACLs ***
+ip access-list extended COPP-ICMP-ACL-EXAMPLE
+ permit udp any any range 33434 33463 ttl eq 1
+ permit icmp any any unreachable
+ permit icmp any any echo
+ permit icmp any any echo-reply
+ permit icmp any any ttl-exceeded
+ exit
+ip access-list extended COPP-MGMT-TRAFFIC-ACL-EXAMPLE
+ permit udp any eq ntp any
+ permit udp any any eq snmp
+ permit tcp any any eq 22
+ permit tcp any eq 22 any established
+ permit tcp any any eq 23
+ exit
+ip access-list extended COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE
+ permit tcp any eq bgp any established
+ permit eigrp any host 224.0.0.10
+ permit ospf any host 224.0.0.5
+ permit ospf any host 224.0.0.6
+ permit pim any host 224.0.0.13
+ permit igmp any any
+ 
+ 
+*** Create Class Maps ***
+class-map match-all COPP-ICMP-CLASSMAP-EXAMPLE
+ match access-group name COPP-ICMP-ACL-EXAMPLE
+class-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE
+ match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE
+class-map match-all COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE
+ match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE
+ 
+*** Create Policy Map ***
+policy-map COPP-POLICYMAP-EXAMPLE
+ class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE
+  police 32000 conform-action transmit exceed-action transmit violate-action transmit
+ class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE
+  police 34000 conform-action transmit exceed-action transmit violate-action transmit
+ class COPP-ICMP-CLASSMAP-EXAMPLE
+  police 8000 conform-action transmit exceed-action transmit violate-action drop
+
+*** Apply to the Control Plane ***
+control-plane
+ service-policy input COPP-POLICYMAP-EXAMPLE
+```
