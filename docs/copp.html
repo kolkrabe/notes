@@ -282,6 +282,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General info</a></li>
+  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
+  <li><a href="#standard-copp-configuration" id="toc-standard-copp-configuration" class="nav-link" data-scroll-target="#standard-copp-configuration">Standard CoPP Configuration</a></li>
   </ul>
 </nav>
     </div>
@@ -318,9 +320,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>match-all</code> - must match all match commands</li>
 <li><code>match-any</code> - can match any match commands</li>
 </ul></li>
-<li></li>
 </ul>
-<p>Standard CoPP Configuration</p>
+</section>
+<section id="useful-show-commands" class="level2">
+<h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
+<ul>
+<li><code>show policy-map control-plane input</code></li>
+</ul>
+</section>
+<section id="standard-copp-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="standard-copp-configuration">Standard CoPP Configuration</h2>
 <ol type="1">
 <li>Create <strong>ACL</strong> to define interesting traffic</li>
 <li>Create <strong>class maps</strong> to define traffic class</li>
@@ -352,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>*** Create Class Maps ***</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>class-map match-all COPP-ICMP-CLASSMAP-EXAMPLE</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>class-map match-all COPP-ICMP-CLASSMAP-EXAMPLE                           -  Note name case sensitive!</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> match access-group name COPP-ICMP-ACL-EXAMPLE</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>class-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE</span>

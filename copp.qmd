@@ -50,7 +50,7 @@ ip access-list extended COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE
  
  
 *** Create Class Maps ***
-class-map match-all COPP-ICMP-CLASSMAP-EXAMPLE
+class-map match-all COPP-ICMP-CLASSMAP-EXAMPLE                           -  Note name case sensitive!
  match access-group name COPP-ICMP-ACL-EXAMPLE
 class-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE
  match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE
