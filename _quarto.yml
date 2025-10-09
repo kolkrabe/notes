@@ -32,7 +32,7 @@ website:
         contents:
          - aaa.qmd
          - uRPF.qmd
-         - CoPP.qmd
+         - copp.qmd
       - whitepapers.qmd
 
 format:
