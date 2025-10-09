@@ -12,9 +12,12 @@ code-block-bg: dark
 -   Class map match statement (used when multiple match statements exist)
     -   `match-all` - must match all match commands
     -   `match-any` - can match any match commands
--   
 
-Standard CoPP Configuration
+## Useful Show Commands
+
+-   `show policy-map control-plane input`
+
+## Standard CoPP Configuration
 
 1.   Create **ACL** to define interesting traffic
 2.   Create **class maps** to define traffic class
