@@ -52,7 +52,7 @@ code-block-bg: dark
         -   Type 1=E1 - Cost the ASBR reports plus cost to ASBR
         -   Type 2=E2 - Cost of Redistribution metric only, if tie-break cost to ASBR included.
     -   **Type 7 - NSSA External LSA**
--   Troubleshooting - **TAN MAT** (**T**imers, **A**rea, **N**etwork Add, **M**TU, **A**uth, **T**ype)
+-   Troubleshooting - **TAN MAT** (**T**imers, **A**rea, **N**etwork Address, **M**TU, **A**uth, **T**ype)
 
 ------------------------------------------------------------------------
 

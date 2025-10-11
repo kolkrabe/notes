@@ -324,6 +324,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>match-all</code> - must match all match commands</li>
 <li><code>match-any</code> - can match any match commands</li>
 </ul></li>
+<li>Class Map &amp; Policy Maps are case sensitive</li>
+<li>T/S - <strong>SPCA</strong> ( <strong>S</strong>ervice Policy, <strong>P</strong>olicy Map, <strong>C</strong>lass Map <strong>A</strong>CL</li>
 </ul>
 </section>
 <section id="useful-show-commands" class="level2">
@@ -373,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>*** Create Policy Map ***</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>policy-map COPP-POLICYMAP-EXAMPLE</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>policy-map COPP-POLICYMAP-EXAMPLE                                        </span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  police 32000 conform-action transmit exceed-action transmit violate-action transmit</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE</span>

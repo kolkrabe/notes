@@ -12,6 +12,8 @@ code-block-bg: dark
 -   Class map match statement (used when multiple match statements exist)
     -   `match-all` - must match all match commands
     -   `match-any` - can match any match commands
+-   Class Map & Policy Maps are case sensitive
+-   T/S - **SPCA** ( **S**ervice Policy, **P**olicy Map, **C**lass Map **A**CL
 
 ## Useful Show Commands
 
@@ -19,8 +21,8 @@ code-block-bg: dark
 
 ## Standard CoPP Configuration
 
-1.   Create **ACL** to define interesting traffic
-2.   Create **class maps** to define traffic class
+1.  Create **ACL** to define interesting traffic
+2.  Create **class maps** to define traffic class
 3.  Create **policy maps** to define a service policy
 4.  Apply **service policy** to control plane
 
@@ -58,7 +60,7 @@ class-map match-all COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE
  match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE
  
 *** Create Policy Map ***
-policy-map COPP-POLICYMAP-EXAMPLE
+policy-map COPP-POLICYMAP-EXAMPLE                                        
  class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE
   police 32000 conform-action transmit exceed-action transmit violate-action transmit
  class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE
