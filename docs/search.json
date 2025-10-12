@@ -95,6 +95,7 @@
     "section": "",
     "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "IPv6 Sec"
     ]
@@ -106,6 +107,7 @@
     "section": "",
     "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "IPv6 Sec"
     ]
@@ -117,6 +119,7 @@
     "section": "Features",
     "text": "Features\n\nRA Guard (Router Advertisement)\n\nRA guard inspects incoming RA messages, filtering when configured\nConfigure with ipv6 nd raguard attach-policy [policy-name] inbound on interface\nConfigured inbound on an interface\n2 modes ( Host & Router)\nDoesn’t work on Tunneled Traffic and requires TCAM\nDoesn’t work on Etherchannel members or trunks with merge mode\n\nDHCPV6 Guard\n\nDHCP snooping for IPv6\nClassifies Messages into client, server or relay.\n\nAll Client messages are switched, server messages switches if router role = server\n\nConfigured with ipv6 dhcp guard attach-policy [policy] on interface\n\nIPv6 Snooping\n\nCreates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols\nGlean populates bind table without verifying messages\nInspect gleans addresses and validates messages\nGuard gleans and inspects messages, drops RA and DHCP messages by default\nConfigured as follows:\n\nipv6 snooping policy [name]\n security-level [glean|inspect|guard]\n!\nint gi0/0\n ipv6 snooping attach-policy [name]\nND inspection\n\nInspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing\nRelies on IPv6 snooping\nConfigured with ipv6 nd inspection under interfaces\n\nSource Guard\n\nSnooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked & dropped\n\nSource IP must be in the DHCP Binding table.\n\nSource learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS\nConfigured with ipv6 source-guard under interfaces\n\nDestination Guard\n\nCan filter based on Destination. Also requires binding table to be populated.\nBlocks traffic coming for an unknown destination\n\nPrefix Guard\n\nUsed on Ingress interface to deny traffic that has a correct address but is not topologically correct.\nConfigured with ipv6 source-guard under interface",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "IPv6 Sec"
     ]
@@ -128,6 +131,7 @@
     "section": "Configuration",
     "text": "Configuration\n\nStandard RA Guard Config\nipv6 nd raguard policy &lt;policy-name&gt;  \n device-role host \nint gi0/0  \n ipv6 nd raguard attach-policy &lt;policy-name&gt; \n! \n! This will block all RAs on this port\n\n\nStandard DHCP v6 Guard Config\nipv6 dhcp guard policy DHCP_SERVER  \n device-role server \nipv6 dhcp guard policy DHCP_CLIENT  device-role client \n! \ninterface GigabitEthernet 0/1  \n ipv6 dhcp guard attach-policy DHCP_SERVER\ninterface range GigabitEthernet 0/2 - 3\n ipv6 dhcp guard attach-policy DHCP_CLIENT \n! \n!This will only allow DHCP offers from the server ports",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "IPv6 Sec"
     ]
@@ -319,6 +323,7 @@
     "section": "",
     "text": "AAA = Authentication, Authorisation, Accounting\nWho are they, what can they do, what did they do…\nif-authenticated used in authorisation config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.\n\n\n\n\nusername [user] privilege 15 secret [password] \n!\naaa new-model\naaa group server tacacs+ [group]\n server-private 10.44.155.20 single-connection key [key]\n ip vrf forwarding Mgmt-intf\n ip tacacs source-interface GigabitEthernet0\n!\n! Alternate Method of server config with single server^\n!\ntacacs server [server]\n address ipv4 [10.44.241.250]\n key [passkey]\naaa group server tacacs+ [group-name]\n server name [server]\n ip tacacs source-interface GigabitEthernet0\n!\naaa authentication login [method list] group [group] local\naaa authorization exec [method list] group [group] local if-authenticated\naaa authorization commands 15 [method list] group [group] local if-authenticated\naaa accounting commands 1 [method list] start-stop group [group]\naaa accounting commands 15 [method list] start-stop group [group]\naaa session-id common\n!\n! using method list 'default' applies the AAA methods to all lines \n!\nline vty 0 4\nlogin authentication [list-name]\n\n\n***\naaa authorization exec default local          - Puts authenticated user to priv exec upon login]\nline vty 0 4\n  authorization exec default\n  \nTo use AAA on console port this is also required\nline con 0\n  logging authentication [group]\n  aaa authorization console",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "AAA"
     ]
@@ -330,6 +335,7 @@
     "section": "",
     "text": "AAA = Authentication, Authorisation, Accounting\nWho are they, what can they do, what did they do…\nif-authenticated used in authorisation config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.\n\n\n\n\nusername [user] privilege 15 secret [password] \n!\naaa new-model\naaa group server tacacs+ [group]\n server-private 10.44.155.20 single-connection key [key]\n ip vrf forwarding Mgmt-intf\n ip tacacs source-interface GigabitEthernet0\n!\n! Alternate Method of server config with single server^\n!\ntacacs server [server]\n address ipv4 [10.44.241.250]\n key [passkey]\naaa group server tacacs+ [group-name]\n server name [server]\n ip tacacs source-interface GigabitEthernet0\n!\naaa authentication login [method list] group [group] local\naaa authorization exec [method list] group [group] local if-authenticated\naaa authorization commands 15 [method list] group [group] local if-authenticated\naaa accounting commands 1 [method list] start-stop group [group]\naaa accounting commands 15 [method list] start-stop group [group]\naaa session-id common\n!\n! using method list 'default' applies the AAA methods to all lines \n!\nline vty 0 4\nlogin authentication [list-name]\n\n\n***\naaa authorization exec default local          - Puts authenticated user to priv exec upon login]\nline vty 0 4\n  authorization exec default\n  \nTo use AAA on console port this is also required\nline con 0\n  logging authentication [group]\n  aaa authorization console",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "AAA"
     ]
@@ -341,6 +347,7 @@
     "section": "Useful show commands",
     "text": "Useful show commands\n\ndebug aaa authentication - Debug all AAA auth\ndebug radius authentication - Debug for radius auth\ndebug tacacs authentication - Debug for tacacs auth\ndebug aaa protocol local - Debug local authentication",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "AAA"
     ]
@@ -359,6 +366,7 @@
     "section": "",
     "text": "Control Plane Policing\nUsed to protect control plane from DDoS and other attacks.\nUtilises Policy-Maps in a top down fashion, once matched the evaluation stops\nClass map match statement (used when multiple match statements exist)\n\nmatch-all - must match all match commands\nmatch-any - can match any match commands\n\nClass Map & Policy Maps are case sensitive\nT/S - SPCA ( Service Policy, Policy Map, Class Map ACL",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "CoPP"
     ]
@@ -370,6 +378,7 @@
     "section": "",
     "text": "Control Plane Policing\nUsed to protect control plane from DDoS and other attacks.\nUtilises Policy-Maps in a top down fashion, once matched the evaluation stops\nClass map match statement (used when multiple match statements exist)\n\nmatch-all - must match all match commands\nmatch-any - can match any match commands\n\nClass Map & Policy Maps are case sensitive\nT/S - SPCA ( Service Policy, Policy Map, Class Map ACL",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "CoPP"
     ]
@@ -381,6 +390,7 @@
     "section": "Useful Show Commands",
     "text": "Useful Show Commands\n\nshow policy-map control-plane input",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "CoPP"
     ]
@@ -392,6 +402,7 @@
     "section": "Standard CoPP Configuration",
     "text": "Standard CoPP Configuration\n\nCreate ACL to define interesting traffic\nCreate class maps to define traffic class\nCreate policy maps to define a service policy\nApply service policy to control plane\n\n *** Configure ACLs ***\nip access-list extended COPP-ICMP-ACL-EXAMPLE\n permit udp any any range 33434 33463 ttl eq 1\n permit icmp any any unreachable\n permit icmp any any echo\n permit icmp any any echo-reply\n permit icmp any any ttl-exceeded\n exit\nip access-list extended COPP-MGMT-TRAFFIC-ACL-EXAMPLE\n permit udp any eq ntp any\n permit udp any any eq snmp\n permit tcp any any eq 22\n permit tcp any eq 22 any established\n permit tcp any any eq 23\n exit\nip access-list extended COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE\n permit tcp any eq bgp any established\n permit eigrp any host 224.0.0.10\n permit ospf any host 224.0.0.5\n permit ospf any host 224.0.0.6\n permit pim any host 224.0.0.13\n permit igmp any any\n \n \n*** Create Class Maps ***\nclass-map match-all COPP-ICMP-CLASSMAP-EXAMPLE                           -  Class Map Name is case sensitive!\n match access-group name COPP-ICMP-ACL-EXAMPLE\nclass-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE\n match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE\nclass-map match-all COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE\n match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE\n \n*** Create Policy Map ***\npolicy-map COPP-POLICYMAP-EXAMPLE                                        \n class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE\n  police 32000 conform-action transmit exceed-action transmit violate-action transmit\n class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE\n  police 34000 conform-action transmit exceed-action transmit violate-action transmit\n class COPP-ICMP-CLASSMAP-EXAMPLE\n  police 8000 conform-action transmit exceed-action transmit violate-action drop\n\n*** Apply to the Control Plane ***\ncontrol-plane\n service-policy input COPP-POLICYMAP-EXAMPLE",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "CoPP"
     ]
@@ -629,6 +640,7 @@
     "section": "",
     "text": "Unicast Reverse Path Forwarding\nSecurity mechanism to inspect and validate source IP of packet by checking return path in\nRequires CEF to be enabled\nStops router pinging itself when enabled (can be permitted using allow-self-ping flag",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "uRFP"
     ]
@@ -640,6 +652,7 @@
     "section": "",
     "text": "Unicast Reverse Path Forwarding\nSecurity mechanism to inspect and validate source IP of packet by checking return path in\nRequires CEF to be enabled\nStops router pinging itself when enabled (can be permitted using allow-self-ping flag",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "uRFP"
     ]
@@ -651,6 +664,7 @@
     "section": "uRPF Modes",
     "text": "uRPF Modes\n\nStrict mode\n\nIf the return path to the source IP of the traffic does not match the ingress interface, the traffic will be discarded\nConfigured with the rx flag on the ip verify unicast source command\n\nLoose mode\n\nIf a return path to the source IP of the traffic does not exist in the routing table, the traffic will be discarded\nConfigured with the any flag on the ip verify unicast source command\n\nAllow-default\n\nUsed to allow a default route to be used as a return path - by default this is not allowed with uRPF\nConfigured with the allow-default flag on the ip verify unicast source command",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "uRFP"
     ]
@@ -662,6 +676,7 @@
     "section": "Useful Show Commands",
     "text": "Useful Show Commands\n\nshow ip traffic - shows drops\nshow cef interface [int] - shows whether uRPF & CEF are enabled",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "uRFP"
     ]
@@ -673,6 +688,7 @@
     "section": "Standard Config",
     "text": "Standard Config\nint gi0/1\nip verify unicast source reachable-via [rx | any] [allow-default]",
     "crumbs": [
+      "CCNP ENARSI",
       "Infrastructure Security",
       "uRFP"
     ]
