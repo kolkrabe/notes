@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EIGRP – Kolkrabe</title>
+<title>IPv6 Sec – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./eigrp.html">EIGRP</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./aaa.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./ipv6sec.html">IPv6 Sec</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -158,13 +123,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Layer 3 Technologies</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bgp.html" class="sidebar-item-text sidebar-link">
@@ -173,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eigrp.html" class="sidebar-item-text sidebar-link active">
+  <a href="./eigrp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EIGRP</span></a>
   </div>
 </li>
@@ -269,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ipv6sec.html" class="sidebar-item-text sidebar-link">
+  <a href="./ipv6sec.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">IPv6 Sec</span></a>
   </div>
 </li>
@@ -286,26 +251,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
-  <ul class="collapse">
-  <li><a href="#eigrp---traditional-ipv4-configuration" id="toc-eigrp---traditional-ipv4-configuration" class="nav-link" data-scroll-target="#eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</a></li>
-  <li><a href="#useful-show-commands-info" id="toc-useful-show-commands-info" class="nav-link" data-scroll-target="#useful-show-commands-info">Useful Show Commands + Info</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./eigrp.html">EIGRP</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./aaa.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./ipv6sec.html">IPv6 Sec</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">EIGRP</h1>
+<h1 class="title">IPv6 Sec</h1>
 </div>
 
 
@@ -322,253 +276,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="general" class="level1">
-<h1>General</h1>
-<ul>
-<li>Classic/Named Mode
-<ul>
-<li>Classic: Commands under router process + Interfaces - disparate.</li>
-<li>Named: Config in SubSections - Address Family, Interface &amp; Topology</li>
-</ul></li>
-<li>AD 90 internal, 170 External</li>
-<li><strong>Hello</strong>’s are Multicast on <strong>224.0.0.10</strong>, port <strong>88</strong></li>
-<li>Timers
-<ul>
-<li>Hello - default 5 secs, (60 on Slow interfaces)</li>
-<li>Hold - default 15 secs, (180 on slow interfaces) - How long we tell neighbour to wait for us.</li>
-</ul></li>
-<li>Load balance over unequal paths using <code>variance</code> - only IGRP that can do this.</li>
-<li>Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with <code>metric-weights</code>
-<ul>
-<li>Mostly uses
-<ul>
-<li>K1 - Bandwidth - slowest in path</li>
-<li>K3 - Delay - cumulative</li>
-</ul></li>
-</ul></li>
-<li>Supports VLSM by sending mask</li>
-<li>Can configure neighbour specifically to use <strong>Unicast</strong></li>
-<li>Uses RTP (reliable transport protocol - confirms messages neighbour received messages but not hello)</li>
-<li>Uses DUAL (Difussing identifies neighbour with lowest Feasible Distance)
-<ul>
-<li>FD set to <strong>Infinity</strong> to indicate the router is in transition &amp; seeking alternative paths</li>
-</ul></li>
-<li>3 Data Structures
-<ul>
-<li><code>Neighbour Table</code> - Who our EIGRP neighbours are</li>
-<li><code>Interface Table</code> - which interfaces are participating</li>
-<li><code>Topology Table</code> - shows routes known to EIGRP</li>
-</ul></li>
-<li>Router-ID configurable - if not generated byhighest configured + active Loopback, then any IPv4 interface.</li>
-</ul>
-</section>
-<section id="features" class="level1">
-<h1>Features</h1>
-<section id="path-selection" class="level5">
-<h5 class="anchored" data-anchor-id="path-selection">Path Selection</h5>
-<ul>
-<li><strong>Reported Distance</strong> - cost to destination from neighbouring router</li>
-<li><strong>Feasible Distance</strong> - RD + path cost to get to neighbouring router.</li>
-<li><strong>Successor Route</strong> - the lowest cost path to route</li>
-<li><strong>Successor</strong> - First Hop route on that path</li>
-<li><strong>Feasibility Condition</strong> - That the <strong>RD</strong> must be less than the <strong>FD</strong> (loop prevention)</li>
-<li><strong>Feasible Successor</strong> - route which passes the feasibility condition.</li>
-</ul>
-<hr>
-</section>
-<section id="authentication" class="level5">
-<h5 class="anchored" data-anchor-id="authentication">Authentication</h5>
-<ul>
-<li>Supports plaintext + hash based auth - MD5 &amp; SHA-256 auth (named) or just MD5 (classic)</li>
-<li>MD5 configuration done with key chain in global config</li>
-<li>Key-id numbers must match for successful auth</li>
-<li>Applied under physical interfaces in classic mode or af-interfaces in named mode</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>key chain MD5_KEYS  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> key 1   </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   key-string MD5_PASS </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>! </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>router eigrp MULTI-AF  </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>!  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 100   </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  !  </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  af-interface default    </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>   authentication mode hmac-sha-256 SHA_DEFAULT  </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  exit-af-interface   </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  !   </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet1.58</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  authentication mode md5    </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  authentication key-chain MD5_KEYS   </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="route-filtering" class="level5">
-<h5 class="anchored" data-anchor-id="route-filtering">Route Filtering</h5>
-<ul>
-<li><p>Can be advertised with quad 0 summary route under interface</p></li>
-<li><p>Can also be redistributed from static route</p></li>
-<li><p>Use of Distribute-list stops route being added to topology &amp; routing table - <code>distribute-list prefix [prefix-list] [in/out] [interface]</code></p></li>
-<li><p>Can also use route-maps to match on tags, metric</p>
-<ul>
-<li>For example:</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>route-map FILTER_ON_TAGS deny 10  </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  match tag 4 </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>! </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>route-map FILTER_ON_TAGS permit 20 </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>! </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  distribute-list route-map FILTER_ON_TAGS in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-</section>
-<section id="loop-prevention" class="level5">
-<h5 class="anchored" data-anchor-id="loop-prevention">Loop Prevention</h5>
-<ul>
-<li>Split-Horizon - stops a route being learned on the interface it was advertised on.</li>
-<li>Use of Feasibility condition.</li>
-<li>Can disable on P2P link - <code>no ip split-horizon eigrp [AS]</code></li>
-</ul>
-</section>
-<section id="redistribution---see-redistribution" class="level5">
-<h5 class="anchored" data-anchor-id="redistribution---see-redistribution">Redistribution - see redistribution</h5>
-<ul>
-<li>see <a href="https://kolkrabe.github.io/notes/redistribution.html">Redistribution Page</a></li>
-</ul>
-</section>
-<section id="summarization" class="level5">
-<h5 class="anchored" data-anchor-id="summarization">Summarization</h5>
-<ul>
-<li>Possible anywhere in topology</li>
-<li>Manual or Auto (auto is classful).</li>
-<li>Configured with <code>summary-address &lt;network&gt; &lt;mask&gt;</code> under af-interface in named mode, under physical interface in classic mode</li>
-<li>Leak map can be used to leak longer mask prefixes included in summary
-<ul>
-<li><code>summary-address 0.0.0.0 0.0.0.0 leak-map &lt;route-map&gt;</code></li>
-</ul></li>
-<li>“Discard Route” installed with destination Null0 - match summary address to prevent loops (AD set to 5)</li>
-<li>Can define metric on summary-address with the <code>summary-metric</code> command under topology base</li>
-</ul>
-</section>
-<section id="stub" class="level5">
-<h5 class="anchored" data-anchor-id="stub">Stub</h5>
-<ul>
-<li>Prevents advertisement of anything other than connected routes + summary routes <em>by default</em></li>
-<li>If route goes active the router doesn’t send EIGRP Queries to Stub</li>
-<li>Prevents site from being used for transit</li>
-<li>Breaks query domain</li>
-<li>Best used when sites have no downstream neighbors</li>
-<li>Can use leak-maps to advertise normally suppressed routes</li>
-</ul>
-</section>
-<section id="stub-site" class="level5">
-<h5 class="anchored" data-anchor-id="stub-site">Stub Site</h5>
-<ul>
-<li>Only on named mode</li>
-<li>Allows advertisement of routes learned on LAN but not WAN interfaces</li>
-<li>Limits EIGRP query-domain and prevents site from being used for transit</li>
-<li>Enabled with <code>eigrp stub-site</code>
-<ul>
-<li>Mutually exclusive with <code>eigrp stub</code></li>
-</ul></li>
-<li>Interfaces towards hub/WAN identified with <code>stub-site wan-interface</code> under af-interface</li>
-</ul>
-</section>
-<section id="split-horizon" class="level5">
-<h5 class="anchored" data-anchor-id="split-horizon">Split Horizon</h5>
-<ul>
-<li>Prevents route being advertised out of the interface they were learned from.</li>
-<li>Stops routing loops</li>
-<li>Can be disabled <code>no ip split-horizon eigrp [AS]</code> - Useful for Hub &amp; Spoke networks</li>
-</ul>
-</section>
-<section id="load-balancing" class="level5">
-<h5 class="anchored" data-anchor-id="load-balancing">Load balancing</h5>
-<ul>
-<li>Equal cost load balancing enabled by default (max 4 paths by default)
-<ul>
-<li>alter max number of equal cost/metric routes using <code>maximum-paths [x]</code></li>
-</ul></li>
-<li>Variance used to enable load balancing between unequal paths, installs feasible successor routes and puts them into the routing table</li>
-<li>variance is a multiplier of Feasible Distance. Verify (and show traffic share) with <code>show ip route [network]</code></li>
-</ul>
-</section>
-<section id="metrics" class="level5">
-<h5 class="anchored" data-anchor-id="metrics">Metrics</h5>
-<ul>
-<li>wide-metrics - used to scale EIGRP for modern bandwidths, NAMED Mode only.</li>
-<li>Introduces K6 value.</li>
-<li>configure under address family</li>
-</ul>
-</section>
-<section id="offset-lists" class="level5">
-<h5 class="anchored" data-anchor-id="offset-lists">Offset-lists</h5>
-<ul>
-<li>Used for traffic steering</li>
-<li>Can modify path attributes based on <em>direction of update</em> / <em>PREFIX</em> / combination of both.</li>
-<li>Can be used to increase metric for a specific route/interface</li>
-<li>Configured under topology base (modifying metric) with for Modern / Under process for Classic
-<ul>
-<li><code>offset-list [access-list] [in/out] [metric] [interface]</code></li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="eigrp---traditional-ipv4-configuration" class="level2">
-<h2 class="anchored" data-anchor-id="eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>CLASSIC</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>router eigrp 10 </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces match &amp; configured/up they should participate in EIGRP</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>network 172.16.1.0 0.0.0.3</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>network 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  interface G0/1</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ip hello-interval eigrp 10 3</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ip hold-interval eigrp 10 15</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    timers active-time 2</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>eigrp stub                            - for stub site</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>MODERN</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>router eigrp [NAME]</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a> !</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a> address-family ipv4 unicast autonomous-system 1</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a> eigrp stub                           - for stub site</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  af-interface default</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>   passive-interface                 - Sets all intefaces as passive.</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>   ip hello-interval eigrp 10 3       - Can be here or af-interface section below</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>   ip hold-interval eigrp 10 15</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  af-interface GigabitEthernet0/1</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>   no passive-interface               - enables interface for EIGRP</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>   ip hello-interval eigrp 10 3</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>   ip hold-interval eigrp 10 15</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  exit-af-interface</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  !</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  topology base</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  variance 2</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    timers active-time 2              - 3 mins by default, </span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  exit-af-topology</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  network 10.1.1.2 255.255.255.255</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  m</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  eigrp router-id 150.1.5.5</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a> exit-address-family</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="useful-show-commands-info" class="level2">
-<h2 class="anchored" data-anchor-id="useful-show-commands-info">Useful Show Commands + Info</h2>
-<ul>
-<li><p><code>show ip route EIGRP</code> - shows EIGRP routes installed into the RIB</p></li>
-<li><p><code>show ip eigrp interfaces</code> - shows active EIGRP interfaces</p></li>
-<li><p><code>show ip eigrp interfaces detail</code> - shows detailed interface info (hold time, split-horizon enabled etc.</p></li>
-<li><p><code>show ip eigrp topology all-links</code> - shows all additional paths to network (failed Feasibility Condition)</p></li>
-<li><p><code>show ip protocols</code> - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints</p></li>
-<li><p>Stuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours</p></li>
-<li><p>EIGRP routes with same <code>router-id</code> will form an adjacency but won’t accept routes from one another. Investigate using <code>debug ip eigrp</code></p></li>
-</ul>
+<p>General Info</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

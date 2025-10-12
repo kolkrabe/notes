@@ -33,6 +33,7 @@ website:
          - aaa.qmd
          - uRPF.qmd
          - copp.qmd
+         - ipv6sec.qmd
       - whitepapers.qmd
 
 format:

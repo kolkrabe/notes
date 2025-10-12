@@ -89,6 +89,17 @@
     ]
   },
   {
+    "objectID": "ipv6sec.html",
+    "href": "ipv6sec.html",
+    "title": "IPv6 Sec",
+    "section": "",
+    "text": "General Info",
+    "crumbs": [
+      "Infrastructure Security",
+      "IPv6 Sec"
+    ]
+  },
+  {
     "objectID": "ipsla+track.html",
     "href": "ipsla+track.html",
     "title": "IP SLA & Tracking",
