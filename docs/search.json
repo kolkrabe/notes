@@ -93,7 +93,40 @@
     "href": "ipv6sec.html",
     "title": "IPv6 Sec",
     "section": "",
-    "text": "General Info",
+    "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
+    "crumbs": [
+      "Infrastructure Security",
+      "IPv6 Sec"
+    ]
+  },
+  {
+    "objectID": "ipv6sec.html#general-info",
+    "href": "ipv6sec.html#general-info",
+    "title": "IPv6 Sec",
+    "section": "",
+    "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
+    "crumbs": [
+      "Infrastructure Security",
+      "IPv6 Sec"
+    ]
+  },
+  {
+    "objectID": "ipv6sec.html#features",
+    "href": "ipv6sec.html#features",
+    "title": "IPv6 Sec",
+    "section": "Features",
+    "text": "Features\n\nRA Guard (Router Advertisement)\n\nRA guard inspects incoming RA messages, filtering when configured\nConfigure with ipv6 nd raguard attach-policy [policy-name] inbound on interface\nConfigured inbound on an interface\n2 modes ( Host & Router)\nDoesn’t work on Tunneled Traffic and requires TCAM\nDoesn’t work on Etherchannel members or trunks with merge mode\n\nDHCPV6 Guard\n\nDHCP snooping for IPv6\nClassifies Messages into client, server or relay.\n\nAll Client messages are switched, server messages switches if router role = server\n\nConfigured with ipv6 dhcp guard attach-policy [policy] on interface\n\nIPv6 Snooping\n\nCreates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols\nGlean populates bind table without verifying messages\nInspect gleans addresses and validates messages\nGuard gleans and inspects messages, drops RA and DHCP messages by default\nConfigured as follows:\n\nipv6 snooping policy [name]\n security-level [glean|inspect|guard]\n!\nint gi0/0\n ipv6 snooping attach-policy [name]\nND inspection\n\nInspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing\nRelies on IPv6 snooping\nConfigured with ipv6 nd inspection under interfaces\n\nSource Guard\n\nSnooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked & dropped\n\nSource IP must be in the DHCP Binding table.\n\nSource learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS\nConfigured with ipv6 source-guard under interfaces\n\nDestination Guard\n\nCan filter based on Destination. Also requires binding table to be populated.\nBlocks traffic coming for an unknown destination\n\nPrefix Guard\n\nUsed on Ingress interface to deny traffic that has a correct address but is not topologically correct.\nConfigured with ipv6 source-guard under interface",
+    "crumbs": [
+      "Infrastructure Security",
+      "IPv6 Sec"
+    ]
+  },
+  {
+    "objectID": "ipv6sec.html#configuration",
+    "href": "ipv6sec.html#configuration",
+    "title": "IPv6 Sec",
+    "section": "Configuration",
+    "text": "Configuration\n\nStandard RA Guard Config\nipv6 nd raguard policy &lt;policy-name&gt;  \n device-role host \nint gi0/0  \n ipv6 nd raguard attach-policy &lt;policy-name&gt; \n! \n! This will block all RAs on this port\n\n\nStandard DHCP v6 Guard Config\nipv6 dhcp guard policy DHCP_SERVER  \n device-role server \nipv6 dhcp guard policy DHCP_CLIENT  device-role client \n! \ninterface GigabitEthernet 0/1  \n ipv6 dhcp guard attach-policy DHCP_SERVER\ninterface range GigabitEthernet 0/2 - 3\n ipv6 dhcp guard attach-policy DHCP_CLIENT \n! \n!This will only allow DHCP offers from the server ports",
     "crumbs": [
       "Infrastructure Security",
       "IPv6 Sec"

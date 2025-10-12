@@ -4,4 +4,108 @@ editor: visual
 code-block-bg: dark
 ---
 
-General Info
+## General Info
+
+-   Designed to increase L2 security in IPv6 LANs
+
+-   No broadcasts, but certain packets almost always flooded in IPv6 networks
+
+    -   FF02::1 (All IPv6 hosts)
+    -   FF02::2 (All IPv6 routers)
+
+-   First-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6
+
+-   
+
+-   Policies configured un \[protocol\] config mode then applied to interface
+
+------------------------------------------------------------------------
+
+## Features
+
+-   RA Guard (Router Advertisement)
+
+    -   RA guard inspects incoming RA messages, filtering when configured
+    -   Configure with `ipv6 nd raguard attach-policy [policy-name]` inbound on interface
+    -   Configured inbound on an interface
+    -   2 modes ( Host & Router)
+    -   Doesn't work on Tunneled Traffic and requires TCAM
+    -   Doesn't work on Etherchannel members or trunks with merge mode
+
+-   **DHCPV6 Guard**
+
+    -   DHCP snooping for IPv6
+    -   Classifies Messages into client, server or relay.
+        -   All Client messages are switched, server messages switches if router role = server
+    -   Configured with `ipv6 dhcp guard attach-policy [policy]` on interface
+
+-   **IPv6 Snooping**
+
+    -   Creates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols
+    -   **Glean** populates bind table without verifying messages
+    -   **Inspect** gleans addresses and validates messages
+    -   **Guard** gleans *and* inspects messages, drops RA and DHCP messages by default
+    -   Configured as follows:
+
+    ``` default
+    ipv6 snooping policy [name]
+     security-level [glean|inspect|guard]
+    !
+    int gi0/0
+     ipv6 snooping attach-policy [name]
+    ```
+
+-   **ND inspection**
+
+    -   Inspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing
+    -   Relies on IPv6 snooping
+    -   Configured with `ipv6 nd inspection` under interfaces
+
+-   **Source Guard**
+
+    -   Snooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked & dropped
+        -   Source IP must be in the **DHCP Binding** table.
+    -   Source learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS
+    -   Configured with `ipv6 source-guard` under interfaces
+
+-   **Destination Guard**
+
+    -   Can filter based on Destination. Also requires binding table to be populated.
+
+    -   Blocks traffic coming for an unknown destination
+
+-   **Prefix Guard**
+
+    -   Used on Ingress interface to deny traffic that has a correct address but is not topologically correct.
+
+    -   Configured with `ipv6 source-guard` under interface
+
+---
+
+## **Configuration**
+
+##### **Standard RA Guard Config**
+
+```         
+ipv6 nd raguard policy <policy-name>  
+ device-role host 
+int gi0/0  
+ ipv6 nd raguard attach-policy <policy-name> 
+! 
+! This will block all RAs on this port
+```
+
+##### **Standard DHCP v6 Guard Config**
+
+```         
+ipv6 dhcp guard policy DHCP_SERVER  
+ device-role server 
+ipv6 dhcp guard policy DHCP_CLIENT  device-role client 
+! 
+interface GigabitEthernet 0/1  
+ ipv6 dhcp guard attach-policy DHCP_SERVER
+interface range GigabitEthernet 0/2 - 3
+ ipv6 dhcp guard attach-policy DHCP_CLIENT 
+! 
+!This will only allow DHCP offers from the server ports
+```
