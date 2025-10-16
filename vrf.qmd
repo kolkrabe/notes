@@ -1,0 +1,33 @@
+---
+title: "VRF"
+editor: visual
+code-block-bg: dark
+---
+
+## General Info
+
+-   Technology which allows logical separation of routing tables on single device.
+-   Routes learned from main routing table aren't learned by vrf tables
+-   `VRF` when used with MPLS, `VRF-Lite` when used without
+-   
+
+---
+
+Useful show commands
+
+-   `show ip route vrf` - shows summary of vrf information
+-   
+
+---
+
+## Config
+
+``` default
+vrf definition TENANT-A
+  address-family ipv4
+!
+interface g0/0
+  vrf forwarding TENANT-A
+  ip address 192.0.2.1 255.255.255.0
+!
+```

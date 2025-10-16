@@ -21,6 +21,7 @@ website:
               - ospf.qmd
               - redistribution.qmd
               - routemap-pbr.qmd
+              - vrf.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd
