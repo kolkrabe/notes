@@ -333,9 +333,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li></li>
 </ul>
 <hr>
-<p>Useful show commands</p>
+<p>Useful show commands + other</p>
 <ul>
-<li><code>show ip route vrf</code> - shows summary of vrf information</li>
+<li><p><code>show ip vrf</code> / <code>show vrf</code> - shows summary of configured VRFs, including interfaces.</p></li>
+<li><p><code>show ip route vrf [vrf-name]</code> - shows routing table of VRF</p></li>
+<li><p><code>show ip vrf interfaces</code> / <code>show vrf ipv4 unicast interfaces</code> - shows interfaces in VRF.</p></li>
+<li><p><code>ping vrf [name] 10.1.1.1</code> - ping from specific VRF</p></li>
+<li><p><code>show ip eigrp vrf [vrf-name] interfaces</code></p></li>
 <li></li>
 </ul>
 <hr>
