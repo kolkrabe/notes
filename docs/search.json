@@ -698,7 +698,7 @@
     "href": "vrf.html",
     "title": "VRF",
     "section": "",
-    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\n\n\n\nUseful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
+    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\nFront Door VRFs - FVRF\n\n\nUseful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -710,7 +710,7 @@
     "href": "vrf.html#general-info",
     "title": "VRF",
     "section": "",
-    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\n\n\n\nUseful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
+    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\nFront Door VRFs - FVRF\n\n\nUseful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -722,7 +722,7 @@
     "href": "vrf.html#config",
     "title": "VRF",
     "section": "Config",
-    "text": "Config\nvrf definition TENANT-A\n  address-family ipv4\n!\ninterface g0/0\n  vrf forwarding TENANT-A\n  ip address 192.0.2.1 255.255.255.0\n!",
+    "text": "Config\nvrf definition Customer-A\n  address-family ipv4\n!\ninterface g0/0\n  vrf forwarding Customer-A\n  ip address 192.0.2.1 255.255.255.0\n!\nrouter eigrp [INE]\n address-family ipv4 unicast vrf [vrf-name] autonomous-system [as]\n  network 0.0.0.0 (all connected networks)\n!\nrouter ospf [as] vrf [vrf-name]\n network 0.0.0.0\n!\nrouter bgp 100\n neighbor 10.1.1.5 remote-as 100\n !\n address-family ipv4 vrf [vrf-name]\n  neighbor 10.1.1.5 activate",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

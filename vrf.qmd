@@ -9,7 +9,7 @@ code-block-bg: dark
 -   Technology which allows logical separation of routing tables on single device.
 -   Routes learned from main routing table aren't learned by vrf tables
 -   `VRF` when used with MPLS, `VRF-Lite` when used without
--   
+-   Front Door VRFs - [FVRF](https://www.networkingwithfish.com/tunnels-and-the-use-of-front-door-vrfs/ "FVRF")
 
 ------------------------------------------------------------------------
 
@@ -23,20 +23,30 @@ Useful show commands + other
 
 -   `ping vrf [name] 10.1.1.1` - ping from specific VRF
 
--    `show ip eigrp vrf [vrf-name] interfaces`
-
--   
+-   `show ip eigrp vrf [vrf-name] interfaces`
 
 ------------------------------------------------------------------------
 
 ## Config
 
 ``` default
-vrf definition TENANT-A
+vrf definition Customer-A
   address-family ipv4
 !
 interface g0/0
-  vrf forwarding TENANT-A
+  vrf forwarding Customer-A
   ip address 192.0.2.1 255.255.255.0
 !
+router eigrp [INE]
+ address-family ipv4 unicast vrf [vrf-name] autonomous-system [as]
+  network 0.0.0.0 (all connected networks)
+!
+router ospf [as] vrf [vrf-name]
+ network 0.0.0.0
+!
+router bgp 100
+ neighbor 10.1.1.5 remote-as 100
+ !
+ address-family ipv4 vrf [vrf-name]
+  neighbor 10.1.1.5 activate
 ```
