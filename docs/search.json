@@ -250,140 +250,219 @@
     ]
   },
   {
-    "objectID": "logging.html",
-    "href": "logging.html",
-    "title": "Logging",
+    "objectID": "mpls.html",
+    "href": "mpls.html",
+    "title": "MPLS",
     "section": "",
-    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
+    "text": "Protocal that uses labels to determine which path traffic should route\nIntroduces LIB (Label Information Base) & LFIB (Label Forwarding Information Base)",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "Logging"
+      "VPN & Encryption",
+      "MPLS"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "notes",
+    "objectID": "mpls.html#general-info",
+    "href": "mpls.html#general-info",
+    "title": "MPLS",
     "section": "",
-    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam.\nIdea and formatting borrowed from BrunB…\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "dhcp.html",
-    "href": "dhcp.html",
-    "title": "DHCP",
-    "section": "",
-    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR (IPv6)\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
+    "text": "Protocal that uses labels to determine which path traffic should route\nIntroduces LIB (Label Information Base) & LFIB (Label Forwarding Information Base)",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "DHCP"
+      "VPN & Encryption",
+      "MPLS"
     ]
   },
   {
-    "objectID": "dhcp.html#dhcp-operation",
-    "href": "dhcp.html#dhcp-operation",
-    "title": "DHCP",
-    "section": "",
-    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR (IPv6)\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "DHCP"
-    ]
-  },
-  {
-    "objectID": "copp.html",
-    "href": "copp.html",
-    "title": "CoPP",
-    "section": "",
-    "text": "Control Plane Policing\nUsed to protect control plane from DDoS and other attacks.\nUtilises Policy-Maps in a top down fashion, once matched the evaluation stops\nClass map match statement (used when multiple match statements exist)\n\nmatch-all - must match all match commands\nmatch-any - can match any match commands\n\nClass Map & Policy Maps are case sensitive\nT/S - SPCA ( Service Policy, Policy Map, Class Map ACL",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Security",
-      "CoPP"
-    ]
-  },
-  {
-    "objectID": "copp.html#general-info",
-    "href": "copp.html#general-info",
-    "title": "CoPP",
-    "section": "",
-    "text": "Control Plane Policing\nUsed to protect control plane from DDoS and other attacks.\nUtilises Policy-Maps in a top down fashion, once matched the evaluation stops\nClass map match statement (used when multiple match statements exist)\n\nmatch-all - must match all match commands\nmatch-any - can match any match commands\n\nClass Map & Policy Maps are case sensitive\nT/S - SPCA ( Service Policy, Policy Map, Class Map ACL",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Security",
-      "CoPP"
-    ]
-  },
-  {
-    "objectID": "copp.html#useful-show-commands",
-    "href": "copp.html#useful-show-commands",
-    "title": "CoPP",
+    "objectID": "mpls.html#useful-show-commands",
+    "href": "mpls.html#useful-show-commands",
+    "title": "MPLS",
     "section": "Useful Show Commands",
-    "text": "Useful Show Commands\n\nshow policy-map control-plane input",
+    "text": "Useful Show Commands",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Security",
-      "CoPP"
+      "VPN & Encryption",
+      "MPLS"
     ]
   },
   {
-    "objectID": "copp.html#standard-copp-configuration",
-    "href": "copp.html#standard-copp-configuration",
-    "title": "CoPP",
-    "section": "Standard CoPP Configuration",
-    "text": "Standard CoPP Configuration\n\nCreate ACL to define interesting traffic\nCreate class maps to define traffic class\nCreate policy maps to define a service policy\nApply service policy to control plane\n\n *** Configure ACLs ***\nip access-list extended COPP-ICMP-ACL-EXAMPLE\n permit udp any any range 33434 33463 ttl eq 1\n permit icmp any any unreachable\n permit icmp any any echo\n permit icmp any any echo-reply\n permit icmp any any ttl-exceeded\n exit\nip access-list extended COPP-MGMT-TRAFFIC-ACL-EXAMPLE\n permit udp any eq ntp any\n permit udp any any eq snmp\n permit tcp any any eq 22\n permit tcp any eq 22 any established\n permit tcp any any eq 23\n exit\nip access-list extended COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE\n permit tcp any eq bgp any established\n permit eigrp any host 224.0.0.10\n permit ospf any host 224.0.0.5\n permit ospf any host 224.0.0.6\n permit pim any host 224.0.0.13\n permit igmp any any\n \n \n*** Create Class Maps ***\nclass-map match-all COPP-ICMP-CLASSMAP-EXAMPLE                           -  Class Map Name is case sensitive!\n match access-group name COPP-ICMP-ACL-EXAMPLE\nclass-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE\n match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE\nclass-map match-all COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE\n match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE\n \n*** Create Policy Map ***\npolicy-map COPP-POLICYMAP-EXAMPLE                                        \n class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE\n  police 32000 conform-action transmit exceed-action transmit violate-action transmit\n class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE\n  police 34000 conform-action transmit exceed-action transmit violate-action transmit\n class COPP-ICMP-CLASSMAP-EXAMPLE\n  police 8000 conform-action transmit exceed-action transmit violate-action drop\n\n*** Apply to the Control Plane ***\ncontrol-plane\n service-policy input COPP-POLICYMAP-EXAMPLE",
+    "objectID": "mpls.html#config",
+    "href": "mpls.html#config",
+    "title": "MPLS",
+    "section": "Config",
+    "text": "Config",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Security",
-      "CoPP"
+      "VPN & Encryption",
+      "MPLS"
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "ipv6sec.html",
+    "href": "ipv6sec.html",
+    "title": "IPv6 Sec",
     "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "aaa.html",
-    "href": "aaa.html",
-    "title": "AAA",
-    "section": "",
-    "text": "AAA = Authentication, Authorisation, Accounting\nWho are they, what can they do, what did they do…\nif-authenticated used in authorisation config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.\n\n\n\n\nusername [user] privilege 15 secret [password] \n!\naaa new-model\naaa group server tacacs+ [group]\n server-private 10.44.155.20 single-connection key [key]\n ip vrf forwarding Mgmt-intf\n ip tacacs source-interface GigabitEthernet0\n!\n! Alternate Method of server config with single server^\n!\ntacacs server [server]\n address ipv4 [10.44.241.250]\n key [passkey]\naaa group server tacacs+ [group-name]\n server name [server]\n ip tacacs source-interface GigabitEthernet0\n!\naaa authentication login [method list] group [group] local\naaa authorization exec [method list] group [group] local if-authenticated\naaa authorization commands 15 [method list] group [group] local if-authenticated\naaa accounting commands 1 [method list] start-stop group [group]\naaa accounting commands 15 [method list] start-stop group [group]\naaa session-id common\n!\n! using method list 'default' applies the AAA methods to all lines \n!\nline vty 0 4\nlogin authentication [list-name]\n\n\n***\naaa authorization exec default local          - Puts authenticated user to priv exec upon login]\nline vty 0 4\n  authorization exec default\n  \nTo use AAA on console port this is also required\nline con 0\n  logging authentication [group]\n  aaa authorization console",
+    "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Security",
-      "AAA"
+      "IPv6 Sec"
     ]
   },
   {
-    "objectID": "aaa.html#general-info",
-    "href": "aaa.html#general-info",
-    "title": "AAA",
+    "objectID": "ipv6sec.html#general-info",
+    "href": "ipv6sec.html#general-info",
+    "title": "IPv6 Sec",
     "section": "",
-    "text": "AAA = Authentication, Authorisation, Accounting\nWho are they, what can they do, what did they do…\nif-authenticated used in authorisation config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.\n\n\n\n\nusername [user] privilege 15 secret [password] \n!\naaa new-model\naaa group server tacacs+ [group]\n server-private 10.44.155.20 single-connection key [key]\n ip vrf forwarding Mgmt-intf\n ip tacacs source-interface GigabitEthernet0\n!\n! Alternate Method of server config with single server^\n!\ntacacs server [server]\n address ipv4 [10.44.241.250]\n key [passkey]\naaa group server tacacs+ [group-name]\n server name [server]\n ip tacacs source-interface GigabitEthernet0\n!\naaa authentication login [method list] group [group] local\naaa authorization exec [method list] group [group] local if-authenticated\naaa authorization commands 15 [method list] group [group] local if-authenticated\naaa accounting commands 1 [method list] start-stop group [group]\naaa accounting commands 15 [method list] start-stop group [group]\naaa session-id common\n!\n! using method list 'default' applies the AAA methods to all lines \n!\nline vty 0 4\nlogin authentication [list-name]\n\n\n***\naaa authorization exec default local          - Puts authenticated user to priv exec upon login]\nline vty 0 4\n  authorization exec default\n  \nTo use AAA on console port this is also required\nline con 0\n  logging authentication [group]\n  aaa authorization console",
+    "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Security",
-      "AAA"
+      "IPv6 Sec"
     ]
   },
   {
-    "objectID": "aaa.html#useful-show-commands",
-    "href": "aaa.html#useful-show-commands",
-    "title": "AAA",
-    "section": "Useful show commands",
-    "text": "Useful show commands\n\ndebug aaa authentication - Debug all AAA auth\ndebug radius authentication - Debug for radius auth\ndebug tacacs authentication - Debug for tacacs auth\ndebug aaa protocol local - Debug local authentication",
+    "objectID": "ipv6sec.html#features",
+    "href": "ipv6sec.html#features",
+    "title": "IPv6 Sec",
+    "section": "Features",
+    "text": "Features\n\nRA Guard (Router Advertisement)\n\nRA guard inspects incoming RA messages, filtering when configured\nConfigure with ipv6 nd raguard attach-policy [policy-name] inbound on interface\nConfigured inbound on an interface\n2 modes ( Host & Router)\nDoesn’t work on Tunneled Traffic and requires TCAM\nDoesn’t work on Etherchannel members or trunks with merge mode\n\nDHCPV6 Guard\n\nDHCP snooping for IPv6\nClassifies Messages into client, server or relay.\n\nAll Client messages are switched, server messages switches if router role = server\n\nConfigured with ipv6 dhcp guard attach-policy [policy] on interface\n\nIPv6 Snooping\n\nCreates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols\nGlean populates bind table without verifying messages\nInspect gleans addresses and validates messages\nGuard gleans and inspects messages, drops RA and DHCP messages by default\nConfigured as follows:\n\nipv6 snooping policy [name]\n security-level [glean|inspect|guard]\n!\nint gi0/0\n ipv6 snooping attach-policy [name]\nND inspection\n\nInspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing\nRelies on IPv6 snooping\nConfigured with ipv6 nd inspection under interfaces\n\nSource Guard\n\nSnooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked & dropped\n\nSource IP must be in the DHCP Binding table.\n\nSource learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS\nConfigured with ipv6 source-guard under interfaces\n\nDestination Guard\n\nCan filter based on Destination. Also requires binding table to be populated.\nBlocks traffic coming for an unknown destination\n\nPrefix Guard\n\nUsed on Ingress interface to deny traffic that has a correct address but is not topologically correct.\nConfigured with ipv6 source-guard under interface",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Security",
-      "AAA"
+      "IPv6 Sec"
+    ]
+  },
+  {
+    "objectID": "ipv6sec.html#configuration",
+    "href": "ipv6sec.html#configuration",
+    "title": "IPv6 Sec",
+    "section": "Configuration",
+    "text": "Configuration\n\nStandard RA Guard Config\nipv6 nd raguard policy &lt;policy-name&gt;  \n device-role host \nint gi0/0  \n ipv6 nd raguard attach-policy &lt;policy-name&gt; \n! \n! This will block all RAs on this port\n\n\nStandard DHCP v6 Guard Config\nipv6 dhcp guard policy DHCP_SERVER  \n device-role server \nipv6 dhcp guard policy DHCP_CLIENT  device-role client \n! \ninterface GigabitEthernet 0/1  \n ipv6 dhcp guard attach-policy DHCP_SERVER\ninterface range GigabitEthernet 0/2 - 3\n ipv6 dhcp guard attach-policy DHCP_CLIENT \n! \n!This will only allow DHCP offers from the server ports",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Security",
+      "IPv6 Sec"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html",
+    "href": "ipsla+track.html",
+    "title": "IP SLA & Tracking",
+    "section": "",
+    "text": "IP-SLA is used to measure various parameters across the network for troubleshooting\n\nIP SLA instances\nInterface Status / Reachability\nJitter / latency\nGroups of things\n\nUsed commonly for floating static default route (routes internet across different link if one fails.\nGreat example below from Brunbattery on using it to monitor HSRP.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#useful-show-commands",
+    "href": "ipsla+track.html#useful-show-commands",
+    "title": "IP SLA & Tracking",
+    "section": "Useful Show Commands",
+    "text": "Useful Show Commands\n\nshow ip sla configuration - shows config of all IP SLA’s\nshow ip sla statistics -show ip sla statistics\nshow track - shows config and status of tracked objects (e.g. floating statics)",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
+    "href": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
+    "title": "IP SLA & Tracking",
+    "section": "Configuration of Floating Static using IP SLA",
+    "text": "Configuration of Floating Static using IP SLA\nip sla 1 \n icmp-echo 10.44.1.2                                    - pings 10.44.1.2\n timeout 5000                                           - expecting a response within 5000ms\n frequency 10                                           - every 10 seconds\n!\nip sla schedule 1 start-time now life forever          - starts IP SLA\n!\ntrack 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable\nip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#brunbatterys-awesome-ipsla-w-track-for-hsrp",
+    "href": "ipsla+track.html#brunbatterys-awesome-ipsla-w-track-for-hsrp",
+    "title": "IP SLA & Tracking",
+    "section": "BrunBattery’s awesome IPSLA w/ Track for HSRP",
+    "text": "BrunBattery’s awesome IPSLA w/ Track for HSRP\n! Tracking line protocols of WAN interfaces\ntrack 11 interface GigabitEthernet8 line-protocol\ntrack 12 interface FastEthernet0 line-protocol\n! Tracking ip routing status of tunnel interfaces for backup route\ntrack 21 interface Tunnel1 ip routing\ntrack 22 interface Tunnel2 ip routing\n! Track 23 will be up if both tunnels are not routing - set up for backup route to be installed\ntrack 23 list boolean and\n object 21 not\n object 22 not\n! Tracking for IP SLA 101\ntrack 100 ip sla 101 reachability\n delay down 15 up 60\n! Decrementing HSRP based on IP SLA and line protocols of WAN interfaces\nint vlan 100\n standby 1 track 11 decrement 10\n standby 1 track 12 decrement 10\n standby 1 track 100 decrement 10\n! Routing management traffic to secondary router if neither tunnel is routing\nip route 10.100.100.0 255.255.255.0 10.1.174.253 track 23\n! Testing reachability over DMVPN overlay and starting SLA\nip sla 101\n icmp-echo 172.16.1.254 source-interface Tunnel1\n request-data-size 100\n frequency 5\nip sla schedule 101 life forever start-time now",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "eigrp.html",
+    "href": "eigrp.html",
+    "title": "EIGRP",
+    "section": "",
+    "text": "Classic/Named Mode\n\nClassic: Commands under router process + Interfaces - disparate.\nNamed: Config in SubSections - Address Family, Interface & Topology\n\nAD 90 internal, 170 External\nHello’s are Multicast on 224.0.0.10, port 88\nTimers\n\nHello - default 5 secs, (60 on Slow interfaces)\nHold - default 15 secs, (180 on slow interfaces) - How long we tell neighbour to wait for us.\n\nLoad balance over unequal paths using variance - only IGRP that can do this.\nUses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with metric-weights\n\nMostly uses\n\nK1 - Bandwidth - slowest in path\nK3 - Delay - cumulative\n\n\nSupports VLSM by sending mask\nCan configure neighbour specifically to use Unicast\nUses RTP (reliable transport protocol - confirms messages neighbour received messages but not hello)\nUses DUAL (Difussing identifies neighbour with lowest Feasible Distance)\n\nFD set to Infinity to indicate the router is in transition & seeking alternative paths\n\n3 Data Structures\n\nNeighbour Table - Who our EIGRP neighbours are\nInterface Table - which interfaces are participating\nTopology Table - shows routes known to EIGRP\n\nRouter-ID configurable - if not generated byhighest configured + active Loopback, then any IPv4 interface.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#eigrp---traditional-ipv4-configuration",
+    "href": "eigrp.html#eigrp---traditional-ipv4-configuration",
+    "title": "EIGRP",
+    "section": "EIGRP - Traditional IPv4 Configuration",
+    "text": "EIGRP - Traditional IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n  interface G0/1\n    ip hello-interval eigrp 10 3\n    ip hold-interval eigrp 10 15\n    timers active-time 2\neigrp stub                            - for stub site\n\n---\n\nMODERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 1\n eigrp stub                           - for stub site\n  !\n  af-interface default\n   passive-interface                 - Sets all intefaces as passive.\n   ip hello-interval eigrp 10 3       - Can be here or af-interface section below\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface               - enables interface for EIGRP\n   ip hello-interval eigrp 10 3\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  topology base\n  variance 2\n    timers active-time 2              - 3 mins by default, \n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  m\n  eigrp router-id 150.1.5.5\n exit-address-family",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "eigrp.html#useful-show-commands-info",
+    "href": "eigrp.html#useful-show-commands-info",
+    "title": "EIGRP",
+    "section": "Useful Show Commands + Info",
+    "text": "Useful Show Commands + Info\n\nshow ip route EIGRP - shows EIGRP routes installed into the RIB\nshow ip eigrp interfaces - shows active EIGRP interfaces\nshow ip eigrp interfaces detail - shows detailed interface info (hold time, split-horizon enabled etc.\nshow ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition)\nshow ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours\nEIGRP routes with same router-id will form an adjacency but won’t accept routes from one another. Investigate using debug ip eigrp",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "EIGRP"
+    ]
+  },
+  {
+    "objectID": "device_management.html",
+    "href": "device_management.html",
+    "title": "Device Management",
+    "section": "",
+    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users\n\n\n\n\n(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
+  },
+  {
+    "objectID": "device_management.html#console-line-connection-requirements",
+    "href": "device_management.html#console-line-connection-requirements",
+    "title": "Device Management",
+    "section": "",
+    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
+    ]
+  },
+  {
+    "objectID": "device_management.html#standard-line-config",
+    "href": "device_management.html#standard-line-config",
+    "title": "Device Management",
+    "section": "",
+    "text": "(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "Device Management"
     ]
   },
   {
@@ -447,171 +526,140 @@
     ]
   },
   {
-    "objectID": "device_management.html",
-    "href": "device_management.html",
-    "title": "Device Management",
+    "objectID": "aaa.html",
+    "href": "aaa.html",
+    "title": "AAA",
     "section": "",
-    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users\n\n\n\n\n(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
+    "text": "AAA = Authentication, Authorisation, Accounting\nWho are they, what can they do, what did they do…\nif-authenticated used in authorisation config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.\n\n\n\n\nusername [user] privilege 15 secret [password] \n!\naaa new-model\naaa group server tacacs+ [group]\n server-private 10.44.155.20 single-connection key [key]\n ip vrf forwarding Mgmt-intf\n ip tacacs source-interface GigabitEthernet0\n!\n! Alternate Method of server config with single server^\n!\ntacacs server [server]\n address ipv4 [10.44.241.250]\n key [passkey]\naaa group server tacacs+ [group-name]\n server name [server]\n ip tacacs source-interface GigabitEthernet0\n!\naaa authentication login [method list] group [group] local\naaa authorization exec [method list] group [group] local if-authenticated\naaa authorization commands 15 [method list] group [group] local if-authenticated\naaa accounting commands 1 [method list] start-stop group [group]\naaa accounting commands 15 [method list] start-stop group [group]\naaa session-id common\n!\n! using method list 'default' applies the AAA methods to all lines \n!\nline vty 0 4\nlogin authentication [list-name]\n\n\n***\naaa authorization exec default local          - Puts authenticated user to priv exec upon login]\nline vty 0 4\n  authorization exec default\n  \nTo use AAA on console port this is also required\nline con 0\n  logging authentication [group]\n  aaa authorization console",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "Device Management"
+      "Infrastructure Security",
+      "AAA"
     ]
   },
   {
-    "objectID": "device_management.html#console-line-connection-requirements",
-    "href": "device_management.html#console-line-connection-requirements",
-    "title": "Device Management",
+    "objectID": "aaa.html#general-info",
+    "href": "aaa.html#general-info",
+    "title": "AAA",
     "section": "",
-    "text": "9600 Baud\n8 data bits\n1 stop bit\nno parity\nGenerally no password by default. If line password is configured Login needs to be configured on the line.\nLogin Local - uses Local user DB Login authentication xxx - uses configured aaa servers.\n\n\n\n\n\nIs it Reachable?\nTransport protocols permitted with allowed protocols?\n\n\nTransport input \\[ssh/telnet\\]\nshow line vty \\[line number\\] \\| include Allowed\n\n\nAuth setup?\n\n\nLogin configured on line, line password configured\nLogin local configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”\n\n\nACL?\nVTY Lines Busy?\n\n“Show users” - will show active users\n“clear line [number]” used to clear a line\n\n\n\nUseful show commands\nShow users - will show active users",
+    "text": "AAA = Authentication, Authorisation, Accounting\nWho are they, what can they do, what did they do…\nif-authenticated used in authorisation config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.\n\n\n\n\nusername [user] privilege 15 secret [password] \n!\naaa new-model\naaa group server tacacs+ [group]\n server-private 10.44.155.20 single-connection key [key]\n ip vrf forwarding Mgmt-intf\n ip tacacs source-interface GigabitEthernet0\n!\n! Alternate Method of server config with single server^\n!\ntacacs server [server]\n address ipv4 [10.44.241.250]\n key [passkey]\naaa group server tacacs+ [group-name]\n server name [server]\n ip tacacs source-interface GigabitEthernet0\n!\naaa authentication login [method list] group [group] local\naaa authorization exec [method list] group [group] local if-authenticated\naaa authorization commands 15 [method list] group [group] local if-authenticated\naaa accounting commands 1 [method list] start-stop group [group]\naaa accounting commands 15 [method list] start-stop group [group]\naaa session-id common\n!\n! using method list 'default' applies the AAA methods to all lines \n!\nline vty 0 4\nlogin authentication [list-name]\n\n\n***\naaa authorization exec default local          - Puts authenticated user to priv exec upon login]\nline vty 0 4\n  authorization exec default\n  \nTo use AAA on console port this is also required\nline con 0\n  logging authentication [group]\n  aaa authorization console",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "Device Management"
+      "Infrastructure Security",
+      "AAA"
     ]
   },
   {
-    "objectID": "device_management.html#standard-line-config",
-    "href": "device_management.html#standard-line-config",
-    "title": "Device Management",
+    "objectID": "aaa.html#useful-show-commands",
+    "href": "aaa.html#useful-show-commands",
+    "title": "AAA",
+    "section": "Useful show commands",
+    "text": "Useful show commands\n\ndebug aaa authentication - Debug all AAA auth\ndebug radius authentication - Debug for radius auth\ndebug tacacs authentication - Debug for tacacs auth\ndebug aaa protocol local - Debug local authentication",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Security",
+      "AAA"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "(config)# exec -enables the line \n(config)# no exec -disables exec access to line line \n(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "Device Management"
-    ]
+    "text": "About this site"
   },
   {
-    "objectID": "eigrp.html",
-    "href": "eigrp.html",
-    "title": "EIGRP",
+    "objectID": "copp.html",
+    "href": "copp.html",
+    "title": "CoPP",
     "section": "",
-    "text": "Classic/Named Mode\n\nClassic: Commands under router process + Interfaces - disparate.\nNamed: Config in SubSections - Address Family, Interface & Topology\n\nAD 90 internal, 170 External\nHello’s are Multicast on 224.0.0.10, port 88\nTimers\n\nHello - default 5 secs, (60 on Slow interfaces)\nHold - default 15 secs, (180 on slow interfaces) - How long we tell neighbour to wait for us.\n\nLoad balance over unequal paths using variance - only IGRP that can do this.\nUses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with metric-weights\n\nMostly uses\n\nK1 - Bandwidth - slowest in path\nK3 - Delay - cumulative\n\n\nSupports VLSM by sending mask\nCan configure neighbour specifically to use Unicast\nUses RTP (reliable transport protocol - confirms messages neighbour received messages but not hello)\nUses DUAL (Difussing identifies neighbour with lowest Feasible Distance)\n\nFD set to Infinity to indicate the router is in transition & seeking alternative paths\n\n3 Data Structures\n\nNeighbour Table - Who our EIGRP neighbours are\nInterface Table - which interfaces are participating\nTopology Table - shows routes known to EIGRP\n\nRouter-ID configurable - if not generated byhighest configured + active Loopback, then any IPv4 interface.",
+    "text": "Control Plane Policing\nUsed to protect control plane from DDoS and other attacks.\nUtilises Policy-Maps in a top down fashion, once matched the evaluation stops\nClass map match statement (used when multiple match statements exist)\n\nmatch-all - must match all match commands\nmatch-any - can match any match commands\n\nClass Map & Policy Maps are case sensitive\nT/S - SPCA ( Service Policy, Policy Map, Class Map ACL",
     "crumbs": [
       "CCNP ENARSI",
-      "Layer 3 Technologies",
-      "EIGRP"
+      "Infrastructure Security",
+      "CoPP"
     ]
   },
   {
-    "objectID": "eigrp.html#eigrp---traditional-ipv4-configuration",
-    "href": "eigrp.html#eigrp---traditional-ipv4-configuration",
-    "title": "EIGRP",
-    "section": "EIGRP - Traditional IPv4 Configuration",
-    "text": "EIGRP - Traditional IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n  interface G0/1\n    ip hello-interval eigrp 10 3\n    ip hold-interval eigrp 10 15\n    timers active-time 2\neigrp stub                            - for stub site\n\n---\n\nMODERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 1\n eigrp stub                           - for stub site\n  !\n  af-interface default\n   passive-interface                 - Sets all intefaces as passive.\n   ip hello-interval eigrp 10 3       - Can be here or af-interface section below\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface               - enables interface for EIGRP\n   ip hello-interval eigrp 10 3\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  topology base\n  variance 2\n    timers active-time 2              - 3 mins by default, \n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  m\n  eigrp router-id 150.1.5.5\n exit-address-family",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Layer 3 Technologies",
-      "EIGRP"
-    ]
-  },
-  {
-    "objectID": "eigrp.html#useful-show-commands-info",
-    "href": "eigrp.html#useful-show-commands-info",
-    "title": "EIGRP",
-    "section": "Useful Show Commands + Info",
-    "text": "Useful Show Commands + Info\n\nshow ip route EIGRP - shows EIGRP routes installed into the RIB\nshow ip eigrp interfaces - shows active EIGRP interfaces\nshow ip eigrp interfaces detail - shows detailed interface info (hold time, split-horizon enabled etc.\nshow ip eigrp topology all-links - shows all additional paths to network (failed Feasibility Condition)\nshow ip protocols - displays EIGRP process ID, ASN, K values, RID, Neighbours, AD + Passive Ints\nStuck in Active - router sends query about network, doesn’t hear back and thinks it’s neighbor has died. Default timer 3 mins, router waits half then sends SIA query to neighbours\nEIGRP routes with same router-id will form an adjacency but won’t accept routes from one another. Investigate using debug ip eigrp",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Layer 3 Technologies",
-      "EIGRP"
-    ]
-  },
-  {
-    "objectID": "ipsla+track.html",
-    "href": "ipsla+track.html",
-    "title": "IP SLA & Tracking",
+    "objectID": "copp.html#general-info",
+    "href": "copp.html#general-info",
+    "title": "CoPP",
     "section": "",
-    "text": "IP-SLA is used to measure various parameters across the network for troubleshooting\n\nIP SLA instances\nInterface Status / Reachability\nJitter / latency\nGroups of things\n\nUsed commonly for floating static default route (routes internet across different link if one fails.\nGreat example below from Brunbattery on using it to monitor HSRP.",
+    "text": "Control Plane Policing\nUsed to protect control plane from DDoS and other attacks.\nUtilises Policy-Maps in a top down fashion, once matched the evaluation stops\nClass map match statement (used when multiple match statements exist)\n\nmatch-all - must match all match commands\nmatch-any - can match any match commands\n\nClass Map & Policy Maps are case sensitive\nT/S - SPCA ( Service Policy, Policy Map, Class Map ACL",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "IP SLA & Tracking"
+      "Infrastructure Security",
+      "CoPP"
     ]
   },
   {
-    "objectID": "ipsla+track.html#useful-show-commands",
-    "href": "ipsla+track.html#useful-show-commands",
-    "title": "IP SLA & Tracking",
+    "objectID": "copp.html#useful-show-commands",
+    "href": "copp.html#useful-show-commands",
+    "title": "CoPP",
     "section": "Useful Show Commands",
-    "text": "Useful Show Commands\n\nshow ip sla configuration - shows config of all IP SLA’s\nshow ip sla statistics -show ip sla statistics\nshow track - shows config and status of tracked objects (e.g. floating statics)",
+    "text": "Useful Show Commands\n\nshow policy-map control-plane input",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "IP SLA & Tracking"
+      "Infrastructure Security",
+      "CoPP"
     ]
   },
   {
-    "objectID": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
-    "href": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
-    "title": "IP SLA & Tracking",
-    "section": "Configuration of Floating Static using IP SLA",
-    "text": "Configuration of Floating Static using IP SLA\nip sla 1 \n icmp-echo 10.44.1.2                                    - pings 10.44.1.2\n timeout 5000                                           - expecting a response within 5000ms\n frequency 10                                           - every 10 seconds\n!\nip sla schedule 1 start-time now life forever          - starts IP SLA\n!\ntrack 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable\nip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met",
+    "objectID": "copp.html#standard-copp-configuration",
+    "href": "copp.html#standard-copp-configuration",
+    "title": "CoPP",
+    "section": "Standard CoPP Configuration",
+    "text": "Standard CoPP Configuration\n\nCreate ACL to define interesting traffic\nCreate class maps to define traffic class\nCreate policy maps to define a service policy\nApply service policy to control plane\n\n *** Configure ACLs ***\nip access-list extended COPP-ICMP-ACL-EXAMPLE\n permit udp any any range 33434 33463 ttl eq 1\n permit icmp any any unreachable\n permit icmp any any echo\n permit icmp any any echo-reply\n permit icmp any any ttl-exceeded\n exit\nip access-list extended COPP-MGMT-TRAFFIC-ACL-EXAMPLE\n permit udp any eq ntp any\n permit udp any any eq snmp\n permit tcp any any eq 22\n permit tcp any eq 22 any established\n permit tcp any any eq 23\n exit\nip access-list extended COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE\n permit tcp any eq bgp any established\n permit eigrp any host 224.0.0.10\n permit ospf any host 224.0.0.5\n permit ospf any host 224.0.0.6\n permit pim any host 224.0.0.13\n permit igmp any any\n \n \n*** Create Class Maps ***\nclass-map match-all COPP-ICMP-CLASSMAP-EXAMPLE                           -  Class Map Name is case sensitive!\n match access-group name COPP-ICMP-ACL-EXAMPLE\nclass-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE\n match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE\nclass-map match-all COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE\n match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE\n \n*** Create Policy Map ***\npolicy-map COPP-POLICYMAP-EXAMPLE                                        \n class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE\n  police 32000 conform-action transmit exceed-action transmit violate-action transmit\n class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE\n  police 34000 conform-action transmit exceed-action transmit violate-action transmit\n class COPP-ICMP-CLASSMAP-EXAMPLE\n  police 8000 conform-action transmit exceed-action transmit violate-action drop\n\n*** Apply to the Control Plane ***\ncontrol-plane\n service-policy input COPP-POLICYMAP-EXAMPLE",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Services",
-      "IP SLA & Tracking"
+      "Infrastructure Security",
+      "CoPP"
     ]
   },
   {
-    "objectID": "ipsla+track.html#brunbatterys-awesome-ipsla-w-track-for-hsrp",
-    "href": "ipsla+track.html#brunbatterys-awesome-ipsla-w-track-for-hsrp",
-    "title": "IP SLA & Tracking",
-    "section": "BrunBattery’s awesome IPSLA w/ Track for HSRP",
-    "text": "BrunBattery’s awesome IPSLA w/ Track for HSRP\n! Tracking line protocols of WAN interfaces\ntrack 11 interface GigabitEthernet8 line-protocol\ntrack 12 interface FastEthernet0 line-protocol\n! Tracking ip routing status of tunnel interfaces for backup route\ntrack 21 interface Tunnel1 ip routing\ntrack 22 interface Tunnel2 ip routing\n! Track 23 will be up if both tunnels are not routing - set up for backup route to be installed\ntrack 23 list boolean and\n object 21 not\n object 22 not\n! Tracking for IP SLA 101\ntrack 100 ip sla 101 reachability\n delay down 15 up 60\n! Decrementing HSRP based on IP SLA and line protocols of WAN interfaces\nint vlan 100\n standby 1 track 11 decrement 10\n standby 1 track 12 decrement 10\n standby 1 track 100 decrement 10\n! Routing management traffic to secondary router if neither tunnel is routing\nip route 10.100.100.0 255.255.255.0 10.1.174.253 track 23\n! Testing reachability over DMVPN overlay and starting SLA\nip sla 101\n icmp-echo 172.16.1.254 source-interface Tunnel1\n request-data-size 100\n frequency 5\nip sla schedule 101 life forever start-time now",
-    "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Services",
-      "IP SLA & Tracking"
-    ]
-  },
-  {
-    "objectID": "ipv6sec.html",
-    "href": "ipv6sec.html",
-    "title": "IPv6 Sec",
+    "objectID": "dhcp.html",
+    "href": "dhcp.html",
+    "title": "DHCP",
     "section": "",
-    "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
+    "text": "DHCP used to dynamically address clients on a network.\nClients Broadcast DHCPDISCOVER on local network.\nTo operate outwith local subnet ip helper-address x.x.x.x on DG interface will forward DHCP messages towards DHCP server.\n\nfor IPv6 this is ipv6 dhcp relay destination [ipv6-ip]\n\n\n\n\n\nDORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR (IPv6)\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Security",
-      "IPv6 Sec"
+      "Infrastructure Services",
+      "DHCP"
     ]
   },
   {
-    "objectID": "ipv6sec.html#general-info",
-    "href": "ipv6sec.html#general-info",
-    "title": "IPv6 Sec",
+    "objectID": "dhcp.html#dhcp-operation",
+    "href": "dhcp.html#dhcp-operation",
+    "title": "DHCP",
     "section": "",
-    "text": "Designed to increase L2 security in IPv6 LANs\nNo broadcasts, but certain packets almost always flooded in IPv6 networks\n\nFF02::1 (All IPv6 hosts)\nFF02::2 (All IPv6 routers)\n\nFirst-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6\n\nPolicies configured un [protocol] config mode then applied to interface",
+    "text": "DORA\n\nDiscover - Client sends broadcast to discover DHCP servers on port 67\nOffer - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port 68\nRequest - Client request the offered IP details.\nAcknowledge - DHCP server acknowledges clients request and records the details\n\nSARR (IPv6)\n\nSolicit - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2\nAdvertise - Servers respond to solicit message with a unicast advertise, offering addressing info\nRequest - Client sends request back to server, confirming address provided + other config\nReply - Server finalizes process with this message\n\n\n\nUseful show commands\n\nshow ip dhcp binding ! shows current dhcp ip bindings\nshow ip dhcp pool ! shows configured dhcp pool\nshow ip dhcp conflict ! shows ip conflicts\n\n\nStandard IPv4/IPv6 Configuration\nIPv4\nip dhcp excluded-address 10.8.8.1 10.8.8.10\n!\nip dhcp pool POOL-A\nnetwork 10.8.8.0 255.255.255.0\ndefault-router 10.8.8.1\ndns-server 192.168.1.1\nIPv6\nipv6 dhcp pool DHCPV6POOL\naddress prefix 2001:DB8:A:A::/64\ndns-server 2001:DB8:B:B::1\ndomain-name cisco.com\n!\ninterface GigabitEthernet0/0\nipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4\nint g0/0\nipv6 address autoconfig            ! Enables SLAAC on an interface",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Security",
-      "IPv6 Sec"
+      "Infrastructure Services",
+      "DHCP"
     ]
   },
   {
-    "objectID": "ipv6sec.html#features",
-    "href": "ipv6sec.html#features",
-    "title": "IPv6 Sec",
-    "section": "Features",
-    "text": "Features\n\nRA Guard (Router Advertisement)\n\nRA guard inspects incoming RA messages, filtering when configured\nConfigure with ipv6 nd raguard attach-policy [policy-name] inbound on interface\nConfigured inbound on an interface\n2 modes ( Host & Router)\nDoesn’t work on Tunneled Traffic and requires TCAM\nDoesn’t work on Etherchannel members or trunks with merge mode\n\nDHCPV6 Guard\n\nDHCP snooping for IPv6\nClassifies Messages into client, server or relay.\n\nAll Client messages are switched, server messages switches if router role = server\n\nConfigured with ipv6 dhcp guard attach-policy [policy] on interface\n\nIPv6 Snooping\n\nCreates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols\nGlean populates bind table without verifying messages\nInspect gleans addresses and validates messages\nGuard gleans and inspects messages, drops RA and DHCP messages by default\nConfigured as follows:\n\nipv6 snooping policy [name]\n security-level [glean|inspect|guard]\n!\nint gi0/0\n ipv6 snooping attach-policy [name]\nND inspection\n\nInspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing\nRelies on IPv6 snooping\nConfigured with ipv6 nd inspection under interfaces\n\nSource Guard\n\nSnooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked & dropped\n\nSource IP must be in the DHCP Binding table.\n\nSource learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS\nConfigured with ipv6 source-guard under interfaces\n\nDestination Guard\n\nCan filter based on Destination. Also requires binding table to be populated.\nBlocks traffic coming for an unknown destination\n\nPrefix Guard\n\nUsed on Ingress interface to deny traffic that has a correct address but is not topologically correct.\nConfigured with ipv6 source-guard under interface",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "notes",
+    "section": "",
+    "text": "This is a Quarto website used for various things, including collating notes for my CCNP ENARSI exam.\nIdea and formatting borrowed from BrunB…\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
     "crumbs": [
-      "CCNP ENARSI",
-      "Infrastructure Security",
-      "IPv6 Sec"
+      "Welcome"
     ]
   },
   {
-    "objectID": "ipv6sec.html#configuration",
-    "href": "ipv6sec.html#configuration",
-    "title": "IPv6 Sec",
-    "section": "Configuration",
-    "text": "Configuration\n\nStandard RA Guard Config\nipv6 nd raguard policy &lt;policy-name&gt;  \n device-role host \nint gi0/0  \n ipv6 nd raguard attach-policy &lt;policy-name&gt; \n! \n! This will block all RAs on this port\n\n\nStandard DHCP v6 Guard Config\nipv6 dhcp guard policy DHCP_SERVER  \n device-role server \nipv6 dhcp guard policy DHCP_CLIENT  device-role client \n! \ninterface GigabitEthernet 0/1  \n ipv6 dhcp guard attach-policy DHCP_SERVER\ninterface range GigabitEthernet 0/2 - 3\n ipv6 dhcp guard attach-policy DHCP_CLIENT \n! \n!This will only allow DHCP offers from the server ports",
+    "objectID": "logging.html",
+    "href": "logging.html",
+    "title": "Logging",
+    "section": "",
+    "text": "Syslog\n\nGeneral Notes\n\nUsed to manage system logs and alerts\nCan be stored locally, sent to vty, console lines, or forwarded to an external syslog server\nLogging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )\n\nEmergency: 0\nAlert: 1\nCritical: 2\nError: 3\nWarning: 4\nNotice: 5\nInformational: 6\nDebug: 7\n\n\n\n\n\nConditional Debugging\nConditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)\n\nUseful show commands\n\nshow logging — Shows information on local and external syslog\n\n\n\n\nStandard Syslog Config\nlogging buffered 90000        # Increase local logging buffer size\nlogging &lt;logging-server&gt;\nservice timestamps debug datetime localtime show-timezone msec\nservice timestamps log datetime localtime show-timezone msec\nlogging trap warning         # includes this level of message and all lower levels\nlogging source-interface loopback0\nexit\n\n\nStandard timestamp config\n#service timestamps [debug|log] [datetime|uptime]\n\n*Datetime - includes date and time\n*Uptime - time elapsed since last reboot\n\n\nConditional Debugging\ndebug condition mac 1111.1111.1111                  ! this debugs based on the mac specified\ndebug condition start                               ! starts conditional debugging\n!\nshow condition                                      ! displays the current conditions set\nshow debug\n!\nno debug condition interface g0/2                   ! this removes the condition\nno debug all                                        ! stops debugging however does not remove conditions",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Security",
-      "IPv6 Sec"
+      "Infrastructure Services",
+      "Logging"
     ]
   },
   {

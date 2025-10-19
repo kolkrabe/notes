@@ -1,0 +1,19 @@
+---
+title: "MPLS"
+editor: visual
+code-block-bg: dark
+---
+
+## General Info
+
+-   Protocal that uses labels to determine which path traffic should route
+-   Introduces `LIB` (Label Information Base) & `LFIB` (Label Forwarding Information Base)
+-   
+
+---
+
+## Useful Show Commands
+
+---
+
+## Config
