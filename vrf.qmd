@@ -13,7 +13,7 @@ code-block-bg: dark
 
 ------------------------------------------------------------------------
 
-Useful show commands + other
+## Useful show commands + other
 
 -   `show ip vrf` / `show vrf` - shows summary of configured VRFs, including interfaces.
 

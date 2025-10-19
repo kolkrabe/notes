@@ -746,7 +746,7 @@
     "href": "vrf.html",
     "title": "VRF",
     "section": "",
-    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\nFront Door VRFs - FVRF\n\n\nUseful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
+    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\nFront Door VRFs - FVRF",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -758,7 +758,19 @@
     "href": "vrf.html#general-info",
     "title": "VRF",
     "section": "",
-    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\nFront Door VRFs - FVRF\n\n\nUseful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
+    "text": "Technology which allows logical separation of routing tables on single device.\nRoutes learned from main routing table aren’t learned by vrf tables\nVRF when used with MPLS, VRF-Lite when used without\nFront Door VRFs - FVRF",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "VRF"
+    ]
+  },
+  {
+    "objectID": "vrf.html#useful-show-commands-other",
+    "href": "vrf.html#useful-show-commands-other",
+    "title": "VRF",
+    "section": "Useful show commands + other",
+    "text": "Useful show commands + other\n\nshow ip vrf / show vrf - shows summary of configured VRFs, including interfaces.\nshow ip route vrf [vrf-name] - shows routing table of VRF\nshow ip vrf interfaces / show vrf ipv4 unicast interfaces - shows interfaces in VRF.\nping vrf [name] 10.1.1.1 - ping from specific VRF\nshow ip eigrp vrf [vrf-name] interfaces",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
