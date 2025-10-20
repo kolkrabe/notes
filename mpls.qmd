@@ -6,14 +6,51 @@ code-block-bg: dark
 
 ## General Info
 
--   Protocal that uses labels to determine which path traffic should route
+-   Protocol that uses labels to determine which path traffic should route
+-   shim header inserted between IP & MAC header (This is the label)
+-   Labels switched hop by hop
 -   Introduces `LIB` (Label Information Base) & `LFIB` (Label Forwarding Information Base)
--   
+-   **LDP** - Label Discovery Protocol
+    -   Uses all-routers multicast (**224.0.0.2**), TCP port **646** src and dst for Hellos, unicast to neighbors once TCP session established
+    -   UDP also used for initial discovery messages
+    -   LDP requires **CEF** in order to exchange labels
+    -   Only IGP-learned or local routes are labelled, BGP routes not assigned a label
+-   **PHP**
+    -   Penultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header & IP)
+    -   In order to facilitate this, LDP routers advertise routes they own with an *implicit null/POP* label (label value of **3**) - **"imp-null"** that tells neighbours to pop LDP labels before sending for these routes
+-   **LIB** - Label Information Base - functions like L3 RIB
+-   **LFIB** - Label Forward Information Base - functions like L3 FIB
+-   **LSR** - Label Switched Router - any router that participates in MPLS
+-   **LSP** - Label Switched Path - path through LSRs labelled packet takes throughout MPLS domain
+-   **MP-BGP** (VPNv4) used with VRFs and LDP to form MPLS L3VPNs
+-   **RSVP** - Resource Reservation Protocol - used for traffic engineering
+-   **MPLS LDP Features**
+    -   **Inbound Label Binding Filtering** - uses ACLs to identify traffic that will and won't be accepted from peers.
+    -   **Entropy Label** - Load Balancing, DPI is done on ingress router (Edge LSR) and entropy label created, this is used by all other MPLS routers. Without each router must perform DPI for LB.
+    -   **Implicit NULL Label** - Reserved , Value 3, Used for PHP. When LSR received label with value 3 it knows it has to pop the label before forwarding.
+    -   **Explicit NULL Label** - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs
+    -   **MPLS LDP Autoconfiguration** - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS
 
 ---
+
+## MPLS Layer 3 VPN
+
+-   Route Distinguishers
+-   Route Targets
+-   
+
+------------------------------------------------------------------------
 
 ## Useful Show Commands
 
----
+-   `show mpls ldp binding` - Shows LDP label bindings to prefixes (Remember imp-null - POP)
+-   `show mpls interfaces` - shows interfaces participating in LDP
+-   `show mpls ldp neighbor` - shows LDP neighbors
+-   `show mpls forwarding-table` - shows LFIB
+-   `show bgp vpnv4 unicast all` - checking that VPNv4 routes being sent/received
+-   `debug mpls ldp transport events` - self-explanatory
+-   `debug bgp vpnv4 unicast updates` - useful for troubleshooting VPNv4 issues
+
+------------------------------------------------------------------------
 
 ## Config
