@@ -254,7 +254,7 @@
     "href": "mpls.html",
     "title": "MPLS",
     "section": "",
-    "text": "Protocal that uses labels to determine which path traffic should route\nIntroduces LIB (Label Information Base) & LFIB (Label Forwarding Information Base)",
+    "text": "Protocol that uses labels to determine which path traffic should route\nshim header inserted between IP & MAC header (This is the label)\nLabels switched hop by hop\nIntroduces LIB (Label Information Base) & LFIB (Label Forwarding Information Base)\nLDP - Label Discovery Protocol\n\nUses all-routers multicast (224.0.0.2), TCP port 646 src and dst for Hellos, unicast to neighbors once TCP session established\nUDP also used for initial discovery messages\nLDP requires CEF in order to exchange labels\nOnly IGP-learned or local routes are labelled, BGP routes not assigned a label\n\nPHP\n\nPenultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header & IP)\nIn order to facilitate this, LDP routers advertise routes they own with an implicit null/POP label (label value of 3) - “imp-null” that tells neighbours to pop LDP labels before sending for these routes\n\nLIB - Label Information Base - functions like L3 RIB\nLFIB - Label Forward Information Base - functions like L3 FIB\nLSR - Label Switched Router - any router that participates in MPLS\nLSP - Label Switched Path - path through LSRs labelled packet takes throughout MPLS domain\nMP-BGP (VPNv4) used with VRFs and LDP to form MPLS L3VPNs\nRSVP - Resource Reservation Protocol - used for traffic engineering\nMPLS LDP Features\n\nInbound Label Binding Filtering - uses ACLs to identify traffic that will and won’t be accepted from peers.\nEntropy Label - Load Balancing, DPI is done on ingress router (Edge LSR) and entropy label created, this is used by all other MPLS routers. Without each router must perform DPI for LB.\nImplicit NULL Label - Reserved , Value 3, Used for PHP. When LSR received label with value 3 it knows it has to pop the label before forwarding.\nExplicit NULL Label - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs\nMPLS LDP Autoconfiguration - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS",
     "crumbs": [
       "CCNP ENARSI",
       "VPN & Encryption",
@@ -266,7 +266,19 @@
     "href": "mpls.html#general-info",
     "title": "MPLS",
     "section": "",
-    "text": "Protocal that uses labels to determine which path traffic should route\nIntroduces LIB (Label Information Base) & LFIB (Label Forwarding Information Base)",
+    "text": "Protocol that uses labels to determine which path traffic should route\nshim header inserted between IP & MAC header (This is the label)\nLabels switched hop by hop\nIntroduces LIB (Label Information Base) & LFIB (Label Forwarding Information Base)\nLDP - Label Discovery Protocol\n\nUses all-routers multicast (224.0.0.2), TCP port 646 src and dst for Hellos, unicast to neighbors once TCP session established\nUDP also used for initial discovery messages\nLDP requires CEF in order to exchange labels\nOnly IGP-learned or local routes are labelled, BGP routes not assigned a label\n\nPHP\n\nPenultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header & IP)\nIn order to facilitate this, LDP routers advertise routes they own with an implicit null/POP label (label value of 3) - “imp-null” that tells neighbours to pop LDP labels before sending for these routes\n\nLIB - Label Information Base - functions like L3 RIB\nLFIB - Label Forward Information Base - functions like L3 FIB\nLSR - Label Switched Router - any router that participates in MPLS\nLSP - Label Switched Path - path through LSRs labelled packet takes throughout MPLS domain\nMP-BGP (VPNv4) used with VRFs and LDP to form MPLS L3VPNs\nRSVP - Resource Reservation Protocol - used for traffic engineering\nMPLS LDP Features\n\nInbound Label Binding Filtering - uses ACLs to identify traffic that will and won’t be accepted from peers.\nEntropy Label - Load Balancing, DPI is done on ingress router (Edge LSR) and entropy label created, this is used by all other MPLS routers. Without each router must perform DPI for LB.\nImplicit NULL Label - Reserved , Value 3, Used for PHP. When LSR received label with value 3 it knows it has to pop the label before forwarding.\nExplicit NULL Label - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs\nMPLS LDP Autoconfiguration - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS",
+    "crumbs": [
+      "CCNP ENARSI",
+      "VPN & Encryption",
+      "MPLS"
+    ]
+  },
+  {
+    "objectID": "mpls.html#mpls-layer-3-vpn",
+    "href": "mpls.html#mpls-layer-3-vpn",
+    "title": "MPLS",
+    "section": "MPLS Layer 3 VPN",
+    "text": "MPLS Layer 3 VPN\n\nRoute Distinguishers\nRoute Targets",
     "crumbs": [
       "CCNP ENARSI",
       "VPN & Encryption",
@@ -278,7 +290,7 @@
     "href": "mpls.html#useful-show-commands",
     "title": "MPLS",
     "section": "Useful Show Commands",
-    "text": "Useful Show Commands",
+    "text": "Useful Show Commands\n\nshow mpls ldp binding - Shows LDP label bindings to prefixes (Remember imp-null - POP)\nshow mpls interfaces - shows interfaces participating in LDP\nshow mpls ldp neighbor - shows LDP neighbors\nshow mpls forwarding-table - shows LFIB\nshow bgp vpnv4 unicast all - checking that VPNv4 routes being sent/received\ndebug mpls ldp transport events - self-explanatory\ndebug bgp vpnv4 unicast updates - useful for troubleshooting VPNv4 issues",
     "crumbs": [
       "CCNP ENARSI",
       "VPN & Encryption",
@@ -703,7 +715,7 @@
     "href": "redistribution.html#per-protocol-info",
     "title": "Redistribution",
     "section": "Per Protocol Info",
-    "text": "Per Protocol Info\n\nEIGRP\n\nRedistribution configurable anywhere in topology\nRedistributed routes marked as External (AD 170)\nDefault Metric = Infinity so not installed, MUST configure metric as follows for OSPF/BGP redist, not required for static + connected\n\nSet under router ospf config\nunder address-family config\nwithin redistribute config line\nwith Route Map (PREFERRED if multiple are configured, then distribute command metric then default-metric)\n\n\n\n\nOSPF\n\nRedistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router\nExternal routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR\nBy default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm\nMust use the subnets flag or only classful routes will be redistributed\n\n\n\nBGP\n\nNo seed metric required\nDon’t redistribute eBGP into IGP as they can’t handle the volume of routes\nUse bgp redistribute-internal to force BGP to redistribute iBGP routers into another IGP\nOrigin set to incomplete, Weight to 32768, MED to path metric of source protocol\nRedistribution from OSPF to BGP doesn’t include OSPF External routes by default\n\nmust user match external [1|2] to redistribute OSPF externals",
+    "text": "Per Protocol Info\n\nEIGRP\n\nRedistribution configurable anywhere in topology\nRedistributed routes marked as External (AD 170)\nDefault Metric = Infinity so not installed, MUST configure metric as follows for OSPF/BGP redist, not required for static + connected\n\nSet under router ospf config\nunder address-family config\nwithin redistribute config line\nwith Route Map (PREFERRED if multiple are configured, then distribute command metric then default-metric)\n\n\n\n\nOSPF\n\nRedistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router\nExternal routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR\nBy default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm\nMust use the subnets flag or only classful routes will be redistributed\n\n\n\nBGP\n\nNo seed metric required\nDon’t redistribute eBGP into IGP as they can’t handle the volume of routes\nUse bgp redistribute-internal to force BGP to redistribute iBGP routers into another IGP\nOrigin set to incomplete, Weight to 32768, MED to path metric of source protocol\nRedistribution from OSPF to BGP doesn’t include OSPF External routes by default\n\nmust user match external [1|2] to redistribute OSPF externals\nNote if you use external only this ONLY redistributes externals.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

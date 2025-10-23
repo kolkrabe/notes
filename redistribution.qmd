@@ -49,6 +49,7 @@ code-block-bg: dark
 -   Origin set to incomplete, Weight to 32768, MED to path metric of source protocol
 -   Redistribution from OSPF to BGP doesn't include OSPF External routes by default
     -   must user `match external [1|2]` to redistribute OSPF externals
+    -   Note if you use `external` only this **ONLY** redistributes externals.
 
 ------------------------------------------------------------------------
 
