@@ -1,0 +1,30 @@
+---
+title: "DMVPN"
+editor: visual
+code-block-bg: dark
+---
+
+General Info
+
+-   Dynamic Multi Point VPN - DMVPN
+-   Highly scalable system to connect multiple sites using Hub-and-Spoke topology using **mGRE** (Multipoint Generic Routing Encapsulation)
+    -   Spoke to Spoke Tunnels can be created on demand
+-   Uses **NHRP (**Next Hop Resolution Protocol) - acts like DNS
+    -   **NHS** (Next Hop Server) - configured on all spokes
+    -   Spokes register their physical & tunnel interface IP's with the **NHS**
+    -   NHS Populates it's NHRP Cache to maintain a database of it's spokes
+    -   Spokes can query the **NHS** to obtain the tunnel IP it needs to form direct tunnel.
+
+---
+
+Useful Show Commands
+
+-   `show interface tunnel [number]`  - shows state of tunnel interface
+-   `show dmvpn [detail]` - shows tunnel status, peers, up/down time, etc
+-   `show ip nhrp [brief]` - shows NHRP cache, NHRP-specific details useful for phase 2, 3
+-   `show ip route next-hop-override` - shows NH overrides for DMVPN phase 3
+-   `show crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa` - for troubleshooting IPsec when used with DMVPN
+
+---
+
+Configuration

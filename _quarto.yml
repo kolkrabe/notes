@@ -25,6 +25,7 @@ website:
           - section: "VPN & Encryption"
             contents:
               - mpls.qmd
+              - dmvpn.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd

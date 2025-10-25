@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IPv6 Sec – Kolkrabe</title>
+<title>DMVPN – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./aaa.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./ipv6sec.html">IPv6 Sec</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./mpls.html">VPN &amp; Encryption</a></li><li class="breadcrumb-item"><a href="./dmvpn.html">DMVPN</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -205,13 +170,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">VPN &amp; Encryption</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mpls.html" class="sidebar-item-text sidebar-link">
@@ -220,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dmvpn.html" class="sidebar-item-text sidebar-link">
+  <a href="./dmvpn.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">DMVPN</span></a>
   </div>
 </li>
@@ -269,13 +234,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Infrastructure Security</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aaa.html" class="sidebar-item-text sidebar-link">
@@ -296,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ipv6sec.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ipv6sec.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">IPv6 Sec</span></a>
   </div>
 </li>
@@ -315,23 +280,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
-  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration"><strong>Configuration</strong></a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./aaa.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./ipv6sec.html">IPv6 Sec</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./mpls.html">VPN &amp; Encryption</a></li><li class="breadcrumb-item"><a href="./dmvpn.html">DMVPN</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IPv6 Sec</h1>
+<h1 class="title">DMVPN</h1>
 </div>
 
 
@@ -348,110 +305,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="general-info" class="level2">
-<h2 class="anchored" data-anchor-id="general-info">General Info</h2>
+<p>General Info</p>
 <ul>
-<li><p>Designed to increase L2 security in IPv6 LANs</p></li>
-<li><p>No broadcasts, but certain packets almost always flooded in IPv6 networks</p>
+<li>Dynamic Multi Point VPN - DMVPN</li>
+<li>Highly scalable system to connect multiple sites using Hub-and-Spoke topology using <strong>mGRE</strong> (Multipoint Generic Routing Encapsulation)
 <ul>
-<li>FF02::1 (All IPv6 hosts)</li>
-<li>FF02::2 (All IPv6 routers)</li>
+<li>Spoke to Spoke Tunnels can be created on demand</li>
 </ul></li>
-<li><p>First-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6</p></li>
-<li></li>
-<li><p>Policies configured un [protocol] config mode then applied to interface</p></li>
-</ul>
-<hr>
-</section>
-<section id="features" class="level2">
-<h2 class="anchored" data-anchor-id="features">Features</h2>
+<li>Uses <strong>NHRP (</strong>Next Hop Resolution Protocol) - acts like DNS
 <ul>
-<li><p>RA Guard (Router Advertisement)</p>
-<ul>
-<li>RA guard inspects incoming RA messages, filtering when configured</li>
-<li>Configure with <code>ipv6 nd raguard attach-policy [policy-name]</code> inbound on interface</li>
-<li>Configured inbound on an interface</li>
-<li>2 modes ( Host &amp; Router)</li>
-<li>Doesn’t work on Tunneled Traffic and requires TCAM</li>
-<li>Doesn’t work on Etherchannel members or trunks with merge mode</li>
-</ul></li>
-<li><p><strong>DHCPV6 Guard</strong></p>
-<ul>
-<li>DHCP snooping for IPv6</li>
-<li>Classifies Messages into client, server or relay.
-<ul>
-<li>All Client messages are switched, server messages switches if router role = server</li>
-</ul></li>
-<li>Configured with <code>ipv6 dhcp guard attach-policy [policy]</code> on interface</li>
-</ul></li>
-<li><p><strong>IPv6 Snooping</strong></p>
-<ul>
-<li>Creates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols</li>
-<li><strong>Glean</strong> populates bind table without verifying messages</li>
-<li><strong>Inspect</strong> gleans addresses and validates messages</li>
-<li><strong>Guard</strong> gleans <em>and</em> inspects messages, drops RA and DHCP messages by default</li>
-<li>Configured as follows:</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ipv6 snooping policy [name]</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> security-level [glean|inspect|guard]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>int gi0/0</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> ipv6 snooping attach-policy [name]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>ND inspection</strong></p>
-<ul>
-<li>Inspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing</li>
-<li>Relies on IPv6 snooping</li>
-<li>Configured with <code>ipv6 nd inspection</code> under interfaces</li>
-</ul></li>
-<li><p><strong>Source Guard</strong></p>
-<ul>
-<li>Snooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked &amp; dropped
-<ul>
-<li>Source IP must be in the <strong>DHCP Binding</strong> table.</li>
-</ul></li>
-<li>Source learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS</li>
-<li>Configured with <code>ipv6 source-guard</code> under interfaces</li>
-</ul></li>
-<li><p><strong>Destination Guard</strong></p>
-<ul>
-<li><p>Can filter based on Destination. Also requires binding table to be populated.</p></li>
-<li><p>Blocks traffic coming for an unknown destination</p></li>
-</ul></li>
-<li><p><strong>Prefix Guard</strong></p>
-<ul>
-<li><p>Used on Ingress interface to deny traffic that has a correct address but is not topologically correct.</p></li>
-<li><p>Configured with <code>ipv6 source-guard</code> under interface</p></li>
+<li><strong>NHS</strong> (Next Hop Server) - configured on all spokes</li>
+<li>Spokes register their physical &amp; tunnel interface IP’s with the <strong>NHS</strong></li>
+<li>NHS Populates it’s NHRP Cache to maintain a database of it’s spokes</li>
+<li>Spokes can query the <strong>NHS</strong> to obtain the tunnel IP it needs to form direct tunnel.</li>
 </ul></li>
 </ul>
 <hr>
-</section>
-<section id="configuration" class="level2">
-<h2 class="anchored" data-anchor-id="configuration"><strong>Configuration</strong></h2>
-<section id="standard-ra-guard-config" class="level5">
-<h5 class="anchored" data-anchor-id="standard-ra-guard-config"><strong>Standard RA Guard Config</strong></h5>
-<pre><code>ipv6 nd raguard policy &lt;policy-name&gt;  
- device-role host 
-int gi0/0  
- ipv6 nd raguard attach-policy &lt;policy-name&gt; 
-! 
-! This will block all RAs on this port</code></pre>
-</section>
-<section id="standard-dhcp-v6-guard-config" class="level5">
-<h5 class="anchored" data-anchor-id="standard-dhcp-v6-guard-config"><strong>Standard DHCP v6 Guard Config</strong></h5>
-<pre><code>ipv6 dhcp guard policy DHCP_SERVER  
- device-role server 
-ipv6 dhcp guard policy DHCP_CLIENT  device-role client 
-! 
-interface GigabitEthernet 0/1  
- ipv6 dhcp guard attach-policy DHCP_SERVER
-interface range GigabitEthernet 0/2 - 3
- ipv6 dhcp guard attach-policy DHCP_CLIENT 
-! 
-!This will only allow DHCP offers from the server ports</code></pre>
+<p>Useful Show Commands</p>
+<ul>
+<li><code>show interface tunnel [number]</code> - shows state of tunnel interface</li>
+<li><code>show dmvpn [detail]</code> - shows tunnel status, peers, up/down time, etc</li>
+<li><code>show ip nhrp [brief]</code> - shows NHRP cache, NHRP-specific details useful for phase 2, 3</li>
+<li><code>show ip route next-hop-override</code> - shows NH overrides for DMVPN phase 3</li>
+<li><code>show crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa</code> - for troubleshooting IPsec when used with DMVPN</li>
+</ul>
+<hr>
+<p>Configuration</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
