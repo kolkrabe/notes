@@ -280,8 +280,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
+  <li><a href="#dmvpn-phases" id="toc-dmvpn-phases" class="nav-link" data-scroll-target="#dmvpn-phases">DMVPN Phases</a></li>
+  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a>
+  <ul class="collapse">
+  <li><a href="#dmvpn-phase-1-configuration-no-ipsec" id="toc-dmvpn-phase-1-configuration-no-ipsec" class="nav-link" data-scroll-target="#dmvpn-phase-1-configuration-no-ipsec"><strong>DMVPN Phase 1 Configuration (No IPsec)</strong></a></li>
+  <li><a href="#dmvpn-phase-2-configuration-no-ipsec" id="toc-dmvpn-phase-2-configuration-no-ipsec" class="nav-link" data-scroll-target="#dmvpn-phase-2-configuration-no-ipsec"><strong>DMVPN Phase 2 Configuration (No IPsec)</strong></a></li>
+  <li><a href="#dmvpn-phase-3-configuration-no-ipsec" id="toc-dmvpn-phase-3-configuration-no-ipsec" class="nav-link" data-scroll-target="#dmvpn-phase-3-configuration-no-ipsec"><strong>DMVPN Phase 3 Configuration (No IPsec)</strong></a></li>
+  <li><a href="#dmvpn-ikev1-ipsec-configuration" id="toc-dmvpn-ikev1-ipsec-configuration" class="nav-link" data-scroll-target="#dmvpn-ikev1-ipsec-configuration"><strong>DMVPN IKEv1 IPsec Configuration</strong></a></li>
+  <li><a href="#dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" id="toc-dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" class="nav-link" data-scroll-target="#dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive"><strong>DMVPN IKEv2 IPsec Configuration (See IPsec page for deep dive)</strong></a></li>
+  <li><a href="#using-fvrf-with-dmvpn" id="toc-using-fvrf-with-dmvpn" class="nav-link" data-scroll-target="#using-fvrf-with-dmvpn"><strong>Using FVRF with DMVPN</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -305,7 +322,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>General Info</p>
+<section id="general-info" class="level2">
+<h2 class="anchored" data-anchor-id="general-info">General Info</h2>
 <ul>
 <li>Dynamic Multi Point VPN - DMVPN</li>
 <li>Highly scalable system to connect multiple sites using Hub-and-Spoke topology using <strong>mGRE</strong> (Multipoint Generic Routing Encapsulation)
@@ -320,8 +338,35 @@ ul.task-list li input[type="checkbox"] {
 <li>Spokes can query the <strong>NHS</strong> to obtain the tunnel IP it needs to form direct tunnel.</li>
 </ul></li>
 </ul>
+</section>
+<section id="dmvpn-phases" class="level2">
+<h2 class="anchored" data-anchor-id="dmvpn-phases">DMVPN Phases</h2>
+<ul>
+<li><strong>Phase 1</strong>
+<ul>
+<li>All traffic between spokes must traverse Hub, no spoke-to-spoke.</li>
+</ul></li>
+<li><strong>Phase 2</strong>
+<ul>
+<li>Allows spoke-to-spoke traffic by making all tunnels (including spokes) multipoint</li>
+<li>This allows spokes to form tunnels directly to each other</li>
+<li>Must not have routing protocol use next-hop-self or the tunnels will not form</li>
+<li>Does <strong><em>NOT</em></strong> work with summarization - since the RIB will not have a route to the other spokes, all traffic will transit the hub</li>
+<li>If using OSPF, network type must be broadcast or non-broadcast to prevent changing next-hops
+<ul>
+<li>In this scenario the spokes must be set at priority 0 to prevent them becoming DRs - if spokes become DRs the network will not function as they cannot multicast between each other</li>
+</ul></li>
+</ul></li>
+<li><strong>Phase 3</strong>
+<ul>
+<li><p>Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB</p></li>
+<li><p>Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub</p></li>
+</ul></li>
+</ul>
 <hr>
-<p>Useful Show Commands</p>
+</section>
+<section id="useful-show-commands" class="level2">
+<h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
 <ul>
 <li><code>show interface tunnel [number]</code> - shows state of tunnel interface</li>
 <li><code>show dmvpn [detail]</code> - shows tunnel status, peers, up/down time, etc</li>
@@ -330,9 +375,131 @@ ul.task-list li input[type="checkbox"] {
 <li><code>show crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa</code> - for troubleshooting IPsec when used with DMVPN</li>
 </ul>
 <hr>
-<p>Configuration</p>
+</section>
+<section id="configuration" class="level2">
+<h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
+<section id="dmvpn-phase-1-configuration-no-ipsec" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-phase-1-configuration-no-ipsec"><strong>DMVPN Phase 1 Configuration (No IPsec)</strong></h3>
+<p><strong>Hub Config</strong></p>
+<pre><code>! Essential 
+interface Tunnel100 
+ip address 192.168.100.11 255.255.255.0 
+ip nhrp map multicast dynamic 
+ip nhrp network-id 100 
+tunnel source GigabitEthernet0/1 
+tunnel mode gre multipoint 
+
+! Discretionary 
+bandwidth 4000 
+ip mtu 1400 
+ip tcp adjust-mss 1360 
+ip nhrp authentication NHRPAUTH 
+no ip split-horizon eigrp 100  ! necessary for EIGRP 
+tunnel key 100                 ! necessary in multi-hub designs</code></pre>
+<p><strong>Spoke Config</strong></p>
+<pre><code>interface Tunnel100 
+ip address 192.168.100.31 255.255.255.0 
+ip nhrp network-id 100 
+ip nhrp nhs &lt;TunnelIP&gt; nbma &lt;PublicIP&gt; multicast 
+tunnel source GigabitEthernet0/1 
+tunnel destination &lt;PublicIP&gt;  
+
+! Discretionary 
+bandwidth 4000 
+ip mtu 1400 
+ip tcp adjust-mss 1360 
+ip nhrp authentication NHRPAUTH 
+tunnel key 100 ! necessary in multi-hub designs</code></pre>
+</section>
+<section id="dmvpn-phase-2-configuration-no-ipsec" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-phase-2-configuration-no-ipsec"><strong>DMVPN Phase 2 Configuration (No IPsec)</strong></h3>
+<p><strong>Hub Config</strong></p>
+<pre><code>!same as Phase 1, but including:  
+
+no ip next-hop-self eigrp 100  
+
+!so that hub doesn't list itself as NH for spokes</code></pre>
+<p><strong>Spoke Config</strong></p>
+<pre><code>!same as Phase 1, but including:  
+
+tunnel mode gre multipoint  
+
+!so that spokes can form direct tunnels</code></pre>
+</section>
+<section id="dmvpn-phase-3-configuration-no-ipsec" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-phase-3-configuration-no-ipsec"><strong>DMVPN Phase 3 Configuration (No IPsec)</strong></h3>
+<p><strong>Hub Config</strong></p>
+<pre><code>!same as Phase 1, but including:  
+
+ip nhrp redirect  
+
+!so that hub will forward redirect messages to spokes after initial traffic,  allowing spoke-to-spoke tunnels to form</code></pre>
+<p><strong>Spoke Config</strong></p>
+<pre><code>!same as Phase 1, but including:  
+
+ip nhrp shortcut tunnel mode gre multipoint  
+
+!to allow the spokes to install NHRP next hops into the routing table and form direct tunnels</code></pre>
+</section>
+<section id="dmvpn-ikev1-ipsec-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-ikev1-ipsec-configuration"><strong>DMVPN IKEv1 IPsec Configuration</strong></h3>
+<p><strong>VRFless</strong></p>
+<pre><code>crypto isakmp policy 10  
+ encr aes 128  
+ hash sha256  
+ authentication pre-share  
+ group 16 
+!
+crypto isakmp key DMVPN_PSK address 0.0.0.0   
+! 
+crypto ipsec transform-set ESP-AES-256-SHA-512 esp-aes 256 esp-sha512-hmac   
+ mode transport 
+! 
+crypto ipsec profile DMVPN_PROFILE
+ set transform-set ESP-AES-256-SHA-512 
+!
+interface Tunnel0 
+tunnel protection ipsec profile DMVPN_PROFILE</code></pre>
+<p><strong>FVRF</strong></p>
+<pre><code>!same as above, but instead of crypto isakmp key: 
+
+crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT    
+ pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN_PSK</code></pre>
+</section>
+<section id="dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive"><strong>DMVPN IKEv2 IPsec Configuration (See IPsec page for deep dive)</strong></h3>
+<p><strong>VRFless</strong></p>
+<pre><code>crypto ikev2 keyring DMVPN-KEYRING
+peer ANY address 0.0.0.0 0.0.0.0 
+pre-shared-key CISCO456 
+! 
+crypto ikev2 profile DMVPN-IKE 
+match identity remote address 0.0.0.0 
+authentication remote pre-share 
+authentication local pre-share 
+keyring local DMVPN-KEYRING 
+! 
+crypto ipsec transform-set SET1 esp-aes 256 esp-sha-hmac 
+mode transport 
+! 
+crypto ipsec profile DMVPN-IPSEC 
+set transform-set SET1 
+set ikev2-profile DMVPN-IKE 
+!
+interface Tunnel0 
+tunnel protection ipsec profile DMVPN-IPSEC</code></pre>
+<p><strong>FVRF</strong></p>
+<pre><code>!Same as above, but under crypto ikev2 profile:  match fvrf INET</code></pre>
+</section>
+<section id="using-fvrf-with-dmvpn" class="level3">
+<h3 class="anchored" data-anchor-id="using-fvrf-with-dmvpn"><strong>Using FVRF with DMVPN</strong></h3>
+<ul>
+<li>See <a href="https://brunbattery.github.io/NetworkNotes/VRF.html">VRF</a> page for details on that</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

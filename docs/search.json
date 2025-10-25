@@ -657,7 +657,55 @@
     "href": "dmvpn.html",
     "title": "DMVPN",
     "section": "",
-    "text": "General Info\n\nDynamic Multi Point VPN - DMVPN\nHighly scalable system to connect multiple sites using Hub-and-Spoke topology using mGRE (Multipoint Generic Routing Encapsulation)\n\nSpoke to Spoke Tunnels can be created on demand\n\nUses NHRP (Next Hop Resolution Protocol) - acts like DNS\n\nNHS (Next Hop Server) - configured on all spokes\nSpokes register their physical & tunnel interface IP’s with the NHS\nNHS Populates it’s NHRP Cache to maintain a database of it’s spokes\nSpokes can query the NHS to obtain the tunnel IP it needs to form direct tunnel.\n\n\n\nUseful Show Commands\n\nshow interface tunnel [number] - shows state of tunnel interface\nshow dmvpn [detail] - shows tunnel status, peers, up/down time, etc\nshow ip nhrp [brief] - shows NHRP cache, NHRP-specific details useful for phase 2, 3\nshow ip route next-hop-override - shows NH overrides for DMVPN phase 3\nshow crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa - for troubleshooting IPsec when used with DMVPN\n\n\nConfiguration",
+    "text": "Dynamic Multi Point VPN - DMVPN\nHighly scalable system to connect multiple sites using Hub-and-Spoke topology using mGRE (Multipoint Generic Routing Encapsulation)\n\nSpoke to Spoke Tunnels can be created on demand\n\nUses NHRP (Next Hop Resolution Protocol) - acts like DNS\n\nNHS (Next Hop Server) - configured on all spokes\nSpokes register their physical & tunnel interface IP’s with the NHS\nNHS Populates it’s NHRP Cache to maintain a database of it’s spokes\nSpokes can query the NHS to obtain the tunnel IP it needs to form direct tunnel.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "VPN & Encryption",
+      "DMVPN"
+    ]
+  },
+  {
+    "objectID": "dmvpn.html#general-info",
+    "href": "dmvpn.html#general-info",
+    "title": "DMVPN",
+    "section": "",
+    "text": "Dynamic Multi Point VPN - DMVPN\nHighly scalable system to connect multiple sites using Hub-and-Spoke topology using mGRE (Multipoint Generic Routing Encapsulation)\n\nSpoke to Spoke Tunnels can be created on demand\n\nUses NHRP (Next Hop Resolution Protocol) - acts like DNS\n\nNHS (Next Hop Server) - configured on all spokes\nSpokes register their physical & tunnel interface IP’s with the NHS\nNHS Populates it’s NHRP Cache to maintain a database of it’s spokes\nSpokes can query the NHS to obtain the tunnel IP it needs to form direct tunnel.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "VPN & Encryption",
+      "DMVPN"
+    ]
+  },
+  {
+    "objectID": "dmvpn.html#dmvpn-phases",
+    "href": "dmvpn.html#dmvpn-phases",
+    "title": "DMVPN",
+    "section": "DMVPN Phases",
+    "text": "DMVPN Phases\n\nPhase 1\n\nAll traffic between spokes must traverse Hub, no spoke-to-spoke.\n\nPhase 2\n\nAllows spoke-to-spoke traffic by making all tunnels (including spokes) multipoint\nThis allows spokes to form tunnels directly to each other\nMust not have routing protocol use next-hop-self or the tunnels will not form\nDoes NOT work with summarization - since the RIB will not have a route to the other spokes, all traffic will transit the hub\nIf using OSPF, network type must be broadcast or non-broadcast to prevent changing next-hops\n\nIn this scenario the spokes must be set at priority 0 to prevent them becoming DRs - if spokes become DRs the network will not function as they cannot multicast between each other\n\n\nPhase 3\n\nAllows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB\nMain benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub",
+    "crumbs": [
+      "CCNP ENARSI",
+      "VPN & Encryption",
+      "DMVPN"
+    ]
+  },
+  {
+    "objectID": "dmvpn.html#useful-show-commands",
+    "href": "dmvpn.html#useful-show-commands",
+    "title": "DMVPN",
+    "section": "Useful Show Commands",
+    "text": "Useful Show Commands\n\nshow interface tunnel [number] - shows state of tunnel interface\nshow dmvpn [detail] - shows tunnel status, peers, up/down time, etc\nshow ip nhrp [brief] - shows NHRP cache, NHRP-specific details useful for phase 2, 3\nshow ip route next-hop-override - shows NH overrides for DMVPN phase 3\nshow crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa - for troubleshooting IPsec when used with DMVPN",
+    "crumbs": [
+      "CCNP ENARSI",
+      "VPN & Encryption",
+      "DMVPN"
+    ]
+  },
+  {
+    "objectID": "dmvpn.html#configuration",
+    "href": "dmvpn.html#configuration",
+    "title": "DMVPN",
+    "section": "Configuration",
+    "text": "Configuration\n\nDMVPN Phase 1 Configuration (No IPsec)\nHub Config\n! Essential \ninterface Tunnel100 \nip address 192.168.100.11 255.255.255.0 \nip nhrp map multicast dynamic \nip nhrp network-id 100 \ntunnel source GigabitEthernet0/1 \ntunnel mode gre multipoint \n\n! Discretionary \nbandwidth 4000 \nip mtu 1400 \nip tcp adjust-mss 1360 \nip nhrp authentication NHRPAUTH \nno ip split-horizon eigrp 100  ! necessary for EIGRP \ntunnel key 100                 ! necessary in multi-hub designs\nSpoke Config\ninterface Tunnel100 \nip address 192.168.100.31 255.255.255.0 \nip nhrp network-id 100 \nip nhrp nhs &lt;TunnelIP&gt; nbma &lt;PublicIP&gt; multicast \ntunnel source GigabitEthernet0/1 \ntunnel destination &lt;PublicIP&gt;  \n\n! Discretionary \nbandwidth 4000 \nip mtu 1400 \nip tcp adjust-mss 1360 \nip nhrp authentication NHRPAUTH \ntunnel key 100 ! necessary in multi-hub designs\n\n\nDMVPN Phase 2 Configuration (No IPsec)\nHub Config\n!same as Phase 1, but including:  \n\nno ip next-hop-self eigrp 100  \n\n!so that hub doesn't list itself as NH for spokes\nSpoke Config\n!same as Phase 1, but including:  \n\ntunnel mode gre multipoint  \n\n!so that spokes can form direct tunnels\n\n\nDMVPN Phase 3 Configuration (No IPsec)\nHub Config\n!same as Phase 1, but including:  \n\nip nhrp redirect  \n\n!so that hub will forward redirect messages to spokes after initial traffic,  allowing spoke-to-spoke tunnels to form\nSpoke Config\n!same as Phase 1, but including:  \n\nip nhrp shortcut tunnel mode gre multipoint  \n\n!to allow the spokes to install NHRP next hops into the routing table and form direct tunnels\n\n\nDMVPN IKEv1 IPsec Configuration\nVRFless\ncrypto isakmp policy 10  \n encr aes 128  \n hash sha256  \n authentication pre-share  \n group 16 \n!\ncrypto isakmp key DMVPN_PSK address 0.0.0.0   \n! \ncrypto ipsec transform-set ESP-AES-256-SHA-512 esp-aes 256 esp-sha512-hmac   \n mode transport \n! \ncrypto ipsec profile DMVPN_PROFILE\n set transform-set ESP-AES-256-SHA-512 \n!\ninterface Tunnel0 \ntunnel protection ipsec profile DMVPN_PROFILE\nFVRF\n!same as above, but instead of crypto isakmp key: \n\ncrypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT    \n pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN_PSK\n\n\nDMVPN IKEv2 IPsec Configuration (See IPsec page for deep dive)\nVRFless\ncrypto ikev2 keyring DMVPN-KEYRING\npeer ANY address 0.0.0.0 0.0.0.0 \npre-shared-key CISCO456 \n! \ncrypto ikev2 profile DMVPN-IKE \nmatch identity remote address 0.0.0.0 \nauthentication remote pre-share \nauthentication local pre-share \nkeyring local DMVPN-KEYRING \n! \ncrypto ipsec transform-set SET1 esp-aes 256 esp-sha-hmac \nmode transport \n! \ncrypto ipsec profile DMVPN-IPSEC \nset transform-set SET1 \nset ikev2-profile DMVPN-IKE \n!\ninterface Tunnel0 \ntunnel protection ipsec profile DMVPN-IPSEC\nFVRF\n!Same as above, but under crypto ikev2 profile:  match fvrf INET\n\n\nUsing FVRF with DMVPN\n\nSee VRF page for details on that",
     "crumbs": [
       "CCNP ENARSI",
       "VPN & Encryption",
