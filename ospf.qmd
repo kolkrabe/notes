@@ -199,7 +199,7 @@ router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in
 -   Note again distribute-lists **ONLY AFFECTS LOCAL RIB**, not OSPF database
 -   Easy to create traffic black holes if not careful with this feature
 
-Intra Area preferredvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+Intra Area preferred
 
 Inter Area next
 

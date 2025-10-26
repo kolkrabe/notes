@@ -428,7 +428,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="bgp-regexp" class="level2">
 <h2 class="anchored" data-anchor-id="bgp-regexp"><strong>BGP regexp</strong></h2>
 <ul>
-<li>Can be used to search for specifc AS-PATHs in table - for example: <code>show ip bgp regexp ^$</code></li>
+<li>Can be used to search for specifc AS-PATHs in table - for example: <code>show ip bgp regexp ^$</code> this shows entries where AS-PATH is empty (locally originated)</li>
 <li>Above will show prefixes originated locally with the AS. Cheat sheet <a href="http://gponsolution.com/bgp-regular-expressions-cheat-sheet.html">here.</a></li>
 <li>Originated in AS 100: <code>_100$</code>, Learned from AS 100: <code>^100_</code></li>
 <li>Can be used to filter with ACLs with IP as-path: <code>ip as-path access-list 1 permit _54$</code></li>

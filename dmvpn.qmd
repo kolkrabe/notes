@@ -143,11 +143,11 @@ crypto isakmp policy 10
 !
 crypto isakmp key DMVPN_PSK address 0.0.0.0   
 ! 
-crypto ipsec transform-set ESP-AES-256-SHA-512 esp-aes 256 esp-sha512-hmac   
+crypto ipsec transform-set [ESP-AES-256-SHA-512] esp-aes 256 esp-sha512-hmac   
  mode transport 
 ! 
 crypto ipsec profile DMVPN_PROFILE
- set transform-set ESP-AES-256-SHA-512 
+ set transform-set [ESP-AES-256-SHA-512] 
 !
 interface Tunnel0 
 tunnel protection ipsec profile DMVPN_PROFILE
@@ -168,24 +168,25 @@ crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT
 
 ``` default
 crypto ikev2 keyring DMVPN-KEYRING
-peer ANY address 0.0.0.0 0.0.0.0 
-pre-shared-key CISCO456 
+ peer ANY 
+  address 0.0.0.0 0.0.0.0               !(Any peer)
+  pre-shared-key CISCO456 
 ! 
 crypto ikev2 profile DMVPN-IKE 
-match identity remote address 0.0.0.0 
-authentication remote pre-share 
-authentication local pre-share 
-keyring local DMVPN-KEYRING 
+ match identity remote address 0.0.0.0 
+ authentication remote pre-share 
+ authentication local pre-share 
+ keyring local DMVPN-KEYRING 
 ! 
 crypto ipsec transform-set SET1 esp-aes 256 esp-sha-hmac 
-mode transport 
+ mode transport 
 ! 
 crypto ipsec profile DMVPN-IPSEC 
-set transform-set SET1 
-set ikev2-profile DMVPN-IKE 
+ set transform-set SET1 
+ set ikev2-profile DMVPN-IKE 
 !
 interface Tunnel0 
-tunnel protection ipsec profile DMVPN-IPSEC
+ tunnel protection ipsec profile DMVPN-IPSEC
 ```
 
 **FVRF**
