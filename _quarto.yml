@@ -26,6 +26,7 @@ website:
             contents:
               - mpls.qmd
               - dmvpn.qmd
+              - gre+ipsec.qmd
           - section: "Infrastructure Services"
             contents:
               - device_management.qmd

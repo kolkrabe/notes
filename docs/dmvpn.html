@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -187,6 +222,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./dmvpn.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">DMVPN</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gre+ipsec.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GRE &amp; IPsec</span></a>
   </div>
 </li>
       </ul>
@@ -359,8 +400,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><strong>Phase 3</strong>
 <ul>
-<li><p>Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB</p></li>
-<li><p>Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub</p></li>
+<li>Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB</li>
+<li>Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub</li>
 </ul></li>
 </ul>
 <hr>
@@ -372,6 +413,7 @@ ul.task-list li input[type="checkbox"] {
 <li><code>show dmvpn [detail]</code> - shows tunnel status, peers, up/down time, etc</li>
 <li><code>show ip nhrp [brief]</code> - shows NHRP cache, NHRP-specific details useful for phase 2, 3</li>
 <li><code>show ip route next-hop-override</code> - shows NH overrides for DMVPN phase 3</li>
+<li><code>show ip cef [IP address]</code> - shows how the switch will deal with this IP address - send to tunnel?</li>
 <li><code>show crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa</code> - for troubleshooting IPsec when used with DMVPN</li>
 </ul>
 <hr>
@@ -381,115 +423,116 @@ ul.task-list li input[type="checkbox"] {
 <section id="dmvpn-phase-1-configuration-no-ipsec" class="level3">
 <h3 class="anchored" data-anchor-id="dmvpn-phase-1-configuration-no-ipsec"><strong>DMVPN Phase 1 Configuration (No IPsec)</strong></h3>
 <p><strong>Hub Config</strong></p>
-<pre><code>! Essential 
-interface Tunnel100 
-ip address 192.168.100.11 255.255.255.0 
-ip nhrp map multicast dynamic 
-ip nhrp network-id 100 
-tunnel source GigabitEthernet0/1 
-tunnel mode gre multipoint 
-
-! Discretionary 
-bandwidth 4000 
-ip mtu 1400 
-ip tcp adjust-mss 1360 
-ip nhrp authentication NHRPAUTH 
-no ip split-horizon eigrp 100  ! necessary for EIGRP 
-tunnel key 100                 ! necessary in multi-hub designs</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>! Essential </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>interface Tunnel100 </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ip address 192.168.100.11 255.255.255.0 </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ip nhrp map multicast dynamic </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ip nhrp network-id 100 </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>tunnel source GigabitEthernet0/1 </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>tunnel mode gre multipoint </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>! Discretionary </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>bandwidth 4000 </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ip mtu 1400 </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ip tcp adjust-mss 1360 </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ip nhrp authentication NHRPAUTH </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>no ip split-horizon eigrp 100  ! necessary for EIGRP </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tunnel key 100                 ! necessary in multi-hub designs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Spoke Config</strong></p>
-<pre><code>interface Tunnel100 
-ip address 192.168.100.31 255.255.255.0 
-ip nhrp network-id 100 
-ip nhrp nhs &lt;TunnelIP&gt; nbma &lt;PublicIP&gt; multicast 
-tunnel source GigabitEthernet0/1 
-tunnel destination &lt;PublicIP&gt;  
-
-! Discretionary 
-bandwidth 4000 
-ip mtu 1400 
-ip tcp adjust-mss 1360 
-ip nhrp authentication NHRPAUTH 
-tunnel key 100 ! necessary in multi-hub designs</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>interface Tunnel100 </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ip address 192.168.100.31 255.255.255.0 </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ip nhrp network-id 100 </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ip nhrp nhs [TunnelIP] nbma [&lt;]PublicIP] multicast </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>tunnel source GigabitEthernet0/1 </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>tunnel destination [PublicIP]  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>! Discretionary </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>bandwidth 4000 </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ip mtu 1400 </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ip tcp adjust-mss 1360 </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ip nhrp authentication NHRPAUTH </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>tunnel key 100                 ! necessary in multi-hub designs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dmvpn-phase-2-configuration-no-ipsec" class="level3">
 <h3 class="anchored" data-anchor-id="dmvpn-phase-2-configuration-no-ipsec"><strong>DMVPN Phase 2 Configuration (No IPsec)</strong></h3>
 <p><strong>Hub Config</strong></p>
-<pre><code>!same as Phase 1, but including:  
-
-no ip next-hop-self eigrp 100  
-
-!so that hub doesn't list itself as NH for spokes</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>no ip next-hop-self eigrp 100  </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>!so that hub doesn't list itself as NH for spokes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Spoke Config</strong></p>
-<pre><code>!same as Phase 1, but including:  
-
-tunnel mode gre multipoint  
-
-!so that spokes can form direct tunnels</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tunnel mode gre multipoint  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>!so that spokes can form direct tunnels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dmvpn-phase-3-configuration-no-ipsec" class="level3">
 <h3 class="anchored" data-anchor-id="dmvpn-phase-3-configuration-no-ipsec"><strong>DMVPN Phase 3 Configuration (No IPsec)</strong></h3>
 <p><strong>Hub Config</strong></p>
-<pre><code>!same as Phase 1, but including:  
-
-ip nhrp redirect  
-
-!so that hub will forward redirect messages to spokes after initial traffic,  allowing spoke-to-spoke tunnels to form</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ip nhrp redirect  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>!so that hub will forward redirect messages to spokes after initial traffic,  allowing spoke-to-spoke tunnels to form</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Spoke Config</strong></p>
-<pre><code>!same as Phase 1, but including:  
-
-ip nhrp shortcut tunnel mode gre multipoint  
-
-!to allow the spokes to install NHRP next hops into the routing table and form direct tunnels</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ip nhrp shortcut </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tunnel mode gre multipoint  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>!to allow the spokes to install NHRP next hops into the routing table and form direct tunnels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dmvpn-ikev1-ipsec-configuration" class="level3">
 <h3 class="anchored" data-anchor-id="dmvpn-ikev1-ipsec-configuration"><strong>DMVPN IKEv1 IPsec Configuration</strong></h3>
 <p><strong>VRFless</strong></p>
-<pre><code>crypto isakmp policy 10  
- encr aes 128  
- hash sha256  
- authentication pre-share  
- group 16 
-!
-crypto isakmp key DMVPN_PSK address 0.0.0.0   
-! 
-crypto ipsec transform-set ESP-AES-256-SHA-512 esp-aes 256 esp-sha512-hmac   
- mode transport 
-! 
-crypto ipsec profile DMVPN_PROFILE
- set transform-set ESP-AES-256-SHA-512 
-!
-interface Tunnel0 
-tunnel protection ipsec profile DMVPN_PROFILE</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>crypto isakmp policy 10  </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> encr aes 128  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> hash sha256  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> authentication pre-share  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> group 16 </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>crypto isakmp key DMVPN_PSK address 0.0.0.0   </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>crypto ipsec transform-set ESP-AES-256-SHA-512 esp-aes 256 esp-sha512-hmac   </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> mode transport </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>crypto ipsec profile DMVPN_PROFILE</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a> set transform-set ESP-AES-256-SHA-512 </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>interface Tunnel0 </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>tunnel protection ipsec profile DMVPN_PROFILE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>FVRF</strong></p>
-<pre><code>!same as above, but instead of crypto isakmp key: 
-
-crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT    
- pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN_PSK</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>!same as above, but instead of crypto isakmp key: </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT    </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN_PSK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" class="level3">
 <h3 class="anchored" data-anchor-id="dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive"><strong>DMVPN IKEv2 IPsec Configuration (See IPsec page for deep dive)</strong></h3>
 <p><strong>VRFless</strong></p>
-<pre><code>crypto ikev2 keyring DMVPN-KEYRING
-peer ANY address 0.0.0.0 0.0.0.0 
-pre-shared-key CISCO456 
-! 
-crypto ikev2 profile DMVPN-IKE 
-match identity remote address 0.0.0.0 
-authentication remote pre-share 
-authentication local pre-share 
-keyring local DMVPN-KEYRING 
-! 
-crypto ipsec transform-set SET1 esp-aes 256 esp-sha-hmac 
-mode transport 
-! 
-crypto ipsec profile DMVPN-IPSEC 
-set transform-set SET1 
-set ikev2-profile DMVPN-IKE 
-!
-interface Tunnel0 
-tunnel protection ipsec profile DMVPN-IPSEC</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>crypto ikev2 keyring DMVPN-KEYRING</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>peer ANY address 0.0.0.0 0.0.0.0 </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pre-shared-key CISCO456 </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>crypto ikev2 profile DMVPN-IKE </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>match identity remote address 0.0.0.0 </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>authentication remote pre-share </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>authentication local pre-share </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>keyring local DMVPN-KEYRING </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>crypto ipsec transform-set SET1 esp-aes 256 esp-sha-hmac </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>mode transport </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>crypto ipsec profile DMVPN-IPSEC </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>set transform-set SET1 </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>set ikev2-profile DMVPN-IKE </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>interface Tunnel0 </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>tunnel protection ipsec profile DMVPN-IPSEC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>FVRF</strong></p>
-<pre><code>!Same as above, but under crypto ikev2 profile:  match fvrf INET</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>!Same as above, but under crypto ikev2 profile:  match fvrf INET</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="using-fvrf-with-dmvpn" class="level3">
 <h3 class="anchored" data-anchor-id="using-fvrf-with-dmvpn"><strong>Using FVRF with DMVPN</strong></h3>

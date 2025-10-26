@@ -28,7 +28,6 @@ code-block-bg: dark
         -   In this scenario the spokes must be set at priority 0 to prevent them becoming DRs - if spokes become DRs the network will not function as they cannot multicast between each other
 -   **Phase 3**
     -   Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB
-
     -   Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub
 
 ------------------------------------------------------------------------
@@ -39,6 +38,7 @@ code-block-bg: dark
 -   `show dmvpn [detail]` - shows tunnel status, peers, up/down time, etc
 -   `show ip nhrp [brief]` - shows NHRP cache, NHRP-specific details useful for phase 2, 3
 -   `show ip route next-hop-override` - shows NH overrides for DMVPN phase 3
+-   `show ip cef [IP address]` - shows how the switch will deal with this IP address - send to tunnel?
 -   `show crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa` - for troubleshooting IPsec when used with DMVPN
 
 ------------------------------------------------------------------------
@@ -49,7 +49,7 @@ code-block-bg: dark
 
 **Hub Config**
 
-```         
+``` default
 ! Essential 
 interface Tunnel100 
 ip address 192.168.100.11 255.255.255.0 
@@ -69,27 +69,27 @@ tunnel key 100                 ! necessary in multi-hub designs
 
 **Spoke Config**
 
-```         
+``` default
 interface Tunnel100 
 ip address 192.168.100.31 255.255.255.0 
 ip nhrp network-id 100 
-ip nhrp nhs <TunnelIP> nbma <PublicIP> multicast 
+ip nhrp nhs [TunnelIP] nbma [<]PublicIP] multicast 
 tunnel source GigabitEthernet0/1 
-tunnel destination <PublicIP>  
+tunnel destination [PublicIP]  
 
 ! Discretionary 
 bandwidth 4000 
 ip mtu 1400 
 ip tcp adjust-mss 1360 
 ip nhrp authentication NHRPAUTH 
-tunnel key 100 ! necessary in multi-hub designs
+tunnel key 100                 ! necessary in multi-hub designs
 ```
 
 ### **DMVPN Phase 2 Configuration (No IPsec)**
 
 **Hub Config**
 
-```         
+``` default
 !same as Phase 1, but including:  
 
 no ip next-hop-self eigrp 100  
@@ -99,7 +99,7 @@ no ip next-hop-self eigrp 100
 
 **Spoke Config**
 
-```         
+``` default
 !same as Phase 1, but including:  
 
 tunnel mode gre multipoint  
@@ -111,7 +111,7 @@ tunnel mode gre multipoint
 
 **Hub Config**
 
-```         
+``` default
 !same as Phase 1, but including:  
 
 ip nhrp redirect  
@@ -121,10 +121,11 @@ ip nhrp redirect
 
 **Spoke Config**
 
-```         
+``` default
 !same as Phase 1, but including:  
 
-ip nhrp shortcut tunnel mode gre multipoint  
+ip nhrp shortcut 
+tunnel mode gre multipoint  
 
 !to allow the spokes to install NHRP next hops into the routing table and form direct tunnels
 ```
@@ -133,7 +134,7 @@ ip nhrp shortcut tunnel mode gre multipoint
 
 **VRFless**
 
-```         
+``` default
 crypto isakmp policy 10  
  encr aes 128  
  hash sha256  
@@ -154,7 +155,7 @@ tunnel protection ipsec profile DMVPN_PROFILE
 
 **FVRF**
 
-```         
+``` default
 !same as above, but instead of crypto isakmp key: 
 
 crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT    
@@ -165,7 +166,7 @@ crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT
 
 **VRFless**
 
-```         
+``` default
 crypto ikev2 keyring DMVPN-KEYRING
 peer ANY address 0.0.0.0 0.0.0.0 
 pre-shared-key CISCO456 
@@ -189,7 +190,7 @@ tunnel protection ipsec profile DMVPN-IPSEC
 
 **FVRF**
 
-```         
+``` default
 !Same as above, but under crypto ikev2 profile:  match fvrf INET
 ```
 
