@@ -311,8 +311,115 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="general-notes" class="level4">
+<h4 class="anchored" data-anchor-id="general-notes"><strong>General Notes</strong></h4>
+<ul>
+<li><strong>GRE</strong>
+<ul>
+<li>Stands for Generic Route Encapsulation</li>
+<li>Tunneling method that can tunnel many different protocols inside GRE header</li>
+<li>Used as default encapsulation method for Cisco tunnel interfaces</li>
+<li>IP protocol type <strong>47</strong> used in IP header</li>
+</ul></li>
+<li><strong>Security features of IPSec</strong>
+<ul>
+<li><strong>Data origin authentication</strong>
+<ul>
+<li>Verifying where packet came from</li>
+</ul></li>
+<li><strong>Data integrity</strong>
+<ul>
+<li>Ensuring packet wasn’t changed in transit</li>
+</ul></li>
+<li><strong>Confidentiality</strong>
+<ul>
+<li>Encryption, preventing packet from being intercepted and read</li>
+<li>Prevented by limited allowed window</li>
+</ul></li>
+<li>Confidentiality is the mainly thought-of core feature</li>
+</ul></li>
+<li>IPSec uses symmetric key encryption</li>
+<li>Point-to-point tunnels in almost all cases, GETVPN can be P2MP</li>
+<li>Tunnel keys dynamically negotiated through IKE</li>
+<li>IKEv2 is superior but not supported by all platforms</li>
+</ul>
+<section id="phases" class="level5">
+<h5 class="anchored" data-anchor-id="phases"><strong>Phases</strong></h5>
+<ul>
+<li>Phase one establishes ISAKMP SA, secure tunnel to negotiate phase two through</li>
+<li>Phase two establishes IPsec SA, tunnel used to protect actual data traffic</li>
+<li><strong>In Phase 1:</strong>
+<ul>
+<li>Authentication either PSK (Pre-shared key) or certificate based</li>
+<li>DH<sup><a href="https://brunbattery.github.io/NetworkNotes/IPsec%20&amp;%20GRE%20VPN.html#fn1">1</a></sup> used to exchange crypto keys
+<ul>
+<li>Higher DH group number is more secure</li>
+</ul></li>
+<li>Encryption algorithms used to protect traffic
+<ul>
+<li>Possibilities include DES, 3DES, AES-128, AES-256, etc</li>
+</ul></li>
+<li>Hash algorithm used to ensure packet wasn’t modified in transit
+<ul>
+<li>IKEv1 supports MD5, SHA-1</li>
+</ul></li>
+<li>Tunnel lifetime is negotiated</li>
+<li>IKE parameters <em>must match</em> in order for phase 1 to complete successfully</li>
+<li>Main mode and aggressive mode both options for completing this step
+<ul>
+<li>Main mode preferred as aggressive has security issues</li>
+</ul></li>
+</ul></li>
+<li><strong>In Phase 2, following are negotiated:</strong>
+<ul>
+<li><p>Security protocol</p>
+<ul>
+<li>ESP (Encapsulating Security Payload) or AH (Authentication Header)</li>
+<li>AH does not support encryption, rarely used</li>
+</ul></li>
+<li><p>Encapsulation modes</p>
+<ul>
+<li>Tunnel or transport</li>
+<li>Tunnel adds new IP header, used for actually tunneling traffic</li>
+<li>Transport mode used for host-to-host applications or combined with GRE which does the tunneling itself</li>
+</ul></li>
+<li><p>Encryption (used for actual data traffic, not just tunnel)</p>
+<ul>
+<li>DES, 3DES, AES-128, AES-256, etc</li>
+</ul></li>
+<li><p>Authentication (hashing)</p>
+<ul>
+<li>MD5, SHA, etc</li>
+</ul></li>
+<li><p>Combination of the above called IPsec <strong>Transform Set</strong></p></li>
+<li><p>Only performed in QM (quick mode)</p></li>
+</ul></li>
+<li>UDP 500 (ISAKMP), 4500 (NAT-T) are ports used to establish control plane
+<ul>
+<li>4500 is only used with NAT-T<sup><a href="https://brunbattery.github.io/NetworkNotes/IPsec%20&amp;%20GRE%20VPN.html#fn2">2</a></sup></li>
+</ul></li>
+<li>IPsec data plane uses IP protocol <strong>50</strong> (ESP), <strong>51</strong> (AH) in the IP header</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="useful-showdebug-commands" class="level4">
+<h4 class="anchored" data-anchor-id="useful-showdebug-commands"><strong>Useful show/debug commands</strong></h4>
+<ul>
+<li><strong>Phase 1:</strong>
+<ul>
+<li><code>show crypto isakmp sa</code> - should show <strong>QM_IDLE</strong> as state and status as <strong>ACTIVE</strong></li>
+<li><code>debug crypto isakmp</code>, or <code>debug crypto condition peer ipv4 &lt;IP&gt;</code> to debug for one specific peer</li>
+</ul></li>
+<li><strong>Phase 2:</strong>
+<ul>
+<li><code>show crypto ipsec sa [&lt;peer IP&gt;</code>]</li>
+<li><code>debug crypto ipsec</code></li>
+</ul></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
