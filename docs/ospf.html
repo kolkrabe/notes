@@ -528,6 +528,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="nssa">NSSA</h2>
 <ul>
 <li>Not So Stubby Area, RFC1587 (<a href="https://www.ietf.org/rfc/rfc1587.txt" class="uri">https://www.ietf.org/rfc/rfc1587.txt</a>)</li>
+<li>Two types, NSSA and totally NSSA
+<ul>
+<li><p>NSSA prevents LSA5 advertisements but allows redistribution of externals</p>
+<ul>
+<li><p>Configured with <code>area &lt;area#&gt; nssa</code> under router ospf</p></li>
+<li><p>Does not advertise default route from ABR by default</p></li>
+<li><p>Can use <code>area &lt;area#&gt; nssa default-information-originate</code> to advertise default</p></li>
+</ul></li>
+<li><p>Totally NSSA prevents LSA3, 5 but allows redistribution of externals</p>
+<ul>
+<li><p>Configured with <code>area &lt;area#&gt; nssa no-summary</code> under router ospf</p></li>
+<li><p>Advertises default route from ABR</p></li>
+</ul></li>
+</ul></li>
+<li>Externals originated in these areas will be LSA7s instead of LSA5s, translated to LSA5 at ABR</li>
 </ul>
 </section>
 <section id="default-route" class="level2">

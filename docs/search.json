@@ -218,7 +218,7 @@
     "href": "ospf.html#nssa",
     "title": "OSPF",
     "section": "NSSA",
-    "text": "NSSA\n\nNot So Stubby Area, RFC1587 (https://www.ietf.org/rfc/rfc1587.txt)",
+    "text": "NSSA\n\nNot So Stubby Area, RFC1587 (https://www.ietf.org/rfc/rfc1587.txt)\nTwo types, NSSA and totally NSSA\n\nNSSA prevents LSA5 advertisements but allows redistribution of externals\n\nConfigured with area &lt;area#&gt; nssa under router ospf\nDoes not advertise default route from ABR by default\nCan use area &lt;area#&gt; nssa default-information-originate to advertise default\n\nTotally NSSA prevents LSA3, 5 but allows redistribution of externals\n\nConfigured with area &lt;area#&gt; nssa no-summary under router ospf\nAdvertises default route from ABR\n\n\nExternals originated in these areas will be LSA7s instead of LSA5s, translated to LSA5 at ABR",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

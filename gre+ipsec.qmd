@@ -68,7 +68,7 @@ code-block-bg: dark
     -   4500 is only used with NAT-T^[2](https://brunbattery.github.io/NetworkNotes/IPsec%20&%20GRE%20VPN.html#fn2)^
 -   IPsec data plane uses IP protocol **50** (ESP), **51** (AH) in the IP header
 
----
+------------------------------------------------------------------------
 
 #### **Useful show/debug commands**
 
