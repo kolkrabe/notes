@@ -333,6 +333,11 @@ ul.task-list li input[type="checkbox"] {
 <li>UDP also used for initial discovery messages</li>
 <li>LDP requires <strong>CEF</strong> in order to exchange labels</li>
 <li>Only IGP-learned or local routes are labelled, BGP routes not assigned a label</li>
+<li>After LDP TCP connection is established LSR’s negotiate session parameters using 2 types of label distribution
+<ul>
+<li>Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.</li>
+<li>Downstream on Demand: An LSR advertises label mappings to a peer only when the peer asks for them.</li>
+</ul></li>
 </ul></li>
 <li><strong>PHP</strong>
 <ul>

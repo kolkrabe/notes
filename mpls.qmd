@@ -15,6 +15,9 @@ code-block-bg: dark
     -   UDP also used for initial discovery messages
     -   LDP requires **CEF** in order to exchange labels
     -   Only IGP-learned or local routes are labelled, BGP routes not assigned a label
+    -   After LDP TCP connection is established LSR's negotiate session parameters using 2 types of label distribution
+        -   Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.
+        -   Downstream on Demand: An LSR advertises label mappings to a peer only when the peer asks for them.
 -   **PHP**
     -   Penultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header & IP)
     -   In order to facilitate this, LDP routers advertise routes they own with an *implicit null/POP* label (label value of **3**) - **"imp-null"** that tells neighbours to pop LDP labels before sending for these routes
