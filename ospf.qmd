@@ -132,6 +132,21 @@ ip ospf authentication key-chain OSPF_KEY
 ## NSSA
 
 -   Not So Stubby Area, RFC1587 (<https://www.ietf.org/rfc/rfc1587.txt>)
+-   Two types, NSSA and totally NSSA
+    -   NSSA prevents LSA5 advertisements but allows redistribution of externals
+
+        -   Configured with `area <area#> nssa` under router ospf
+
+        -   Does not advertise default route from ABR by default
+
+        -   Can use `area <area#> nssa default-information-originate` to advertise default
+
+    -   Totally NSSA prevents LSA3, 5 but allows redistribution of externals
+
+        -   Configured with `area <area#> nssa no-summary` under router ospf
+
+        -   Advertises default route from ABR
+-   Externals originated in these areas will be LSA7s instead of LSA5s, translated to LSA5 at ABR
 
 ## Default Route
 
