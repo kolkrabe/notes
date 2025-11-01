@@ -31,7 +31,7 @@ code-block-bg: dark
 -   Phase two establishes IPsec SA, tunnel used to protect actual data traffic
 -   **In Phase 1:**
     -   Authentication either PSK (Pre-shared key) or certificate based
-    -   DH^[1](https://brunbattery.github.io/NetworkNotes/IPsec%20&%20GRE%20VPN.html#fn1)^ used to exchange crypto keys
+    -   DH used to exchange crypto keys
         -   Higher DH group number is more secure
     -   Encryption algorithms used to protect traffic
         -   Possibilities include DES, 3DES, AES-128, AES-256, etc
@@ -78,3 +78,99 @@ code-block-bg: dark
 -   **Phase 2:**
     -   `show crypto ipsec sa [<peer IP>`\]
     -   `debug crypto ipsec`
+
+---
+
+##### **Crypto Profile IPSec Config w/ IKEv1 (with & without GRE)**
+
+``` default
+interface Tunnel0    
+ ip address <ip & mask>  
+ tunnel source <ip>  
+ tunnel destination <ip> 
+ 
+crypto isakmp policy 10  
+ encryption aes 256  
+ hash md5  
+ authentication pre-share  
+ group 14  
+ lifetime 3600   
+!
+crypto isakmp key <PSK> address <remote outside interface IP with subnet mask> 
+! 
+crypto ipsec transform-set <ts-name> esp-3des esp-md5-hmac  
+ mode transport 
+!mode tunnel if using VTI 
+
+crypto ipsec profile <profile-name>  
+ set transform-set <ts-name>     
+ 
+interface Tunnel0
+ tunnel protection ipsec profile <profile-name>  
+ ip mtu 1400  
+ ip tcp adjust-mss 1360 
+!optionally can define tunnel mode as ipsec to bypass GRE and use VTI - 'tunnel mode ipsec ipv4' 
+!note that routing through tunnel must exist for ipsec sa to form - routing not included in config 
+!can do underlay and overlay routing protocols, static routing, front door vrfs, many options
+```
+
+##### **Crypto Profile IPSec Config w/ IKEv2 (with & without GRE)**
+
+``` default
+interface Tunnel0    
+ip address <ip & mask>  
+ tunnel source <ip>  
+ tunnel destination <ip>      
+crypto ikev2 keyring <keyring-name>  
+ peer ANY  address 0.0.0.0 0.0.0.0 ! any host for DMVPN, specific host for site-to-site  
+ pre-shared-key <psk> 
+!
+crypto ikev2 profile <ike-prof-name>  
+ match identity remote address 0.0.0.0 ! any host for DMVPN, specific host for site-to-site  
+ authentication remote pre-share  
+ authentication local pre-share  
+ keyring local <keyring-name> 
+! 
+crypto ipsec transform-set <ts-name> esp-aes 256 esp-sha-hmac  
+ mode transport  !mode tunnel if using VTI 
+! 
+crypto ipsec profile <profile-name>  set transform-set <ts-name>  set ikev2-profile <ike-prof-name> 
+!
+interface Tunnel0 
+ tunnel protection ipsec profile <profile-name>  !optionally can define tunnel mode as ipsec to bypass GRE and use VTI - 'tunnel mode ipsec ipv4'  
+
+!note that routing through tunnel must exist for ipsec sa to form - routing not included in config 
+!can do underlay and overlay routing protocols, static routing, front door vrfs, 
+```
+
+##### **Crypto Map IPSec Config w/ IKEv1 (with GRE)**
+
+```         
+interface Tunnel0
+ ip address <ip & mask>  
+ tunnel source <ip>  
+ tunnel destination <ip>  
+ ip mtu 1400  
+ ip tcp adjust-mss 1360     
+crypto isakmp policy 10  
+ encryption aes 256  
+ hash md5  
+ authentication pre-share  
+ group 14  
+ lifetime 180   
+! 
+crypto isakmp key <PSK> address <remote outside interface IP with 32 bit subnet mask>  
+!
+crypto ipsec transform-set <ts-name> esp-3des esp-md5-hmac  
+ mode transport  
+! 
+access-list 120 permit gre host <local outside interface ip> host <remote outside interface IP>     
+
+crypto map <cm-name> 10 ipsec-isakmp     
+ set peer <ip>  
+ set transform-set <ts-name>   
+ match address 120       
+
+interface Ethernet0/0
+ crypto map <cm-name>
+```

@@ -44,3 +44,5 @@ snmp-server group \<group-name\> v3 priv read \<view-name\> write \<view-name
 snmp-server user \<user-name\> \<group-name\> v3 auth sha \<password\> priv aes 256 \<password\>\
 snmp-server host 10.1.100.100 version 3 priv \<user-name\>
 ```
+
+#### SNMP traps for OSPF

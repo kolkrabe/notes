@@ -25,16 +25,13 @@ code-block-bg: dark
 
 ### Conditional Debugging
 
-Conditions can be configured to reduce the output you see when debugging. 
-These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)
-
+Conditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)
 
 #### Useful show commands
 
 -   `show logging` — Shows information on local and external syslog
 
 ------------------------------------------------------------------------
-
 
 #### Standard Syslog Config
 
@@ -48,7 +45,6 @@ logging source-interface loopback0
 exit
 ```
 
-
 #### Standard timestamp config
 
 ``` default
@@ -58,6 +54,14 @@ exit
 *Uptime - time elapsed since last reboot
 ```
 
+#### Show Sequence Numbers
+
+``` default
+conf t
+service sequence-numbers
+
+! shows sequence numbers in log which allows you to differenciate between 2 events that happened simultaneously.
+```
 
 #### Conditional Debugging
 

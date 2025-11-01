@@ -31,6 +31,7 @@ website:
             contents:
               - device_management.qmd
               - logging.qmd
+              - snmp.qmd
               - dhcp.qmd
               - ipsla+track.qmd
               - netflow.qmd
