@@ -67,6 +67,27 @@ code-block-bg: dark
 -   UDP 500 (ISAKMP), 4500 (NAT-T) are ports used to establish control plane
     -   4500 is only used with NAT-T^[2](https://brunbattery.github.io/NetworkNotes/IPsec%20&%20GRE%20VPN.html#fn2)^
 -   IPsec data plane uses IP protocol **50** (ESP), **51** (AH) in the IP header
+-   
+
+### Configuration Reminder - HAGLE
+
+-   **1.Configure Crypto ISAKMP Policy (HAGLE)**
+    -   H - Hash
+    -   A - Authentication
+    -   G - Group (Diffe Helman)
+    -   L - lifetime
+    -   E - Encryption
+-   **2.Configure Crypto ISAKMP Key**
+    -   pre-shared key
+    -   specify DMVPN Peer IP for which to use the key
+-   **3.Configure Crypto IPsec Transform-Set**
+    -   specify phase-2 encryption parameters
+    -   config of tunnel mode (transport preferred
+-   **4.Configuration of Crypto IPsec Profile**
+    -   Change SA lifetime from default (if desired)
+    -   Reference crypto transform-set
+-   **5.Tunnel protection on Tunnel Interface**\*
+    -   Reference Crypto IPsec Profile and applies it to Tunnel Interface
 
 ------------------------------------------------------------------------
 
@@ -79,9 +100,9 @@ code-block-bg: dark
     -   `show crypto ipsec sa [<peer IP>`\]
     -   `debug crypto ipsec`
 
----
+------------------------------------------------------------------------
 
-##### **Crypto Profile IPSec Config w/ IKEv1 (with & without GRE)**
+##### **Crypto Profile IPSec Config w/ IKEv1 (with & without GRE) - HAGLE**
 
 ``` default
 interface Tunnel0    

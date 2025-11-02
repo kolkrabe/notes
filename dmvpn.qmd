@@ -73,9 +73,9 @@ tunnel key 100                 ! necessary in multi-hub designs
 interface Tunnel100 
 ip address 192.168.100.31 255.255.255.0 
 ip nhrp network-id 100 
-ip nhrp nhs [TunnelIP] nbma [<]PublicIP] multicast 
+ip nhrp nhs [Hub TunnelIP] nbma [Hub Public IP] multicast 
 tunnel source GigabitEthernet0/1 
-tunnel destination [PublicIP]  
+tunnel destination [Hub Public IP]  
 
 ! Discretionary 
 bandwidth 4000 
