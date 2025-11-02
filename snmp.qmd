@@ -1,5 +1,5 @@
 ---
-title: "snmp"
+title: "SNMP"
 editor: visual
 code-block-bg: dark
 ---
@@ -28,8 +28,9 @@ snmp ifmib ifindex persist\
 snmp-server location \<location\>\
 snmp-server contact \<contact-details\>\
 snmp-server community \<community-string\> \[RO\|RW\] \[ACL\]\
-snmp-server enable traps\
+snmp-server enable traps\                                                            ! Enables all traps
 snmp-server host 10.1.100.100 \[traps\|informs\] version 2c \<community-string\>
+snmp-server enable traps ospf                                                        ! Enables specific traps for SNMP for example
 ```
 
 ##### Standard SNMP v3 Config
@@ -45,4 +46,4 @@ snmp-server user \<user-name\> \<group-name\> v3 auth sha \<password\> priv aes 
 snmp-server host 10.1.100.100 version 3 priv \<user-name\>
 ```
 
-#### SNMP traps for OSPF
+##### 

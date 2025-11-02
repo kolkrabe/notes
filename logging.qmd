@@ -63,6 +63,17 @@ service sequence-numbers
 ! shows sequence numbers in log which allows you to differenciate between 2 events that happened simultaneously.
 ```
 
+#### Save config commands to local log & send to syslog
+
+``` default
+archive
+ log config
+ logging enable     ! enables local config logger
+ logging size       ! sets max number of logs to keep
+ hidekeys           ! hides passwords when showing logged commands
+ notify syslog      ! sends logged commands to syslog server
+```
+
 #### Conditional Debugging
 
 ``` default
