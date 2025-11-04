@@ -335,6 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#general-notes" id="toc-general-notes" class="nav-link active" data-scroll-target="#general-notes">General Notes</a></li>
   <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
+  <li><a href="#neighbourship" id="toc-neighbourship" class="nav-link" data-scroll-target="#neighbourship">Neighbourship</a></li>
   <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
   <li><a href="#virtual-links" id="toc-virtual-links" class="nav-link" data-scroll-target="#virtual-links">Virtual Links</a></li>
   <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
@@ -388,15 +389,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast), <strong>Port 89</strong></li>
 <li>224.0.0.6 - Broadcast for All Designates Routers, <strong>Port 89</strong></li>
-<li>Neighbourship Requirements
-<ul>
-<li>Matching Area</li>
-<li>Matching Auth Parameters</li>
-<li>Matching Subnet</li>
-<li>Matching Timers</li>
-<li>Matching Stub Flags</li>
-<li>Matching MTU (Exstart/Exchange State)</li>
-</ul></li>
 <li><strong>DR/BDR Election</strong> - Highest Priority value (0 to remove from election) - Highest Router-ID - Highest IP on Loopback Int - Highest IP on interface that’s UP</li>
 <li><strong>Metric Calculation</strong>
 <ul>
@@ -448,6 +440,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="features" class="level1">
 <h1>Features</h1>
+<section id="neighbourship" class="level2">
+<h2 class="anchored" data-anchor-id="neighbourship">Neighbourship</h2>
+<ul>
+<li>Neighbourship Requirements (Must match)
+<ul>
+<li>Matching Area</li>
+<li>Matching Auth Parameters</li>
+<li>Matching Subnet</li>
+<li>Matching Timers</li>
+<li>Matching Stub Flags</li>
+<li>Matching MTU (Exstart/Exchange State)</li>
+</ul></li>
+<li>Troubleshooting - <strong>TAN MAT</strong> (<strong>T</strong>imers, <strong>A</strong>rea, <strong>N</strong>etwork Address, <strong>M</strong>TU, <strong>A</strong>uth, <strong>T</strong>ype)</li>
+</ul>
+</section>
 <section id="authentication" class="level2">
 <h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
 <ul>
@@ -538,14 +545,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>NSSA prevents LSA5 advertisements but allows redistribution of externals</p>
 <ul>
-<li><p>Configured with <code>area &lt;area#&gt; nssa</code> under router ospf</p></li>
-<li><p>Does not advertise default route from ABR by default</p></li>
-<li><p>Can use <code>area &lt;area#&gt; nssa default-information-originate</code> to advertise default</p></li>
+<li>Configured with <code>area &lt;area#&gt; nssa</code> under router ospf</li>
+<li>Does not advertise default route from ABR by default</li>
+<li>Can use <code>area &lt;area#&gt; nssa default-information-originate</code> to advertise default</li>
 </ul></li>
 <li><p>Totally NSSA prevents LSA3, 5 but allows redistribution of externals</p>
 <ul>
-<li><p>Configured with <code>area &lt;area#&gt; nssa no-summary</code> under router ospf</p></li>
-<li><p>Advertises default route from ABR</p></li>
+<li>Configured with <code>area &lt;area#&gt; nssa no-summary</code> under router ospf</li>
+<li>Advertises default route from ABR</li>
 </ul></li>
 </ul></li>
 <li>Externals originated in these areas will be LSA7s instead of LSA5s, translated to LSA5 at ABR</li>
