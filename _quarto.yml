@@ -42,6 +42,7 @@ website:
              - copp.qmd
              - ipv6sec.qmd
       - whitepapers.qmd
+      - tools.qmd
 
 format:
   html:
