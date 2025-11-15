@@ -1,0 +1,11 @@
+---
+title: "IP ACLs"
+editor: visual
+code-block-bg: dark
+---
+
+**IP access-list**: Defines traffic - either via permit/deny
+
+**Access-group**: applies an ACL to a physical `interface`
+
+**Access-class**: applies an ACL to a `line` (VTY, Console, Aux) etc.

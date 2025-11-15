@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Device Management – Kolkrabe</title>
+<title>CoPP – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./device_management.html">Device Management</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./acls.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./copp.html">CoPP</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -234,16 +234,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Infrastructure Services</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./device_management.html" class="sidebar-item-text sidebar-link active">
+  <a href="./device_management.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Device Management</span></a>
   </div>
 </li>
@@ -281,13 +281,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Infrastructure Security</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./acls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IP ACLs</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aaa.html" class="sidebar-item-text sidebar-link">
@@ -302,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./copp.html" class="sidebar-item-text sidebar-link">
+  <a href="./copp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">CoPP</span></a>
   </div>
 </li>
@@ -338,23 +344,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#console-vty-lines" id="toc-console-vty-lines" class="nav-link active" data-scroll-target="#console-vty-lines">Console &amp; VTY Lines</a>
-  <ul class="collapse">
-  <li><a href="#console-line-connection-requirements" id="toc-console-line-connection-requirements" class="nav-link" data-scroll-target="#console-line-connection-requirements">Console line connection requirements</a>
-  <ul class="collapse">
-  <li><a href="#vty-line-troubleshooting" id="toc-vty-line-troubleshooting" class="nav-link" data-scroll-target="#vty-line-troubleshooting">VTY Line troubleshooting</a></li>
-  </ul></li>
-  <li><a href="#standard-line-config" id="toc-standard-line-config" class="nav-link" data-scroll-target="#standard-line-config">Standard Line Config</a></li>
-  </ul></li>
+  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General info</a></li>
+  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
+  <li><a href="#standard-copp-configuration" id="toc-standard-copp-configuration" class="nav-link" data-scroll-target="#standard-copp-configuration">Standard CoPP Configuration</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./device_management.html">Device Management</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./acls.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./copp.html">CoPP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Device Management</h1>
+<h1 class="title">CoPP</h1>
 </div>
 
 
@@ -371,57 +372,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="console-vty-lines" class="level1">
-<h1>Console &amp; VTY Lines</h1>
-<section id="console-line-connection-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="console-line-connection-requirements">Console line connection requirements</h2>
+<section id="general-info" class="level2">
+<h2 class="anchored" data-anchor-id="general-info">General info</h2>
 <ul>
-<li>9600 Baud</li>
-<li>8 data bits</li>
-<li>1 stop bit</li>
-<li>no parity</li>
-<li>Generally no password by default. If line password is configured <code>Login</code> needs to be configured on the line.</li>
-<li><code>Login Local</code> - uses Local user DB <code>Login authentication xxx</code> - uses configured aaa servers.</li>
+<li>Control Plane Policing</li>
+<li>Used to protect control plane from DDoS and other attacks.</li>
+<li>Utilises Policy-Maps in a top down fashion, once matched the evaluation stops</li>
+<li>Class map match statement (used when multiple match statements exist)
+<ul>
+<li><code>match-all</code> - must match all match commands</li>
+<li><code>match-any</code> - can match any match commands</li>
+</ul></li>
+<li>Class Map &amp; Policy Maps are case sensitive</li>
+<li>T/S - <strong>SPCA</strong> ( <strong>S</strong>ervice Policy, <strong>P</strong>olicy Map, <strong>C</strong>lass Map <strong>A</strong>CL</li>
 </ul>
-<hr>
-<section id="vty-line-troubleshooting" class="level3">
-<h3 class="anchored" data-anchor-id="vty-line-troubleshooting">VTY Line troubleshooting</h3>
+</section>
+<section id="useful-show-commands" class="level2">
+<h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
+<ul>
+<li><code>show policy-map control-plane input</code></li>
+</ul>
+</section>
+<section id="standard-copp-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="standard-copp-configuration">Standard CoPP Configuration</h2>
 <ol type="1">
-<li>Is it Reachable?</li>
-<li>Transport protocols permitted with allowed protocols?</li>
+<li>Create <strong>ACL</strong> to define interesting traffic</li>
+<li>Create <strong>class maps</strong> to define traffic class</li>
+<li>Create <strong>policy maps</strong> to define a service policy</li>
+<li>Apply <strong>service policy</strong> to control plane</li>
 </ol>
-<ul>
-<li><code>Transport input \[ssh/telnet\]</code></li>
-<li><code>show line vty \[line number\] \| include Allowed</code></li>
-</ul>
-<ol start="3" type="1">
-<li>Auth setup?</li>
-</ol>
-<ul>
-<li><code>Login</code> configured on line, line password configured</li>
-<li><code>Login local</code> configured - refer to local user DB • If Login specified but no password set -error - “Password required but none set”</li>
-</ul>
-<ol start="3" type="1">
-<li>ACL?</li>
-<li>VTY Lines Busy?
-<ol type="a">
-<li>“Show users” - will show active users</li>
-<li>“clear line [number]” used to clear a line</li>
-</ol></li>
-</ol>
-<hr>
-<p>Useful show commands</p>
-<p><code>Show users</code> - will show active users</p>
-</section>
-</section>
-<section id="standard-line-config" class="level2">
-<h2 class="anchored" data-anchor-id="standard-line-config">Standard Line Config</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(config)# exec -enables the line </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>(config)# no exec -disables exec access to line line </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>(config)# exec-timeout 5 0 -sets logout timer as 5 minutes of inactivity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> *** Configure ACLs ***</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ip access-list extended COPP-ICMP-ACL-EXAMPLE</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> permit udp any any range 33434 33463 ttl eq 1</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> permit icmp any any unreachable</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> permit icmp any any echo</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> permit icmp any any echo-reply</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> permit icmp any any ttl-exceeded</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> exit</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ip access-list extended COPP-MGMT-TRAFFIC-ACL-EXAMPLE</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> permit udp any eq ntp any</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> permit udp any any eq snmp</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> permit tcp any any eq 22</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> permit tcp any eq 22 any established</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> permit tcp any any eq 23</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> exit</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>ip access-list extended COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> permit tcp any eq bgp any established</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> permit eigrp any host 224.0.0.10</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> permit ospf any host 224.0.0.5</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> permit ospf any host 224.0.0.6</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> permit pim any host 224.0.0.13</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> permit igmp any any</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>*** Create Class Maps ***</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>class-map match-all COPP-ICMP-CLASSMAP-EXAMPLE                           -  Class Map Name is case sensitive!</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> match access-group name COPP-ICMP-ACL-EXAMPLE</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>class-map match-all COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> match access-group name COPP-MGMT-TRAFFIC-ACL-EXAMPLE</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>class-map match-all COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> match access-group name COPP-ROUTING-PROTOCOLS-ACL-EXAMPLE</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>*** Create Policy Map ***</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>policy-map COPP-POLICYMAP-EXAMPLE                                        </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> class COPP-MGMT-TRAFFIC-CLASSMAP-EXAMPLE</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  police 32000 conform-action transmit exceed-action transmit violate-action transmit</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> class COPP-ROUTING-PROTOCOLS-CLASSMAP-EXAMPLE</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  police 34000 conform-action transmit exceed-action transmit violate-action transmit</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a> class COPP-ICMP-CLASSMAP-EXAMPLE</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  police 8000 conform-action transmit exceed-action transmit violate-action drop</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>*** Apply to the Control Plane ***</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>control-plane</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a> service-policy input COPP-POLICYMAP-EXAMPLE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

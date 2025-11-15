@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IP SLA &amp; Tracking – Kolkrabe</title>
+<title>IP ACLs – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./ipsla+track.html">IP SLA &amp; Tracking</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./acls.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./acls.html">IP ACLs</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -234,13 +199,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Infrastructure Services</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./device_management.html" class="sidebar-item-text sidebar-link">
@@ -267,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ipsla+track.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ipsla+track.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">IP SLA &amp; Tracking</span></a>
   </div>
 </li>
@@ -281,13 +246,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Infrastructure Security</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./acls.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">IP ACLs</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aaa.html" class="sidebar-item-text sidebar-link">
@@ -333,23 +304,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link active" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
-  <li><a href="#configuration-of-floating-static-using-ip-sla" id="toc-configuration-of-floating-static-using-ip-sla" class="nav-link" data-scroll-target="#configuration-of-floating-static-using-ip-sla">Configuration of Floating Static using IP SLA</a></li>
-  <li><a href="#brunbatterys-awesome-ipsla-w-track-for-hsrp" id="toc-brunbatterys-awesome-ipsla-w-track-for-hsrp" class="nav-link" data-scroll-target="#brunbatterys-awesome-ipsla-w-track-for-hsrp">BrunBattery’s awesome IPSLA w/ Track for HSRP</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./ipsla+track.html">IP SLA &amp; Tracking</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./acls.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./acls.html">IP ACLs</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IP SLA &amp; Tracking</h1>
+<h1 class="title">IP ACLs</h1>
 </div>
 
 
@@ -366,69 +329,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<ul>
-<li><p>IP-SLA is used to measure various parameters across the network for troubleshooting</p>
-<ul>
-<li>IP SLA instances</li>
-<li>Interface Status / Reachability</li>
-<li>Jitter / latency</li>
-<li>Groups of things</li>
-</ul></li>
-<li><p>Used commonly for floating static default route (routes internet across different link if one fails.</p></li>
-<li><p>Great example below from Brunbattery on using it to monitor HSRP.</p></li>
-</ul>
-<hr>
-<section id="useful-show-commands" class="level2">
-<h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
-<ul>
-<li><code>show ip sla configuration</code> - shows config of all IP SLA’s</li>
-<li><code>show ip sla statistics</code> -show ip sla statistics</li>
-<li><code>show track</code> - shows config and status of tracked objects (e.g.&nbsp;floating statics)</li>
-</ul>
-</section>
-<section id="configuration-of-floating-static-using-ip-sla" class="level2">
-<h2 class="anchored" data-anchor-id="configuration-of-floating-static-using-ip-sla">Configuration of Floating Static using IP SLA</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ip sla 1 </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> icmp-echo 10.44.1.2                                    - pings 10.44.1.2</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> timeout 5000                                           - expecting a response within 5000ms</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> frequency 10                                           - every 10 seconds</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ip sla schedule 1 start-time now life forever          - starts IP SLA</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="brunbatterys-awesome-ipsla-w-track-for-hsrp" class="level2">
-<h2 class="anchored" data-anchor-id="brunbatterys-awesome-ipsla-w-track-for-hsrp">BrunBattery’s awesome IPSLA w/ Track for HSRP</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>! Tracking line protocols of WAN interfaces</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>track 11 interface GigabitEthernet8 line-protocol</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>track 12 interface FastEthernet0 line-protocol</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>! Tracking ip routing status of tunnel interfaces for backup route</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>track 21 interface Tunnel1 ip routing</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>track 22 interface Tunnel2 ip routing</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>! Track 23 will be up if both tunnels are not routing - set up for backup route to be installed</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>track 23 list boolean and</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> object 21 not</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> object 22 not</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>! Tracking for IP SLA 101</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>track 100 ip sla 101 reachability</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a> delay down 15 up 60</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>! Decrementing HSRP based on IP SLA and line protocols of WAN interfaces</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>int vlan 100</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a> standby 1 track 11 decrement 10</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a> standby 1 track 12 decrement 10</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a> standby 1 track 100 decrement 10</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>! Routing management traffic to secondary router if neither tunnel is routing</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>ip route 10.100.100.0 255.255.255.0 10.1.174.253 track 23</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>! Testing reachability over DMVPN overlay and starting SLA</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ip sla 101</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a> icmp-echo 172.16.1.254 source-interface Tunnel1</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a> request-data-size 100</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> frequency 5</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ip sla schedule 101 life forever start-time now</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>IP access-list</strong>: Defines traffic - either via permit/deny</p>
+<p><strong>Access-group</strong>: applies an ACL to a physical <code>interface</code></p>
+<p><strong>Access-class</strong>: applies an ACL to a <code>line</code> (VTY, Console, Aux) etc.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -10,6 +10,8 @@ code-block-bg: dark
 -   Routes learned from main routing table aren't learned by vrf tables
 -   `VRF` when used with MPLS, `VRF-Lite` when used without
 -   Front Door VRFs - [FVRF](https://www.networkingwithfish.com/tunnels-and-the-use-of-front-door-vrfs/ "FVRF")
+-   For OSPFv2 you need separate OSPF processes for each VRF
+-   For other Protocols - we can have a single process with multiple address families.
 
 ------------------------------------------------------------------------
 

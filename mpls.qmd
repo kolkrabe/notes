@@ -7,7 +7,7 @@ code-block-bg: dark
 ## General Info
 
 -   Protocol that uses labels to determine which path traffic should route
--   shim header inserted between IP & MAC header (This is the label)
+-   shim header (**20-bit**) inserted between IP & MAC header (This is the label)
 -   Labels switched hop by hop
 -   Introduces `LIB` (Label Information Base) & `LFIB` (Label Forwarding Information Base)
 -   **LDP** - Label Discovery Protocol

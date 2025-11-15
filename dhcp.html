@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Logging – Kolkrabe</title>
+<title>DHCP – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./logging.html">Logging</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./dhcp.html">DHCP</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -249,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./logging.html" class="sidebar-item-text sidebar-link active">
+  <a href="./logging.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logging</span></a>
   </div>
 </li>
@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dhcp.html" class="sidebar-item-text sidebar-link">
+  <a href="./dhcp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">DHCP</span></a>
   </div>
 </li>
@@ -288,6 +288,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./acls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IP ACLs</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aaa.html" class="sidebar-item-text sidebar-link">
@@ -338,9 +344,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syslog" id="toc-syslog" class="nav-link active" data-scroll-target="#syslog">Syslog</a>
+  <li><a href="#dhcp" id="toc-dhcp" class="nav-link active" data-scroll-target="#dhcp">DHCP</a>
   <ul class="collapse">
-  <li><a href="#conditional-debugging" id="toc-conditional-debugging" class="nav-link" data-scroll-target="#conditional-debugging">Conditional Debugging</a></li>
+  <li><a href="#dhcp-operation" id="toc-dhcp-operation" class="nav-link" data-scroll-target="#dhcp-operation">DHCP Operation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -348,9 +354,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./logging.html">Logging</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./dhcp.html">DHCP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Logging</h1>
+<h1 class="title">DHCP</h1>
 </div>
 
 
@@ -367,83 +373,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="syslog" class="level1">
-<h1>Syslog</h1>
-<section id="general-notes" class="level4">
-<h4 class="anchored" data-anchor-id="general-notes">General Notes</h4>
+<section id="dhcp" class="level1">
+<h1>DHCP</h1>
 <ul>
-<li>Used to manage system logs and alerts</li>
-<li>Can be stored locally, sent to vty, console lines, or forwarded to an external syslog server</li>
-<li>Logging levels: (Every Awesome Cisco Engineer Will Need Icecream Daily )
+<li>DHCP used to dynamically address clients on a network.</li>
+<li>Clients Broadcast DHCPDISCOVER on local network.</li>
+<li>To operate outwith local subnet <code>ip helper-address x.x.x.x</code> on DG interface will forward DHCP messages towards DHCP server.
 <ul>
-<li>Emergency: <strong>0</strong></li>
-<li>Alert: <strong>1</strong></li>
-<li>Critical: <strong>2</strong></li>
-<li>Error: <strong>3</strong></li>
-<li>Warning: <strong>4</strong></li>
-<li>Notice: <strong>5</strong></li>
-<li>Informational: <strong>6</strong></li>
-<li>Debug: <strong>7</strong></li>
+<li>for IPv6 this is <code>ipv6 dhcp relay destination [ipv6-ip]</code></li>
+</ul></li>
+</ul>
+<section id="dhcp-operation" class="level2">
+<h2 class="anchored" data-anchor-id="dhcp-operation">DHCP Operation</h2>
+<ul>
+<li><p>DORA</p>
+<ul>
+<li><strong>Discover</strong> - Client sends broadcast to discover DHCP servers on port <strong>67</strong></li>
+<li><strong>Offer</strong> - DHCP Server responds, offers IP, SM, DG, DHCP Options (if configured) on port <strong>68</strong></li>
+<li><strong>Request</strong> - Client request the offered IP details.</li>
+<li><strong>Acknowledge</strong> - DHCP server acknowledges clients request and records the details</li>
+</ul></li>
+<li><p>SARR (IPv6)</p>
+<ul>
+<li><strong>Solicit</strong> - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2</li>
+<li><strong>Advertise</strong> - Servers respond to solicit message with a unicast advertise, offering addressing info</li>
+<li><strong>Request</strong> - Client sends request back to server, confirming address provided + other config</li>
+<li><strong>Reply</strong> - Server finalizes process with this message</li>
 </ul></li>
 </ul>
 <hr>
-</section>
-<section id="conditional-debugging" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-debugging">Conditional Debugging</h3>
-<p>Conditions can be configured to reduce the output you see when debugging. These conditions can be nested (set interlace condition, then set IP/Mac condition for eg.)</p>
-<section id="useful-show-commands" class="level4">
-<h4 class="anchored" data-anchor-id="useful-show-commands">Useful show commands</h4>
+<p>Useful show commands</p>
 <ul>
-<li><code>show logging</code> — Shows information on local and external syslog</li>
+<li><code>show ip dhcp binding</code> ! shows current dhcp ip bindings</li>
+<li><code>show ip dhcp pool</code> ! shows configured dhcp pool</li>
+<li><code>show ip dhcp conflict</code> ! shows ip conflicts</li>
 </ul>
 <hr>
-</section>
-<section id="standard-syslog-config" class="level4">
-<h4 class="anchored" data-anchor-id="standard-syslog-config">Standard Syslog Config</h4>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logging buffered 90000        # Increase local logging buffer size</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>logging &lt;logging-server&gt;</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>service timestamps debug datetime localtime show-timezone msec</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>service timestamps log datetime localtime show-timezone msec</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>logging trap warning         # includes this level of message and all lower levels</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>logging source-interface loopback0</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>exit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="standard-timestamp-config" class="level4">
-<h4 class="anchored" data-anchor-id="standard-timestamp-config">Standard timestamp config</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>#service timestamps [debug|log] [datetime|uptime]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>*Datetime - includes date and time</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>*Uptime - time elapsed since last reboot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="show-sequence-numbers" class="level4">
-<h4 class="anchored" data-anchor-id="show-sequence-numbers">Show Sequence Numbers</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>conf t</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>service sequence-numbers</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>! shows sequence numbers in log which allows you to differenciate between 2 events that happened simultaneously.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="save-config-commands-to-local-log-send-to-syslog" class="level4">
-<h4 class="anchored" data-anchor-id="save-config-commands-to-local-log-send-to-syslog">Save config commands to local log &amp; send to syslog</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>archive</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> log config</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> logging enable     ! enables local config logger</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> logging size       ! sets max number of logs to keep</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> hidekeys           ! hides passwords when showing logged commands</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> notify syslog      ! sends logged commands to syslog server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="conditional-debugging-1" class="level4">
-<h4 class="anchored" data-anchor-id="conditional-debugging-1">Conditional Debugging</h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>debug condition mac 1111.1111.1111                  ! this debugs based on the mac specified</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>debug condition start                               ! starts conditional debugging</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>show condition                                      ! displays the current conditions set</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>show debug</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>no debug condition interface g0/2                   ! this removes the condition</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>no debug all                                        ! stops debugging however does not remove conditions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Standard IPv4/IPv6 Configuration</p>
+<p><strong>IPv4</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ip dhcp excluded-address 10.8.8.1 10.8.8.10</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ip dhcp pool POOL-A</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>network 10.8.8.0 255.255.255.0</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>default-router 10.8.8.1</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dns-server 192.168.1.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>IPv6</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ipv6 dhcp pool DHCPV6POOL</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>address prefix 2001:DB8:A:A::/64</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dns-server 2001:DB8:B:B::1</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>domain-name cisco.com</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>interface GigabitEthernet0/0</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ipv6 address autoconfig            ! Enables SLAAC on an interface</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-</section>
 </section>
 </section>
 

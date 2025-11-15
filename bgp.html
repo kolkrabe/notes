@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IPv6 RA Guard – Kolkrabe</title>
+<title>BGP – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,9 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Kolkrabe
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./bgp.html">BGP</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -125,16 +123,16 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Layer 3 Technologies</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bgp.html" class="sidebar-item-text sidebar-link">
+  <a href="./bgp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">BGP</span></a>
   </div>
 </li>
@@ -257,6 +255,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./acls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IP ACLs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./aaa.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">AAA</span></a>
   </div>
@@ -300,15 +304,30 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
+  <li><a href="#features-attributes" id="toc-features-attributes" class="nav-link" data-scroll-target="#features-attributes">Features/ Attributes</a>
+  <ul class="collapse">
+  <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
+  <li><a href="#route-reflector" id="toc-route-reflector" class="nav-link" data-scroll-target="#route-reflector">Route Reflector</a></li>
+  <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
+  <li><a href="#bgp-regexp" id="toc-bgp-regexp" class="nav-link" data-scroll-target="#bgp-regexp"><strong>BGP regexp</strong></a></li>
+  </ul></li>
+  <li><a href="#bgp-configuration" id="toc-bgp-configuration" class="nav-link" data-scroll-target="#bgp-configuration">BGP Configuration</a></li>
+  <li><a href="#useful-show-commmands" id="toc-useful-show-commmands" class="nav-link" data-scroll-target="#useful-show-commmands">Useful Show Commmands</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./bgp.html">BGP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IPv6 RA Guard</h1>
+<h1 class="title">BGP</h1>
 </div>
 
 
@@ -325,8 +344,139 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="general-info" class="level1">
+<h1>General Info</h1>
+<ul>
+<li>Used <strong>TCP 179</strong> <strong>to</strong> establish session. Unicast</li>
+<li>Admin Distance: iBGP AD = <strong>200</strong>, eBGP AD = <strong>20</strong></li>
+<li>Use of TCP allows for adjacencies with non directly connected neighbour.</li>
+<li>Only <strong>Best route</strong> + <strong>next hop</strong> are advertised, not all routes.</li>
+<li>Multi-hop session require underlying routes from RIB (dynamic or static) Must explicitly configure neighbour relationships
+<ul>
+<li>TCP session established</li>
+<li>Advertises Address Prefix &amp; Length (called Network Layer Reachability Information - NLRI)</li>
+</ul></li>
+<li>Hold Time: <strong>180s</strong>, Keepalive: <strong>60s</strong> (1/3 ratio)
+<ul>
+<li>Adjust under bgp process with <code>timers bgp 5 20</code> - keepalive 5 / hold 20</li>
+</ul></li>
+<li>Uses Address families to</li>
+<li>AFI/SAFI - Address &amp; Subsequent Address Family Identifiers (ipv4 unicast etc).</li>
+<li>Modern BGP sets DF bit (do not fragment) to prevent fragmentation.</li>
+<li>BGP RID - If not manually configured (which is recommended)
+<ul>
+<li>Highest IP on Loopback int that’s up</li>
+<li>Highest IP on any other Interface thats up</li>
+</ul></li>
+<li>BGP Synchronisation - disabled on modern devices by default
+<ul>
+<li>RULE: Only advertise routes learned from iBGP peer to an eBGP peer when there is an exact match of that route learned from an IGP in the routing table.</li>
+</ul></li>
+<li><strong>iBGP</strong>
+<ul>
+<li>TTL = 255</li>
+<li>Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
+<ul>
+<li>A route learned from 1 iBGP won’t be forwarded to another iBGP peer by default.</li>
+<li>This can be overcome with route-reflectors</li>
+</ul></li>
+<li>NRLI’s from iBGP peer can only be forwarded to eBGP peer.</li>
+</ul></li>
+<li><strong>eBGP</strong>
+<ul>
+<li>TTL = 1, this can be increased using <code>neighbor [ip] ebgp-multihop [1-255]</code></li>
+<li>Can also use <code>neighbor [ip] ttl-security hops [hop-count]</code></li>
+<li>Difference = <code>eBGP-multihop</code> = sets <em>maximum range</em> allowed, <code>TTL-security</code> sets <em>exact range</em></li>
+</ul></li>
+<li>If peering with different update source but not through additional hops, can use <code>neighbor &lt;ip&gt; disable-connected-check</code></li>
+<li>Does change next-hop by default</li>
+<li>It’s recommended to update source to a loopback for resiliency <code>neighbor [ip] update-source [loopback]</code></li>
+<li>NRLI from eBGP can be shared onto all other peers.</li>
+</ul>
+</section>
+<section id="features-attributes" class="level1">
+<h1>Features/ Attributes</h1>
+<p>Cheat sheet - <a href="https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf" target="_blank">https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf</a></p>
+<section id="path-selection" class="level2">
+<h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
+<p><strong>W</strong>e <strong>L</strong>ove <strong>O</strong>ranges <strong>AS</strong> <strong>O</strong>ranges <strong>M</strong>ean <strong>P</strong>ure <strong>R</strong>efreshment</p>
+<ol type="1">
+<li>Weight (Highest)</li>
+<li>Local Preference (Highest)</li>
+<li>Originated locally</li>
+<li>AS_PATH (Shortest)</li>
+<li>Origin code (IGP &gt; EGP &gt; ?)</li>
+<li>MED (Lowest)</li>
+<li>Path (eBGP &gt; iBGP)</li>
+<li>IGP metric (Lowest)</li>
+<li>Route age (Oldest, only compared when routes from different eBGP peers)</li>
+<li>RID (Lowest)</li>
+<li>Choose path with minimum cluster list length</li>
+<li>Choose path through neighbour with lowest IP address</li>
+</ol>
+</section>
+<section id="route-reflector" class="level2">
+<h2 class="anchored" data-anchor-id="route-reflector">Route Reflector</h2>
+<ul>
+<li>Allows route learned from iBGP neighbour can be reflected to neighbours in same ASN - negates need for full mesh</li>
+<li>Configured using <code>neighbour [ip] route-reflector-client</code> on the route reflector</li>
+<li>3 rules:
+<ul>
+<li>Routes learned from eBGP peers can be sent to other eBGP peers, clients, and non-clients.</li>
+<li>Routes learned from client peers can be sent to eBGP peers, other client peers, and non-clients.</li>
+<li>Routes learned from non-client peers can be sent to eBGP peers, and client peers,&nbsp;<em>but not other non-clients</em>.</li>
+</ul></li>
+<li><code>next-hop-self</code> only affects eBGP routes when used with route reflectors.</li>
+</ul>
+</section>
+<section id="summarisation" class="level2">
+<h2 class="anchored" data-anchor-id="summarisation">Summarisation</h2>
+<ul>
+<li>Configured on AS Edge Routers.</li>
+<li>configured with <code>aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]</code>
+<ul>
+<li>use of <code>summary-only</code> advertises only summary route, not the aggregated networks</li>
+<li>use of <code>[as-set]</code> carries over AS_Path attributes from component routes.</li>
+</ul></li>
+<li>These routes are assigned the <strong><em>ATOMIC_AGGREGATE</em></strong> attribute to indicate they are aggregates &amp; that loss of path info has occurred.</li>
+<li>The summarising router adds an entry in their RIB with destination Null0 to avoid loops.</li>
+<li>AS_Path, MED +communities aren’t included in new prefix info</li>
+<li>Can include AS_Path info using <code>as-set</code></li>
+</ul>
+</section>
+<section id="bgp-regexp" class="level2">
+<h2 class="anchored" data-anchor-id="bgp-regexp"><strong>BGP regexp</strong></h2>
+<ul>
+<li>Can be used to search for specifc AS-PATHs in table - for example: <code>show ip bgp regexp ^$</code> this shows entries where AS-PATH is empty (locally originated)</li>
+<li>Above will show prefixes originated locally with the AS. Cheat sheet <a href="http://gponsolution.com/bgp-regular-expressions-cheat-sheet.html">here.</a></li>
+<li>Originated in AS 100: <code>_100$</code>, Learned from AS 100: <code>^100_</code></li>
+<li>Can be used to filter with ACLs with IP as-path: <code>ip as-path access-list 1 permit _54$</code></li>
+<li>Then use <code>match as-path</code> under a route-map to apply modifications</li>
+<li>TIP: Summarise Address without using aggregate-adresss
+<ul>
+<li><p>Create static route for the summarised address with destination Null0</p></li>
+<li><p>Redistribute Static under the BGP precess.</p></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="bgp-configuration" class="level1">
+<h1>BGP Configuration</h1>
+<p><code>bgp redistribute-internal</code> - all BGP routes redistributes</p>
+<hr>
+</section>
+<section id="useful-show-commmands" class="level1">
+<h1>Useful Show Commmands</h1>
+<ul>
+<li><code>show bgp ipv4 unicast</code> - shows the bgp table</li>
+<li><code>show bgp ipv4 unicast neighbors 10.1.1.2 advertised-routes</code> - shows which routes are being advertised to neighbour 10.1.1.2</li>
+<li><code>show bgp ipv4 unicast summary</code> - shows exchange of routes between nodes</li>
+<li></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

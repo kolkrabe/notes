@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>netflow – Kolkrabe</title>
+<title>AAA – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./netflow.html">netflow</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./acls.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./aaa.html">AAA</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -234,13 +234,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Infrastructure Services</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./device_management.html" class="sidebar-item-text sidebar-link">
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./netflow.html" class="sidebar-item-text sidebar-link active">
+  <a href="./netflow.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">netflow</span></a>
   </div>
 </li>
@@ -281,16 +281,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Infrastructure Security</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./aaa.html" class="sidebar-item-text sidebar-link">
+  <a href="./acls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IP ACLs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./aaa.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">AAA</span></a>
   </div>
 </li>
@@ -338,22 +344,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
-  <li><a href="#flexible-netflow" id="toc-flexible-netflow" class="nav-link" data-scroll-target="#flexible-netflow">Flexible Netflow</a></li>
-  <li><a href="#useful-show-other-commands" id="toc-useful-show-other-commands" class="nav-link" data-scroll-target="#useful-show-other-commands">Useful Show + Other Commands</a></li>
-  <li><a href="#flexible-netflow-1" id="toc-flexible-netflow-1" class="nav-link" data-scroll-target="#flexible-netflow-1">Flexible Netflow</a></li>
-  <li><a href="#standard-netflow-config" id="toc-standard-netflow-config" class="nav-link" data-scroll-target="#standard-netflow-config">Standard Netflow Config</a></li>
-  <li><a href="#flexible-netflow-config" id="toc-flexible-netflow-config" class="nav-link" data-scroll-target="#flexible-netflow-config">Flexible Netflow Config</a></li>
-  <li><a href="#bfd---bidirectionforwarding" id="toc-bfd---bidirectionforwarding" class="nav-link" data-scroll-target="#bfd---bidirectionforwarding">BFD - BiDirectionForwarding</a></li>
+  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a>
+  <ul class="collapse">
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration"><strong>Configuration</strong></a></li>
+  </ul></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful show commands</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./device_management.html">Infrastructure Services</a></li><li class="breadcrumb-item"><a href="./netflow.html">netflow</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./acls.html">Infrastructure Security</a></li><li class="breadcrumb-item"><a href="./aaa.html">AAA</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">netflow</h1>
+<h1 class="title">AAA</h1>
 </div>
 
 
@@ -370,132 +375,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="general" class="level3">
-<h3 class="anchored" data-anchor-id="general">General</h3>
+<section id="general-info" class="level2">
+<h2 class="anchored" data-anchor-id="general-info">General Info</h2>
 <ul>
-<li>Netflow is a tool to observce traffic flows in the network</li>
-<li>A Flow is a series of packets with shared head information such as
-<ul>
-<li>source/destination IP</li>
-<li>protocol numbers</li>
-<li>port numbers</li>
-<li>Type of Service (ToS) field information.</li>
-<li>ingress/egress interface</li>
-<li>QoS</li>
-<li>All entering the same interface on the device.</li>
-</ul></li>
-<li>Netflow data is stored on local device’s <strong>flow cache</strong> and can be viewed on CLI</li>
-<li>Once flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.</li>
-<li>Flows removed after max age expires (Default <strong>30 minutes)</strong></li>
+<li><p>AAA = Authentication, Authorisation, Accounting</p></li>
+<li><p>Who are they, what can they do, what did they do…</p></li>
+<li><p><code>if-authenticated</code> used in <strong>authorisation</strong> config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.</p>
+<h2 id="section" class="anchored"></h2></li>
 </ul>
+<section id="configuration" class="level3">
+<h3 class="anchored" data-anchor-id="configuration"><strong>Configuration</strong></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>username [user] privilege 15 secret [password] </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>aaa new-model</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>aaa group server tacacs+ [group]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> server-private 10.44.155.20 single-connection key [key]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> ip vrf forwarding Mgmt-intf</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> ip tacacs source-interface GigabitEthernet0</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>! Alternate Method of server config with single server^</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>tacacs server [server]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> address ipv4 [10.44.241.250]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> key [passkey]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>aaa group server tacacs+ [group-name]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> server name [server]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> ip tacacs source-interface GigabitEthernet0</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>aaa authentication login [method list] group [group] local</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>aaa authorization exec [method list] group [group] local if-authenticated</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>aaa authorization commands 15 [method list] group [group] local if-authenticated</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>aaa accounting commands 1 [method list] start-stop group [group]</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>aaa accounting commands 15 [method list] start-stop group [group]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>aaa session-id common</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>! using method list 'default' applies the AAA methods to all lines </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>line vty 0 4</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>login authentication [list-name]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>aaa authorization exec default local          - Puts authenticated user to priv exec upon login]</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>line vty 0 4</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  authorization exec default</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>To use AAA on console port this is also required</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>line con 0</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  logging authentication [group]</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  aaa authorization console</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="flexible-netflow" class="level3">
-<h3 class="anchored" data-anchor-id="flexible-netflow">Flexible Netflow</h3>
-<ul>
-<li>Can determine traffic in the same was as Netflow + more. things simultaneously</li>
-<li>Requires <strong>CEF</strong> (Cisco Express Forwarding) to be enabled</li>
-<li><strong>Flexible netflow</strong>
-<ul>
-<li>Used to allow more customization of the traffic parameters to be captured</li>
-<li>Consists of records, exporters, samplers and monitors</li>
-<li><strong>Records</strong>
-<ul>
-<li>Define what parameters will be captured by netflow</li>
-<li>Can use pre-defined records or define your own</li>
-</ul></li>
-<li><strong>Exporters</strong>
-<ul>
-<li>Used to set up exportation of the netflow information to the flow collector</li>
-</ul></li>
-<li><strong>Samplers</strong>
-<ul>
-<li>Used to limit the number of monitored packets if desired for performance reasons</li>
-</ul></li>
-<li><strong>Monitors</strong>
-<ul>
-<li>Used to apply netflow records to desired interfaces</li>
-<li>References specific flow record and flow exporter</li>
-</ul></li>
-</ul></li>
-</ul>
-<hr>
 </section>
-<section id="useful-show-other-commands" class="level3">
-<h3 class="anchored" data-anchor-id="useful-show-other-commands">Useful Show + Other Commands</h3>
-<ul>
-<li><code>show ip cache flow</code> - shows contents of local router flow cache</li>
-<li><code>show ip flow interface</code> - used to verify netflow enabled interfaces and direction of capture</li>
-<li><code>show ip flow export</code> - used to verify export source and destination details</li>
-<li><code>ip flow-cache entries [number]</code> - change the size of the flow cache (if it’s filling up often</li>
-<li><code>ip flow-cache timeout active [minutes]</code> - used to modify the max age of a flow.</li>
-<li><code>ip flow-cache timeout inactive [seconds]</code> - used to modify idle timer (default <strong>15 seconds)</strong></li>
-<li><code>clear ip flow stats</code> - clears netflow statistics from device.</li>
-</ul>
-<hr>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
 </section>
-<section id="flexible-netflow-1" class="level3">
-<h3 class="anchored" data-anchor-id="flexible-netflow-1">Flexible Netflow</h3>
+<section id="useful-show-commands" class="level2">
+<h2 class="anchored" data-anchor-id="useful-show-commands">Useful show commands</h2>
 <ul>
-<li><code>show flow record</code> - used to verify match and collect conditions of the flow record</li>
-<li><code>show running-config flow record</code> - also can show this info</li>
-<li><code>show flow monitor</code> - used to verify which <em>pre-defined’</em> flow record is being used.</li>
-</ul>
-<hr>
-</section>
-<section id="standard-netflow-config" class="level3">
-<h3 class="anchored" data-anchor-id="standard-netflow-config">Standard Netflow Config</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>int fa 0/0</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> ip flow [ingress|egress]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> exit</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ip flow-export source lo 0</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ip flow-export version [5|9]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ip flow-export destination &lt;collector-ip&gt; 5000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="flexible-netflow-config" class="level3">
-<h3 class="anchored" data-anchor-id="flexible-netflow-config">Flexible Netflow Config</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flow exporter EXPORTER</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> destination &lt;Collector-IP&gt;</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> export-protocol netflow-v9</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> source Vlan100</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> transport udp 2055</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>flow record RECORD</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> match ipv4 tos</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> match ipv4 protocol</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> match ipv4 source address</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a> match ipv4 destination address</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a> match transport source-port</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a> match transport destination-port</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a> match interface input</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a> collect interface output</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a> collect counter bytes</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a> collect counter packets</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>flow monitor IPv4_NETFLOW</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a> record RECORD</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a> exporter EXPORTER</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a> cache timeout active 60</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>interface fa0/0</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> ip flow monitor IPv4_NETFLOW input</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-</section>
-<section id="bfd---bidirectionforwarding" class="level3">
-<h3 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h3>
-<ul>
-<li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p></li>
-<li><p>Connection types in question</p>
-<ul>
-<li>L2 Switched Network</li>
-<li>VPN Tunnels</li>
-<li>DMVPN without LOS Propagation</li>
-</ul></li>
-<li><p>Works with all Media Types, routing protocols, topologies and encapsulations.</p></li>
-<li><p>Requirements</p>
-<ul>
-<li><p><strong>CEP + IP Routing</strong> must be enabled</p></li>
-<li><p>IP Routing protocol supported by BFD must be configured before BFD is configured</p></li>
-</ul></li>
+<li><code>debug aaa authentication</code> - Debug all AAA auth</li>
+<li><code>debug radius authentication</code> - Debug for radius auth</li>
+<li><code>debug tacacs authentication</code> - Debug for tacacs auth</li>
+<li><code>debug aaa protocol local</code> - Debug local authentication</li>
 </ul>
 
 

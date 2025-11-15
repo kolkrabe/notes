@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Redistribution – Kolkrabe</title>
+<title>DMVPN – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./redistribution.html">Redistribution</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./mpls.html">VPN &amp; Encryption</a></li><li class="breadcrumb-item"><a href="./dmvpn.html">DMVPN</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -158,13 +158,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Layer 3 Technologies</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bgp.html" class="sidebar-item-text sidebar-link">
@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./redistribution.html" class="sidebar-item-text sidebar-link active">
+  <a href="./redistribution.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Redistribution</span></a>
   </div>
 </li>
@@ -205,13 +205,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">VPN &amp; Encryption</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mpls.html" class="sidebar-item-text sidebar-link">
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dmvpn.html" class="sidebar-item-text sidebar-link">
+  <a href="./dmvpn.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">DMVPN</span></a>
   </div>
 </li>
@@ -290,6 +290,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./acls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IP ACLs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./aaa.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">AAA</span></a>
   </div>
@@ -339,29 +345,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
-  <li><a href="#per-protocol-info" id="toc-per-protocol-info" class="nav-link" data-scroll-target="#per-protocol-info">Per Protocol Info</a>
-  <ul class="collapse">
-  <li><a href="#eigrp" id="toc-eigrp" class="nav-link" data-scroll-target="#eigrp">EIGRP</a></li>
-  <li><a href="#ospf" id="toc-ospf" class="nav-link" data-scroll-target="#ospf">OSPF</a></li>
-  <li><a href="#bgp" id="toc-bgp" class="nav-link" data-scroll-target="#bgp">BGP</a></li>
-  </ul></li>
+  <li><a href="#dmvpn-phases" id="toc-dmvpn-phases" class="nav-link" data-scroll-target="#dmvpn-phases">DMVPN Phases</a></li>
+  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a>
   <ul class="collapse">
-  <li><a href="#route-map" id="toc-route-map" class="nav-link" data-scroll-target="#route-map">Route Map</a></li>
-  <li><a href="#eigrp-1" id="toc-eigrp-1" class="nav-link" data-scroll-target="#eigrp-1">EIGRP</a></li>
-  <li><a href="#ospf-1" id="toc-ospf-1" class="nav-link" data-scroll-target="#ospf-1">OSPF</a></li>
-  <li><a href="#bgp-1" id="toc-bgp-1" class="nav-link" data-scroll-target="#bgp-1">BGP</a></li>
+  <li><a href="#dmvpn-phase-1-configuration-no-ipsec" id="toc-dmvpn-phase-1-configuration-no-ipsec" class="nav-link" data-scroll-target="#dmvpn-phase-1-configuration-no-ipsec"><strong>DMVPN Phase 1 Configuration (No IPsec)</strong></a></li>
+  <li><a href="#dmvpn-phase-2-configuration-no-ipsec" id="toc-dmvpn-phase-2-configuration-no-ipsec" class="nav-link" data-scroll-target="#dmvpn-phase-2-configuration-no-ipsec"><strong>DMVPN Phase 2 Configuration (No IPsec)</strong></a></li>
+  <li><a href="#dmvpn-phase-3-configuration-no-ipsec" id="toc-dmvpn-phase-3-configuration-no-ipsec" class="nav-link" data-scroll-target="#dmvpn-phase-3-configuration-no-ipsec"><strong>DMVPN Phase 3 Configuration (No IPsec)</strong></a></li>
+  <li><a href="#dmvpn-ikev1-ipsec-configuration" id="toc-dmvpn-ikev1-ipsec-configuration" class="nav-link" data-scroll-target="#dmvpn-ikev1-ipsec-configuration"><strong>DMVPN IKEv1 IPsec Configuration</strong></a></li>
+  <li><a href="#dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" id="toc-dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" class="nav-link" data-scroll-target="#dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive"><strong>DMVPN IKEv2 IPsec Configuration (See IPsec page for deep dive)</strong></a></li>
+  <li><a href="#using-fvrf-with-dmvpn" id="toc-using-fvrf-with-dmvpn" class="nav-link" data-scroll-target="#using-fvrf-with-dmvpn"><strong>Using FVRF with DMVPN</strong></a></li>
   </ul></li>
-  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./redistribution.html">Redistribution</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./mpls.html">VPN &amp; Encryption</a></li><li class="breadcrumb-item"><a href="./dmvpn.html">DMVPN</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Redistribution</h1>
+<h1 class="title">DMVPN</h1>
 </div>
 
 
@@ -381,140 +384,183 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-info" class="level2">
 <h2 class="anchored" data-anchor-id="general-info">General Info</h2>
 <ul>
-<li>Configured under Destination Protocol, specifying source protocol.</li>
-<li>Redistribution is <strong>NOT</strong> transitive on a single router.
+<li>Dynamic Multi Point VPN - DMVPN</li>
+<li>Highly scalable system to connect multiple sites using Hub-and-Spoke topology using <strong>mGRE</strong> (Multipoint Generic Routing Encapsulation)
 <ul>
-<li>R1 redistributes protocol 1 into protocol 2 and protocol 2 into protocol 3 - p3 won’t receive P1’s routes.</li>
+<li>Spoke to Spoke Tunnels can be created on demand</li>
 </ul></li>
-<li>Redistribution between EIGRP to EIGRP or OSPF to OSPF preserves the path metrics</li>
-<li>Sequential Protocol Redistribution is possible
+<li>Uses <strong>NHRP (</strong>Next Hop Resolution Protocol) - acts like DNS
 <ul>
-<li>Redistribution over multiple protocols using multiple routers.</li>
-</ul></li>
-<li>Routes must exist in RIB</li>
-<li>Seed metric used to allow calculation of metric from Source Protocol
-<ul>
-<li>EIGRP/RIP = Infinity (not installed into EIGRP topology table</li>
-<li>OSPF = 20 (1 for BGP)</li>
-<li>BGP = Uses IGP metric</li>
-</ul></li>
-<li><code>redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]</code></li>
-<li>Into OSPF = <code>subnets</code> allows classless networks to be redistributes</li>
-</ul>
-<hr>
-</section>
-<section id="per-protocol-info" class="level2">
-<h2 class="anchored" data-anchor-id="per-protocol-info">Per Protocol Info</h2>
-<section id="eigrp" class="level3">
-<h3 class="anchored" data-anchor-id="eigrp">EIGRP</h3>
-<ul>
-<li>Redistribution configurable anywhere in topology</li>
-<li>Redistributed routes marked as External (AD 170)</li>
-<li>Default Metric = Infinity so not installed, <strong>MUST</strong> configure metric as follows for OSPF/BGP redist, not required for static + connected
-<ul>
-<li>Set under router ospf config</li>
-<li>under address-family config</li>
-<li>within redistribute config line</li>
-<li>with Route Map (<strong>PREFERRED</strong> if multiple are configured, then distribute command metric then default-metric)</li>
+<li><strong>NHS</strong> (Next Hop Server) - configured on all spokes</li>
+<li>Spokes register their physical &amp; tunnel interface IP’s with the <strong>NHS</strong></li>
+<li>NHS Populates it’s NHRP Cache to maintain a database of it’s spokes</li>
+<li>Spokes can query the <strong>NHS</strong> to obtain the tunnel IP it needs to form direct tunnel.</li>
 </ul></li>
 </ul>
 </section>
-<section id="ospf" class="level3">
-<h3 class="anchored" data-anchor-id="ospf">OSPF</h3>
+<section id="dmvpn-phases" class="level2">
+<h2 class="anchored" data-anchor-id="dmvpn-phases">DMVPN Phases</h2>
 <ul>
-<li>Redistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router</li>
-<li>External routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR</li>
-<li>By default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm</li>
-<li>Must use the <code>subnets</code> flag or only classful routes will be redistributed</li>
-</ul>
-</section>
-<section id="bgp" class="level3">
-<h3 class="anchored" data-anchor-id="bgp">BGP</h3>
+<li><strong>Phase 1</strong>
 <ul>
-<li>No seed metric required</li>
-<li>Don’t redistribute eBGP into IGP as they can’t handle the volume of routes</li>
-<li>Use <code>bgp redistribute-internal</code> to force BGP to redistribute iBGP routers into another IGP</li>
-<li>Origin set to incomplete, Weight to 32768, MED to path metric of source protocol</li>
-<li>Redistribution from OSPF to BGP doesn’t include OSPF External routes by default
+<li>All traffic between spokes must traverse Hub, no spoke-to-spoke.</li>
+</ul></li>
+<li><strong>Phase 2</strong>
 <ul>
-<li>must user <code>match external [1|2]</code> to redistribute OSPF externals</li>
-<li>Note if you use <code>external</code> only this <strong>ONLY</strong> redistributes externals.</li>
+<li>Allows spoke-to-spoke traffic by making all tunnels (including spokes) multipoint</li>
+<li>This allows spokes to form tunnels directly to each other</li>
+<li>Must not have routing protocol use next-hop-self or the tunnels will not form</li>
+<li>Does <strong><em>NOT</em></strong> work with summarization - since the RIB will not have a route to the other spokes, all traffic will transit the hub</li>
+<li>If using OSPF, network type must be broadcast or non-broadcast to prevent changing next-hops
+<ul>
+<li>In this scenario the spokes must be set at priority 0 to prevent them becoming DRs - if spokes become DRs the network will not function as they cannot multicast between each other</li>
+</ul></li>
+</ul></li>
+<li><strong>Phase 3</strong>
+<ul>
+<li>Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB</li>
+<li>Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub</li>
 </ul></li>
 </ul>
 <hr>
-</section>
-</section>
-<section id="configuration" class="level2">
-<h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
-<section id="route-map" class="level3">
-<h3 class="anchored" data-anchor-id="route-map">Route Map</h3>
-</section>
-<section id="eigrp-1" class="level3">
-<h3 class="anchored" data-anchor-id="eigrp-1">EIGRP</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> default-metric 1000000 1 255 1 1500</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> redistribute ospf 1</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> distance 165 10.1.1.1 0.0.0.0                                       (Changes AD for external (redistributed) routes)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> distance 165 170                                                   (sets AD for internal then external routes)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>router eigrp EIGRP-NAMED</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> addres-family ipv4</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  default-metric 1000000 1 255 1 1500</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  redistribute ospf 1</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> exit-af-topology</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>router eigrp EIGRP-NAMED</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> addres-family ipv4</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  redistribute bgp 65100 metric 1000000 1 255 1 1500</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> exit-af-topology</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>!!! With Route Map Setting Metric !!!</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>router eigrp 100</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> network 10.23.1.0 0.0.0.255</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> redistribute ospf 1 route-map OSPF-2-EIGRP</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>route-map OSPF-2-EIGRP permit 10</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> set metric 1000000 1 255 1 1500</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="ospf-1" class="level3">
-<h3 class="anchored" data-anchor-id="ospf-1">OSPF</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>router ospf 2</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> network 10.41.1.0 0.0.0.255 area 0</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> redistribute eigrp 100 subnets                             (allows classless network redistribution from EIGRP)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> distance ospf external 171                                 ! for AD manipulation if required</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="bgp-1" class="level3">
-<h3 class="anchored" data-anchor-id="bgp-1">BGP</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>router bgp 65100</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  address-family ipv4</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    redistribute connected route-map RM-LOOPBACK</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>route-map RM-LOOPBACK</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  match interface Loopback0</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>----</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>redistribute connected / static etc.</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>redistrivute ospf 100 match external 1 external 2                                               - Redistributes OSPF E1 + E2</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>distance bgp external-ad internal-ad local-routes             Sets AD for network types</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>distance AD source-ip source-wildcardmask                     Sets AD of routes learned from IP</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-</section>
 </section>
 <section id="useful-show-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
-<p><code>show ip protocol</code> - shows redistribution under each protocol</p>
-<p><code>show ip route profile</code> -</p>
+<ul>
+<li><code>show interface tunnel [number]</code> - shows state of tunnel interface</li>
+<li><code>show dmvpn [detail]</code> - shows tunnel status, peers, up/down time, etc</li>
+<li><code>show ip nhrp [brief]</code> - shows NHRP cache, NHRP-specific details useful for phase 2, 3</li>
+<li><code>show ip route next-hop-override</code> - shows NH overrides for DMVPN phase 3</li>
+<li><code>show ip cef [IP address]</code> - shows how the switch will deal with this IP address - send to tunnel?</li>
+<li><code>show crypto isakmp sa; show crypto ike2 sa; show crypto ipsec sa</code> - for troubleshooting IPsec when used with DMVPN</li>
+</ul>
+<hr>
+</section>
+<section id="configuration" class="level2">
+<h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
+<section id="dmvpn-phase-1-configuration-no-ipsec" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-phase-1-configuration-no-ipsec"><strong>DMVPN Phase 1 Configuration (No IPsec)</strong></h3>
+<p><strong>Hub Config</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>! Essential </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>interface Tunnel100 </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ip address 192.168.100.11 255.255.255.0 </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ip nhrp map multicast dynamic </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ip nhrp network-id 100 </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>tunnel source GigabitEthernet0/1 </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>tunnel mode gre multipoint </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>! Discretionary </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>bandwidth 4000 </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ip mtu 1400 </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ip tcp adjust-mss 1360 </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ip nhrp authentication NHRPAUTH </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>no ip split-horizon eigrp 100  ! necessary for EIGRP </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tunnel key 100                 ! necessary in multi-hub designs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Spoke Config</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>interface Tunnel100 </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ip address 192.168.100.31 255.255.255.0 </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ip nhrp network-id 100 </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ip nhrp nhs [Hub TunnelIP] nbma [Hub Public IP] multicast </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>tunnel source GigabitEthernet0/1 </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>tunnel destination [Hub Public IP]  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>! Discretionary </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>bandwidth 4000 </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ip mtu 1400 </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ip tcp adjust-mss 1360 </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ip nhrp authentication NHRPAUTH </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>tunnel key 100                 ! necessary in multi-hub designs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dmvpn-phase-2-configuration-no-ipsec" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-phase-2-configuration-no-ipsec"><strong>DMVPN Phase 2 Configuration (No IPsec)</strong></h3>
+<p><strong>Hub Config</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>no ip next-hop-self eigrp 100  </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>!so that hub doesn't list itself as NH for spokes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Spoke Config</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tunnel mode gre multipoint  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>!so that spokes can form direct tunnels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dmvpn-phase-3-configuration-no-ipsec" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-phase-3-configuration-no-ipsec"><strong>DMVPN Phase 3 Configuration (No IPsec)</strong></h3>
+<p><strong>Hub Config</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ip nhrp redirect  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>!so that hub will forward redirect messages to spokes after initial traffic,  allowing spoke-to-spoke tunnels to form</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Spoke Config</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>!same as Phase 1, but including:  </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ip nhrp shortcut </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tunnel mode gre multipoint  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>!to allow the spokes to install NHRP next hops into the routing table and form direct tunnels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dmvpn-ikev1-ipsec-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-ikev1-ipsec-configuration"><strong>DMVPN IKEv1 IPsec Configuration</strong></h3>
+<p><strong>VRFless</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>crypto isakmp policy 10  </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> encr aes 128  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> hash sha256  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> authentication pre-share  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> group 16 </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>crypto isakmp key DMVPN_PSK address 0.0.0.0   </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>crypto ipsec transform-set [ESP-AES-256-SHA-512] esp-aes 256 esp-sha512-hmac   </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> mode transport </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>crypto ipsec profile DMVPN_PROFILE</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a> set transform-set [ESP-AES-256-SHA-512] </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>interface Tunnel0 </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>tunnel protection ipsec profile DMVPN_PROFILE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>FVRF</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>!same as above, but instead of crypto isakmp key: </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>crypto keyring VRF_AWARE_PSK vrf UNDERLAY_TRANSPORT    </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN_PSK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="dmvpn-ikev2-ipsec-configuration-see-ipsec-page-for-deep-dive"><strong>DMVPN IKEv2 IPsec Configuration (See IPsec page for deep dive)</strong></h3>
+<p><strong>VRFless</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>crypto ikev2 keyring DMVPN-KEYRING</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a> peer ANY </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  address 0.0.0.0 0.0.0.0               !(Any peer)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  pre-shared-key CISCO456 </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>crypto ikev2 profile DMVPN-IKE </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> match identity remote address 0.0.0.0 </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a> authentication remote pre-share </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a> authentication local pre-share </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a> keyring local DMVPN-KEYRING </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>crypto ipsec transform-set SET1 esp-aes 256 esp-sha-hmac </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a> mode transport </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>crypto ipsec profile DMVPN-IPSEC </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a> set transform-set SET1 </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a> set ikev2-profile DMVPN-IKE </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>interface Tunnel0 </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a> tunnel protection ipsec profile DMVPN-IPSEC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>FVRF</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>!Same as above, but under crypto ikev2 profile:  match fvrf INET</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-fvrf-with-dmvpn" class="level3">
+<h3 class="anchored" data-anchor-id="using-fvrf-with-dmvpn"><strong>Using FVRF with DMVPN</strong></h3>
+<ul>
+<li>See <a href="https://brunbattery.github.io/NetworkNotes/VRF.html">VRF</a> page for details on that</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
