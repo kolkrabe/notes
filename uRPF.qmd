@@ -10,6 +10,7 @@ code-block-bg: dark
 -   Security mechanism to inspect and validate source IP of packet by checking return path in
 -   Requires CEF to be enabled
 -   Stops router pinging itself when enabled (can be permitted using `allow-self-ping` flag
+-   Configured per **Interface**
 
 ## **uRPF Modes**
 

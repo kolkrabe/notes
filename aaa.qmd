@@ -7,12 +7,36 @@ code-block-bg: dark
 ## General Info
 
 -   AAA = Authentication, Authorisation, Accounting
-
 -   Who are they, what can they do, what did they do...
-
 -   `if-authenticated` used in **authorisation** config to allow user to access exec session once authenticated if TACACS/RADIUS server not reachable.
+-   `aaa new-model` - Enables AAA, also tells device to look at the local DB if no credentials configured under Con/VTY lines.
 
-    ## 
+### Securing Line Access
+
+-   Routers/Switches have Console (CTY), Virtual Terminal (VTY) and occasionally AUX ports for access.
+
+-   Securing Console
+
+    ``` default
+    Line Con 0
+    Login                               
+    password [password]                        !!! This secures the console line, in this case, with only the password [password]. NOTE-if Enable password is configured this will be required to get to priv exec mode.
+    !
+    !
+    Line Con 0
+    Login Local                                !!! Login Local - tells switch to look at local user database
+    !
+    !
+    Line Con 0
+    aaa authentication [Method List]
+    transport input SSH                       !!! Enables SSH (disables Telnet)
+    ```
+
+### Securing with ACL's
+
+-   **IP access-list**: Defines traffic - either via permit/deny
+-   **Access-group**: applies an ACL to a physical `interface`
+-   **Access-class**: applies an ACL to a `line` (VTY, Console, Aux) etc.
 
 ### **Configuration**
 
@@ -63,7 +87,9 @@ line con 0
 
 ## Useful show commands
 
+-   `show ip interface g0/0 | include List` - Shows ACL's + direction applied to interface.
 -   `debug aaa authentication` - Debug all AAA auth
 -   `debug radius authentication` - Debug for radius auth
 -   `debug tacacs authentication` - Debug for tacacs auth
 -   `debug aaa protocol local` - Debug local authentication
+-   
