@@ -403,7 +403,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Config options:
 <ul>
 <li><code>set ip next-hop ip-address [ip]</code></li>
-<li><code>set ip default next-hop ip-address [ip]</code></li>
+<li><code>set ip default next-hop ip-address [ip]</code> - Verified existence of the destination IP address in the routing table.
+<ul>
+<li>If destination <strong>exists</strong>: the command doesn’t policy route, routes based on routing table</li>
+<li>If destination <strong>does not</strong> exist: the command policy routes the packet to the next hop.</li>
+</ul></li>
 <li><code>set interface [interface type] [interface-number]</code> (multiple ints will be tried in turn)</li>
 <li><code>set default interface [interface type] [interface-number]</code></li>
 </ul></li>
