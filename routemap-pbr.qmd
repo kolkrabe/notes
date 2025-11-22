@@ -21,7 +21,7 @@ code-block-bg: dark
 -   If you want to use a non-adjacent route, you must use the `recursive` flag when configuring the route-map `set` statement
 -   Config options:
     -   `set ip next-hop ip-address [ip]`
-    -   `set ip default next-hop ip-address [ip]`  - Verified existence of the destination IP address in the routing table.
+    -   `set ip default next-hop ip-address [ip]` - Verified existence of the destination IP address in the routing table.
         -   If destination **exists**: the command doesn't policy route, routes based on routing table
         -   If destination **does not** exist: the command policy routes the packet to the next hop.
     -   `set interface [interface type] [interface-number]` (multiple ints will be tried in turn)

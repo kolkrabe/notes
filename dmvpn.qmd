@@ -141,7 +141,7 @@ crypto isakmp policy 10
  authentication pre-share  
  group 16 
 !
-crypto isakmp key DMVPN_PSK address 0.0.0.0   
+crypto isakmp key DMVPN_PSK address 0.0.0.0   (Physical IP of whoever can use the key, 0.0.0.0 0.0.0.0 for anyone)
 ! 
 crypto ipsec transform-set [ESP-AES-256-SHA-512] esp-aes 256 esp-sha512-hmac   
  mode transport 

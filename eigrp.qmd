@@ -169,6 +169,24 @@ int g0/0
 -   Configured under topology base (modifying metric) with for Modern / Under process for Classic
     -   `offset-list [access-list] [in/out] [metric] [interface]`
 
+##### EIGRP for IPv6
+
+-   Doesn't use Network command
+
+-   Protocols enabled at the interface-level
+
+-   Still requires manual creation of a global eigrp routing process, uses 32bit Router-ID
+
+    ``` default
+    ipv6 unicast-routing
+    !
+    int g0/0
+      ipv6 address 2001:1234:1234:1234::4/64
+      ipv6 eigrp 100
+    !
+    ipv6 router eigrp 100
+    ```
+
 ------------------------------------------------------------------------
 
 ## EIGRP - Traditional IPv4 Configuration
