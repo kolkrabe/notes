@@ -431,27 +431,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><strong>In Phase 2, following are negotiated:</strong>
 <ul>
-<li><p>Security protocol</p>
+<li>Security protocol
 <ul>
 <li>ESP (Encapsulating Security Payload) or AH (Authentication Header)</li>
 <li>AH does not support encryption, rarely used</li>
 </ul></li>
-<li><p>Encapsulation modes</p>
+<li>Encapsulation modes
 <ul>
 <li>Tunnel or transport</li>
 <li>Tunnel adds new IP header, used for actually tunneling traffic</li>
-<li>Transport mode used for host-to-host applications or combined with GRE which does the tunneling itself</li>
+<li>Transport mode used for host-to-host applications or combined with GRE which does the tunnelling itself</li>
 </ul></li>
-<li><p>Encryption (used for actual data traffic, not just tunnel)</p>
+<li>Encryption (used for actual data traffic, not just tunnel)
 <ul>
 <li>DES, 3DES, AES-128, AES-256, etc</li>
 </ul></li>
-<li><p>Authentication (hashing)</p>
+<li>Authentication (hashing)
 <ul>
 <li>MD5, SHA, etc</li>
 </ul></li>
-<li><p>Combination of the above called IPsec <strong>Transform Set</strong></p></li>
-<li><p>Only performed in QM (quick mode)</p></li>
+<li>Combination of the above called IPsec <strong>Transform Set</strong></li>
+<li>Only performed in QM (quick mode)</li>
 </ul></li>
 <li>UDP 500 (ISAKMP), 4500 (NAT-T) are ports used to establish control plane
 <ul>

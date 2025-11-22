@@ -347,6 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General info</a></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   <li><a href="#standard-copp-configuration" id="toc-standard-copp-configuration" class="nav-link" data-scroll-target="#standard-copp-configuration">Standard CoPP Configuration</a></li>
+  <li><a href="#additional-points" id="toc-additional-points" class="nav-link" data-scroll-target="#additional-points">Additional Points</a></li>
   </ul>
 </nav>
     </div>
@@ -375,16 +376,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-info" class="level2">
 <h2 class="anchored" data-anchor-id="general-info">General info</h2>
 <ul>
-<li>Control Plane Policing</li>
-<li>Used to protect control plane from DDoS and other attacks.</li>
-<li>Utilises Policy-Maps in a top down fashion, once matched the evaluation stops</li>
-<li>Class map match statement (used when multiple match statements exist)
+<li><p>Control Plane Policing</p></li>
+<li><p>Used to protect control plane from DDoS and other attacks.</p></li>
+<li><p>Utilises Policy-Maps in a top down fashion, once matched the evaluation stops</p></li>
+<li><p>Class map match statement (used when multiple match statements exist)</p>
 <ul>
 <li><code>match-all</code> - must match all match commands</li>
 <li><code>match-any</code> - can match any match commands</li>
 </ul></li>
-<li>Class Map &amp; Policy Maps are case sensitive</li>
-<li>T/S - <strong>SPCA</strong> ( <strong>S</strong>ervice Policy, <strong>P</strong>olicy Map, <strong>C</strong>lass Map <strong>A</strong>CL</li>
+<li><p>Class Map &amp; Policy Maps are case sensitive</p></li>
+<li><p>T/S - <strong>SPCA</strong> ( <strong>S</strong>ervice Policy, <strong>P</strong>olicy Map, <strong>C</strong>lass Map <strong>A</strong>CL</p></li>
 </ul>
 </section>
 <section id="useful-show-commands" class="level2">
@@ -445,6 +446,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>*** Apply to the Control Plane ***</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>control-plane</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a> service-policy input COPP-POLICYMAP-EXAMPLE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="additional-points" class="level2">
+<h2 class="anchored" data-anchor-id="additional-points">Additional Points</h2>
+<p>Policy Map Policing: The first value is <strong>bits</strong> but the <strong>burst-normal</strong> and <strong>burst-max</strong> are in <strong>bytes (x8)</strong></p>
 
 
 </section>

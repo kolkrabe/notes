@@ -36,7 +36,12 @@ code-block-bg: dark
 ##### Neighbourship
 
 -   **Autonomous System** number **must match** between Neighbours
--   Hello + Hold don't have to be identical (Hold typically 3x the Hello)
+
+-   Connected interface can't be **Passive**
+
+-   K Values must match
+
+-   Authentication must pass
 
 ##### Path Selection
 

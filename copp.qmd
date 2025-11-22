@@ -7,12 +7,18 @@ code-block-bg: dark
 ## General info
 
 -   Control Plane Policing
+
 -   Used to protect control plane from DDoS and other attacks.
+
 -   Utilises Policy-Maps in a top down fashion, once matched the evaluation stops
+
 -   Class map match statement (used when multiple match statements exist)
+
     -   `match-all` - must match all match commands
     -   `match-any` - can match any match commands
+
 -   Class Map & Policy Maps are case sensitive
+
 -   T/S - **SPCA** ( **S**ervice Policy, **P**olicy Map, **C**lass Map **A**CL
 
 ## Useful Show Commands
@@ -72,3 +78,7 @@ policy-map COPP-POLICYMAP-EXAMPLE
 control-plane
  service-policy input COPP-POLICYMAP-EXAMPLE
 ```
+
+## Additional Points
+
+Policy Map Policing: The first value is **bits** but the **burst-normal** and **burst-max** are in **bytes (x8)**

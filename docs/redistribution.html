@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Redistributed routes marked as External (AD 170)</li>
 <li>Default Metric = Infinity so not installed, <strong>MUST</strong> configure metric as follows for OSPF/BGP redist, not required for static + connected
 <ul>
-<li>Set under router ospf config</li>
+<li>Set under router EIGRP config</li>
 <li>under address-family config</li>
 <li>within redistribute config line</li>
 <li>with Route Map (<strong>PREFERRED</strong> if multiple are configured, then distribute command metric then default-metric)</li>
