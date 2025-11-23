@@ -9,15 +9,27 @@ code-block-bg: dark
 -   Protocol that uses labels to determine which path traffic should route
 -   shim header (**20-bit**) inserted between IP & MAC header (This is the label)
 -   Labels switched hop by hop
+-   **Control Plane**
+    -   Where/how things are "learned".
+    -   L3 protocol - IGPs, BGP
+        -   Databases (OSPF LSDB)
+    -   Label Learning/Exchange (TDP, LDP, RSVP)
+        -   Databases (LIB)
+-   **Data Plane**
+    -   Tables that store forwarding information
+    -   RIP
+    -   CEF Tables (FIB, LFIB, Adjacency Table)
 -   Introduces `LIB` (Label Information Base) & `LFIB` (Label Forwarding Information Base)
 -   **LDP** - Label Discovery Protocol
-    -   Uses all-routers multicast (**224.0.0.2**), TCP port **646** src and dst for Hellos, unicast to neighbors once TCP session established
-    -   UDP also used for initial discovery messages
+    -   Uses all-routers multicast (**224.0.0.2**), TCP port **646** src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)
+    -   UDP also used for initial discovery messages **(Using UDP)**
     -   LDP requires **CEF** in order to exchange labels
+    -   No Split Horizon - floods labels to all nei
     -   Only IGP-learned or local routes are labelled, BGP routes not assigned a label
     -   After LDP TCP connection is established LSR's negotiate session parameters using 2 types of label distribution
         -   Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.
         -   Downstream on Demand: An LSR advertises label mappings to a peer only when the peer asks for them.
+    -   LDP Transport Address - dynamically derived, like a Router-ID (Highest lop
 -   **PHP**
     -   Penultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header & IP)
     -   In order to facilitate this, LDP routers advertise routes they own with an *implicit null/POP* label (label value of **3**) - **"imp-null"** that tells neighbours to pop LDP labels before sending for these routes
@@ -33,8 +45,30 @@ code-block-bg: dark
     -   **Implicit NULL Label** - Reserved , Value 3, Used for PHP. When LSR received label with value 3 it knows it has to pop the label before forwarding.
     -   **Explicit NULL Label** - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs
     -   **MPLS LDP Autoconfiguration** - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS
+-   MPLS Label
+    -   4 Bytes
+    -   Has Local significance
+    -   
 
 ------------------------------------------------------------------------
+
+## **FEC**
+
+-   Forwarding Equivalence Class
+    -   Group of packets forwarded
+        -   In the same Manner
+        -   Over the same path
+        -   With the same forwarding treatment
+    -   MPLS packet forwarding consists of
+        -   Assigning a packet to a specific FEC
+        -   Determining the next hop of each FEC
+-   FEC can represent a:
+    -   Destination IP Prefix
+    -   VPN ID
+    -   VLAN ID
+    -   Traffic Engineering tunnel
+    -   Others
+-   
 
 ## MPLS Layer 3 VPN
 
@@ -46,9 +80,12 @@ code-block-bg: dark
 
 ## Useful Show Commands
 
--   `show mpls ldp binding` - Shows LDP label bindings to prefixes (Remember imp-null - POP)
+-   `show mpls ldp parameters` - Displays LDP parameters on local router
 -   `show mpls interfaces` - shows interfaces participating in LDP
--   `show mpls ldp neighbor` - shows LDP neighbors
+-   `show mpls ldp discovery` - Displays all discovered LDP neighbours
+-   
+-   `show mpls ldp binding` - Shows LDP label bindings to prefixes (Remember imp-null - POP)
+-   `show mpls ldp neighbor` - shows LDP neighbours
 -   `show mpls forwarding-table` - shows LFIB
 -   `show bgp vpnv4 unicast all` - checking that VPNv4 routes being sent/received
 -   `debug mpls ldp transport events` - self-explanatory

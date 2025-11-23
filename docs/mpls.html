@@ -310,6 +310,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
+  <li><a href="#fec" id="toc-fec" class="nav-link" data-scroll-target="#fec"><strong>FEC</strong></a></li>
   <li><a href="#mpls-layer-3-vpn" id="toc-mpls-layer-3-vpn" class="nav-link" data-scroll-target="#mpls-layer-3-vpn">MPLS Layer 3 VPN</a></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   <li><a href="#config" id="toc-config" class="nav-link" data-scroll-target="#config">Config</a></li>
@@ -344,18 +345,38 @@ ul.task-list li input[type="checkbox"] {
 <li>Protocol that uses labels to determine which path traffic should route</li>
 <li>shim header (<strong>20-bit</strong>) inserted between IP &amp; MAC header (This is the label)</li>
 <li>Labels switched hop by hop</li>
+<li><strong>Control Plane</strong>
+<ul>
+<li>Where/how things are “learned”.</li>
+<li>L3 protocol - IGPs, BGP
+<ul>
+<li>Databases (OSPF LSDB)</li>
+</ul></li>
+<li>Label Learning/Exchange (TDP, LDP, RSVP)
+<ul>
+<li>Databases (LIB)</li>
+</ul></li>
+</ul></li>
+<li><strong>Data Plane</strong>
+<ul>
+<li>Tables that store forwarding information</li>
+<li>RIP</li>
+<li>CEF Tables (FIB, LFIB, Adjacency Table)</li>
+</ul></li>
 <li>Introduces <code>LIB</code> (Label Information Base) &amp; <code>LFIB</code> (Label Forwarding Information Base)</li>
 <li><strong>LDP</strong> - Label Discovery Protocol
 <ul>
-<li>Uses all-routers multicast (<strong>224.0.0.2</strong>), TCP port <strong>646</strong> src and dst for Hellos, unicast to neighbors once TCP session established</li>
-<li>UDP also used for initial discovery messages</li>
+<li>Uses all-routers multicast (<strong>224.0.0.2</strong>), TCP port <strong>646</strong> src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)</li>
+<li>UDP also used for initial discovery messages <strong>(Using UDP)</strong></li>
 <li>LDP requires <strong>CEF</strong> in order to exchange labels</li>
+<li>No Split Horizon - floods labels to all nei</li>
 <li>Only IGP-learned or local routes are labelled, BGP routes not assigned a label</li>
 <li>After LDP TCP connection is established LSR’s negotiate session parameters using 2 types of label distribution
 <ul>
 <li>Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.</li>
 <li>Downstream on Demand: An LSR advertises label mappings to a peer only when the peer asks for them.</li>
 </ul></li>
+<li>LDP Transport Address - dynamically derived, like a Router-ID (Highest lop</li>
 </ul></li>
 <li><strong>PHP</strong>
 <ul>
@@ -376,8 +397,42 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Explicit NULL Label</strong> - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs</li>
 <li><strong>MPLS LDP Autoconfiguration</strong> - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS</li>
 </ul></li>
+<li>MPLS Label
+<ul>
+<li>4 Bytes</li>
+<li>Has Local significance</li>
+<li></li>
+</ul></li>
 </ul>
 <hr>
+</section>
+<section id="fec" class="level2">
+<h2 class="anchored" data-anchor-id="fec"><strong>FEC</strong></h2>
+<ul>
+<li>Forwarding Equivalence Class
+<ul>
+<li>Group of packets forwarded
+<ul>
+<li>In the same Manner</li>
+<li>Over the same path</li>
+<li>With the same forwarding treatment</li>
+</ul></li>
+<li>MPLS packet forwarding consists of
+<ul>
+<li>Assigning a packet to a specific FEC</li>
+<li>Determining the next hop of each FEC</li>
+</ul></li>
+</ul></li>
+<li>FEC can represent a:
+<ul>
+<li>Destination IP Prefix</li>
+<li>VPN ID</li>
+<li>VLAN ID</li>
+<li>Traffic Engineering tunnel</li>
+<li>Others</li>
+</ul></li>
+<li></li>
+</ul>
 </section>
 <section id="mpls-layer-3-vpn" class="level2">
 <h2 class="anchored" data-anchor-id="mpls-layer-3-vpn">MPLS Layer 3 VPN</h2>
@@ -391,9 +446,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="useful-show-commands" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
 <ul>
-<li><code>show mpls ldp binding</code> - Shows LDP label bindings to prefixes (Remember imp-null - POP)</li>
+<li><code>show mpls ldp parameters</code> - Displays LDP parameters on local router</li>
 <li><code>show mpls interfaces</code> - shows interfaces participating in LDP</li>
-<li><code>show mpls ldp neighbor</code> - shows LDP neighbors</li>
+<li><code>show mpls ldp discovery</code> - Displays all discovered LDP neighbours</li>
+<li></li>
+<li><code>show mpls ldp binding</code> - Shows LDP label bindings to prefixes (Remember imp-null - POP)</li>
+<li><code>show mpls ldp neighbor</code> - shows LDP neighbours</li>
 <li><code>show mpls forwarding-table</code> - shows LFIB</li>
 <li><code>show bgp vpnv4 unicast all</code> - checking that VPNv4 routes being sent/received</li>
 <li><code>debug mpls ldp transport events</code> - self-explanatory</li>

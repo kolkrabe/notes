@@ -157,7 +157,7 @@ interface Tunnel0
 
 ##### **Crypto Map IPSec Config w/ IKEv1 (with GRE)**
 
-```         
+``` default
 interface Tunnel0
  ip address <ip & mask>  
  tunnel source <ip>  
