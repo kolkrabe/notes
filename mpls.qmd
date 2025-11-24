@@ -46,9 +46,9 @@ code-block-bg: dark
     -   **Explicit NULL Label** - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs
     -   **MPLS LDP Autoconfiguration** - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS
 -   MPLS Label
-    -   4 Bytes
-    -   Has Local significance
-    -   
+    -   Locally Significant
+
+        ![](images/clipboard-632952593.png)
 
 ------------------------------------------------------------------------
 

@@ -72,20 +72,21 @@ code-block-bg: dark
 ``` default
 PLAINTEXT (AREA)
 router ospf 1
-area [area id] authentication
+area [area id] authentication                               - Enables plaintext auth in the area specified
   int g0/1
-    ip ospf authentication  
+    ip ospf authentication                                  - Or here Plaintext
     ip ospf authentication-key [password] 
 
 
 MD5 (AREA)
 router ospf 1
-area [area id] authentication message-digest                - enables MD5
+area [area id] authentication message-digest                - enables MD5 in the area specified
   int g0/1
-    ip ospf authentication message-digest                       - Sets MD5 auth for that interface
-    ip ospf message-digest-key [key#] md5 [password]            - Creates hash using key + password 
+    ip ospf authentication message-digest                   - Sets MD5 auth for that interface
+    ip ospf message-digest-key [key#] md5 [password]        - Creates hash using key + password 
     
-  
+-------------------------------------------------------------------------------------------------------------
+
 OSPFv3
 area 0 authentication ipsec spi [value] sha1 0 [40char key]
 int g0/0
@@ -176,7 +177,7 @@ router ospf 2
 -   Configured using `distribute-list prefix [name] [in/out] [interface]`
 
 ```` default
- ACL
+### ACL
 access-list 1 deny 28.0.0.0 0.255.255.255
 access-list 1 permit any
 !
@@ -184,9 +185,7 @@ router ospf 1
       distribute-list 1 in 
     ```
 
--   Example with Prefix List
-
-``` default
+###  Example with Prefix List
 PREFIX-LIST
 ip prefix-list BLOCK_GERMANY deny 10.49.1.0/24 le32
 ip prefix-list BLOCK_GERMANY permit 0.0.0.0/0 le 32
@@ -194,8 +193,6 @@ ip prefix-list BLOCK_GERMANY permit 0.0.0.0/0 le 32
 router ospf 1
 distribute-list prefix BLOCK_GERMANY in
 ````
-
--   
 
 -   Can match on many values with route-maps, such as interface, ip address, ip next-hop, ip route-source, metric, route-type and tag
 
@@ -220,6 +217,13 @@ Intra Area preferred
 Inter Area next
 
 Intra AREA
+
+## OSPFv3
+
+-   Requires `ipv6 unicast-routing` to be enabled in **Global Configuration** mode.
+-   OSPF process enabled with \`ipv6 ospfv3 \<process\>
+-   Issue `ipv6 address xx` or `ipv6 enable` command in **interface Configuration** mode
+-   Issue \`ipv6 ospf \<process-id\> area \<area-id\> \[instance instance-id\] under **interface Configuration** mode
 
 ------------------------------------------------------------------------
 
@@ -256,14 +260,16 @@ ospf 1 area 0
 
 
 ADDRESS FAMILIES
-ipv6
+ipv6 Unicast-Routing                    !!!! Must enable this
+
 router ospfv3 1
 router-id 1.1.1.1
 passive-interface g0/1
 address-family ipv4
 address-family ipv6
 int g0/1
-  ospfv3 1 ipv4 area 0
+  ipv6 address 2001:CAFE::0/128         
+  ospfv3 1 ipv4 area 0                
   ospfv3 1 ipv6 area 0
 i
 ```

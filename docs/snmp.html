@@ -324,6 +324,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./misc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Misc</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./whitepapers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Whitepapers</span></a>
   </div>
@@ -345,6 +351,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#snmp" id="toc-snmp" class="nav-link active" data-scroll-target="#snmp">SNMP</a></li>
+  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show commands</a></li>
+  <li><a href="#standard-snmp-v2c-config" id="toc-standard-snmp-v2c-config" class="nav-link" data-scroll-target="#standard-snmp-v2c-config">Standard SNMP v2c Config</a></li>
+  <li><a href="#standard-snmp-v3-config" id="toc-standard-snmp-v3-config" class="nav-link" data-scroll-target="#standard-snmp-v3-config">Standard SNMP v3 Config</a></li>
   </ul>
 </nav>
     </div>
@@ -379,14 +388,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>SNMP informs are reliable (must be confirmed by receiving server).</li>
 </ul>
 <p><strong>`Ifindex persist` -</strong> Prevents SNMP index ID’s from changing after reboot (if components are added etc.)&nbsp; keeps consistency of mapped</p>
-<section id="useful-show-commands" class="level5">
-<h5 class="anchored" data-anchor-id="useful-show-commands">Useful Show commands</h5>
-<p><strong>show snmp host</strong> - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications</p>
-<p><strong>show snmp group</strong> - Displays SNMP group information (v3) <strong>show snmp user</strong> - Displays SNMP user information (v3)</p>
+</section>
+<section id="useful-show-commands" class="level3">
+<h3 class="anchored" data-anchor-id="useful-show-commands">Useful Show commands</h3>
+<p><strong><code>show snmp host</code></strong> - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications</p>
+<p><strong><code>show snmp group</code></strong> - Displays SNMP group information (v3) <strong>show snmp user</strong> - Displays SNMP user information (v3)</p>
 <hr>
 </section>
-<section id="standard-snmp-v2c-config" class="level5">
-<h5 class="anchored" data-anchor-id="standard-snmp-v2c-config">Standard SNMP v2c Config</h5>
+<section id="standard-snmp-v2c-config" class="level3">
+<h3 class="anchored" data-anchor-id="standard-snmp-v2c-config">Standard SNMP v2c Config</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>snmp ifmib ifindex persist\</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>snmp-server location&nbsp;\&lt;location\&gt;\</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>snmp-server contact&nbsp;\&lt;contact-details\&gt;\</span>
@@ -395,8 +405,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>snmp-server host 10.1.100.100 \[traps\|informs\] version 2c \&lt;community-string\&gt;</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>snmp-server enable traps ospf                                                        ! Enables specific traps for SNMP for example</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="standard-snmp-v3-config" class="level5">
-<h5 class="anchored" data-anchor-id="standard-snmp-v3-config">Standard SNMP v3 Config</h5>
+<section id="standard-snmp-v3-config" class="level3">
+<h3 class="anchored" data-anchor-id="standard-snmp-v3-config">Standard SNMP v3 Config</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>snmp ifmib ifindex persist\</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>snmp-server location&nbsp;\&lt;location\&gt;\</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>snmp-server contact&nbsp;\&lt;contact-details\&gt;\</span>
@@ -405,7 +415,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>snmp-server group \&lt;group-name\&gt; v3 priv read&nbsp;\&lt;view-name\&gt;&nbsp;write&nbsp;\&lt;view-name\&gt;\</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>snmp-server user \&lt;user-name\&gt; \&lt;group-name\&gt; v3 auth sha \&lt;password\&gt; priv aes 256 \&lt;password\&gt;\</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>snmp-server host 10.1.100.100 version 3 priv \&lt;user-name\&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="section" class="level5">
 <h5 class="anchored" data-anchor-id="section"></h5>
 

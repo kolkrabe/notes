@@ -1,0 +1,10 @@
+---
+title: "Misc"
+editor: visual
+code-block-bg: dark
+---
+
+SPT Loopguard protects against L2 loops, enabled per port.
+
+-   If non designated port stops receiving BPDUs, loopguard moves the port to "STP Loop-inconsistent blocking state, rather than listening/learning/forwarding which would cause a loop.
+-   Once BPDU received again the port is transitioned and doesn't require intervention.

@@ -13,15 +13,15 @@ code-block-bg: dark
 
 **\`Ifindex persist\` -** Prevents SNMP index ID's from changing after reboot (if components are added etc.)  keeps consistency of mapped
 
-##### Useful Show commands
+### Useful Show commands
 
-**show snmp host** - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications
+**`show snmp host`** - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications
 
-**show snmp group** - Displays SNMP group information (v3) **show snmp user** - Displays SNMP user information (v3)
+**`show snmp group`** - Displays SNMP group information (v3) **show snmp user** - Displays SNMP user information (v3)
 
 ------------------------------------------------------------------------
 
-##### Standard SNMP v2c Config
+### Standard SNMP v2c Config
 
 ``` default
 snmp ifmib ifindex persist\
@@ -33,7 +33,7 @@ snmp-server host 10.1.100.100 \[traps\|informs\] version 2c \<community-string\>
 snmp-server enable traps ospf                                                        ! Enables specific traps for SNMP for example
 ```
 
-##### Standard SNMP v3 Config
+### Standard SNMP v3 Config
 
 ``` default
 snmp ifmib ifindex persist\

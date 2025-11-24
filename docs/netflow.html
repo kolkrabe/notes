@@ -324,6 +324,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./misc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Misc</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./whitepapers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Whitepapers</span></a>
   </div>
@@ -489,7 +495,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="bfd---bidirectionforwarding" class="level3">
 <h3 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h3>
 <ul>
-<li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p></li>
+<li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p>
+<ul>
+<li>Sub Second failure</li>
+<li>1 session per address family per interface (regardless of how many protocols run on it).</li>
+<li>Supports OSPF, EIGRP, BGP, IS-IS</li>
+</ul></li>
 <li><p>Connection types in question</p>
 <ul>
 <li>L2 Switched Network</li>
@@ -499,8 +510,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Works with all Media Types, routing protocols, topologies and encapsulations.</p></li>
 <li><p>Requirements</p>
 <ul>
-<li><p><strong>CEP + IP Routing</strong> must be enabled</p></li>
-<li><p>IP Routing protocol supported by BFD must be configured before BFD is configured</p></li>
+<li><strong>CEP + IP Routing</strong> must be enabled</li>
+<li>IP Routing protocol supported by BFD must be configured before BFD is configured</li>
 </ul></li>
 </ul>
 

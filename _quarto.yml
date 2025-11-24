@@ -42,6 +42,7 @@ website:
              - uRPF.qmd
              - copp.qmd
              - ipv6sec.qmd
+      - misc.qmd
       - whitepapers.qmd
       - tools.qmd
 

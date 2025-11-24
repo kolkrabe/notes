@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MPLS – Kolkrabe</title>
+<title>Misc – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./mpls.html">VPN &amp; Encryption</a></li><li class="breadcrumb-item"><a href="./mpls.html">MPLS</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./misc.html">Misc</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -170,16 +170,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">VPN &amp; Encryption</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mpls.html" class="sidebar-item-text sidebar-link active">
+  <a href="./mpls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MPLS</span></a>
   </div>
 </li>
@@ -289,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./misc.html" class="sidebar-item-text sidebar-link">
+  <a href="./misc.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Misc</span></a>
   </div>
 </li>
@@ -310,25 +310,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
-  <li><a href="#fec" id="toc-fec" class="nav-link" data-scroll-target="#fec"><strong>FEC</strong></a></li>
-  <li><a href="#mpls-layer-3-vpn" id="toc-mpls-layer-3-vpn" class="nav-link" data-scroll-target="#mpls-layer-3-vpn">MPLS Layer 3 VPN</a></li>
-  <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
-  <li><a href="#config" id="toc-config" class="nav-link" data-scroll-target="#config">Config</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./mpls.html">VPN &amp; Encryption</a></li><li class="breadcrumb-item"><a href="./mpls.html">MPLS</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MPLS</h1>
+<h1 class="title">Misc</h1>
 </div>
 
 
@@ -345,130 +335,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="general-info" class="level2">
-<h2 class="anchored" data-anchor-id="general-info">General Info</h2>
+<p>SPT Loopguard protects against L2 loops, enabled per port.</p>
 <ul>
-<li>Protocol that uses labels to determine which path traffic should route</li>
-<li>shim header (<strong>20-bit</strong>) inserted between IP &amp; MAC header (This is the label)</li>
-<li>Labels switched hop by hop</li>
-<li><strong>Control Plane</strong>
-<ul>
-<li>Where/how things are “learned”.</li>
-<li>L3 protocol - IGPs, BGP
-<ul>
-<li>Databases (OSPF LSDB)</li>
-</ul></li>
-<li>Label Learning/Exchange (TDP, LDP, RSVP)
-<ul>
-<li>Databases (LIB)</li>
-</ul></li>
-</ul></li>
-<li><strong>Data Plane</strong>
-<ul>
-<li>Tables that store forwarding information</li>
-<li>RIP</li>
-<li>CEF Tables (FIB, LFIB, Adjacency Table)</li>
-</ul></li>
-<li>Introduces <code>LIB</code> (Label Information Base) &amp; <code>LFIB</code> (Label Forwarding Information Base)</li>
-<li><strong>LDP</strong> - Label Discovery Protocol
-<ul>
-<li>Uses all-routers multicast (<strong>224.0.0.2</strong>), TCP port <strong>646</strong> src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)</li>
-<li>UDP also used for initial discovery messages <strong>(Using UDP)</strong></li>
-<li>LDP requires <strong>CEF</strong> in order to exchange labels</li>
-<li>No Split Horizon - floods labels to all nei</li>
-<li>Only IGP-learned or local routes are labelled, BGP routes not assigned a label</li>
-<li>After LDP TCP connection is established LSR’s negotiate session parameters using 2 types of label distribution
-<ul>
-<li>Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.</li>
-<li>Downstream on Demand: An LSR advertises label mappings to a peer only when the peer asks for them.</li>
-</ul></li>
-<li>LDP Transport Address - dynamically derived, like a Router-ID (Highest lop</li>
-</ul></li>
-<li><strong>PHP</strong>
-<ul>
-<li>Penultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header &amp; IP)</li>
-<li>In order to facilitate this, LDP routers advertise routes they own with an <em>implicit null/POP</em> label (label value of <strong>3</strong>) - <strong>“imp-null”</strong> that tells neighbours to pop LDP labels before sending for these routes</li>
-</ul></li>
-<li><strong>LIB</strong> - Label Information Base - functions like L3 RIB</li>
-<li><strong>LFIB</strong> - Label Forward Information Base - functions like L3 FIB</li>
-<li><strong>LSR</strong> - Label Switched Router - any router that participates in MPLS</li>
-<li><strong>LSP</strong> - Label Switched Path - path through LSRs labelled packet takes throughout MPLS domain</li>
-<li><strong>MP-BGP</strong> (VPNv4) used with VRFs and LDP to form MPLS L3VPNs</li>
-<li><strong>RSVP</strong> - Resource Reservation Protocol - used for traffic engineering</li>
-<li><strong>MPLS LDP Features</strong>
-<ul>
-<li><strong>Inbound Label Binding Filtering</strong> - uses ACLs to identify traffic that will and won’t be accepted from peers.</li>
-<li><strong>Entropy Label</strong> - Load Balancing, DPI is done on ingress router (Edge LSR) and entropy label created, this is used by all other MPLS routers. Without each router must perform DPI for LB.</li>
-<li><strong>Implicit NULL Label</strong> - Reserved , Value 3, Used for PHP. When LSR received label with value 3 it knows it has to pop the label before forwarding.</li>
-<li><strong>Explicit NULL Label</strong> - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs</li>
-<li><strong>MPLS LDP Autoconfiguration</strong> - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS</li>
-</ul></li>
-<li>MPLS Label
-<ul>
-<li><p>Locally Significant</p>
-<p><img src="images/clipboard-632952593.png" class="img-fluid"></p></li>
-</ul></li>
+<li>If non designated port stops receiving BPDUs, loopguard moves the port to “STP Loop-inconsistent blocking state, rather than listening/learning/forwarding which would cause a loop.</li>
+<li>Once BPDU received again the port is transitioned and doesn’t require intervention.</li>
 </ul>
-<hr>
-</section>
-<section id="fec" class="level2">
-<h2 class="anchored" data-anchor-id="fec"><strong>FEC</strong></h2>
-<ul>
-<li>Forwarding Equivalence Class
-<ul>
-<li>Group of packets forwarded
-<ul>
-<li>In the same Manner</li>
-<li>Over the same path</li>
-<li>With the same forwarding treatment</li>
-</ul></li>
-<li>MPLS packet forwarding consists of
-<ul>
-<li>Assigning a packet to a specific FEC</li>
-<li>Determining the next hop of each FEC</li>
-</ul></li>
-</ul></li>
-<li>FEC can represent a:
-<ul>
-<li>Destination IP Prefix</li>
-<li>VPN ID</li>
-<li>VLAN ID</li>
-<li>Traffic Engineering tunnel</li>
-<li>Others</li>
-</ul></li>
-<li></li>
-</ul>
-</section>
-<section id="mpls-layer-3-vpn" class="level2">
-<h2 class="anchored" data-anchor-id="mpls-layer-3-vpn">MPLS Layer 3 VPN</h2>
-<ul>
-<li>Route Distinguishers</li>
-<li>Route Targets</li>
-<li></li>
-</ul>
-<hr>
-</section>
-<section id="useful-show-commands" class="level2">
-<h2 class="anchored" data-anchor-id="useful-show-commands">Useful Show Commands</h2>
-<ul>
-<li><code>show mpls ldp parameters</code> - Displays LDP parameters on local router</li>
-<li><code>show mpls interfaces</code> - shows interfaces participating in LDP</li>
-<li><code>show mpls ldp discovery</code> - Displays all discovered LDP neighbours</li>
-<li></li>
-<li><code>show mpls ldp binding</code> - Shows LDP label bindings to prefixes (Remember imp-null - POP)</li>
-<li><code>show mpls ldp neighbor</code> - shows LDP neighbours</li>
-<li><code>show mpls forwarding-table</code> - shows LFIB</li>
-<li><code>show bgp vpnv4 unicast all</code> - checking that VPNv4 routes being sent/received</li>
-<li><code>debug mpls ldp transport events</code> - self-explanatory</li>
-<li><code>debug bgp vpnv4 unicast updates</code> - useful for troubleshooting VPNv4 issues</li>
-</ul>
-<hr>
-</section>
-<section id="config" class="level2">
-<h2 class="anchored" data-anchor-id="config">Config</h2>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
