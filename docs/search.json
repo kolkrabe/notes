@@ -146,7 +146,7 @@
     "href": "netflow.html",
     "title": "netflow",
     "section": "",
-    "text": "General\n\nNetflow is a tool to observce traffic flows in the network\nA Flow is a series of packets with shared head information such as\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)\n\n\n\nFlexible Netflow\n\nCan determine traffic in the same was as Netflow + more. things simultaneously\nRequires CEF (Cisco Express Forwarding) to be enabled\nFlexible netflow\n\nUsed to allow more customization of the traffic parameters to be captured\nConsists of records, exporters, samplers and monitors\nRecords\n\nDefine what parameters will be captured by netflow\nCan use pre-defined records or define your own\n\nExporters\n\nUsed to set up exportation of the netflow information to the flow collector\n\nSamplers\n\nUsed to limit the number of monitored packets if desired for performance reasons\n\nMonitors\n\nUsed to apply netflow records to desired interfaces\nReferences specific flow record and flow exporter\n\n\n\n\n\n\nUseful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.\n\n\n\n\nFlexible Netflow\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.\n\n\n\n\nStandard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000\n\n\nFlexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input\n\n\n\nBFD - BiDirectionForwarding\n\nBFD is a lightweight (small fixed packets) protocol used to determine a link failure between L3 non-directly connected routers.\n\nSub Second failure\n1 session per address family per interface (regardless of how many protocols run on it).\nSupports OSPF, EIGRP, BGP, IS-IS\n\nConnection types in question\n\nL2 Switched Network\nVPN Tunnels\nDMVPN without LOS Propagation\n\nWorks with all Media Types, routing protocols, topologies and encapsulations.\nRequirements\n\nCEP + IP Routing must be enabled\nIP Routing protocol supported by BFD must be configured before BFD is configured",
+    "text": "General\n\nNetflow is a tool to observce traffic flows in the network\nOriginal Netlow used fixed 7 Tuples of info\nA Flow is a series of packets with shared head information such as:\n\nsource/destination IP\nprotocol numbers\nport numbers\nType of Service (ToS) field information.\ningress/egress interface\nQoS\nAll entering the same interface on the device.\n\nNetflow data is stored on local device’s flow cache and can be viewed on CLI\nOnce flow is inactive for (default) 15 seconds it can be removed from the cache and exported to a collector.\nFlows removed after max age expires (Default 30 minutes)\n\n\n\nFlexible Netflow\n\nCan determine traffic in the same was as Netflow + more. things simultaneously\nRequires CEF (Cisco Express Forwarding) to be enabled\nFlexible netflow\n\nUsed to allow more customization of the traffic parameters to be captured\nConsists of records, exporters, samplers and monitors\nRecords\n\nDefine what parameters will be captured by netflow\nCan use pre-defined records or define your own\n\nExporters\n\nUsed to set up exportation of the netflow information to the flow collector\n\nSamplers\n\nUsed to limit the number of monitored packets if desired for performance reasons\n\nMonitors\n\nUsed to apply netflow records to desired interfaces\nReferences specific flow record and flow exporter\n\n\n\n\n\n\nUseful Show + Other Commands\n\nshow ip cache flow - shows contents of local router flow cache\nshow ip flow interface - used to verify netflow enabled interfaces and direction of capture\nshow ip flow export - used to verify export source and destination details\nip flow-cache entries [number] - change the size of the flow cache (if it’s filling up often\nip flow-cache timeout active [minutes] - used to modify the max age of a flow.\nip flow-cache timeout inactive [seconds] - used to modify idle timer (default 15 seconds)\nclear ip flow stats - clears netflow statistics from device.\n\n\n\n\nFlexible Netflow\n\nshow flow record - used to verify match and collect conditions of the flow record\nshow running-config flow record - also can show this info\nshow flow monitor - used to verify which pre-defined’ flow record is being used.\n\n\n\n\nStandard Netflow Config\nint fa 0/0\n ip flow [ingress|egress]\n exit\nip flow-export source lo 0\nip flow-export version [5|9]\nip flow-export destination &lt;collector-ip&gt; 5000\n\n\nFlexible Netflow Config\nflow exporter EXPORTER\n destination &lt;Collector-IP&gt;\n export-protocol netflow-v9\n source Vlan100\n transport udp 2055\n!\nflow record RECORD\n match ipv4 tos\n match ipv4 protocol\n match ipv4 source address\n match ipv4 destination address\n match transport source-port\n match transport destination-port\n match interface input\n collect interface output\n collect counter bytes\n collect counter packets\n!\nflow monitor IPv4_NETFLOW\n record RECORD\n exporter EXPORTER\n cache timeout active 60\n!\ninterface fa0/0\n ip flow monitor IPv4_NETFLOW input",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
@@ -428,11 +428,16 @@
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "acls.html",
+    "href": "acls.html",
+    "title": "IP ACLs",
     "section": "",
-    "text": "About this site"
+    "text": "IP access-list: Defines traffic - either via permit/deny\nAccess-group: applies an ACL to a physical interface\nAccess-class: applies an ACL to a line (VTY, Console, Aux) etc.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Security",
+      "IP ACLs"
+    ]
   },
   {
     "objectID": "aaa.html",
@@ -471,15 +476,22 @@
     ]
   },
   {
-    "objectID": "acls.html",
-    "href": "acls.html",
-    "title": "IP ACLs",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "IP access-list: Defines traffic - either via permit/deny\nAccess-group: applies an ACL to a physical interface\nAccess-class: applies an ACL to a line (VTY, Console, Aux) etc.",
+    "text": "About this site"
+  },
+  {
+    "objectID": "bfd.html",
+    "href": "bfd.html",
+    "title": "BFD",
+    "section": "",
+    "text": "BFD - BiDirectionForwarding\n\nBFD is a lightweight (small fixed packets) protocol used to determine a link failure between L3 non-directly connected routers.\n\nSub Second failure\n1 session per address family per interface (regardless of how many protocols run on it).\nSupports OSPF, EIGRP, BGP, IS-IS\n\nConnection types in question\n\nL2 Switched Network\nVPN Tunnels\nDMVPN without LOS Propagation\n\nWorks with all Media Types, routing protocols, topologies and encapsulations.\nRequirements\n\nCEP + IP Routing must be enabled\nIP Routing protocol supported by BFD must be configured before BFD is configured",
     "crumbs": [
       "CCNP ENARSI",
-      "Infrastructure Security",
-      "IP ACLs"
+      "Layer 3 Technologies",
+      "BFD"
     ]
   },
   {
@@ -821,7 +833,7 @@
     "href": "ospf.html#ospfv3",
     "title": "OSPF",
     "section": "OSPFv3",
-    "text": "OSPFv3\n\nRequires ipv6 unicast-routing to be enabled in Global Configuration mode.\nOSPF process enabled with `ipv6 ospfv3 &lt;process&gt;\nIssue ipv6 address xx or ipv6 enable command in interface Configuration mode\nIssue `ipv6 ospf &lt;process-id&gt; area &lt;area-id&gt; [instance instance-id] under interface Configuration mode",
+    "text": "OSPFv3\n\nRequires ipv6 unicast-routing to be enabled in Global Configuration mode.\nOSPF process enabled with ipv6 ospfv3 &lt;process&gt;\nIssue ipv6 address xx or ipv6 enable command in interface Configuration mode\nIssue ipv6 ospf &lt;process-id&gt; area &lt;area-id&gt; [instance instance-id] under interface Configuration mode\nNote, if you don’t enter a RouterID and there are no up interfaces the process will fail to start.\nOSPFv3 Comms within a local segment based on link-local addresses.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

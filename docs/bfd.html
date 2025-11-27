@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Kolkrabe</title>
+<title>BFD – Kolkrabe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,9 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Kolkrabe
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./bfd.html">BFD</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -125,13 +123,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Layer 3 Technologies</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bgp.html" class="sidebar-item-text sidebar-link">
@@ -170,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bfd.html" class="sidebar-item-text sidebar-link">
+  <a href="./bfd.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">BFD</span></a>
   </div>
 </li>
@@ -318,15 +316,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bfd---bidirectionforwarding" id="toc-bfd---bidirectionforwarding" class="nav-link active" data-scroll-target="#bfd---bidirectionforwarding">BFD - BiDirectionForwarding</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CCNP ENARSI</li><li class="breadcrumb-item"><a href="./bgp.html">Layer 3 Technologies</a></li><li class="breadcrumb-item"><a href="./bfd.html">BFD</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">BFD</h1>
 </div>
 
 
@@ -343,9 +347,31 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<section id="bfd---bidirectionforwarding" class="level3">
+<h3 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h3>
+<ul>
+<li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p>
+<ul>
+<li>Sub Second failure</li>
+<li>1 session per address family per interface (regardless of how many protocols run on it).</li>
+<li>Supports OSPF, EIGRP, BGP, IS-IS</li>
+</ul></li>
+<li><p>Connection types in question</p>
+<ul>
+<li>L2 Switched Network</li>
+<li>VPN Tunnels</li>
+<li>DMVPN without LOS Propagation</li>
+</ul></li>
+<li><p>Works with all Media Types, routing protocols, topologies and encapsulations.</p></li>
+<li><p>Requirements</p>
+<ul>
+<li><strong>CEP + IP Routing</strong> must be enabled</li>
+<li>IP Routing protocol supported by BFD must be configured before BFD is configured</li>
+</ul></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

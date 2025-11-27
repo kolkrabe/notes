@@ -7,7 +7,8 @@ code-block-bg: dark
 ### General
 
 -   Netflow is a tool to observce traffic flows in the network
--   A Flow is a series of packets with shared head information such as
+-   Original Netlow used fixed 7 Tuples of info
+-   A Flow is a series of packets with shared head information such as:
     -   source/destination IP
     -   protocol numbers
     -   port numbers
@@ -102,23 +103,4 @@ interface fa0/0
 
 ------------------------------------------------------------------------
 
-### BFD - BiDirectionForwarding
-
--   BFD is a lightweight *(small fixed packets)* protocol used to determine a link failure between L3 non-directly connected routers.
-
-    -   Sub Second failure
-    -   1 session per address family per interface (regardless of how many protocols run on it).
-    -   Supports OSPF, EIGRP, BGP, IS-IS
-
--   Connection types in question
-
-    -   L2 Switched Network
-    -   VPN Tunnels
-    -   DMVPN without LOS Propagation
-
--   Works with all Media Types, routing protocols, topologies and encapsulations.
-
--   Requirements
-
-    -   **CEP + IP Routing** must be enabled
-    -   IP Routing protocol supported by BFD must be configured before BFD is configured
+### 

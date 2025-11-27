@@ -221,9 +221,11 @@ Intra AREA
 ## OSPFv3
 
 -   Requires `ipv6 unicast-routing` to be enabled in **Global Configuration** mode.
--   OSPF process enabled with \`ipv6 ospfv3 \<process\>
+-   OSPF process enabled with `ipv6 ospfv3 <process>`
 -   Issue `ipv6 address xx` or `ipv6 enable` command in **interface Configuration** mode
--   Issue \`ipv6 ospf \<process-id\> area \<area-id\> \[instance instance-id\] under **interface Configuration** mode
+-   Issue `ipv6 ospf <process-id> area <area-id> [instance instance-id]` under **interface Configuration** mode
+-   Note, if you don't enter a **RouterID** and there are no up interfaces the process will fail to start.
+-   OSPFv3 Comms within a local segment based on **link-local** addresses.
 
 ------------------------------------------------------------------------
 
@@ -271,5 +273,21 @@ int g0/1
   ipv6 address 2001:CAFE::0/128         
   ospfv3 1 ipv4 area 0                
   ospfv3 1 ipv6 area 0
+  ospfv3 1 hello-interval X
+  ospfv3 1 hello-interval y
 i
+
+-----------------------------------------------------------------------------------------
+Traditional ipv6 Config
+
+ipv6 unicast-routing
+!
+ipv6 router ospf [process-id]
+router-id [id]
+passive-interface l0
+no passive-interface l0
+
+** Under OSPF Int *** 
+interface g0/0
+ ipv6 ospf [process-id] area [area-id]
 ```

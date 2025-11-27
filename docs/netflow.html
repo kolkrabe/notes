@@ -201,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">VRF</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bfd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BFD</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -356,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#flexible-netflow-1" id="toc-flexible-netflow-1" class="nav-link" data-scroll-target="#flexible-netflow-1">Flexible Netflow</a></li>
   <li><a href="#standard-netflow-config" id="toc-standard-netflow-config" class="nav-link" data-scroll-target="#standard-netflow-config">Standard Netflow Config</a></li>
   <li><a href="#flexible-netflow-config" id="toc-flexible-netflow-config" class="nav-link" data-scroll-target="#flexible-netflow-config">Flexible Netflow Config</a></li>
-  <li><a href="#bfd---bidirectionforwarding" id="toc-bfd---bidirectionforwarding" class="nav-link" data-scroll-target="#bfd---bidirectionforwarding">BFD - BiDirectionForwarding</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </nav>
     </div>
@@ -386,7 +392,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="general">General</h3>
 <ul>
 <li>Netflow is a tool to observce traffic flows in the network</li>
-<li>A Flow is a series of packets with shared head information such as
+<li>Original Netlow used fixed 7 Tuples of info</li>
+<li>A Flow is a series of packets with shared head information such as:
 <ul>
 <li>source/destination IP</li>
 <li>protocol numbers</li>
@@ -492,28 +499,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> ip flow monitor IPv4_NETFLOW input</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="bfd---bidirectionforwarding" class="level3">
-<h3 class="anchored" data-anchor-id="bfd---bidirectionforwarding">BFD - BiDirectionForwarding</h3>
-<ul>
-<li><p>BFD is a lightweight <em>(small fixed packets)</em> protocol used to determine a link failure between L3 non-directly connected routers.</p>
-<ul>
-<li>Sub Second failure</li>
-<li>1 session per address family per interface (regardless of how many protocols run on it).</li>
-<li>Supports OSPF, EIGRP, BGP, IS-IS</li>
-</ul></li>
-<li><p>Connection types in question</p>
-<ul>
-<li>L2 Switched Network</li>
-<li>VPN Tunnels</li>
-<li>DMVPN without LOS Propagation</li>
-</ul></li>
-<li><p>Works with all Media Types, routing protocols, topologies and encapsulations.</p></li>
-<li><p>Requirements</p>
-<ul>
-<li><strong>CEP + IP Routing</strong> must be enabled</li>
-<li>IP Routing protocol supported by BFD must be configured before BFD is configured</li>
-</ul></li>
-</ul>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 
 
 </section>

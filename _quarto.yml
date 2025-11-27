@@ -22,6 +22,7 @@ website:
               - redistribution.qmd
               - routemap-pbr.qmd
               - vrf.qmd
+              - bfd.qmd
           - section: "VPN & Encryption"
             contents:
               - mpls.qmd
