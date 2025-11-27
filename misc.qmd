@@ -8,3 +8,12 @@ SPT Loopguard protects against L2 loops, enabled per port.
 
 -   If non designated port stops receiving BPDUs, loopguard moves the port to "STP Loop-inconsistent blocking state, rather than listening/learning/forwarding which would cause a loop.
 -   Once BPDU received again the port is transitioned and doesn't require intervention.
+
+DHCP Option 82 - Relay Agent Information Option
+
+-   Increases DHCP security by enabling identification of request sources and,
+-   allows address allocation based on network topology or client device characteristics.
+-   When DHCP Snooping + IP Source Guard enabled - DHCP server must support option 82.
+    -   Enable: `ip dhcp snooping information option`
+
+DHCP Option 66 - next-server option - ip/hostname of TFTP or HTTP server for client to download files from.

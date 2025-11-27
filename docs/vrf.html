@@ -394,16 +394,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>For OSPFv2 you need separate OSPF processes for each VRF</li>
 <li>For other Protocols - we can have a single process with multiple address families.</li>
 </ul>
+<p>Compatible with <strong>BGP</strong>, <strong>EIGRP</strong>, <strong>OSPF</strong>, <strong>RIP</strong>, <strong>Static Routes</strong></p>
+<p>Not Compatible with <strong>IGRP</strong>, I<strong>S-IS</strong></p>
 <hr>
 </section>
 <section id="useful-show-commands-other" class="level2">
 <h2 class="anchored" data-anchor-id="useful-show-commands-other">Useful show commands + other</h2>
 <ul>
-<li><p><code>show ip vrf</code> / <code>show vrf</code> - shows summary of configured VRFs, including interfaces.</p></li>
-<li><p><code>show ip route vrf [vrf-name]</code> - shows routing table of VRF</p></li>
-<li><p><code>show ip vrf interfaces</code> / <code>show vrf ipv4 unicast interfaces</code> - shows interfaces in VRF.</p></li>
-<li><p><code>ping vrf [name] 10.1.1.1</code> - ping from specific VRF</p></li>
-<li><p><code>show ip eigrp vrf [vrf-name] interfaces</code></p></li>
+<li><code>show ip vrf</code> / <code>show vrf</code> - shows summary of configured VRFs, including interfaces.</li>
+<li><code>show ip route vrf [vrf-name]</code> - shows routing table of VRF</li>
+<li><code>show ip vrf interfaces</code> / <code>show vrf ipv4 unicast interfaces</code> - shows interfaces in VRF.</li>
+<li><code>ping vrf [name] 10.1.1.1</code> - ping from specific VRF</li>
+<li><code>show ip eigrp vrf [vrf-name] interfaces</code></li>
 </ul>
 <hr>
 </section>

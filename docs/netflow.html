@@ -411,11 +411,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="flexible-netflow" class="level3">
 <h3 class="anchored" data-anchor-id="flexible-netflow">Flexible Netflow</h3>
 <ul>
-<li>Can determine traffic in the same was as Netflow + more. things simultaneously</li>
-<li>Requires <strong>CEF</strong> (Cisco Express Forwarding) to be enabled</li>
-<li><strong>Flexible netflow</strong>
+<li><p>Can determine traffic in the same was as Netflow + more. things simultaneously</p></li>
+<li><p>Requires <strong>CEF</strong> (Cisco Express Forwarding) to be enabled</p></li>
+<li><p><strong>Flexible netflow</strong></p>
+<p>Used to allow more customization of the traffic parameters to be captured</p>
 <ul>
-<li>Used to allow more customization of the traffic parameters to be captured</li>
 <li>Consists of records, exporters, samplers and monitors</li>
 <li><strong>Records</strong>
 <ul>
@@ -437,6 +437,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul></li>
 </ul>
+<p><strong>CONFIG STEPS (REMMI)</strong></p>
+<p>1) Configure Flow Record</p>
+<p>2) Configur Flow Exporter</p>
+<p>3) Configure Flow Monitor</p>
+<p>4) Apply Flow Monitor to interface.</p>
 <hr>
 </section>
 <section id="useful-show-other-commands" class="level3">

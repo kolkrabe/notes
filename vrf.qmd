@@ -13,18 +13,18 @@ code-block-bg: dark
 -   For OSPFv2 you need separate OSPF processes for each VRF
 -   For other Protocols - we can have a single process with multiple address families.
 
+Compatible with **BGP**, **EIGRP**, **OSPF**, **RIP**, **Static Routes**
+
+Not Compatible with **IGRP**, I**S-IS**
+
 ------------------------------------------------------------------------
 
 ## Useful show commands + other
 
 -   `show ip vrf` / `show vrf` - shows summary of configured VRFs, including interfaces.
-
 -   `show ip route vrf [vrf-name]` - shows routing table of VRF
-
 -   `show ip vrf interfaces` / `show vrf ipv4 unicast interfaces` - shows interfaces in VRF.
-
 -   `ping vrf [name] 10.1.1.1` - ping from specific VRF
-
 -   `show ip eigrp vrf [vrf-name] interfaces`
 
 ------------------------------------------------------------------------
