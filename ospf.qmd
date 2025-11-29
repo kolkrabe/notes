@@ -21,13 +21,13 @@ code-block-bg: dark
 -   **DR/BDR Election** - Highest Priority value (0 to remove from election) - Highest Router-ID - Highest IP on Loopback Int - Highest IP on interface that's UP
 -   **Metric Calculation**
     -   Bandwidth \\ References Bandwidth - Default ref is 100Mb (all interfaces \> 100M have same ref cost.
-        -   Change ref bandwith with `auto-cost reference bandwidth [value]` big kev recommends 2TB!
+        -   Change ref bandwidth with `auto-cost reference bandwidth [value]` big kev recommends 2TB!
         -   Should match across topology but won't stop neighbourships forming.
 -   Network Type (don't have to match)
-    -   Broadcast - ethernet -Default for OSPF - DR/BDR
-    -   Point-to-Point - Default for non-Frame Relay serial interface, no DR/BDR required
-    -   NBMA - Frame Relay - DR/BDR required, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds)
-    -   Point-to-Multipoint - No DR/BDR required, hello 30 secs
+    -   Broadcast - Ethernet -Default for OSPF - DR/BDR
+    -   Point-to-Point - Default for non-Frame Relay serial interface, **no DR/BDR required**
+    -   NBMA - Frame Relay - DR/BDR required, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds, Dead Interval 120 seconds)
+    -   Point-to-Multipoint - No DR/BDR required, (Hello 30 seconds, Dead Interval 120 seconds)
     -   When mixing - might have to adjust timers.
 -   **LSAs**
     -   **Type 1 - Router LSA** (Intra-Area)
@@ -85,6 +85,15 @@ area [area id] authentication message-digest                - enables MD5 in the
     ip ospf authentication message-digest                   - Sets MD5 auth for that interface
     ip ospf message-digest-key [key#] md5 [password]        - Creates hash using key + password 
     
+HMAC with SHA
+Needs -  KEY CHAIN
+key chain OSPF_KEY
+ key 1
+  key-string [password][
+  cryptographic-algorithm ]hmac-sha-256]                    - can also select md5 here if you wish
+ int g0/0
+  ip ospf authentication key-chain OSPF_KEY
+    
 -------------------------------------------------------------------------------------------------------------
 
 OSPFv3
@@ -94,12 +103,6 @@ int g0/0
 
 
 
-WITH KEY CHAIN
-key chain OSPF_KEY
- key 1
-  key-string [password]
-  cryptographic-algorithm hmac-sha-256
-ip ospf authentication key-chain OSPF_KEY
 ```
 
 ## Virtual Links
@@ -114,11 +117,13 @@ ip ospf authentication key-chain OSPF_KEY
 
 -   Summarisation only possible at ABR + ASBR
 -   Inter-Area Summarisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
-    -   configured with `area [area-id] range [network + mask] cost [metric]` under OSPF process.
+    -   configured with `area [area-id] range [network + mask] cost [metric]` under OSPF process. \*Note the Area ID is the area you're summerising into?
 -   can use `not-advertise` to prevent prefixes being advertised
 -   External router summarisation ndefined at ASBR
     -   configured with `summary-address [network + mask]` under OSPF process.
--   "Discard Route" installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external
+    -   "Discard Route" installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)
+        -   AD can be adjusted wtih `discard-route [external | internal] distance`
+-   
 
 ## Stub Areas
 

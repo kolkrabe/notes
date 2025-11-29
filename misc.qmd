@@ -17,3 +17,5 @@ DHCP Option 82 - Relay Agent Information Option
     -   Enable: `ip dhcp snooping information option`
 
 DHCP Option 66 - next-server option - ip/hostname of TFTP or HTTP server for client to download files from.
+
+OSPF - Advertising Loopbacks - default mask /32, to show the configured subnet mask change the loopbacks network type to **"point-to-point"**

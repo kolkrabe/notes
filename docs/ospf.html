@@ -419,16 +419,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Bandwidth \ References Bandwidth - Default ref is 100Mb (all interfaces &gt; 100M have same ref cost.
 <ul>
-<li>Change ref bandwith with <code>auto-cost reference bandwidth [value]</code> big kev recommends 2TB!</li>
+<li>Change ref bandwidth with <code>auto-cost reference bandwidth [value]</code> big kev recommends 2TB!</li>
 <li>Should match across topology but won’t stop neighbourships forming.</li>
 </ul></li>
 </ul></li>
 <li>Network Type (don’t have to match)
 <ul>
-<li>Broadcast - ethernet -Default for OSPF - DR/BDR</li>
-<li>Point-to-Point - Default for non-Frame Relay serial interface, no DR/BDR required</li>
-<li>NBMA - Frame Relay - DR/BDR required, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds)</li>
-<li>Point-to-Multipoint - No DR/BDR required, hello 30 secs</li>
+<li>Broadcast - Ethernet -Default for OSPF - DR/BDR</li>
+<li>Point-to-Point - Default for non-Frame Relay serial interface, <strong>no DR/BDR required</strong></li>
+<li>NBMA - Frame Relay - DR/BDR required, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds, Dead Interval 120 seconds)</li>
+<li>Point-to-Multipoint - No DR/BDR required, (Hello 30 seconds, Dead Interval 120 seconds)</li>
 <li>When mixing - might have to adjust timers.</li>
 </ul></li>
 <li><strong>LSAs</strong>
@@ -503,21 +503,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    ip ospf authentication message-digest                   - Sets MD5 auth for that interface</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ip ospf message-digest-key [key#] md5 [password]        - Creates hash using key + password </span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>-------------------------------------------------------------------------------------------------------------</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>OSPFv3</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>area 0 authentication ipsec spi [value] sha1 0 [40char key]</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>WITH KEY CHAIN</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> key 1</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  key-string [password]</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm hmac-sha-256</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>ip ospf authentication key-chain OSPF_KEY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>HMAC with SHA</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Needs -  KEY CHAIN</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>key chain OSPF_KEY</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> key 1</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  key-string [password][</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  cryptographic-algorithm ]hmac-sha-256]                    - can also select md5 here if you wish</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> int g0/0</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  ip ospf authentication key-chain OSPF_KEY</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>-------------------------------------------------------------------------------------------------------------</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>OSPFv3</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>area 0 authentication ipsec spi [value] sha1 0 [40char key]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="virtual-links" class="level2">
 <h2 class="anchored" data-anchor-id="virtual-links">Virtual Links</h2>
@@ -535,14 +537,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Summarisation only possible at ABR + ASBR</li>
 <li>Inter-Area Summarisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
 <ul>
-<li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process.</li>
+<li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process. *Note the Area ID is the area you’re summerising into?</li>
 </ul></li>
 <li>can use <code>not-advertise</code> to prevent prefixes being advertised</li>
 <li>External router summarisation ndefined at ASBR
 <ul>
 <li>configured with <code>summary-address [network + mask]</code> under OSPF process.</li>
+<li>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)
+<ul>
+<li>AD can be adjusted wtih <code>discard-route [external | internal] distance</code></li>
 </ul></li>
-<li>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external</li>
+</ul></li>
+<li></li>
 </ul>
 </section>
 <section id="stub-areas" class="level2">
