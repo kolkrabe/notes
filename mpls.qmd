@@ -38,7 +38,7 @@ code-block-bg: dark
 -   **LSR** - Label Switched Router - any router that participates in MPLS
 -   **LSP** - Label Switched Path - path through LSRs labelled packet takes throughout MPLS domain
 -   **MP-BGP** (VPNv4) used with VRFs and LDP to form MPLS L3VPNs
--   **RSVP** - Resource Reservation Protocol - used for traffic engineering
+-   **RSVP** - Resource Reservation Protocol - used to distribute label information with traffic engineering specifically.
 -   **MPLS LDP Features**
     -   **Inbound Label Binding Filtering** - uses ACLs to identify traffic that will and won't be accepted from peers.
     -   **Entropy Label** - Load Balancing, DPI is done on ingress router (Edge LSR) and entropy label created, this is used by all other MPLS routers. Without each router must perform DPI for LB.
@@ -72,9 +72,39 @@ code-block-bg: dark
 
 ## MPLS Layer 3 VPN
 
--   Route Distinguishers
--   Route Targets
--   
+-   Route Distinguishes - 64 bit - prepended to IP address to make VPNv4 route (RD + IP Prefix) - used to differentiate between routes on BGP router.
+
+-   Configured with xx:yy
+
+    -   xx - can be an IPv4 address or ASN
+
+    -   yy - is VPN Identifier (can be anything you like).
+
+        ``` default
+        ip vrf Customer_A
+          rd 100:1
+          route-target export 200:1
+          route-target import 200:1
+        ```
+
+-   Route Targets - BGP Community Value used to inform router which VRF to export/import routes to - these match (opposing values) on other routers.
+
+    ``` default
+    Router A
+    --------
+    ip vrf Customer_A
+      rd 100:1
+      route-target export 200:1
+      route-target import 200:2
+      
+      
+    Router B
+    --------
+    ip vrf Customer_A
+      rd 100:1
+      route-target export 200:2
+      route-target import 200:1
+    ```
 
 ------------------------------------------------------------------------
 

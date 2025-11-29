@@ -22,6 +22,7 @@ Not Compatible with **IGRP**, I**S-IS**
 ## Useful show commands + other
 
 -   `show ip vrf` / `show vrf` - shows summary of configured VRFs, including interfaces.
+-   `show ip vrf detail`
 -   `show ip route vrf [vrf-name]` - shows routing table of VRF
 -   `show ip vrf interfaces` / `show vrf ipv4 unicast interfaces` - shows interfaces in VRF.
 -   `ping vrf [name] 10.1.1.1` - ping from specific VRF

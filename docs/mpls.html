@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -400,7 +435,7 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>LSR</strong> - Label Switched Router - any router that participates in MPLS</li>
 <li><strong>LSP</strong> - Label Switched Path - path through LSRs labelled packet takes throughout MPLS domain</li>
 <li><strong>MP-BGP</strong> (VPNv4) used with VRFs and LDP to form MPLS L3VPNs</li>
-<li><strong>RSVP</strong> - Resource Reservation Protocol - used for traffic engineering</li>
+<li><strong>RSVP</strong> - Resource Reservation Protocol - used to distribute label information with traffic engineering specifically.</li>
 <li><strong>MPLS LDP Features</strong>
 <ul>
 <li><strong>Inbound Label Binding Filtering</strong> - uses ACLs to identify traffic that will and won’t be accepted from peers.</li>
@@ -448,9 +483,31 @@ ul.task-list li input[type="checkbox"] {
 <section id="mpls-layer-3-vpn" class="level2">
 <h2 class="anchored" data-anchor-id="mpls-layer-3-vpn">MPLS Layer 3 VPN</h2>
 <ul>
-<li>Route Distinguishers</li>
-<li>Route Targets</li>
-<li></li>
+<li><p>Route Distinguishes - 64 bit - prepended to IP address to make VPNv4 route (RD + IP Prefix) - used to differentiate between routes on BGP router.</p></li>
+<li><p>Configured with xx:yy</p>
+<ul>
+<li><p>xx - can be an IPv4 address or ASN</p></li>
+<li><p>yy - is VPN Identifier (can be anything you like).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ip vrf Customer_A</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  rd 100:1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  route-target export 200:1</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  route-target import 200:1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+<li><p>Route Targets - BGP Community Value used to inform router which VRF to export/import routes to - these match (opposing values) on other routers.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Router A</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>--------</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ip vrf Customer_A</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  rd 100:1</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  route-target export 200:1</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  route-target import 200:2</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Router B</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>--------</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ip vrf Customer_A</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  rd 100:1</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  route-target export 200:2</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  route-target import 200:1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 <hr>
 </section>
