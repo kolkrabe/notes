@@ -37,9 +37,9 @@ code-block-bg: dark
 ### OSPF
 
 -   Redistribution can happen anywhere except aside from stubby, totally stubby networks - redistributing router becomes ASBR and has type 4 LSA advertised to any areas outside of its own local area to ensure reachability to border router
--   External routes will be LSA 5 in regular area, LSA 7 in NSSA and translated to type 5 at ABR
+-   External routes will be Type 5 LSA in regular area, Type 7LSA in NSSA and translated to type 5 at ABR
 -   By default routes will be external type 2, e1 always preferred over e2 in OSPF algorithm
--   Must use the `subnets` flag or only classful routes will be redistributed
+-   Must use the `subnets` flag or only classful routes will be redistributed.
 
 ### BGP
 

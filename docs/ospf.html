@@ -534,13 +534,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="summarisation" class="level2">
 <h2 class="anchored" data-anchor-id="summarisation">Summarisation</h2>
 <ul>
-<li>Summarisation only possible at ABR + ASBR</li>
-<li>Inter-Area Summarisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
+<li><p>Summarisation only possible at ABR + ASBR</p></li>
+<li><p>Inter-Area Summarisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default</p>
 <ul>
-<li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process. *Note the Area ID is the area you’re summerising into?</li>
-</ul></li>
-<li>can use <code>not-advertise</code> to prevent prefixes being advertised</li>
-<li>External router summarisation ndefined at ASBR
+<li>configured with <code>area [area-id] range [network + mask] cost [metric]</code> under OSPF process. *Note the Area ID is the area you’re summarising from, must be connected.</li>
+</ul>
+<p>can use <code>not-advertise</code> to prevent prefixes being advertised</p></li>
+<li><p>External route Summarisation defined at ASBR</p>
 <ul>
 <li>configured with <code>summary-address [network + mask]</code> under OSPF process.</li>
 <li>“Discard Route” installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)
@@ -602,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Inter-area filtering possible only at ABRs, filtering Type 3 LSAs</li>
 <li>Performed with <code>area &lt;area#&gt; filter-list prefix [prefix-list] [in|out]</code> - IN (filter against things into this area), OUT (Change area, filter out of this area)</li>
-<li>Inter-area filtering also possible with <code>area [area  #] range [network] [mask] not-advertise</code> - area# is source area, can only be used at source ABR (looks are router/network LSAs)</li>
+<li>Inter-area filtering also possible with <code>area [area #] range [network] [mask] not-advertise</code> - area# is source area, can only be used at source ABR (looks are router/network LSAs)</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ON ABR</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ip prefix-list BLOCK_GLASGOW seq 5 deny 10.44.1.0/24 le 30         - deny this network with mask less than 30</span>
@@ -610,7 +610,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>router ospf 2</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  area 1 filter-list prefix BLOCK_GLASGOW in                       - Blocks 10.44.1.0/24 from being advertised IN to area 1</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  area 0 filter-list prefix BLOCK_GLASGOW out                      - Blocks 10.44.1.0/24 from being advertised OUT of area 0</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>Can also use distribute lists which stop the route being added to the routing table but <strong>not the OSPF database. - CAN BE DONE ANYWHERE</strong></p></li>
 <li><p>Configured using <code>distribute-list prefix [name] [in/out] [interface]</code></p></li>

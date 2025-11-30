@@ -115,13 +115,19 @@ int g0/0
 ## Summarisation
 
 -   Summarisation only possible at ABR + ASBR
+
 -   Inter-Area Summarisation, reduces Type 3 LSAs, summarised metric = lowest metric of networks by default
-    -   configured with `area [area-id] range [network + mask] cost [metric]` under OSPF process. \*Note the Area ID is the area you're summerising into?
--   can use `not-advertise` to prevent prefixes being advertised
--   External router summarisation ndefined at ASBR
+
+    -   configured with `area [area-id] range [network + mask] cost [metric]` under OSPF process. \*Note the Area ID is the area you're summarising from, must be connected.
+
+    can use `not-advertise` to prevent prefixes being advertised
+
+-   External route Summarisation defined at ASBR
+
     -   configured with `summary-address [network + mask]` under OSPF process.
     -   "Discard Route" installed with destination Null0 - matches summary address to prevent loops (AD set to 110 for internal, 254 for external)
         -   AD can be adjusted wtih `discard-route [external | internal] distance`
+
 -   
 
 ## Stub Areas
@@ -164,7 +170,7 @@ int g0/0
 
 -   Inter-area filtering possible only at ABRs, filtering Type 3 LSAs
 -   Performed with `area <area#> filter-list prefix [prefix-list] [in|out]` - IN (filter against things into this area), OUT (Change area, filter out of this area)
--   Inter-area filtering also possible with `area [area  #] range [network] [mask] not-advertise` - area# is source area, can only be used at source ABR (looks are router/network LSAs)
+-   Inter-area filtering also possible with `area [area #] range [network] [mask] not-advertise` - area# is source area, can only be used at source ABR (looks are router/network LSAs)
 
 ``` default
 ON ABR
@@ -173,6 +179,7 @@ ip prefix-list BLOCK_GLASGOW seq 10 permit 0.0.0.0/0 le 32         - permit ever
 
 router ospf 2
   area 1 filter-list prefix BLOCK_GLASGOW in                       - Blocks 10.44.1.0/24 from being advertised IN to area 1
+  area 0 filter-list prefix BLOCK_GLASGOW out                      - Blocks 10.44.1.0/24 from being advertised OUT of area 0
   
 ```
 
