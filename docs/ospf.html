@@ -368,6 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#nssa" id="toc-nssa" class="nav-link" data-scroll-target="#nssa">NSSA</a></li>
   <li><a href="#default-route" id="toc-default-route" class="nav-link" data-scroll-target="#default-route">Default Route</a></li>
   <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
+  <li><a href="#route-selection" id="toc-route-selection" class="nav-link" data-scroll-target="#route-selection">Route Selection</a></li>
   <li><a href="#ospfv3" id="toc-ospfv3" class="nav-link" data-scroll-target="#ospfv3">OSPFv3</a></li>
   </ul></li>
   <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands">Useful commands</a></li>
@@ -425,10 +426,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Network Type (don’t have to match)
 <ul>
-<li>Broadcast - Ethernet -Default for OSPF - DR/BDR</li>
+<li>Broadcast - Ethernet -Default for OSPF - <strong>DR/BDR required</strong></li>
 <li>Point-to-Point - Default for non-Frame Relay serial interface, <strong>no DR/BDR required</strong></li>
-<li>NBMA - Frame Relay - DR/BDR required, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds, Dead Interval 120 seconds)</li>
-<li>Point-to-Multipoint - No DR/BDR required, (Hello 30 seconds, Dead Interval 120 seconds)</li>
+<li>NBMA - Frame Relay - <strong>DR/BDR required</strong>, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds, Dead Interval 120 seconds)</li>
+<li>Point-to-Multipoint - <strong>No DR/BDR required</strong>, (Hello 30 seconds, Dead Interval 120 seconds)</li>
 <li>When mixing - might have to adjust timers.</li>
 </ul></li>
 <li><strong>LSAs</strong>
@@ -518,8 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>area 0 authentication ipsec spi [value] sha1 0 [40char key]</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>int g0/0</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  ospfv3 authentication ipsec spi [value] sha1 0 [40char key]</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="virtual-links" class="level2">
 <h2 class="anchored" data-anchor-id="virtual-links">Virtual Links</h2>
@@ -647,9 +647,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Note again distribute-lists <strong>ONLY AFFECTS LOCAL RIB</strong>, not OSPF database</li>
 <li>Easy to create traffic black holes if not careful with this feature</li>
 </ul>
-<p>Intra Area preferred</p>
-<p>Inter Area next</p>
-<p>Intra AREA</p>
+</section>
+<section id="route-selection" class="level2">
+<h2 class="anchored" data-anchor-id="route-selection">Route Selection</h2>
+<p>Intra Area &gt; Inter Area &gt; External (E1/N1 then E2, N2) - irrespective of cost, this order is immutable.</p>
+<p>If 2 routes to external network are learned via E1 &amp; N1 with the same cost then N1 is preferred.</p>
 </section>
 <section id="ospfv3" class="level2">
 <h2 class="anchored" data-anchor-id="ospfv3">OSPFv3</h2>

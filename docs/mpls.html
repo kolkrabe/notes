@@ -441,7 +441,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Inbound Label Binding Filtering</strong> - uses ACLs to identify traffic that will and won’t be accepted from peers.</li>
 <li><strong>Entropy Label</strong> - Load Balancing, DPI is done on ingress router (Edge LSR) and entropy label created, this is used by all other MPLS routers. Without each router must perform DPI for LB.</li>
 <li><strong>Implicit NULL Label</strong> - Reserved , Value 3, Used for PHP. When LSR received label with value 3 it knows it has to pop the label before forwarding.</li>
-<li><strong>Explicit NULL Label</strong> - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs</li>
+<li><strong>Explicit NULL Label</strong> - Reserved, Value 0, used to preserve Qos EXP bits and copy them into QoS IP precedence or DiffServ bits after PHP occurs
+<ul>
+<li>NOTE: Normally LDP advertises implicit Null label for directly connected routes. This caused penultimate router to POP label.</li>
+<li>NOTE: In cases where this isn’t desirable, <code>mpls ldp explicit-null</code> is advertised for directly connected routes.
+<ul>
+<li>Use <code>prefix-acl</code> to determine which routes to advertise explicit-null, if not configured all directly connected.</li>
+<li>Peer-acl - advertise to specific peers if configured.</li>
+</ul></li>
+</ul></li>
 <li><strong>MPLS LDP Autoconfiguration</strong> - Enables LDP on every interface associated with specific IGP, removes the need to manually configure MPLS - Supports only OSPF + IS-IS</li>
 </ul></li>
 <li>MPLS Label

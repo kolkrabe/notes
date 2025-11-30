@@ -24,10 +24,10 @@ code-block-bg: dark
         -   Change ref bandwidth with `auto-cost reference bandwidth [value]` big kev recommends 2TB!
         -   Should match across topology but won't stop neighbourships forming.
 -   Network Type (don't have to match)
-    -   Broadcast - Ethernet -Default for OSPF - DR/BDR
+    -   Broadcast - Ethernet -Default for OSPF - **DR/BDR required**
     -   Point-to-Point - Default for non-Frame Relay serial interface, **no DR/BDR required**
-    -   NBMA - Frame Relay - DR/BDR required, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds, Dead Interval 120 seconds)
-    -   Point-to-Multipoint - No DR/BDR required, (Hello 30 seconds, Dead Interval 120 seconds)
+    -   NBMA - Frame Relay - **DR/BDR required**, no broadcasts or multicasts, Neighbours must be manually configured. (Hello 30 seconds, Dead Interval 120 seconds)
+    -   Point-to-Multipoint - **No DR/BDR required**, (Hello 30 seconds, Dead Interval 120 seconds)
     -   When mixing - might have to adjust timers.
 -   **LSAs**
     -   **Type 1 - Router LSA** (Intra-Area)
@@ -100,7 +100,6 @@ OSPFv3
 area 0 authentication ipsec spi [value] sha1 0 [40char key]
 int g0/0
   ospfv3 authentication ipsec spi [value] sha1 0 [40char key]
-
 
 
 ```
@@ -217,11 +216,11 @@ router ospf 1  distribute-list route-map DENY_VLAN146_FROM_R4 in
 -   Note again distribute-lists **ONLY AFFECTS LOCAL RIB**, not OSPF database
 -   Easy to create traffic black holes if not careful with this feature
 
-Intra Area preferred
+## Route Selection
 
-Inter Area next
+Intra Area \> Inter Area \> External (E1/N1 then E2, N2) - irrespective of cost, this order is immutable.
 
-Intra AREA
+If 2 routes to external network are learned via E1 & N1 with the same cost then N1 is preferred.
 
 ## OSPFv3
 
