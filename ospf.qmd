@@ -101,7 +101,6 @@ area 0 authentication ipsec spi [value] sha1 0 [40char key]
 int g0/0
   ospfv3 authentication ipsec spi [value] sha1 0 [40char key]
 
-
 ```
 
 ## Virtual Links
