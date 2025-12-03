@@ -16,7 +16,7 @@ code-block-bg: dark
     -   Hello - default 5 secs, (60 on Slow interfaces)
     -   Hold - default 15 secs, (180 on slow interfaces) - How long we tell neighbour to wait for us.
 -   Load balance over unequal paths using `variance` (multiple of FD) - only IGRP that can do this.
--   Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with `metric-weights`
+-   Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with `metric-weights` under EIGRP process or Address Family
     -   Mostly uses
         -   K1 - Bandwidth - slowest in path
         -   K3 - Delay - cumulative
@@ -36,11 +36,8 @@ code-block-bg: dark
 ##### Neighbourship
 
 -   **Autonomous System** number **must match** between Neighbours
-
 -   Connected interface can't be **Passive**
-
 -   K Values must match
-
 -   Authentication must pass
 
 ##### Path Selection
@@ -51,6 +48,16 @@ code-block-bg: dark
 -   **Successor** - First Hop route on that path
 -   **Feasibility Condition** - That the **RD** must be less than the **FD** (loop prevention)
 -   **Feasible Successor** - route which passes the feasibility condition.
+
+##### Influencing Path Selection
+
+Metric calculated using K Values, mainly Bandwidth (minimum on path) and Delay (cumulative).
+
+-   Add Delay to interface
+-   Use an Offset List
+-   Summerization
+-   Use a Leak Map
+-   
 
 ------------------------------------------------------------------------
 
@@ -87,6 +94,8 @@ int g0/0
 ```
 
 ##### Route Filtering
+
+-   Can be achieved by using **distribute Lists**, **Prefix lists**, **route maps** & **Leak Maps**
 
 -   Can be advertised with quad 0 summary route under interface
 
@@ -136,6 +145,7 @@ int g0/0
 -   Breaks query domain
 -   Best used when sites have no downstream neighbors
 -   Can use leak-maps to advertise normally suppressed routes
+-   Can specify which routes it shares between - `Connected`, `leak-map`, `receive-only`, `Redistributed` (from other RPs), `static`, `summary`,
 
 ##### Stub Site
 

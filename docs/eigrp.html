@@ -280,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./netflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">netflow</span></a>
+ <span class="menu-text">Netflow</span></a>
   </div>
 </li>
       </ul>
@@ -404,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Hold - default 15 secs, (180 on slow interfaces) - How long we tell neighbour to wait for us.</li>
 </ul></li>
 <li>Load balance over unequal paths using <code>variance</code> (multiple of FD) - only IGRP that can do this.</li>
-<li>Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with <code>metric-weights</code>
+<li>Uses K Values for Metrics (K1-5, Bandwidth, Delay, Reliability, Load, MTU) - set with <code>metric-weights</code> under EIGRP process or Address Family
 <ul>
 <li>Mostly uses
 <ul>
@@ -433,10 +433,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="neighbourship" class="level5">
 <h5 class="anchored" data-anchor-id="neighbourship">Neighbourship</h5>
 <ul>
-<li><p><strong>Autonomous System</strong> number <strong>must match</strong> between Neighbours</p></li>
-<li><p>Connected interface can’t be <strong>Passive</strong></p></li>
-<li><p>K Values must match</p></li>
-<li><p>Authentication must pass</p></li>
+<li><strong>Autonomous System</strong> number <strong>must match</strong> between Neighbours</li>
+<li>Connected interface can’t be <strong>Passive</strong></li>
+<li>K Values must match</li>
+<li>Authentication must pass</li>
 </ul>
 </section>
 <section id="path-selection" class="level5">
@@ -448,6 +448,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Successor</strong> - First Hop route on that path</li>
 <li><strong>Feasibility Condition</strong> - That the <strong>RD</strong> must be less than the <strong>FD</strong> (loop prevention)</li>
 <li><strong>Feasible Successor</strong> - route which passes the feasibility condition.</li>
+</ul>
+</section>
+<section id="influencing-path-selection" class="level5">
+<h5 class="anchored" data-anchor-id="influencing-path-selection">Influencing Path Selection</h5>
+<p>Metric calculated using K Values, mainly Bandwidth (minimum on path) and Delay (cumulative).</p>
+<ul>
+<li>Add Delay to interface</li>
+<li>Use an Offset List</li>
+<li>Summerization</li>
+<li>Use a Leak Map</li>
+<li></li>
 </ul>
 <hr>
 </section>
@@ -487,6 +498,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="route-filtering" class="level5">
 <h5 class="anchored" data-anchor-id="route-filtering">Route Filtering</h5>
 <ul>
+<li><p>Can be achieved by using <strong>distribute Lists</strong>, <strong>Prefix lists</strong>, <strong>route maps</strong> &amp; <strong>Leak Maps</strong></p></li>
 <li><p>Can be advertised with quad 0 summary route under interface</p></li>
 <li><p>Can also be redistributed from static route</p></li>
 <li><p>Use of Distribute-list stops route being added to topology &amp; routing table - <code>distribute-list prefix [prefix-list] [in/out] [interface]</code></p></li>
@@ -540,6 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Breaks query domain</li>
 <li>Best used when sites have no downstream neighbors</li>
 <li>Can use leak-maps to advertise normally suppressed routes</li>
+<li>Can specify which routes it shares between - <code>Connected</code>, <code>leak-map</code>, <code>receive-only</code>, <code>Redistributed</code> (from other RPs), <code>static</code>, <code>summary</code>,</li>
 </ul>
 </section>
 <section id="stub-site" class="level5">
