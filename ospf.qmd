@@ -62,6 +62,24 @@ code-block-bg: dark
     -   Matching MTU (Exstart/Exchange State)
 -   Troubleshooting - **TAN MAT** (**T**imers, **A**rea, **N**etwork Address, **M**TU, **A**uth, **T**ype)
 
+## Neighbour States
+
+1.  **Down -** No Hello's received
+
+2.  **Attempt -** Only for manually configured neighbours in NBMA networks (Frame-Relay)
+
+3.  **Init -** Hello packet received from neighbour
+
+4.  **2Way -** Bi-Direction communication established - Hello packet received from neighbour with own Router-ID present.
+
+5.  **Exstart -** Routers work together to determine which router becomes DBD and will synchronise updates.
+
+6.  **Exchange -** DBD exchange takes place, routers send/receive DBD's containing summaries of their LSA's, Each DBD has a sequence which is incremendted by one for each new packet.
+
+7.  **Loading -** Routers exchange LSR's & LSU's including all LSA's
+
+8.  **Full -** Operational state of OSPF, network functioning as expected.
+
 ## Authentication
 
 -   Enabled per Interface or for all interfaces in an area

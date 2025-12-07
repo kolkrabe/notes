@@ -38,6 +38,7 @@ code-block-bg: dark
     -   Classifies Messages into client, server or relay.
         -   All Client messages are switched, server messages switches if router role = server
     -   Configured with `ipv6 dhcp guard attach-policy [policy]` on interface
+    -   Can mitigate DoS attacks
 
 -   **IPv6 Snooping**
 
@@ -57,7 +58,8 @@ code-block-bg: dark
 
 -   **ND inspection**
 
-    -   Inspects neighbor discovery messages and drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing
+    -   Inspects neighbor discovery messages and adds entries to the binding table.
+    -   Drops messagesfrom hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing
     -   Relies on IPv6 snooping
     -   Configured with `ipv6 nd inspection` under interfaces
 
