@@ -360,7 +360,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
   <li><a href="#neighbourship" id="toc-neighbourship" class="nav-link" data-scroll-target="#neighbourship">Neighbourship</a></li>
-  <li><a href="#neighbour-states" id="toc-neighbour-states" class="nav-link" data-scroll-target="#neighbour-states">Neighbour States</a></li>
+  <li><a href="#neighbour-states" id="toc-neighbour-states" class="nav-link" data-scroll-target="#neighbour-states">Neighbour States</a>
+  <ul class="collapse">
+  <li><a href="#neighbour-transitions" id="toc-neighbour-transitions" class="nav-link" data-scroll-target="#neighbour-transitions">Neighbour Transitions</a></li>
+  </ul></li>
   <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
   <li><a href="#virtual-links" id="toc-virtual-links" class="nav-link" data-scroll-target="#virtual-links">Virtual Links</a></li>
   <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
@@ -485,15 +488,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="neighbour-states" class="level2">
 <h2 class="anchored" data-anchor-id="neighbour-states">Neighbour States</h2>
 <ol type="1">
-<li><p><strong>Down -</strong> No Hello’s received</p></li>
-<li><p><strong>Attempt -</strong> Only for manually configured neighbours in NBMA networks (Frame-Relay)</p></li>
-<li><p><strong>Init -</strong> Hello packet received from neighbour</p></li>
-<li><p><strong>2Way -</strong> Bi-Direction communication established - Hello packet received from neighbour with own Router-ID present.</p></li>
-<li><p><strong>Exstart -</strong> Routers work together to determine which router becomes DBD and will synchronise updates.</p></li>
-<li><p><strong>Exchange -</strong> DBD exchange takes place, routers send/receive DBD’s containing summaries of their LSA’s, Each DBD has a sequence which is incremendted by one for each new packet.</p></li>
-<li><p><strong>Loading -</strong> Routers exchange LSR’s &amp; LSU’s including all LSA’s</p></li>
-<li><p><strong>Full -</strong> Operational state of OSPF, network functioning as expected.</p></li>
+<li><strong>Down -</strong> No Hello’s received</li>
+<li><strong>Attempt -</strong> Only for manually configured neighbours in NBMA networks (Frame-Relay)</li>
+<li><strong>Init -</strong> Hello packet received from neighbour</li>
+<li><strong>2Way -</strong> Bi-Direction communication established - Hello packet received from neighbour with own Router-ID present.</li>
+<li><strong>Exstart -</strong> Routers work together to determine which router becomes DBD and will synchronise updates.</li>
+<li><strong>Exchange -</strong> DBD exchange takes place, routers send/receive DBD’s containing summaries of their LSA’s, Each DBD has a sequence which is incremendted by one for each new packet.</li>
+<li><strong>Loading -</strong> Routers exchange LSR’s &amp; LSU’s including all LSA’s</li>
+<li><strong>Full -</strong> Operational state of OSPF, network functioning as expected.</li>
 </ol>
+<section id="neighbour-transitions" class="level3">
+<h3 class="anchored" data-anchor-id="neighbour-transitions">Neighbour Transitions</h3>
+<ol type="1">
+<li><strong>Down – Init</strong> (Receives Hello packet)</li>
+<li><strong>Init – Two-Way</strong> (Sees own Router ID from the neighbor’s Hello)</li>
+<li><strong>Two-Way – ExStart</strong> (If adjacency is needed, Master-Slave negotiation begins)</li>
+<li><strong>ExStart – Exchange</strong> (DBD packet exchange starts)</li>
+<li><strong>Exchange → Loading</strong> (Request and update LSAs)</li>
+<li><strong>Loading – Full</strong> (Achieved full synchronization of the LSDB)</li>
+</ol>
+</section>
 </section>
 <section id="authentication" class="level2">
 <h2 class="anchored" data-anchor-id="authentication">Authentication</h2>

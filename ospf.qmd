@@ -65,20 +65,22 @@ code-block-bg: dark
 ## Neighbour States
 
 1.  **Down -** No Hello's received
-
 2.  **Attempt -** Only for manually configured neighbours in NBMA networks (Frame-Relay)
-
 3.  **Init -** Hello packet received from neighbour
-
 4.  **2Way -** Bi-Direction communication established - Hello packet received from neighbour with own Router-ID present.
-
 5.  **Exstart -** Routers work together to determine which router becomes DBD and will synchronise updates.
-
 6.  **Exchange -** DBD exchange takes place, routers send/receive DBD's containing summaries of their LSA's, Each DBD has a sequence which is incremendted by one for each new packet.
-
 7.  **Loading -** Routers exchange LSR's & LSU's including all LSA's
-
 8.  **Full -** Operational state of OSPF, network functioning as expected.
+
+### Neighbour Transitions
+
+1.  **Down – Init** (Receives Hello packet)
+2.  **Init – Two-Way** (Sees own Router ID from the neighbor’s Hello)
+3.  **Two-Way – ExStart** (If adjacency is needed, Master-Slave negotiation begins)
+4.  **ExStart – Exchange** (DBD packet exchange starts)
+5.  **Exchange → Loading** (Request and update LSAs)
+6.  **Loading – Full** (Achieved full synchronization of the LSDB)
 
 ## Authentication
 
