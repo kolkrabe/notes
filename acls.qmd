@@ -6,6 +6,14 @@ code-block-bg: dark
 
 **IP access-list**: Defines traffic - either via permit/deny
 
-**Access-group**: applies an ACL to a physical `interface`
+**IP Access-group**: applies an ACL to a physical `interface`
+
+-   `ip access-group <ACL name> {in|out}`
+-   `ipv6 traffic-filter <ACL name> {in|out}`
 
 **Access-class**: applies an ACL to a `line` (VTY, Console, Aux) etc.
+
+``` default
+line con 0
+ access-class <acl name>
+```

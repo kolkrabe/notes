@@ -12,6 +12,7 @@ code-block-bg: dark
     -   Groups of things
 
 -   Used commonly for floating static default route (routes internet across different link if one fails.
+
 -   Great example below from Brunbattery on using it to monitor HSRP.
 
 ------------------------------------------------------------------------
@@ -35,6 +36,8 @@ ip sla schedule 1 start-time now life forever          - starts IP SLA
 track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable
 ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met
 ```
+
+NOTE - If no `life` specified the operation will run for 3600 seconds (1 Hour)
 
 ## BrunBattery's awesome IPSLA w/ Track for HSRP
 

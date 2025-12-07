@@ -14,6 +14,9 @@ code-block-bg: dark
     -   Spokes register their physical & tunnel interface IP's with the **NHS**
     -   NHS Populates it's NHRP Cache to maintain a database of it's spokes
     -   Spokes can query the **NHS** to obtain the tunnel IP it needs to form direct tunnel.
+-   IP Protocol 47 - GRE
+-   IP Protocol 50 - ESP (Encapsulating Security Payload)
+-   IP Protocol 51 - AH Traffic (Authentication Header)
 
 ## DMVPN Phases
 

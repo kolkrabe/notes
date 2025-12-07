@@ -390,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="general-info">General Info</h2>
 <ul>
 <li>Protocol that uses labels to determine which path traffic should route</li>
-<li>shim header (<strong>20-bit</strong>) inserted between IP &amp; MAC header (This is the label)</li>
+<li>shim header (<strong>20-bit</strong>) inserted between IP &amp; MAC header (This is the label) - That is to say the MPLS labels appear between the Layer 2 &amp; Layer 3 Headers.</li>
 <li>Labels switched hop by hop</li>
 <li><strong>Control Plane</strong>
 <ul>
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Uses all-routers multicast (<strong>224.0.0.2</strong>), TCP port <strong>646</strong> src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)</li>
 <li>UDP also used for initial discovery messages <strong>(Using UDP)</strong></li>
 <li>LDP requires <strong>CEF</strong> in order to exchange labels</li>
-<li>No Split Horizon - floods labels to all nei</li>
+<li>No Split Horizon - floods labels to all neighbours</li>
 <li>Only IGP-learned or local routes are labelled, BGP routes not assigned a label</li>
 <li>After LDP TCP connection is established LSR’s negotiate session parameters using 2 types of label distribution
 <ul>

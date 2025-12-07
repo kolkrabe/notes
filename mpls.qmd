@@ -7,7 +7,7 @@ code-block-bg: dark
 ## General Info
 
 -   Protocol that uses labels to determine which path traffic should route
--   shim header (**20-bit**) inserted between IP & MAC header (This is the label)
+-   shim header (**20-bit**) inserted between IP & MAC header (This is the label) - That is to say the MPLS labels appear between the Layer 2 & Layer 3 Headers.
 -   Labels switched hop by hop
 -   **Control Plane**
     -   Where/how things are "learned".
@@ -24,7 +24,7 @@ code-block-bg: dark
     -   Uses all-routers multicast (**224.0.0.2**), TCP port **646** src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)
     -   UDP also used for initial discovery messages **(Using UDP)**
     -   LDP requires **CEF** in order to exchange labels
-    -   No Split Horizon - floods labels to all nei
+    -   No Split Horizon - floods labels to all neighbours
     -   Only IGP-learned or local routes are labelled, BGP routes not assigned a label
     -   After LDP TCP connection is established LSR's negotiate session parameters using 2 types of label distribution
         -   Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.

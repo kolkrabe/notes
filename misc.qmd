@@ -19,3 +19,9 @@ DHCP Option 82 - Relay Agent Information Option
 DHCP Option 66 - next-server option - ip/hostname of TFTP or HTTP server for client to download files from.
 
 OSPF - Advertising Loopbacks - default mask /32, to show the configured subnet mask change the loopbacks network type to **"point-to-point"**
+
+Route Target - Appended to VPNv4 BGP route to indicate membership MP-BGP VPN
+
+Route Distinguisher - Pre-pended to IP Address to create globally unique VPNv4 Address
+
+Logging Synchronous All - Unsolicited messages appear after solicited.

@@ -27,10 +27,10 @@ code-block-bg: dark
 
     -   RA guard inspects incoming RA messages, filtering when configured
     -   Configure with `ipv6 nd raguard attach-policy [policy-name]` inbound on interface
-    -   Configured inbound on an interface
+    -   Configured **inbound** on an interface
     -   2 modes ( Host & Router)
-    -   Doesn't work on Tunneled Traffic and requires TCAM
-    -   Doesn't work on Etherchannel members or trunks with merge mode
+    -   Doesn't work on Tunnelled Traffic and requires TCAM
+    -   Doesn't work on Ether-channel members or trunks with merge mode
 
 -   **DHCPV6 Guard**
 
