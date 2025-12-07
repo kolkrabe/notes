@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
   <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
-  <li><a href="#eigrp---traditional-ipv4-configuration" id="toc-eigrp---traditional-ipv4-configuration" class="nav-link" data-scroll-target="#eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</a></li>
+  <li><a href="#eigrp---classicmodern-ipv4-configuration" id="toc-eigrp---classicmodern-ipv4-configuration" class="nav-link" data-scroll-target="#eigrp---classicmodern-ipv4-configuration">EIGRP - Classic+Modern IPv4 Configuration</a></li>
   <li><a href="#useful-show-commands-info" id="toc-useful-show-commands-info" class="nav-link" data-scroll-target="#useful-show-commands-info">Useful Show Commands + Info</a></li>
   </ul></li>
   </ul>
@@ -599,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="offset-lists" class="level5">
 <h5 class="anchored" data-anchor-id="offset-lists">Offset-lists</h5>
 <ul>
-<li>Used for traffic steering</li>
+<li>Used for traffic steering to make path WORSE</li>
 <li>Can modify path attributes based on <em>direction of update</em> / <em>PREFIX</em> / combination of both.</li>
 <li>Can be used to increase metric for a specific route/interface</li>
 <li>Configured under topology base (modifying metric) with for Modern / Under process for Classic
@@ -624,8 +624,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="eigrp---traditional-ipv4-configuration" class="level2">
-<h2 class="anchored" data-anchor-id="eigrp---traditional-ipv4-configuration">EIGRP - Traditional IPv4 Configuration</h2>
+<section id="eigrp---classicmodern-ipv4-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="eigrp---classicmodern-ipv4-configuration">EIGRP - Classic+Modern IPv4 Configuration</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>CLASSIC</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>router eigrp 10 </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>network 10.1.1.0 0.0.0.255           - If any interfaces match &amp; configured/up they should participate in EIGRP</span>

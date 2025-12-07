@@ -591,11 +591,11 @@
     ]
   },
   {
-    "objectID": "eigrp.html#eigrp---traditional-ipv4-configuration",
-    "href": "eigrp.html#eigrp---traditional-ipv4-configuration",
+    "objectID": "eigrp.html#eigrp---classicmodern-ipv4-configuration",
+    "href": "eigrp.html#eigrp---classicmodern-ipv4-configuration",
     "title": "EIGRP",
-    "section": "EIGRP - Traditional IPv4 Configuration",
-    "text": "EIGRP - Traditional IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n  interface G0/1\n    ip hello-interval eigrp 10 3\n    ip hold-interval eigrp 10 15\n    timers active-time 2\neigrp stub                            - for stub site\n\n---\n\nMODERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 1\n eigrp stub                           - for stub site\n  !\n  af-interface default\n   passive-interface                 - Sets all intefaces as passive.\n   ip hello-interval eigrp 10 3       - Can be here or af-interface section below\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface               - enables interface for EIGRP\n   ip hello-interval eigrp 10 3\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  topology base\n  variance 2\n    timers active-time 2              - 3 mins by default, \n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  m\n  eigrp router-id 150.1.5.5\n exit-address-family",
+    "section": "EIGRP - Classic+Modern IPv4 Configuration",
+    "text": "EIGRP - Classic+Modern IPv4 Configuration\nCLASSIC\nrouter eigrp 10 \nnetwork 10.1.1.0 0.0.0.255           - If any interfaces match & configured/up they should participate in EIGRP\nnetwork 172.16.1.0 0.0.0.3\nnetwork 0.0.0.0 255.255.255.255      - Makes all interfaces participate in EIGRP\n  interface G0/1\n    ip hello-interval eigrp 10 3\n    ip hold-interval eigrp 10 15\n    timers active-time 2\neigrp stub                            - for stub site\n\n---\n\nMODERN\nrouter eigrp [NAME]\n !\n address-family ipv4 unicast autonomous-system 1\n eigrp stub                           - for stub site\n  !\n  af-interface default\n   passive-interface                 - Sets all intefaces as passive.\n   ip hello-interval eigrp 10 3       - Can be here or af-interface section below\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  af-interface GigabitEthernet0/1\n   no passive-interface               - enables interface for EIGRP\n   ip hello-interval eigrp 10 3\n   ip hold-interval eigrp 10 15\n  exit-af-interface\n  !\n  topology base\n  variance 2\n    timers active-time 2              - 3 mins by default, \n  exit-af-topology\n  network 10.1.1.2 255.255.255.255\n  m\n  eigrp router-id 150.1.5.5\n exit-address-family",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

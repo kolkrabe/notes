@@ -178,7 +178,7 @@ int g0/0
 
 ##### Offset-lists
 
--   Used for traffic steering
+-   Used for traffic steering to make path WORSE
 -   Can modify path attributes based on *direction of update* / *PREFIX* / combination of both.
 -   Can be used to increase metric for a specific route/interface
 -   Configured under topology base (modifying metric) with for Modern / Under process for Classic
@@ -204,7 +204,7 @@ int g0/0
 
 ------------------------------------------------------------------------
 
-## EIGRP - Traditional IPv4 Configuration
+## EIGRP - Classic+Modern IPv4 Configuration
 
 ``` default
 CLASSIC
