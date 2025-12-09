@@ -28,11 +28,14 @@ code-block-bg: dark
 
 -   Redistribution configurable anywhere in topology
 -   Redistributed routes marked as External (AD 170)
+    -   If from another routing protocol
+    -   OR, a redistributed **Static Route**
 -   Default Metric = Infinity so not installed, **MUST** configure metric as follows for OSPF/BGP redist, not required for static + connected
     -   Set under router EIGRP config
     -   under address-family config
     -   within redistribute config line
     -   with Route Map (**PREFERRED** if multiple are configured, then distribute command metric then default-metric)
+-   Redistributed **Static Routes** appear in neighbors route tables as **Externals**.
 
 ### OSPF
 

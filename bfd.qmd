@@ -10,6 +10,10 @@ editor: visual
     -   Sub Second failure
     -   1 session per address family per interface (regardless of how many protocols run on it).
     -   Supports OSPF, EIGRP, BGP, IS-IS
+    -   Not Compatible with
+        -   **VTI Tunnels,**
+        -   **ACLs with Log Option**
+        -   **IPSec**
 
 -   Connection types in question
 

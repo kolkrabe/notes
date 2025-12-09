@@ -427,7 +427,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="eigrp">EIGRP</h3>
 <ul>
 <li>Redistribution configurable anywhere in topology</li>
-<li>Redistributed routes marked as External (AD 170)</li>
+<li>Redistributed routes marked as External (AD 170)
+<ul>
+<li>If from another routing protocol</li>
+<li>OR, a redistributed <strong>Static Route</strong></li>
+</ul></li>
 <li>Default Metric = Infinity so not installed, <strong>MUST</strong> configure metric as follows for OSPF/BGP redist, not required for static + connected
 <ul>
 <li>Set under router EIGRP config</li>
@@ -435,6 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>within redistribute config line</li>
 <li>with Route Map (<strong>PREFERRED</strong> if multiple are configured, then distribute command metric then default-metric)</li>
 </ul></li>
+<li>Redistributed <strong>Static Routes</strong> appear in neighbors route tables as <strong>Externals</strong>.</li>
 </ul>
 </section>
 <section id="ospf" class="level3">

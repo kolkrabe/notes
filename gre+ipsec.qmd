@@ -70,7 +70,7 @@ code-block-bg: dark
     -   E - Encryption
 -   **2.Configure Crypto ISAKMP Key**
     -   pre-shared key
-    -   specify DMVPN Peer IP for which to use the key
+    -   specify Peer IP for which to use the key (Physical interface)
 -   **3.Configure Crypto IPsec Transform-Set**
     -   specify phase-2 encryption parameters
     -   config of tunnel mode (transport preferred
