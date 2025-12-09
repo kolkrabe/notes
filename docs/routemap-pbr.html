@@ -415,10 +415,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Config options:
 <ul>
 <li><code>set ip next-hop ip-address [ip]</code></li>
-<li><code>set ip default next-hop ip-address [ip]</code> - Verified existence of the destination IP address in the routing table.
+<li><code>set ip default next-hop ip-address [ip]</code> - Set next hop IP if there is no explicit route for this destination.
 <ul>
-<li>If destination <strong>exists</strong>: the command doesn’t policy route, routes based on routing table</li>
-<li>If destination <strong>does not</strong> exist: the command policy routes the packet to the next hop.</li>
+<li>If destination <strong>exists in route table</strong>: the command doesn’t policy route, routes based on routing table</li>
+<li>If destination <strong>does not</strong> <strong>exist in route table</strong>: the command policy routes the packet to the next hop.</li>
 </ul></li>
 <li><code>set interface [interface type] [interface-number]</code> (multiple ints will be tried in turn)</li>
 <li><code>set default interface [interface type] [interface-number]</code></li>
@@ -447,6 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>When referenced by a Route Map, Permit in ACL means go ahead and process this matched traffic however the route map likes.</li>
 <li>Route-map goes through sequences until a match is found then stops unless the <code>continue</code> flag is set</li>
+<li>When using an ACL the ACL cannot contain <code>time-range</code>, <code>disable-port</code> or <code>log-input.</code></li>
 </ul>
 </section>
 <section id="section" class="level2">

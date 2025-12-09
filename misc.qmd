@@ -25,3 +25,5 @@ Route Target - Appended to VPNv4 BGP route to indicate membership MP-BGP VPN
 Route Distinguisher - Pre-pended to IP Address to create globally unique VPNv4 Address
 
 Logging Synchronous All - Unsolicited messages appear after solicited.
+
+`aaa authorization console` is disabled by default

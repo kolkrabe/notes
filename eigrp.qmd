@@ -66,7 +66,7 @@ Metric calculated using K Values, mainly Bandwidth (minimum on path) and Delay (
 -   Supports plaintext + hash based auth - MD5 & SHA-256 auth (named) or just MD5 (classic)
 -   MD5 configuration done with key chain in global config
     -   `key-string` must match but the `key chain` name doesn't have to (but it makes sense if they do!)
--   Key-id numbers must match for successful auth
+    -   Key-id numbers must match for successful Auth
 -   Applied under physical interfaces in classic mode or af-interfaces in named mode
 
 ``` default

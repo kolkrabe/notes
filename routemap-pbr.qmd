@@ -21,9 +21,9 @@ code-block-bg: dark
 -   If you want to use a non-adjacent route, you must use the `recursive` flag when configuring the route-map `set` statement
 -   Config options:
     -   `set ip next-hop ip-address [ip]`
-    -   `set ip default next-hop ip-address [ip]` - Verified existence of the destination IP address in the routing table.
-        -   If destination **exists**: the command doesn't policy route, routes based on routing table
-        -   If destination **does not** exist: the command policy routes the packet to the next hop.
+    -   `set ip default next-hop ip-address [ip]` - Set next hop IP if there is no explicit route for this destination.
+        -   If destination **exists in route table**: the command doesn't policy route, routes based on routing table
+        -   If destination **does not** **exist in route table**: the command policy routes the packet to the next hop.
     -   `set interface [interface type] [interface-number]` (multiple ints will be tried in turn)
     -   `set default interface [interface type] [interface-number]`
 -   Using the `default` flag causes next-hop value to be set only for routes not within the router’s RIB
@@ -48,6 +48,7 @@ code-block-bg: dark
     -   If both statements match the same criteria = logical **OR**
 -   When referenced by a Route Map, Permit in ACL means go ahead and process this matched traffic however the route map likes.
 -   Route-map goes through sequences until a match is found then stops unless the `continue` flag is set
+-   When using an ACL the ACL cannot contain `time-range`, `disable-port` or `log-input.`
 
 ## 
 
