@@ -27,3 +27,5 @@ Route Distinguisher - Pre-pended to IP Address to create globally unique VPNv4 A
 Logging Synchronous All - Unsolicited messages appear after solicited.
 
 `aaa authorization console` is disabled by default
+
+-   By default, only internal OSPF routes are redistributed into BGP

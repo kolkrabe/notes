@@ -398,7 +398,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="useful-show-commands" class="level3">
 <h3 class="anchored" data-anchor-id="useful-show-commands">Useful Show commands</h3>
 <p><strong><code>show snmp host</code></strong> - Displays the SNMP notifications sent as traps, the version of SNMP, and the host IP address of the notifications</p>
-<p><strong><code>show snmp group</code></strong> - Displays SNMP group information (v3) <strong>show snmp user</strong> - Displays SNMP user information (v3)</p>
+<p><strong><code>show snmp group</code></strong> - Displays SNMP group information (v3)</p>
+<p><strong><code>show snmp user</code></strong> - Displays SNMP user information (v3)</p>
 <hr>
 </section>
 <section id="standard-snmp-v2c-config" class="level3">
@@ -416,8 +417,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>snmp ifmib ifindex persist\</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>snmp-server location&nbsp;\&lt;location\&gt;\</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>snmp-server contact&nbsp;\&lt;contact-details\&gt;\</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>no snmp-server system-shutdown ! prevents device being shutdown via SNMP\</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>snmp-server view&nbsp;\&lt;view-name\&gt;&nbsp;iso included ! iso included allows all values\</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>no snmp-server system-shutdown                                     ! prevents device being shutdown via SNMP\</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>snmp-server view&nbsp;\&lt;view-name\&gt;&nbsp;iso included                        ! iso included allows all values\</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>snmp-server group \&lt;group-name\&gt; v3 priv read&nbsp;\&lt;view-name\&gt;&nbsp;write&nbsp;\&lt;view-name\&gt;\</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>snmp-server user \&lt;user-name\&gt; \&lt;group-name\&gt; v3 auth sha \&lt;password\&gt; priv aes 256 \&lt;password\&gt;\</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>snmp-server host 10.1.100.100 version 3 priv \&lt;user-name\&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
