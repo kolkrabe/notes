@@ -374,6 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
   <li><a href="#route-selection" id="toc-route-selection" class="nav-link" data-scroll-target="#route-selection">Route Selection</a></li>
   <li><a href="#ospfv3" id="toc-ospfv3" class="nav-link" data-scroll-target="#ospfv3">OSPFv3</a></li>
+  <li><a href="#sham-link" id="toc-sham-link" class="nav-link" data-scroll-target="#sham-link">Sham-Link</a></li>
   </ul></li>
   <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands">Useful commands</a></li>
   <li><a href="#ospf-configuration" id="toc-ospf-configuration" class="nav-link" data-scroll-target="#ospf-configuration">OSPF Configuration</a></li>
@@ -690,6 +691,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Issue <code>ipv6 ospf &lt;process-id&gt; area &lt;area-id&gt; [instance instance-id]</code> under <strong>interface Configuration</strong> mode</li>
 <li>Note, if you don’t enter a <strong>RouterID</strong> and there are no up interfaces the process will fail to start.</li>
 <li>OSPFv3 Comms within a local segment based on <strong>link-local</strong> addresses.</li>
+</ul>
+</section>
+<section id="sham-link" class="level2">
+<h2 class="anchored" data-anchor-id="sham-link">Sham-Link</h2>
+<ul>
+<li><p>Can make an inter-area link appear to be an intra-area link on MPLS VPN.</p></li>
+<li><p>Logical links between PE routers</p></li>
+<li><p>Can force OSPF to chose a VPN link between PE routers as best path from local CE router to remote CE router.</p></li>
 </ul>
 <hr>
 </section>

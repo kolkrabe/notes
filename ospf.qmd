@@ -256,6 +256,14 @@ If 2 routes to external network are learned via E1 & N1 with the same cost then 
 -   Note, if you don't enter a **RouterID** and there are no up interfaces the process will fail to start.
 -   OSPFv3 Comms within a local segment based on **link-local** addresses.
 
+## Sham-Link
+
+-   Can make an inter-area link appear to be an intra-area link on MPLS VPN.
+
+-   Logical links between PE routers
+
+-   Can force OSPF to chose a VPN link between PE routers as best path from local CE router to remote CE router.
+
 ------------------------------------------------------------------------
 
 # Useful commands

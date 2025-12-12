@@ -49,6 +49,11 @@ code-block-bg: dark
 -   When referenced by a Route Map, Permit in ACL means go ahead and process this matched traffic however the route map likes.
 -   Route-map goes through sequences until a match is found then stops unless the `continue` flag is set
 -   When using an ACL the ACL cannot contain `time-range`, `disable-port` or `log-input.`
+-   Clauses Evaluated in this order
+    -   `set ip next-hop`
+    -   `set interface`
+    -   `set ip default next-hop`
+    -   `set default interface`
 
 ## 
 

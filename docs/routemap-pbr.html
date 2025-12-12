@@ -448,6 +448,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>When referenced by a Route Map, Permit in ACL means go ahead and process this matched traffic however the route map likes.</li>
 <li>Route-map goes through sequences until a match is found then stops unless the <code>continue</code> flag is set</li>
 <li>When using an ACL the ACL cannot contain <code>time-range</code>, <code>disable-port</code> or <code>log-input.</code></li>
+<li>Clauses Evaluated in this order
+<ul>
+<li><code>set ip next-hop</code></li>
+<li><code>set interface</code></li>
+<li><code>set ip default next-hop</code></li>
+<li><code>set default interface</code></li>
+</ul></li>
 </ul>
 </section>
 <section id="section" class="level2">
