@@ -28,4 +28,18 @@ Logging Synchronous All - Unsolicited messages appear after solicited.
 
 `aaa authorization console` is disabled by default
 
--   By default, only internal OSPF routes are redistributed into BGP
+By default, only internal OSPF routes are redistributed into BGP
+
+SNMP - `snmp trap link-status permit duplicates` - generates traps when link is flapping chronically. **MUST** be configured on interface
+
+``` default
+interface g0/0
+ snmp trap link-status permit duplicates
+```
+
+Log Timestamps - when no log/debug keyword specified (`service timestamps`) - it's like issuing `service timestamps debug uptime` applied be default - shows **UPTIME**
+
+BGP learned route RIB Failure (r)
+
+1.  We have a better route in our routing table (static perhaps)
+2.  We can't reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )

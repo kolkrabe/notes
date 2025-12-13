@@ -158,7 +158,7 @@
     "href": "misc.html",
     "title": "Misc",
     "section": "",
-    "text": "SPT Loopguard protects against L2 loops, enabled per port.\n\nIf non designated port stops receiving BPDUs, loopguard moves the port to “STP Loop-inconsistent blocking state, rather than listening/learning/forwarding which would cause a loop.\nOnce BPDU received again the port is transitioned and doesn’t require intervention.\n\nDHCP Option 82 - Relay Agent Information Option\n\nIncreases DHCP security by enabling identification of request sources and,\nallows address allocation based on network topology or client device characteristics.\nWhen DHCP Snooping + IP Source Guard enabled - DHCP server must support option 82.\n\nEnable: ip dhcp snooping information option\n\n\nDHCP Option 66 - next-server option - ip/hostname of TFTP or HTTP server for client to download files from.\nOSPF - Advertising Loopbacks - default mask /32, to show the configured subnet mask change the loopbacks network type to “point-to-point”\nRoute Target - Appended to VPNv4 BGP route to indicate membership MP-BGP VPN\nRoute Distinguisher - Pre-pended to IP Address to create globally unique VPNv4 Address\nLogging Synchronous All - Unsolicited messages appear after solicited.\naaa authorization console is disabled by default\n\nBy default, only internal OSPF routes are redistributed into BGP",
+    "text": "SPT Loopguard protects against L2 loops, enabled per port.\n\nIf non designated port stops receiving BPDUs, loopguard moves the port to “STP Loop-inconsistent blocking state, rather than listening/learning/forwarding which would cause a loop.\nOnce BPDU received again the port is transitioned and doesn’t require intervention.\n\nDHCP Option 82 - Relay Agent Information Option\n\nIncreases DHCP security by enabling identification of request sources and,\nallows address allocation based on network topology or client device characteristics.\nWhen DHCP Snooping + IP Source Guard enabled - DHCP server must support option 82.\n\nEnable: ip dhcp snooping information option\n\n\nDHCP Option 66 - next-server option - ip/hostname of TFTP or HTTP server for client to download files from.\nOSPF - Advertising Loopbacks - default mask /32, to show the configured subnet mask change the loopbacks network type to “point-to-point”\nRoute Target - Appended to VPNv4 BGP route to indicate membership MP-BGP VPN\nRoute Distinguisher - Pre-pended to IP Address to create globally unique VPNv4 Address\nLogging Synchronous All - Unsolicited messages appear after solicited.\naaa authorization console is disabled by default\nBy default, only internal OSPF routes are redistributed into BGP\nSNMP - snmp trap link-status permit duplicates - generates traps when link is flapping chronically. MUST be configured on interface\ninterface g0/0\n snmp trap link-status permit duplicates\nLog Timestamps - when no log/debug keyword specified (service timestamps) - it’s like issuing service timestamps debug uptime applied be default - shows UPTIME\nBGP learned route RIB Failure (r)\n\nWe have a better route in our routing table (static perhaps)\nWe can’t reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )",
     "crumbs": [
       "Misc"
     ]
@@ -408,7 +408,7 @@
     "href": "bgp.html#summarisation",
     "title": "BGP",
     "section": "Summarisation",
-    "text": "Summarisation\n\nConfigured on AS Edge Routers.\nconfigured with aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]\n\nuse of summary-only advertises only summary route, not the aggregated networks\nuse of [as-set] carries over AS_Path attributes from component routes.\n\nThese routes are assigned the ATOMIC_AGGREGATE attribute to indicate they are aggregates & that loss of path info has occurred.\nThe summarising router adds an entry in their RIB with destination Null0 to avoid loops.\nAS_Path, MED +communities aren’t included in new prefix info\nCan include AS_Path info using as-set",
+    "text": "Summarisation\n\nConfigured on AS Edge Routers\nCan use auto-summary however this only summarises classful networks\nConfigured with aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]\n\nuse of summary-only advertises only summary route, not the aggregated networks\nuse of [as-set] carries over AS_Path attributes from component routes. (disordered AS’s in Curly brackets)\n\nThese routes are assigned the ATOMIC_AGGREGATE attribute to indicate they are aggregates & that loss of path info has occurred.\nThe summarising router adds an entry in their RIB with destination Null0 to avoid loops.\nAS_Path, MED +communities aren’t included in new prefix info\nCan include AS_Path info using as-set",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",
@@ -421,6 +421,18 @@
     "title": "BGP",
     "section": "BGP regexp",
     "text": "BGP regexp\n\nCan be used to search for specifc AS-PATHs in table - for example: show ip bgp regexp ^$ this shows entries where AS-PATH is empty (locally originated)\nAbove will show prefixes originated locally with the AS. Cheat sheet here.\nOriginated in AS 100: _100$, Learned from AS 100: ^100_\nCan be used to filter with ACLs with IP as-path: ip as-path access-list 1 permit _54$\nThen use match as-path under a route-map to apply modifications\nTIP: Summarise Address without using aggregate-adresss\n\nCreate static route for the summarised address with destination Null0\nRedistribute Static under the BGP precess.",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Layer 3 Technologies",
+      "BGP"
+    ]
+  },
+  {
+    "objectID": "bgp.html#next-hop-reachability",
+    "href": "bgp.html#next-hop-reachability",
+    "title": "BGP",
+    "section": "Next Hop Reachability",
+    "text": "Next Hop Reachability\n\neBGP: next-hop IP address is updated by the advertising router.\niBGP: next-hop IP is not changed but is configurable.",
     "crumbs": [
       "CCNP ENARSI",
       "Layer 3 Technologies",

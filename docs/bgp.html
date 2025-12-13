@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -328,6 +363,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#route-reflector" id="toc-route-reflector" class="nav-link" data-scroll-target="#route-reflector">Route Reflector</a></li>
   <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
   <li><a href="#bgp-regexp" id="toc-bgp-regexp" class="nav-link" data-scroll-target="#bgp-regexp"><strong>BGP regexp</strong></a></li>
+  <li><a href="#next-hop-reachability" id="toc-next-hop-reachability" class="nav-link" data-scroll-target="#next-hop-reachability">Next Hop Reachability</a></li>
   </ul></li>
   <li><a href="#bgp-configuration" id="toc-bgp-configuration" class="nav-link" data-scroll-target="#bgp-configuration">BGP Configuration</a></li>
   <li><a href="#useful-show-commmands" id="toc-useful-show-commmands" class="nav-link" data-scroll-target="#useful-show-commmands">Useful Show Commmands</a></li>
@@ -459,11 +495,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="summarisation" class="level2">
 <h2 class="anchored" data-anchor-id="summarisation">Summarisation</h2>
 <ul>
-<li>Configured on AS Edge Routers.</li>
-<li>configured with <code>aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]</code>
+<li>Configured on AS Edge Routers</li>
+<li>Can use <code>auto-summary</code> however this only summarises classful networks</li>
+<li>Configured with <code>aggregate-address 10.0.0.0 255.0.0.0 [summary-only] [as-set]</code>
 <ul>
 <li>use of <code>summary-only</code> advertises only summary route, not the aggregated networks</li>
-<li>use of <code>[as-set]</code> carries over AS_Path attributes from component routes.</li>
+<li>use of <code>[as-set]</code> carries over AS_Path attributes from component routes. (disordered AS’s in Curly brackets)</li>
 </ul></li>
 <li>These routes are assigned the <strong><em>ATOMIC_AGGREGATE</em></strong> attribute to indicate they are aggregates &amp; that loss of path info has occurred.</li>
 <li>The summarising router adds an entry in their RIB with destination Null0 to avoid loops.</li>
@@ -485,12 +522,55 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Redistribute Static under the BGP precess.</p></li>
 </ul></li>
 </ul>
+</section>
+<section id="next-hop-reachability" class="level2">
+<h2 class="anchored" data-anchor-id="next-hop-reachability">Next Hop Reachability</h2>
+<ul>
+<li>eBGP: next-hop IP address is updated by the advertising router.</li>
+<li>iBGP: next-hop IP is not changed but is configurable.</li>
+</ul>
 <hr>
 </section>
 </section>
 <section id="bgp-configuration" class="level1">
 <h1>BGP Configuration</h1>
 <p><code>bgp redistribute-internal</code> - all BGP routes redistributes</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>router bgp 100</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> bgp router-id 4.4.4.4</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> ! iBGP Neighbor</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.1.1 remote-as 100</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.1.1 update-source loopback0</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> neighbor 155.1.1.1 route-reflector-client</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> neighbor 155.1.1.1 next-hop-self # will only affect eBGP routes for RR clients</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> ! eBGP Neighbor</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 remote-as 200</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 update-source loopback0</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 ebgp-multihop</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 send-community both</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 route-map FROM_R3 in</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 route-map TO_R3 in</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> !</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> network 155.1.4.0 255.255.255.0 route-map SET_COMMUNITY_50</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> network 150.1.4.0 255.255.255.0</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>ip prefix-list BGP_PREPEND_1 seq 5 permit 150.1.4.0/24</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ip prefix-list DEF</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>LT seq 5 permit 0.0.0.0/0</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>route-map FROM_R3 deny 10</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> match ip address prefix-list DEFAULT</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>route-map FROM_R3 permit 10000</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>route-map TO_R3 permit 10</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> match ip address prefix-list BGP_PREPEND_1</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> set as-path prepend 100 100 100 100</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>route-map TO_R3 permit 10000</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>route-map SET_COMMUNITY_50 permit 10</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> set community 50</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 <section id="useful-show-commmands" class="level1">

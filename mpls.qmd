@@ -21,7 +21,7 @@ code-block-bg: dark
     -   CEF Tables (FIB, LFIB, Adjacency Table)
 -   Introduces `LIB` (Label Information Base) & `LFIB` (Label Forwarding Information Base)
 -   **LDP** - Label Discovery Protocol
-    -   Uses all-routers multicast (**224.0.0.2**), TCP port **646** src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)
+    -   Uses all-routers multicast (**224.0.0.2**), **TCP** port **646** src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)
     -   UDP also used for initial discovery messages **(Using UDP)**
     -   LDP requires **CEF** in order to exchange labels
     -   No Split Horizon - floods labels to all neighbours

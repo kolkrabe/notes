@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -361,9 +396,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Route Distinguisher - Pre-pended to IP Address to create globally unique VPNv4 Address</p>
 <p>Logging Synchronous All - Unsolicited messages appear after solicited.</p>
 <p><code>aaa authorization console</code> is disabled by default</p>
-<ul>
-<li>By default, only internal OSPF routes are redistributed into BGP</li>
-</ul>
+<p>By default, only internal OSPF routes are redistributed into BGP</p>
+<p>SNMP - <code>snmp trap link-status permit duplicates</code> - generates traps when link is flapping chronically. <strong>MUST</strong> be configured on interface</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>interface g0/0</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> snmp trap link-status permit duplicates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Log Timestamps - when no log/debug keyword specified (<code>service timestamps</code>) - it’s like issuing <code>service timestamps debug uptime</code> applied be default - shows <strong>UPTIME</strong></p>
+<p>BGP learned route RIB Failure (r)</p>
+<ol type="1">
+<li>We have a better route in our routing table (static perhaps)</li>
+<li>We can’t reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )</li>
+</ol>
 
 
 
