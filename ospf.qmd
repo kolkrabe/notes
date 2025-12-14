@@ -255,6 +255,9 @@ If 2 routes to external network are learned via E1 & N1 with the same cost then 
 -   Issue `ipv6 ospf <process-id> area <area-id> [instance instance-id]` under **interface Configuration** mode
 -   Note, if you don't enter a **RouterID** and there are no up interfaces the process will fail to start.
 -   OSPFv3 Comms within a local segment based on **link-local** addresses.
+-   Only one Address Family can be enabled on an OSPFv3 Instance but OSPFv3 allows multiple instances to be enabled on a Link
+    -   IPv4 Instances (Default 64) - **64-95**
+    -   IPv6 Instances (Default 0) - **0-31**
 
 ## Sham-Link
 

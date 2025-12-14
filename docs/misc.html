@@ -407,6 +407,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We can’t reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )</li>
 </ol>
 <p>LDP Extended Discovery Message - Unicast message used to find and establish session with LDP Neighbour (LSR) not directly reachable via multiast hello’s.</p>
+<p><code>debug CEF interface</code> - debugs events related to CEF</p>
+<ul>
+<li>Planes
+<ul>
+<li>Management Plane - Anything which is used to manage the device</li>
+<li>Data Plane - switching frames/routing packets.
+<ul>
+<li>Services Plane (Subset of Data) - facilitates encapsulation of user data into tunnels (QoS, MPLS VPNs, IPSec Tunnels, GRE Tunnels)</li>
+</ul></li>
+<li>Control Plane - Controls that facilitates the learning of destinations, prefixes, MAC Addresses (IP/IPv6 addresses, MAC, ARP, IPv6 Neighbour discovery)</li>
+</ul></li>
+</ul>
 
 
 

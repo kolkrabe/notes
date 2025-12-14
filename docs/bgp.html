@@ -369,6 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#bgp-attributes-main" id="toc-bgp-attributes-main" class="nav-link" data-scroll-target="#bgp-attributes-main">BGP Attributes (Main)</a>
   <ul class="collapse">
   <li><a href="#weight" id="toc-weight" class="nav-link" data-scroll-target="#weight"><strong>Weight</strong></a></li>
+  <li><a href="#local-preference" id="toc-local-preference" class="nav-link" data-scroll-target="#local-preference"><strong>Local Preference</strong></a></li>
   <li><a href="#as-path" id="toc-as-path" class="nav-link" data-scroll-target="#as-path"><strong>AS-PATH</strong></a></li>
   <li><a href="#origin-code" id="toc-origin-code" class="nav-link" data-scroll-target="#origin-code"><strong>Origin Code</strong></a></li>
   <li><a href="#med" id="toc-med" class="nav-link" data-scroll-target="#med"><strong>MED</strong></a></li>
@@ -573,8 +574,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; route-map SET_WEIGHT in  </span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>!  </span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; weight &lt;weight&gt; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="local-preference" class="level5">
-<h5 class="anchored" data-anchor-id="local-preference"><strong>Local Preference</strong></h5>
+</section>
+<section id="local-preference" class="level2">
+<h2 class="anchored" data-anchor-id="local-preference"><strong>Local Preference</strong></h2>
 <ul>
 <li>Locally significant (to the AS), does not transit outside AS.</li>
 <li>Used to affect outbound routing.</li>
@@ -589,7 +591,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; route-map SET_LP in  </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> !  </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> bgp default local-preference &lt;locpref&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 </section>
 <section id="as-path" class="level2">
 <h2 class="anchored" data-anchor-id="as-path"><strong>AS-PATH</strong></h2>

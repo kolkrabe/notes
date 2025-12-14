@@ -7,19 +7,25 @@ code-block-bg: dark
 ## General info
 
 -   Control Plane Policing
-
 -   Used to protect control plane from DDoS and other attacks.
-
 -   Utilises Policy-Maps in a top down fashion, once matched the evaluation stops
-
 -   Class map match statement (used when multiple match statements exist)
-
     -   `match-all` - must match all match commands
     -   `match-any` - can match any match commands
-
 -   Class Map & Policy Maps are case sensitive
-
 -   T/S - **SPCA** ( **S**ervice Policy, **P**olicy Map, **C**lass Map **A**CL
+
+## Terminology
+
+-   Class based Policing works with Token Bucket Mechanism
+    -   Single Token bucket algorithm - used when the `violate` action is [***not***]{.underline} specified
+    -   Two-token bucket algorithm - used when the `violate` action [***is***]{.underline} specified.
+-   Single Rate Policer - specify only the Commited Information Rate - [**CIR**]{.underline}
+-   Dual Rate Policer - Specify both Commited Information Rate & Peak Information Rate - [**CIR**]{.underline} + [**PIR**]{.underline}
+
+## Management Plane Protection
+
+-   Used to determine which physical interfaces on a device you allow access to the managment plane from.
 
 ## Useful Show Commands
 

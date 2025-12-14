@@ -357,6 +357,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General info</a></li>
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology">Terminology</a></li>
+  <li><a href="#management-plane-protection" id="toc-management-plane-protection" class="nav-link" data-scroll-target="#management-plane-protection">Management Plane Protection</a></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   <li><a href="#standard-copp-configuration" id="toc-standard-copp-configuration" class="nav-link" data-scroll-target="#standard-copp-configuration">Standard CoPP Configuration</a></li>
   <li><a href="#additional-points" id="toc-additional-points" class="nav-link" data-scroll-target="#additional-points">Additional Points</a></li>
@@ -388,16 +390,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-info" class="level2">
 <h2 class="anchored" data-anchor-id="general-info">General info</h2>
 <ul>
-<li><p>Control Plane Policing</p></li>
-<li><p>Used to protect control plane from DDoS and other attacks.</p></li>
-<li><p>Utilises Policy-Maps in a top down fashion, once matched the evaluation stops</p></li>
-<li><p>Class map match statement (used when multiple match statements exist)</p>
+<li>Control Plane Policing</li>
+<li>Used to protect control plane from DDoS and other attacks.</li>
+<li>Utilises Policy-Maps in a top down fashion, once matched the evaluation stops</li>
+<li>Class map match statement (used when multiple match statements exist)
 <ul>
 <li><code>match-all</code> - must match all match commands</li>
 <li><code>match-any</code> - can match any match commands</li>
 </ul></li>
-<li><p>Class Map &amp; Policy Maps are case sensitive</p></li>
-<li><p>T/S - <strong>SPCA</strong> ( <strong>S</strong>ervice Policy, <strong>P</strong>olicy Map, <strong>C</strong>lass Map <strong>A</strong>CL</p></li>
+<li>Class Map &amp; Policy Maps are case sensitive</li>
+<li>T/S - <strong>SPCA</strong> ( <strong>S</strong>ervice Policy, <strong>P</strong>olicy Map, <strong>C</strong>lass Map <strong>A</strong>CL</li>
+</ul>
+</section>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<ul>
+<li>Class based Policing works with Token Bucket Mechanism
+<ul>
+<li>Single Token bucket algorithm - used when the <code>violate</code> action is <u><strong><em>not</em></strong></u> specified</li>
+<li>Two-token bucket algorithm - used when the <code>violate</code> action <u><strong><em>is</em></strong></u> specified.</li>
+</ul></li>
+<li>Single Rate Policer - specify only the Commited Information Rate - <u><strong>CIR</strong></u></li>
+<li>Dual Rate Policer - Specify both Commited Information Rate &amp; Peak Information Rate - <u><strong>CIR</strong></u> + <u><strong>PIR</strong></u></li>
+</ul>
+</section>
+<section id="management-plane-protection" class="level2">
+<h2 class="anchored" data-anchor-id="management-plane-protection">Management Plane Protection</h2>
+<ul>
+<li>Used to determine which physical interfaces on a device you allow access to the managment plane from.</li>
 </ul>
 </section>
 <section id="useful-show-commands" class="level2">

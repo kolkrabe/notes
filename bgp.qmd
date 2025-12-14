@@ -146,7 +146,7 @@ router bgp 100
  neighbor <ip> weight <weight> 
 ```
 
-##### **Local Preference**
+## **Local Preference**
 
 -   Locally significant (to the AS), does not transit outside AS.
 -   Used to affect outbound routing.
