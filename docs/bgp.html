@@ -360,10 +360,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#features-attributes" id="toc-features-attributes" class="nav-link" data-scroll-target="#features-attributes">Features/ Attributes</a>
   <ul class="collapse">
   <li><a href="#path-selection" id="toc-path-selection" class="nav-link" data-scroll-target="#path-selection">Path Selection</a></li>
+  <li><a href="#path-selection-2-nwlla-omni" id="toc-path-selection-2-nwlla-omni" class="nav-link" data-scroll-target="#path-selection-2-nwlla-omni">Path Selection 2 (NWLLA OMNI)</a></li>
   <li><a href="#route-reflector" id="toc-route-reflector" class="nav-link" data-scroll-target="#route-reflector">Route Reflector</a></li>
   <li><a href="#summarisation" id="toc-summarisation" class="nav-link" data-scroll-target="#summarisation">Summarisation</a></li>
   <li><a href="#bgp-regexp" id="toc-bgp-regexp" class="nav-link" data-scroll-target="#bgp-regexp"><strong>BGP regexp</strong></a></li>
   <li><a href="#next-hop-reachability" id="toc-next-hop-reachability" class="nav-link" data-scroll-target="#next-hop-reachability">Next Hop Reachability</a></li>
+  </ul></li>
+  <li><a href="#bgp-attributes-main" id="toc-bgp-attributes-main" class="nav-link" data-scroll-target="#bgp-attributes-main">BGP Attributes (Main)</a>
+  <ul class="collapse">
+  <li><a href="#weight" id="toc-weight" class="nav-link" data-scroll-target="#weight"><strong>Weight</strong></a></li>
+  <li><a href="#as-path" id="toc-as-path" class="nav-link" data-scroll-target="#as-path"><strong>AS-PATH</strong></a></li>
+  <li><a href="#origin-code" id="toc-origin-code" class="nav-link" data-scroll-target="#origin-code"><strong>Origin Code</strong></a></li>
+  <li><a href="#med" id="toc-med" class="nav-link" data-scroll-target="#med"><strong>MED</strong></a></li>
   </ul></li>
   <li><a href="#bgp-configuration" id="toc-bgp-configuration" class="nav-link" data-scroll-target="#bgp-configuration">BGP Configuration</a></li>
   <li><a href="#useful-show-commmands" id="toc-useful-show-commmands" class="nav-link" data-scroll-target="#useful-show-commmands">Useful Show Commmands</a></li>
@@ -422,13 +430,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><strong>iBGP</strong>
 <ul>
-<li><p>TTL = 255</p></li>
-<li><p>Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS</p>
+<li>TTL = 255</li>
+<li>Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
 <ul>
 <li>A route learned from 1 iBGP won’t be forwarded to another iBGP peer by default.</li>
 <li>This can be overcome with route-reflectors</li>
 </ul></li>
-<li><p>NRLI’s from iBGP peer can only be forwarded to eBGP peer.</p></li>
+<li>NRLI’s from iBGP peer can only be forwarded to eBGP peer.</li>
 </ul></li>
 <li><strong>eBGP</strong>
 <ul>
@@ -462,20 +470,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Cheat sheet - <a href="https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf" target="_blank">https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf</a></p>
 <section id="path-selection" class="level2">
 <h2 class="anchored" data-anchor-id="path-selection">Path Selection</h2>
-<p><strong>W</strong>e <strong>L</strong>ove <strong>O</strong>ranges <strong>AS</strong> <strong>O</strong>ranges <strong>M</strong>ean <strong>P</strong>ure <strong>R</strong>efreshment</p>
+<p><strong>W</strong>e <strong>L</strong>ove <strong>O</strong>ranges <strong>AS</strong> <strong>O</strong>ranges <strong>M</strong>ean <strong>P</strong>ure <strong>R</strong>efreshment or NWLLA OMNI - Next Hop</p>
 <ol type="1">
-<li>Weight (Highest)</li>
-<li>Local Preference (Highest)</li>
-<li>Originated locally</li>
-<li>AS_PATH (Shortest)</li>
-<li>Origin code (IGP &gt; EGP &gt; ?)</li>
-<li>MED (Lowest)</li>
-<li>Path (eBGP &gt; iBGP)</li>
+<li><strong>W</strong>eight (Highest)</li>
+<li><strong>L</strong>ocal Preference (Highest)</li>
+<li><strong>O</strong>riginated locally</li>
+<li><strong>AS</strong>_PATH (Shortest)</li>
+<li><strong>O</strong>rigin code (IGP &gt; EGP &gt; ?)</li>
+<li><strong>M</strong>ED (Lowest)</li>
+<li><strong>P</strong>ath (eBGP &gt; iBGP)</li>
 <li>IGP metric (Lowest)</li>
 <li>Route age (Oldest, only compared when routes from different eBGP peers)</li>
 <li>RID (Lowest)</li>
 <li>Choose path with minimum cluster list length</li>
 <li>Choose path through neighbour with lowest IP address</li>
+</ol>
+</section>
+<section id="path-selection-2-nwlla-omni" class="level2">
+<h2 class="anchored" data-anchor-id="path-selection-2-nwlla-omni">Path Selection 2 (NWLLA OMNI)</h2>
+<ol type="1">
+<li>Next Hop must be Reachable</li>
+<li>Weight (Highest)</li>
+<li>Local Preference (Higher)</li>
+<li>Locally Originated</li>
+<li>AS_PATH (Shortest)</li>
+<li>Origin Code (Prefer i&gt;e&gt;?)</li>
+<li>MED (Smaller Preferred)</li>
+<li>Neighbour Type - prefer eBGP over iBGP</li>
+<li>IGP Metric to next hop - (Smaller)</li>
 </ol>
 </section>
 <section id="route-reflector" class="level2">
@@ -529,48 +551,134 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>eBGP: next-hop IP address is updated by the advertising router.</li>
 <li>iBGP: next-hop IP is not changed but is configurable.</li>
 </ul>
+</section>
+</section>
+<section id="bgp-attributes-main" class="level1">
+<h1>BGP Attributes (Main)</h1>
+<section id="weight" class="level2">
+<h2 class="anchored" data-anchor-id="weight"><strong>Weight</strong></h2>
+<ul>
+<li>Only used on the router where it is configured</li>
+<li>Used to affect outbound routing.</li>
+<li>Higher value is better - default is 0 (32768 if originated locally)</li>
+<li>Highest in BGP path selection algorithm</li>
+<li>Cisco proprietary</li>
+<li>Configuration:</li>
+</ul>
+<pre><code>route-map SET_WEIGHT  
+ match ip address|ip as-path ...  
+ set weight 100 
+! 
+router bgp 100  
+ neighbor &lt;ip&gt; route-map SET_WEIGHT in  
+!  
+ neighbor &lt;ip&gt; weight &lt;weight&gt; </code></pre>
+<section id="local-preference" class="level5">
+<h5 class="anchored" data-anchor-id="local-preference"><strong>Local Preference</strong></h5>
+<ul>
+<li>Locally significant (to the AS), does not transit outside AS.</li>
+<li>Used to affect outbound routing.</li>
+<li>Higher value is better - defaults to 100</li>
+<li>Configuration:</li>
+</ul>
+<pre><code>route-map SET_LP  
+ match ip address|ip as-path ...  
+ set local-preference 1000  
+! 
+router bgp 100  
+ neighbor &lt;ip&gt; route-map SET_LP in  
+ !  
+ bgp default local-preference &lt;locpref&gt;</code></pre>
+</section>
+</section>
+<section id="as-path" class="level2">
+<h2 class="anchored" data-anchor-id="as-path"><strong>AS-PATH</strong></h2>
+<ul>
+<li>Changed for each AS prefix transits through</li>
+<li>Used to affect inbound routing</li>
+<li>Can be used to influence path selection with as-path prepending</li>
+<li>Can be ignored with <code>bgp bestpath as-path ignore</code> - this is dangerous and not recommended</li>
+<li>Can be limited in length with <code>bgp maxas-limit &lt;#&gt;</code></li>
+<li>Configuration:</li>
+</ul>
+<pre><code>route-map PREPEND
+ match ip address|ip as-path ...  
+ set as-path prepend 100 100 100     
+! 
+router bgp 100  
+ neighbor &lt;ip&gt; route-map PREPEND out</code></pre>
+</section>
+<section id="origin-code" class="level2">
+<h2 class="anchored" data-anchor-id="origin-code"><strong>Origin Code</strong></h2>
+<ul>
+<li>Rarely used to influence path selection - inflexible</li>
+<li>IGP &gt; EGP &gt; Incomplete</li>
+<li>Could affect inbound or outbound routing</li>
+<li>Configuration:</li>
+</ul>
+<pre><code>route-map ORIGIN 
+match ip address|ip as-path ...  
+set origin [igp|egp|incomplete]  
+!
+router bgp 100  
+neighbor &lt;ip&gt; route-map ORIGIN out</code></pre>
+</section>
+<section id="med" class="level2">
+<h2 class="anchored" data-anchor-id="med"><strong>MED</strong></h2>
+<ul>
+<li>By default only compared when originating from same AS</li>
+<li>Lowest is best - defaults to 0</li>
+<li>Used to affect inbound routing</li>
+<li>Can use <code>bgp always-compare-med</code> under router BGP to allow comparison of MED between different ASs</li>
+<li>Configuration:</li>
+</ul>
+<pre><code>route-map MED 
+match ip address|ip as-path ...  
+set metric 1000      
+router bgp 100  
+neighbor &lt;ip&gt; route-map MED out</code></pre>
 <hr>
 </section>
 </section>
 <section id="bgp-configuration" class="level1">
 <h1>BGP Configuration</h1>
 <p><code>bgp redistribute-internal</code> - all BGP routes redistributes</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>router bgp 100</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> bgp router-id 4.4.4.4</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> ! iBGP Neighbor</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.1.1 remote-as 100</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.1.1 update-source loopback0</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> neighbor 155.1.1.1 route-reflector-client</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> neighbor 155.1.1.1 next-hop-self # will only affect eBGP routes for RR clients</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> ! eBGP Neighbor</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 remote-as 200</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 update-source loopback0</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 ebgp-multihop</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 send-community both</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 route-map FROM_R3 in</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 route-map TO_R3 in</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> !</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> network 155.1.4.0 255.255.255.0 route-map SET_COMMUNITY_50</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> network 150.1.4.0 255.255.255.0</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>ip prefix-list BGP_PREPEND_1 seq 5 permit 150.1.4.0/24</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ip prefix-list DEF</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>LT seq 5 permit 0.0.0.0/0</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>route-map FROM_R3 deny 10</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> match ip address prefix-list DEFAULT</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>route-map FROM_R3 permit 10000</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>route-map TO_R3 permit 10</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> match ip address prefix-list BGP_PREPEND_1</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> set as-path prepend 100 100 100 100</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>route-map TO_R3 permit 10000</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>route-map SET_COMMUNITY_50 permit 10</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> set community 50</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>router bgp 100</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> bgp router-id 4.4.4.4</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> ! iBGP Neighbor</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.1.1 remote-as 100</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.1.1 update-source loopback0</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> neighbor 155.1.1.1 route-reflector-client</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> neighbor 155.1.1.1 next-hop-self # will only affect eBGP routes for RR clients</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> ! eBGP Neighbor</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 remote-as 200</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 update-source loopback0</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 ebgp-multihop</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 send-community both</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 route-map FROM_R3 in</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> neighbor 150.1.3.3 route-map TO_R3 in</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a> !</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a> network 155.1.4.0 255.255.255.0 route-map SET_COMMUNITY_50</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a> network 150.1.4.0 255.255.255.0</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ip prefix-list BGP_PREPEND_1 seq 5 permit 150.1.4.0/24</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ip prefix-list DEF</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>LT seq 5 permit 0.0.0.0/0</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>route-map FROM_R3 deny 10</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a> match ip address prefix-list DEFAULT</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>route-map FROM_R3 permit 10000</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>route-map TO_R3 permit 10</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a> match ip address prefix-list BGP_PREPEND_1</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a> set as-path prepend 100 100 100 100</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>route-map TO_R3 permit 10000</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>route-map SET_COMMUNITY_50 permit 10</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a> set community 50</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 <section id="useful-show-commmands" class="level1">

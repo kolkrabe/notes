@@ -43,3 +43,5 @@ BGP learned route RIB Failure (r)
 
 1.  We have a better route in our routing table (static perhaps)
 2.  We can't reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )
+
+LDP Extended Discovery Message - Unicast message used to find and establish session with LDP Neighbour (LSR) not directly reachable via multiast hello's.

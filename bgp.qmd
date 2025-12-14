@@ -25,12 +25,9 @@ code-block-bg: dark
     -   RULE: Only advertise routes learned from iBGP peer to an eBGP peer when there is an exact match of that route learned from an IGP in the routing table.
 -   **iBGP**
     -   TTL = 255
-
     -   Uses split horizon for loop prevention, requires full mesh of BGP routers inside single AS
-
         -   A route learned from 1 iBGP won't be forwarded to another iBGP peer by default.
         -   This can be overcome with route-reflectors
-
     -   NRLI's from iBGP peer can only be forwarded to eBGP peer.
 -   **eBGP**
     -   TTL = 1, this can be increased using `neighbor [ip] ebgp-multihop [1-255]`
@@ -61,20 +58,32 @@ Cheat sheet - [https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf](http
 
 ## Path Selection
 
-**W**e **L**ove **O**ranges **AS** **O**ranges **M**ean **P**ure **R**efreshment
+**W**e **L**ove **O**ranges **AS** **O**ranges **M**ean **P**ure **R**efreshment or NWLLA OMNI - Next Hop
 
-1.  Weight (Highest)
-2.  Local Preference (Highest)
-3.  Originated locally
-4.  AS_PATH (Shortest)
-5.  Origin code (IGP \> EGP \> ?)
-6.  MED (Lowest)
-7.  Path (eBGP \> iBGP)
+1.  **W**eight (Highest)
+2.  **L**ocal Preference (Highest)
+3.  **O**riginated locally
+4.  **AS**\_PATH (Shortest)
+5.  **O**rigin code (IGP \> EGP \> ?)
+6.  **M**ED (Lowest)
+7.  **P**ath (eBGP \> iBGP)
 8.  IGP metric (Lowest)
 9.  Route age (Oldest, only compared when routes from different eBGP peers)
 10. RID (Lowest)
 11. Choose path with minimum cluster list length
 12. Choose path through neighbour with lowest IP address
+
+## Path Selection 2 (NWLLA OMNI)
+
+1.  Next Hop must be Reachable
+2.  Weight (Highest)
+3.  Local Preference (Higher)
+4.  Locally Originated
+5.  AS_PATH (Shortest)
+6.  Origin Code (Prefer i\>e\>?)
+7.  MED (Smaller Preferred)
+8.  Neighbour Type - prefer eBGP over iBGP
+9.  IGP Metric to next hop - (Smaller)
 
 ## Route Reflector
 
@@ -114,6 +123,96 @@ Cheat sheet - [https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf](http
 
 -   eBGP: next-hop IP address is updated by the advertising router.
 -   iBGP: next-hop IP is not changed but is configurable.
+
+# BGP Attributes (Main)
+
+## **Weight**
+
+-   Only used on the router where it is configured
+-   Used to affect outbound routing.
+-   Higher value is better - default is 0 (32768 if originated locally)
+-   Highest in BGP path selection algorithm
+-   Cisco proprietary
+-   Configuration:
+
+```         
+route-map SET_WEIGHT  
+ match ip address|ip as-path ...  
+ set weight 100 
+! 
+router bgp 100  
+ neighbor <ip> route-map SET_WEIGHT in  
+!  
+ neighbor <ip> weight <weight> 
+```
+
+##### **Local Preference**
+
+-   Locally significant (to the AS), does not transit outside AS.
+-   Used to affect outbound routing.
+-   Higher value is better - defaults to 100
+-   Configuration:
+
+```         
+route-map SET_LP  
+ match ip address|ip as-path ...  
+ set local-preference 1000  
+! 
+router bgp 100  
+ neighbor <ip> route-map SET_LP in  
+ !  
+ bgp default local-preference <locpref>
+```
+
+## **AS-PATH**
+
+-   Changed for each AS prefix transits through
+-   Used to affect inbound routing
+-   Can be used to influence path selection with as-path prepending
+-   Can be ignored with `bgp bestpath as-path ignore` - this is dangerous and not recommended
+-   Can be limited in length with `bgp maxas-limit <#>`
+-   Configuration:
+
+```         
+route-map PREPEND
+ match ip address|ip as-path ...  
+ set as-path prepend 100 100 100     
+! 
+router bgp 100  
+ neighbor <ip> route-map PREPEND out
+```
+
+## **Origin Code**
+
+-   Rarely used to influence path selection - inflexible
+-   IGP \> EGP \> Incomplete
+-   Could affect inbound or outbound routing
+-   Configuration:
+
+```         
+route-map ORIGIN 
+match ip address|ip as-path ...  
+set origin [igp|egp|incomplete]  
+!
+router bgp 100  
+neighbor <ip> route-map ORIGIN out
+```
+
+## **MED**
+
+-   By default only compared when originating from same AS
+-   Lowest is best - defaults to 0
+-   Used to affect inbound routing
+-   Can use `bgp always-compare-med` under router BGP to allow comparison of MED between different ASs
+-   Configuration:
+
+```         
+route-map MED 
+match ip address|ip as-path ...  
+set metric 1000      
+router bgp 100  
+neighbor <ip> route-map MED out
+```
 
 ------------------------------------------------------------------------
 

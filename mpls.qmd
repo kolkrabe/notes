@@ -30,6 +30,7 @@ code-block-bg: dark
         -   Downstream Unsolicited: An LSR advertises label mappings to peers without being asked to.
         -   Downstream on Demand: An LSR advertises label mappings to a peer only when the peer asks for them.
     -   LDP Transport Address - dynamically derived, like a Router-ID (Highest lop
+    -   LDP Extended Discovery Message
 -   **PHP**
     -   Penultimate Hop Popping - popping MPLS label on second to last router to avoid unnecessary overhead (processing shim header & IP)
     -   In order to facilitate this, LDP routers advertise routes they own with an *implicit null/POP* label (label value of **3**) - **"imp-null"** that tells neighbours to pop LDP labels before sending for these routes
