@@ -135,7 +135,7 @@ Cheat sheet - [https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf](http
 -   Cisco proprietary
 -   Configuration:
 
-```         
+``` default
 route-map SET_WEIGHT  
  match ip address|ip as-path ...  
  set weight 100 
@@ -153,7 +153,7 @@ router bgp 100
 -   Higher value is better - defaults to 100
 -   Configuration:
 
-```         
+``` default
 route-map SET_LP  
  match ip address|ip as-path ...  
  set local-preference 1000  
@@ -173,7 +173,7 @@ router bgp 100
 -   Can be limited in length with `bgp maxas-limit <#>`
 -   Configuration:
 
-```         
+``` default
 route-map PREPEND
  match ip address|ip as-path ...  
  set as-path prepend 100 100 100     
@@ -189,7 +189,7 @@ router bgp 100
 -   Could affect inbound or outbound routing
 -   Configuration:
 
-```         
+``` default
 route-map ORIGIN 
 match ip address|ip as-path ...  
 set origin [igp|egp|incomplete]  
@@ -206,7 +206,7 @@ neighbor <ip> route-map ORIGIN out
 -   Can use `bgp always-compare-med` under router BGP to allow comparison of MED between different ASs
 -   Configuration:
 
-```         
+``` default
 route-map MED 
 match ip address|ip as-path ...  
 set metric 1000      

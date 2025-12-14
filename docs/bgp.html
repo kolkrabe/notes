@@ -565,14 +565,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Cisco proprietary</li>
 <li>Configuration:</li>
 </ul>
-<pre><code>route-map SET_WEIGHT  
- match ip address|ip as-path ...  
- set weight 100 
-! 
-router bgp 100  
- neighbor &lt;ip&gt; route-map SET_WEIGHT in  
-!  
- neighbor &lt;ip&gt; weight &lt;weight&gt; </code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>route-map SET_WEIGHT  </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> match ip address|ip as-path ...  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> set weight 100 </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>router bgp 100  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; route-map SET_WEIGHT in  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>!  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; weight &lt;weight&gt; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="local-preference" class="level5">
 <h5 class="anchored" data-anchor-id="local-preference"><strong>Local Preference</strong></h5>
 <ul>
@@ -581,14 +581,14 @@ router bgp 100
 <li>Higher value is better - defaults to 100</li>
 <li>Configuration:</li>
 </ul>
-<pre><code>route-map SET_LP  
- match ip address|ip as-path ...  
- set local-preference 1000  
-! 
-router bgp 100  
- neighbor &lt;ip&gt; route-map SET_LP in  
- !  
- bgp default local-preference &lt;locpref&gt;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>route-map SET_LP  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> match ip address|ip as-path ...  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> set local-preference 1000  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>router bgp 100  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; route-map SET_LP in  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> !  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> bgp default local-preference &lt;locpref&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="as-path" class="level2">
@@ -601,12 +601,12 @@ router bgp 100
 <li>Can be limited in length with <code>bgp maxas-limit &lt;#&gt;</code></li>
 <li>Configuration:</li>
 </ul>
-<pre><code>route-map PREPEND
- match ip address|ip as-path ...  
- set as-path prepend 100 100 100     
-! 
-router bgp 100  
- neighbor &lt;ip&gt; route-map PREPEND out</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>route-map PREPEND</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> match ip address|ip as-path ...  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> set as-path prepend 100 100 100     </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>! </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>router bgp 100  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> neighbor &lt;ip&gt; route-map PREPEND out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="origin-code" class="level2">
 <h2 class="anchored" data-anchor-id="origin-code"><strong>Origin Code</strong></h2>
@@ -616,12 +616,12 @@ router bgp 100
 <li>Could affect inbound or outbound routing</li>
 <li>Configuration:</li>
 </ul>
-<pre><code>route-map ORIGIN 
-match ip address|ip as-path ...  
-set origin [igp|egp|incomplete]  
-!
-router bgp 100  
-neighbor &lt;ip&gt; route-map ORIGIN out</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>route-map ORIGIN </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>match ip address|ip as-path ...  </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>set origin [igp|egp|incomplete]  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>router bgp 100  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>neighbor &lt;ip&gt; route-map ORIGIN out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="med" class="level2">
 <h2 class="anchored" data-anchor-id="med"><strong>MED</strong></h2>
@@ -632,11 +632,11 @@ neighbor &lt;ip&gt; route-map ORIGIN out</code></pre>
 <li>Can use <code>bgp always-compare-med</code> under router BGP to allow comparison of MED between different ASs</li>
 <li>Configuration:</li>
 </ul>
-<pre><code>route-map MED 
-match ip address|ip as-path ...  
-set metric 1000      
-router bgp 100  
-neighbor &lt;ip&gt; route-map MED out</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>route-map MED </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>match ip address|ip as-path ...  </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>set metric 1000      </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>router bgp 100  </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>neighbor &lt;ip&gt; route-map MED out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
