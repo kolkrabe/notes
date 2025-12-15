@@ -8,26 +8,37 @@ code-block-bg: dark
 
 -   Designed to increase L2 security in IPv6 LANs
 
--   No broadcasts, but certain packets almost always flooded in IPv6 networks
+-   Protects against weakness in the ICMPv6 Packets which are flooded (not broadcast) to
 
     -   FF02::1 (All IPv6 hosts)
     -   FF02::2 (All IPv6 routers)
 
 -   First-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6
 
--   
+-   Makes use of 2 High Level Features
 
--   Policies configured un \[protocol\] config mode then applied to interface
+    -   <div>
+
+        1.  IPv6 Snooping Policy (Container that enables most other features)
+        2.  IPv6 Binding Table: Database of connected IPv6 Neighbours, gleaned from various FHS features.
+
+        </div>
 
 ------------------------------------------------------------------------
 
 ## Features
 
--   RA Guard (Router Advertisement)
+-   **RA Guard (Router Advertisement)**
 
     -   RA guard inspects incoming RA messages, filtering when configured
     -   Configure with `ipv6 nd raguard attach-policy [policy-name]` inbound on interface
     -   Configured **inbound** on an interface
+    -   Can allow/Block based on
+        -   Source Link Local Address
+        -   GLobal prefixes advertised within an RA
+        -   Is the "Managed Config" flag on or off?
+        -   Is the "Other Config" flag on or off
+        -   A minimum hop-limit advertised within the RA
     -   2 modes ( Host & Router)
     -   Doesn't work on Tunnelled Traffic and requires TCAM
     -   Doesn't work on Ether-channel members or trunks with merge mode
@@ -44,8 +55,8 @@ code-block-bg: dark
 
     -   Creates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols
     -   **Glean** populates bind table without verifying messages
-    -   **Inspect** gleans addresses and validates messages
-    -   **Guard** gleans *and* inspects messages, drops RA and DHCP messages by default
+    -   **Inspect** gleans addresses and validates messages for consistency & conformance and enforces address ownership. Allows Router Advertisements & DHCP Server Messages.
+    -   **Guard** gleans *and* inspects messages, drops RA and DHCP messages by default. **(HOST PORTS)**
     -   Configured as follows:
 
     ``` default
@@ -59,14 +70,15 @@ code-block-bg: dark
 -   **ND inspection**
 
     -   Inspects neighbor discovery messages and adds entries to the binding table.
-    -   Drops messagesfrom hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing
+    -   Drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing
     -   Relies on IPv6 snooping
     -   Configured with `ipv6 nd inspection` under interfaces
+    -   
 
 -   **Source Guard**
 
     -   Snooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked & dropped
-        -   Source IP must be in the **DHCP Binding** table.
+        -   Source IP must be in the **IPv6 Binding** **table**.
     -   Source learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS
     -   Configured with `ipv6 source-guard` under interfaces
 

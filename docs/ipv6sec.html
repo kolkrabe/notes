@@ -388,25 +388,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="general-info">General Info</h2>
 <ul>
 <li><p>Designed to increase L2 security in IPv6 LANs</p></li>
-<li><p>No broadcasts, but certain packets almost always flooded in IPv6 networks</p>
+<li><p>Protects against weakness in the ICMPv6 Packets which are flooded (not broadcast) to</p>
 <ul>
 <li>FF02::1 (All IPv6 hosts)</li>
 <li>FF02::2 (All IPv6 routers)</li>
 </ul></li>
 <li><p>First-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6</p></li>
-<li></li>
-<li><p>Policies configured un [protocol] config mode then applied to interface</p></li>
+<li><p>Makes use of 2 High Level Features</p>
+<ul>
+<li><div>
+<ol type="1">
+<li>IPv6 Snooping Policy (Container that enables most other features)</li>
+<li>IPv6 Binding Table: Database of connected IPv6 Neighbours, gleaned from various FHS features.</li>
+</ol>
+</div></li>
+</ul></li>
 </ul>
 <hr>
 </section>
 <section id="features" class="level2">
 <h2 class="anchored" data-anchor-id="features">Features</h2>
 <ul>
-<li><p>RA Guard (Router Advertisement)</p>
+<li><p><strong>RA Guard (Router Advertisement)</strong></p>
 <ul>
 <li>RA guard inspects incoming RA messages, filtering when configured</li>
 <li>Configure with <code>ipv6 nd raguard attach-policy [policy-name]</code> inbound on interface</li>
 <li>Configured <strong>inbound</strong> on an interface</li>
+<li>Can allow/Block based on
+<ul>
+<li>Source Link Local Address</li>
+<li>GLobal prefixes advertised within an RA</li>
+<li>Is the “Managed Config” flag on or off?</li>
+<li>Is the “Other Config” flag on or off</li>
+<li>A minimum hop-limit advertised within the RA</li>
+</ul></li>
 <li>2 modes ( Host &amp; Router)</li>
 <li>Doesn’t work on Tunnelled Traffic and requires TCAM</li>
 <li>Doesn’t work on Ether-channel members or trunks with merge mode</li>
@@ -425,8 +440,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Creates an IPv6 Binding table - database on each router which holds neighbour information (IP + Prefix) which is used by the following IPv6 security protocols</li>
 <li><strong>Glean</strong> populates bind table without verifying messages</li>
-<li><strong>Inspect</strong> gleans addresses and validates messages</li>
-<li><strong>Guard</strong> gleans <em>and</em> inspects messages, drops RA and DHCP messages by default</li>
+<li><strong>Inspect</strong> gleans addresses and validates messages for consistency &amp; conformance and enforces address ownership. Allows Router Advertisements &amp; DHCP Server Messages.</li>
+<li><strong>Guard</strong> gleans <em>and</em> inspects messages, drops RA and DHCP messages by default. <strong>(HOST PORTS)</strong></li>
 <li>Configured as follows:</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ipv6 snooping policy [name]</span>
@@ -437,15 +452,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>ND inspection</strong></p>
 <ul>
 <li>Inspects neighbor discovery messages and adds entries to the binding table.</li>
-<li>Drops messagesfrom hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing</li>
+<li>Drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing</li>
 <li>Relies on IPv6 snooping</li>
 <li>Configured with <code>ipv6 nd inspection</code> under interfaces</li>
+<li></li>
 </ul></li>
 <li><p><strong>Source Guard</strong></p>
 <ul>
 <li>Snooping tool for validating source of IPv6 traffic - if traffic arriving is from an unknown source it can be blocked &amp; dropped
 <ul>
-<li>Source IP must be in the <strong>DHCP Binding</strong> table.</li>
+<li>Source IP must be in the <strong>IPv6 Binding</strong> <strong>table</strong>.</li>
 </ul></li>
 <li>Source learned via ND Inspection or GLEANING process - relies on IPv6 Snooping being configured on L2access, trunk ports and VLANS</li>
 <li>Configured with <code>ipv6 source-guard</code> under interfaces</li>
