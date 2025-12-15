@@ -607,7 +607,7 @@
     "href": "copp.html#terminology",
     "title": "CoPP",
     "section": "Terminology",
-    "text": "Terminology\n\nClass based Policing works with Token Bucket Mechanism\n\nSingle Token bucket algorithm - used when the violate action is not specified\nTwo-token bucket algorithm - used when the violate action is specified.\n\nSingle Rate Policer - specify only the Commited Information Rate - CIR\nDual Rate Policer - Specify both Commited Information Rate & Peak Information Rate - CIR + PIR",
+    "text": "Terminology\n\nClass based Policing works with Token Bucket Mechanism\n\nSingle Token bucket algorithm - used when the violate action is not specified\nTwo-token bucket algorithm - used when the violate action is specified.\n\nColour Terms - Classification Results\n2 Colour = No Violate command).\n\nGreen: Conform\nAmber: Exceed\nRed: Violate\n\nSingle Rate Policer - specify only the Commited Information Rate - CIR\nDual Rate Policer - Specify both Commited Information Rate & Peak Information Rate - CIR + PIR",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Security",

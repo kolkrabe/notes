@@ -20,6 +20,11 @@ code-block-bg: dark
 -   Class based Policing works with Token Bucket Mechanism
     -   Single Token bucket algorithm - used when the `violate` action is [***not***]{.underline} specified
     -   Two-token bucket algorithm - used when the `violate` action [***is***]{.underline} specified.
+-   Colour Terms - Classification Results
+-   2 Colour = No Violate command).
+    -   Green: Conform
+    -   Amber: Exceed
+    -   Red: Violate
 -   Single Rate Policer - specify only the Commited Information Rate - [**CIR**]{.underline}
 -   Dual Rate Policer - Specify both Commited Information Rate & Peak Information Rate - [**CIR**]{.underline} + [**PIR**]{.underline}
 
