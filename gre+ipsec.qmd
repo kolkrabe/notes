@@ -134,19 +134,21 @@ ip address <ip & mask>
  tunnel source <ip>  
  tunnel destination <ip>      
 crypto ikev2 keyring <keyring-name>  
- peer ANY  address 0.0.0.0 0.0.0.0 ! any host for DMVPN, specific host for site-to-site  
+ peer ANY  address 0.0.0.0 0.0.0.0              ! any host for DMVPN, specific host for site-to-site  
  pre-shared-key <psk> 
 !
 crypto ikev2 profile <ike-prof-name>  
- match identity remote address 0.0.0.0 ! any host for DMVPN, specific host for site-to-site  
+ match identity remote address 0.0.0.0          ! any host for DMVPN, specific host for site-to-site  
  authentication remote pre-share  
  authentication local pre-share  
  keyring local <keyring-name> 
 ! 
 crypto ipsec transform-set <ts-name> esp-aes 256 esp-sha-hmac  
- mode transport  !mode tunnel if using VTI 
+ mode transport                                 !mode tunnel if using VTI
 ! 
-crypto ipsec profile <profile-name>  set transform-set <ts-name>  set ikev2-profile <ike-prof-name> 
+crypto ipsec profile <profile-name>  
+set transform-set <ts-name>  
+set ikev2-profile <ike-prof-name> 
 !
 interface Tunnel0 
  tunnel protection ipsec profile <profile-name>  !optionally can define tunnel mode as ipsec to bypass GRE and use VTI - 'tunnel mode ipsec ipv4'  
