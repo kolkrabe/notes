@@ -463,6 +463,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Only takes effect when many parameters on routes match - Weight, local preference, AS-PATH (both numbers and lengths), origin code, MED, IGP metric</p></li>
 <li><p>use <code>maximum-paths &lt;value&gt;</code> to enable multipath load sharing for eBGP</p></li>
 <li><p>use <code>maximum-paths ibgp &lt;value&gt;</code> to enable for iBGP</p></li>
+<li><p>use <code>maximum-paths eibgp &lt;value&gt;</code> to enable for iBGP &amp; eBGP</p></li>
+<li></li>
 </ul></li>
 </ul>
 </section>
@@ -513,6 +515,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Routes learned from non-client peers can be sent to eBGP peers, and client peers,&nbsp;<em>but not other non-clients</em>.</li>
 </ul></li>
 <li><code>next-hop-self</code> only affects eBGP routes when used with route reflectors.</li>
+<li><u><strong>Originator_ID &amp; Cluster_ID</strong></u> attributes added to reflected routes for loop prevention</li>
 </ul>
 </section>
 <section id="summarisation" class="level2">

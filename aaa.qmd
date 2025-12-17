@@ -28,7 +28,7 @@ code-block-bg: dark
     !
     !
     Line Con 0
-    aaa authentication [Method List]
+    Login Authentication [Method List]
     transport input SSH                       !!! Enables SSH (disables Telnet)
     ```
 

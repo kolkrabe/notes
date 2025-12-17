@@ -52,6 +52,10 @@ code-block-bg: dark
 
     -   use `maximum-paths ibgp <value>` to enable for iBGP
 
+    -   use `maximum-paths eibgp <value>` to enable for iBGP & eBGP
+
+    -   
+
 # Features/ Attributes
 
 Cheat sheet - [https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf](https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf){target="_blank"}
@@ -94,6 +98,7 @@ Cheat sheet - [https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf](http
     -   Routes learned from client peers can be sent to eBGP peers, other client peers, and non-clients.
     -   Routes learned from non-client peers can be sent to eBGP peers, and client peers, *but not other non-clients*.
 -   `next-hop-self` only affects eBGP routes when used with route reflectors.
+-   [**Originator_ID & Cluster_ID**]{.underline} attributes added to reflected routes for loop prevention
 
 ## Summarisation
 

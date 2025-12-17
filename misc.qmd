@@ -49,7 +49,14 @@ LDP Extended Discovery Message - Unicast message used to find and establish sess
 `debug CEF interface` - debugs events related to CEF
 
 -   Planes
+
     -   Management Plane - Anything which is used to manage the device
     -   Data Plane - switching frames/routing packets.
         -   Services Plane (Subset of Data) - facilitates encapsulation of user data into tunnels (QoS, MPLS VPNs, IPSec Tunnels, GRE Tunnels)
     -   Control Plane - Controls that facilitates the learning of destinations, prefixes, MAC Addresses (IP/IPv6 addresses, MAC, ARP, IPv6 Neighbour discovery)
+
+-   BGP: does NOT reapply policies to existing routes automatically when you apply or change the following. (Only new updates are affected).
+
+    -   route-map
+    -   prefix-list
+    -   filter-list
