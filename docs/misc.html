@@ -351,8 +351,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bgp" id="toc-bgp" class="nav-link active" data-scroll-target="#bgp">BGP</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -401,11 +407,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>interface g0/0</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> snmp trap link-status permit duplicates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Log Timestamps - when no log/debug keyword specified (<code>service timestamps</code>) - it’s like issuing <code>service timestamps debug uptime</code> applied be default - shows <strong>UPTIME</strong></p>
+<section id="bgp" class="level3">
+<h3 class="anchored" data-anchor-id="bgp">BGP</h3>
 <p>BGP learned route RIB Failure (r)</p>
 <ol type="1">
 <li>We have a better route in our routing table (static perhaps)</li>
 <li>We can’t reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )</li>
 </ol>
+<p>BGP Maximum Prefix - The BGP Maximum-Prefix feature allows you to control how many prefixes can be received from a neighbor.</p>
+<p>By default, this feature allows a router to bring down a peer when the number of received prefixes from that peer exceeds the configured Maximum-Prefix limit.</p>
 <p>LDP Extended Discovery Message - Unicast message used to find and establish session with LDP Neighbour (LSR) not directly reachable via multiast hello’s.</p>
 <p><code>debug CEF interface</code> - debugs events related to CEF</p>
 <ul>
@@ -427,6 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -144,3 +144,9 @@ White Papers from <https://www.reddit.com/r/ccnp/comments/1jtt2lt/ccnp_enterpris
 <https://www.cisco.com/c/en/us/td/docs/optical/15000r8_0/ethernet/454/guide/d80ether/r8vrf.pdf>
 
 <https://www.cisco.com/c/en/us/support/docs/smb/switches/cisco-550x-series-stackable-managed-switches/smb5797-configure-ip-sla-tracking-for-ipv4-static-routes-on-an-sg550.html>
+
+<https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960xr/software/15_2_6_e/configuration_guide/b_1526e_consolidated_2960xr_cg/m_bidirectional_forwarding_detection_2960-xr-1.html>
+
+<https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bfd/configuration/xe-3s/irb-xe-3s-book/irb-bi-fwd-det.html>
+
+

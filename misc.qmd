@@ -39,10 +39,16 @@ interface g0/0
 
 Log Timestamps - when no log/debug keyword specified (`service timestamps`) - it's like issuing `service timestamps debug uptime` applied be default - shows **UPTIME**
 
+### BGP
+
 BGP learned route RIB Failure (r)
 
 1.  We have a better route in our routing table (static perhaps)
 2.  We can't reach the next hop associated with that route (neighbour advertising route with different next hop that itself. )
+
+BGP Maximum Prefix - The BGP Maximum-Prefix feature allows you to control how many prefixes can be received from a neighbor.
+
+By default, this feature allows a router to bring down a peer when the number of received prefixes from that peer exceeds the configured Maximum-Prefix limit.
 
 LDP Extended Discovery Message - Unicast message used to find and establish session with LDP Neighbour (LSR) not directly reachable via multiast hello's.
 
