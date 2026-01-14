@@ -415,6 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>EIGRP/RIP = Infinity (not installed into EIGRP topology table</li>
 <li>OSPF = 20 (1 for BGP)</li>
 <li>BGP = Uses IGP metric</li>
+<li>RIP = Needs a metric</li>
 </ul></li>
 <li><code>redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]</code></li>
 <li>Into OSPF = <code>subnets</code> allows classless networks to be redistributes</li>

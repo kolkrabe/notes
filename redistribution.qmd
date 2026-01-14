@@ -17,6 +17,7 @@ code-block-bg: dark
     -   EIGRP/RIP = Infinity (not installed into EIGRP topology table
     -   OSPF = 20 (1 for BGP)
     -   BGP = Uses IGP metric
+    -   RIP = Needs a metric
 -   `redistribute {connected | static | eigrp AS number | OSPF Process ID  [match {internal | external [1|2] } ] | BGP AS-number} [destination-protcol-options] [route-map RM NAME]`
 -   Into OSPF = `subnets` allows classless networks to be redistributes
 
