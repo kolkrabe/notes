@@ -35,7 +35,7 @@ Useful show commands
 -   `show ip dhcp pool` ! shows configured dhcp pool
 -   `show ip dhcp conflict` ! shows ip conflicts
 
----
+------------------------------------------------------------------------
 
 Standard IPv4/IPv6 Configuration
 

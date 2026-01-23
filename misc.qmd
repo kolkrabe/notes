@@ -66,3 +66,5 @@ LDP Extended Discovery Message - Unicast message used to find and establish sess
     -   route-map
     -   prefix-list
     -   filter-list
+
+Radius Auth default port 1812

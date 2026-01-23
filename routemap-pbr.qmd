@@ -20,8 +20,8 @@ code-block-bg: dark
 -   Can specify multiple next-hops - when done the first will be used if the next-hop is adjacent, otherwise it will use the second, third, etc
 -   If you want to use a non-adjacent route, you must use the `recursive` flag when configuring the route-map `set` statement
 -   Config options:
-    -   `set ip next-hop ip-address [ip]`
-    -   `set ip default next-hop ip-address [ip]` - Set next hop IP if there is no explicit route for this destination.
+    -   `set ip next-hop ip-address [ip]`  - sets next hop IP.
+    -   `set ip default next-hop ip-address [ip]` - `default` changes behavior - configures next hop IP only if there is no explicit route for this destination.
         -   If destination **exists in route table**: the command doesn't policy route, routes based on routing table
         -   If destination **does not** **exist in route table**: the command policy routes the packet to the next hop.
     -   `set interface [interface type] [interface-number]` (multiple ints will be tried in turn)
