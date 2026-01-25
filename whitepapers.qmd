@@ -89,6 +89,8 @@ White Papers from <https://www.reddit.com/r/ccnp/comments/1jtt2lt/ccnp_enterpris
 
 <https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst6500/ios/15-3SY/config_guide/sup6T/15_3_sy_swcg_6T/control_plane_policing_copp.pdf>
 
+<https://www.cisco.com/c/en/us/td/docs/routers/7600/ios/15S/configuration/guide/7600_15_0s_book/IPv6_Security.pdf>
+
 **MPLS:**
 
 <https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/mpls/command/mp-cr-book/mp-m2.html#wp1359271466>

@@ -414,8 +414,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>If you want to use a non-adjacent route, you must use the <code>recursive</code> flag when configuring the route-map <code>set</code> statement</li>
 <li>Config options:
 <ul>
-<li><code>set ip next-hop ip-address [ip]</code></li>
-<li><code>set ip default next-hop ip-address [ip]</code> - Set next hop IP if there is no explicit route for this destination.
+<li><code>set ip next-hop ip-address [ip]</code> - sets next hop IP - doesn’t verify reachability, if next hop unreachable the packets are dropped.</li>
+<li><code>set ip next-hop verify-availability 10.1.1.1 1 track 10</code> - Verifies reachability via tracking/IPSLA, if next hop down PBR entry is skipped, packet routed by RIB</li>
+<li><code>set ip default next-hop ip-address [ip]</code> - <code>default</code> - Fallback, - if routing table has a match for destination it wins, if no route exists - configred next hop wins.
 <ul>
 <li>If destination <strong>exists in route table</strong>: the command doesn’t policy route, routes based on routing table</li>
 <li>If destination <strong>does not</strong> <strong>exist in route table</strong>: the command policy routes the packet to the next hop.</li>
