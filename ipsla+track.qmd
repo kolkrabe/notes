@@ -28,13 +28,23 @@ code-block-bg: dark
 ``` default
 ip sla 1 
  icmp-echo 10.44.1.2                                    - pings 10.44.1.2
- timeout 5000                                           - expecting a response within 5000ms
- frequency 10                                           - every 10 seconds
+ timeout 5000  (ms)                                          - expecting a response within 5000ms
+ frequency 10   (s)                                        - every 10 seconds
 !
 ip sla schedule 1 start-time now life forever          - starts IP SLA
 !
 track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable
 ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met
+```
+
+## Configuration of IP SLA to monitor web connectivity
+
+``` default
+ip sla 1
+ http get url http://10.44.120.10
+ frequecy 60 (s)
+!
+ip sla schedule 1 start-time now life forever
 ```
 
 NOTE - If no `life` specified the operation will run for 3600 seconds (1 Hour)

@@ -240,7 +240,19 @@
     "href": "ipsla+track.html#configuration-of-floating-static-using-ip-sla",
     "title": "IP SLA & Tracking",
     "section": "Configuration of Floating Static using IP SLA",
-    "text": "Configuration of Floating Static using IP SLA\nip sla 1 \n icmp-echo 10.44.1.2                                    - pings 10.44.1.2\n timeout 5000                                           - expecting a response within 5000ms\n frequency 10                                           - every 10 seconds\n!\nip sla schedule 1 start-time now life forever          - starts IP SLA\n!\ntrack 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable\nip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met\nNOTE - If no life specified the operation will run for 3600 seconds (1 Hour)",
+    "text": "Configuration of Floating Static using IP SLA\nip sla 1 \n icmp-echo 10.44.1.2                                    - pings 10.44.1.2\n timeout 5000  (ms)                                          - expecting a response within 5000ms\n frequency 10   (s)                                        - every 10 seconds\n!\nip sla schedule 1 start-time now life forever          - starts IP SLA\n!\ntrack 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable\nip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met",
+    "crumbs": [
+      "CCNP ENARSI",
+      "Infrastructure Services",
+      "IP SLA & Tracking"
+    ]
+  },
+  {
+    "objectID": "ipsla+track.html#configuration-of-ip-sla-to-monitor-web-connectivity",
+    "href": "ipsla+track.html#configuration-of-ip-sla-to-monitor-web-connectivity",
+    "title": "IP SLA & Tracking",
+    "section": "Configuration of IP SLA to monitor web connectivity",
+    "text": "Configuration of IP SLA to monitor web connectivity\nip sla 1\n http get url http://10.44.120.10\n frequecy 60 (s)\n!\nip sla schedule 1 start-time now life forever\nNOTE - If no life specified the operation will run for 3600 seconds (1 Hour)",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Services",
