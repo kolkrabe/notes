@@ -33,14 +33,14 @@ code-block-bg: dark
 
 # Features
 
-##### Neighbourship
+### Neighbourship
 
 -   **Autonomous System** number **must match** between Neighbours
 -   Connected interface can't be **Passive**
 -   K Values must match
 -   Authentication must pass
 
-##### Path Selection
+### Path Selection
 
 -   **Reported Distance** - cost to destination from neighbouring router
 -   **Feasible Distance** - RD + path cost to get to neighbouring router.
@@ -49,7 +49,7 @@ code-block-bg: dark
 -   **Feasibility Condition** - That the **RD** must be less than the **FD** (loop prevention)
 -   **Feasible Successor** - route which passes the feasibility condition.
 
-##### Influencing Path Selection
+### Influencing Path Selection
 
 Metric calculated using K Values, mainly Bandwidth (minimum on path) and Delay (cumulative).
 
@@ -61,7 +61,7 @@ Metric calculated using K Values, mainly Bandwidth (minimum on path) and Delay (
 
 ------------------------------------------------------------------------
 
-##### Authentication
+### Authentication
 
 -   Supports plaintext + hash based auth - MD5 & SHA-256 auth (named) or just MD5 (classic)
 -   MD5 configuration done with key chain in global config
@@ -93,7 +93,7 @@ int g0/0
  ip authentication key-chain eigrp 10 MD5_KEYS
 ```
 
-##### Route Filtering
+### Route Filtering
 
 -   Can be achieved by using **distribute Lists**, **Prefix lists**, **route maps** & **Leak Maps**
 
@@ -117,17 +117,17 @@ int g0/0
       distribute-list route-map FILTER_ON_TAGS in
     ```
 
-##### Loop Prevention
+### Loop Prevention
 
 -   Split-Horizon - stops a route being learned on the interface it was advertised on.
 -   Use of Feasibility condition.
 -   Can disable on P2P link - `no ip split-horizon eigrp [AS]`
 
-##### Redistribution - see redistribution
+### Redistribution - see redistribution
 
 -   see [Redistribution Page](https://kolkrabe.github.io/notes/redistribution.html)
 
-##### Summarization
+### Summarization
 
 -   Possible anywhere in topology
 -   Manual or Auto (auto is classful).
@@ -137,7 +137,7 @@ int g0/0
 -   "Discard Route" installed with destination Null0 - match summary address to prevent loops (AD set to 5)
 -   Can define metric on summary-address with the `summary-metric` command under topology base
 
-##### Stub
+### Stub
 
 -   Prevents advertisement of anything other than connected routes + summary routes *by default*
 -   If route goes active the router doesn't send EIGRP Queries to Stub
@@ -147,7 +147,7 @@ int g0/0
 -   Can use leak-maps to advertise normally suppressed routes
 -   Can specify which routes it shares between - `Connected`, `leak-map`, `receive-only`, `Redistributed` (from other RPs), `static`, `summary`,
 
-##### Stub Site
+### Stub Site
 
 -   Only on named mode
 -   Allows advertisement of routes learned on LAN but not WAN interfaces
@@ -156,13 +156,13 @@ int g0/0
     -   Mutually exclusive with `eigrp stub`
 -   Interfaces towards hub/WAN identified with `stub-site wan-interface` under af-interface
 
-##### Split Horizon
+### Split Horizon
 
 -   Prevents route being advertised out of the interface they were learned from.
 -   Stops routing loops
 -   Can be disabled `no ip split-horizon eigrp [AS]` - Useful for Hub & Spoke networks
 
-##### Load balancing
+### Load balancing
 
 -   In named config configured under `Topology base`
 -   Equal cost load balancing enabled by default (max 4 paths by default)
@@ -170,13 +170,13 @@ int g0/0
 -   Variance used to enable load balancing between unequal paths, installs feasible successor routes and puts them into the routing table
 -   variance is a multiplier of Feasible Distance. Verify (and show traffic share) with `show ip route [network]`
 
-##### Metrics
+### Metrics
 
 -   wide-metrics - used to scale EIGRP for modern bandwidths, NAMED Mode only.
 -   Introduces K6 value.
 -   configure under address family
 
-##### Offset-lists
+### Offset-lists
 
 -   Used for traffic steering to make path WORSE
 -   Can modify path attributes based on *direction of update* / *PREFIX* / combination of both.
@@ -184,7 +184,7 @@ int g0/0
 -   Configured under topology base (modifying metric) with for Modern / Under process for Classic
     -   `offset-list [access-list] [in/out] [metric] [interface]`
 
-##### EIGRP for IPv6
+### EIGRP for IPv6
 
 -   Doesn't use Network command
 

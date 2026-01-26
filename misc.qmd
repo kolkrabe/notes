@@ -68,3 +68,7 @@ LDP Extended Discovery Message - Unicast message used to find and establish sess
     -   filter-list
 
 Radius Auth default port 1812
+
+BFD Precedence 7
+
+BFD Echo Default
