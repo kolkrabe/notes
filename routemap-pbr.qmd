@@ -21,6 +21,7 @@ code-block-bg: dark
 -   If you want to use a non-adjacent route, you must use the `recursive` flag when configuring the route-map `set` statement
 -   Config options:
     -   `set ip next-hop ip-address [ip]` - sets next hop IP - doesn't verify reachability, if next hop unreachable the packets are dropped.
+    -   `set ip next hop recursive 10.1.1.1` - tells the router to use the routing table to find the next hop interface towards 10.1.1.1
     -   `set ip next-hop verify-availability 10.1.1.1 1 track 10` - Verifies reachability via tracking/IPSLA, if next hop down PBR entry is skipped, packet routed by RIB
     -   `set ip default next-hop ip-address [ip]` - `default` - Fallback, - if routing table has a match for destination it wins, if no route exists - configred next hop wins.
         -   If destination **exists in route table**: the command doesn't policy route, routes based on routing table
