@@ -26,4 +26,7 @@ editor: visual
 -   Requirements
 
     -   **CEP + IP Routing** must be enabled
+
     -   IP Routing protocol supported by BFD must be configured before BFD is configured
+
+    -   Control packets sent on UDP port 3784
