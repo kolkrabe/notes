@@ -27,6 +27,49 @@ code-block-bg: dark
     -   **Request** - Client sends request back to server, confirming address provided + other config
     -   **Reply** - Server finalizes process with this message
 
+## DHCPv6
+
+DHCPv6 can assign:
+
+-    IPv6 addresses
+-   **Prefix Delegation (PD)** for downstream routers
+-   **Other info** (DNS, domain name, NTP, etc.)
+
+Unlike IPv4:
+
+-    No default gateway via DHCPv6
+-    Default gateway comes from **Router Advertisements (RA)**
+
+### SLAAC vs DHCPv6
+
+| Method                   | Address | Other Info | RA Flags      |
+|--------------------------|---------|------------|---------------|
+| SLAAC only               | Yes     | No         | M=0, O=0      |
+| SLAAC + Stateless DHCPv6 | Yes     | Yes        | M=0, O=1      |
+| Stateful DHCPv6          | Yes     | Yes        | M=1, O=0 or 1 |
+
+-   **M (Managed)** = Use DHCPv6 for addressing
+-    **O (Other)** = Use DHCPv6 for other info
+
+### DHCPv6 ports & addresses
+
+-    **UDP 546** → client
+
+-    **UDP 547** → server/relay
+
+    **Multicast addresses**
+
+-    `ff02::1:2` → All DHCPv6 servers & relays
+
+-    Link-local source address used by clients
+
+### DHCPv6 Relay
+
+-   Used when DHCPv6 server is on different network
+-   Relay inserts **link-address**
+-   Relay uses **RELAY-FORWARD**
+-   Server replies with **RELAY-REPLY**
+
 ------------------------------------------------------------------------
 
 Useful show commands
@@ -65,4 +108,5 @@ ipv6 dhcp server DHCPV6POOL ! required to advertise IPs in v6 unlike v4
 ``` default
 int g0/0
 ipv6 address autoconfig            ! Enables SLAAC on an interface
+ipv6 dhcp relay destination 2001:100:100::100:100 Gigabit int g0/2
 ```
