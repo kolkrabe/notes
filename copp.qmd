@@ -84,10 +84,17 @@ policy-map COPP-POLICYMAP-EXAMPLE
   police 34000 conform-action transmit exceed-action transmit violate-action transmit
  class COPP-ICMP-CLASSMAP-EXAMPLE
   police 8000 conform-action transmit exceed-action transmit violate-action drop
-
+  
 *** Apply to the Control Plane ***
 control-plane
  service-policy input COPP-POLICYMAP-EXAMPLE
+ 
+ 
+**** Additional ****
+Under Police Statement conform-action/exceed-action
+set-prec-transmit         Assigns secondary precedence (Lower Priority ) - Allows & Marks
+set-clp-transmit          Sets Cell Loss Priority on Transmit. -         - Deprioritises, more likely to be dropped
+
 ```
 
 ## Additional Points

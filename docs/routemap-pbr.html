@@ -449,6 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>When referenced by a Route Map, Permit in ACL means go ahead and process this matched traffic however the route map likes.</li>
 <li>Route-map goes through sequences until a match is found then stops unless the <code>continue</code> flag is set</li>
+<li>When the <code>continue</code> flag is set, if multiple set conditions are processed only the last is honoured - this can have undesired effects - –&gt; <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-3se/3650/irg-xe-3se-3650-book/irg-route-map-continue-outbound.pdf" class="uri">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-3se/3650/irg-xe-3se-3650-book/irg-route-map-continue-outbound.pdf</a></li>
 <li>When using an ACL the ACL cannot contain <code>time-range</code>, <code>disable-port</code> or <code>log-input.</code></li>
 <li>Clauses Evaluated in this order
 <ul>

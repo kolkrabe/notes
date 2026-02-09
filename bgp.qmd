@@ -116,7 +116,7 @@ Cheat sheet - [https://ipcisco.com/wp-content/uploads/Cheat-Sheets/bgp.pdf](http
 
 -   Can be used to search for specifc AS-PATHs in table - for example: `show ip bgp regexp ^$` this shows entries where AS-PATH is empty (locally originated)
 -   Above will show prefixes originated locally with the AS. Cheat sheet [here.](http://gponsolution.com/bgp-regular-expressions-cheat-sheet.html)
--   Originated in AS 100: `_100$`, Learned from AS 100: `^100_`
+-   Originated in AS 100: `_100$`, Learned from AS 100: `^100_` , Locally Originated `^$`
 -   Can be used to filter with ACLs with IP as-path: `ip as-path access-list 1 permit _54$`
 -   Then use `match as-path` under a route-map to apply modifications
 -   TIP: Summarise Address without using aggregate-adresss

@@ -31,14 +31,14 @@ code-block-bg: dark
 
 DHCPv6 can assign:
 
--    IPv6 addresses
+-   IPv6 addresses
 -   **Prefix Delegation (PD)** for downstream routers
 -   **Other info** (DNS, domain name, NTP, etc.)
 
 Unlike IPv4:
 
--    No default gateway via DHCPv6
--    Default gateway comes from **Router Advertisements (RA)**
+-   No default gateway via DHCPv6
+-   Default gateway comes from **Router Advertisements (RA)**
 
 ### SLAAC vs DHCPv6
 
@@ -49,19 +49,21 @@ Unlike IPv4:
 | Stateful DHCPv6          | Yes     | Yes        | M=1, O=0 or 1 |
 
 -   **M (Managed)** = Use DHCPv6 for addressing
--    **O (Other)** = Use DHCPv6 for other info
+-   **O (Other)** = Use DHCPv6 for other info
 
 ### DHCPv6 ports & addresses
 
--    **UDP 546** → client
+-   **UDP 546** → client
 
--    **UDP 547** → server/relay
+-   **UDP 547** → server/relay
 
-    **Multicast addresses**
+```         
+**Multicast addresses**
+```
 
--    `ff02::1:2` → All DHCPv6 servers & relays
+-   `ff02::1:2` → All DHCPv6 servers & relays
 
--    Link-local source address used by clients
+-   Link-local source address used by clients
 
 ### DHCPv6 Relay
 
