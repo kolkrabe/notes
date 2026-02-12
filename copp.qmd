@@ -94,7 +94,6 @@ control-plane
 Under Police Statement conform-action/exceed-action
 set-prec-transmit         Assigns secondary precedence (Lower Priority ) - Allows & Marks
 set-clp-transmit          Sets Cell Loss Priority on Transmit. -         - Deprioritises, more likely to be dropped
-
 ```
 
 ## Additional Points

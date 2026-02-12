@@ -50,8 +50,7 @@ code-block-bg: dark
     -   If both statements match the same criteria = logical **OR**
 -   When referenced by a Route Map, Permit in ACL means go ahead and process this matched traffic however the route map likes.
 -   Route-map goes through sequences until a match is found then stops unless the `continue` flag is set
--    When the `continue` flag is set, if multiple set conditions are processed only the last is honoured - this can have undesired effects
-    -   --\> <https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-3se/3650/irg-xe-3se-3650-book/irg-route-map-continue-outbound.pdf>
+-   When the `continue` flag is set, if multiple set conditions are processed only the last is honoured - this can have undesired effects - --\> <https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_bgp/configuration/xe-3se/3650/irg-xe-3se-3650-book/irg-route-map-continue-outbound.pdf>
 -   When using an ACL the ACL cannot contain `time-range`, `disable-port` or `log-input.`
 -   Clauses Evaluated in this order
     -   `set ip next-hop`
