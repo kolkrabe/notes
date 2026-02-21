@@ -7,16 +7,11 @@ code-block-bg: dark
 ## General Info
 
 -   Designed to increase L2 security in IPv6 LANs
-
 -   Protects against weakness in the ICMPv6 Packets which are flooded (not broadcast) to
-
     -   FF02::1 (All IPv6 hosts)
     -   FF02::2 (All IPv6 routers)
-
 -   First-hop security features assist in preventing exploits around common multicast addresses used by NDP, DHCPv6
-
 -   Makes use of 2 High Level Features
-
     -   <div>
 
         1.  IPv6 Snooping Policy (Container that enables most other features)
@@ -73,7 +68,6 @@ code-block-bg: dark
     -   Drops messages from hosts that already exist in the bind table but on different hardware addresses, preventing address spoofing
     -   Relies on IPv6 snooping
     -   Configured with `ipv6 nd inspection` under interfaces
-    -   
 
 -   **Source Guard**
 
@@ -85,14 +79,21 @@ code-block-bg: dark
 -   **Destination Guard**
 
     -   Can filter based on Destination. Also requires binding table to be populated.
-
     -   Blocks traffic coming for an unknown destination
 
 -   **Prefix Guard**
 
     -   Used on Ingress interface to deny traffic that has a correct address but is not topologically correct.
-
     -   Configured with `ipv6 source-guard` under interface
+
+## NS/NA/RS/RA Packets
+
+-   ICMPv6 Type 133 - Router Solicitation
+-   ICMPv6 Type 134 - Router Advertisement
+-   ICMPv6 Type 135 - Neighbour Solicitation
+-   ICMPv6 Type 136 - Neighbour Advertisement
+-   ICMPv6 Type 137 - Redirect
+-   
 
 ------------------------------------------------------------------------
 

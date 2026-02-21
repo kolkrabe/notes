@@ -20,6 +20,16 @@ code-block-bg: dark
     -   **Request** - Client request the offered IP details.
     -   **Acknowledge** - DHCP server acknowledges clients request and records the details
 
+-   Additional Messages
+
+    -   **DHCPNAK (Negative Acknowledgment):** Sent by a server to a client to reject a `DHCPREQUEST`. This happens if the requested IP is no longer available or the client has moved to a new subnet.
+
+    -   **DHCPDECLINE:** Sent by the client to the server to notify it that the offered IP address is already in use (detected via gratuitous ARP).
+
+    -   **DHCPRELEASE:** Sent by the client to the server to voluntarily give up an IP address, such as during a graceful shutdown.
+
+    -   **DHCPINFORM:** Sent by a client that already has an IP address (configured manually or via other means) to request additional configuration parameters (e.g., DNS, gateway) from a server.
+
 -   SARR (IPv6)
 
     -   **Solicit** - Client sends this to locate DHCPv6 server, uses Multicast FFF02::1:2
