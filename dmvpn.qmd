@@ -29,9 +29,26 @@ code-block-bg: dark
     -   Does ***NOT*** work with summarization - since the RIB will not have a route to the other spokes, all traffic will transit the hub
     -   If using OSPF, network type must be broadcast or non-broadcast to prevent changing next-hops
         -   In this scenario the spokes must be set at priority 0 to prevent them becoming DRs - if spokes become DRs the network will not function as they cannot multicast between each other
--   **Phase 3**
-    -   Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB
-    -   Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub
+
+**Phase 3**
+
+-   Allows spoke-to-spoke traffic by using NHRP redirect and shortcut commands that allow NHRP to rewrite next hops in the RIB
+-   Main benefit over phase 2 is allowing summarization from hubs to spokes - spokes will still be able to form tunnels to each other in phase 3 even with a default route from the hub
+
+## Flags
+
+-   **authoritative -** The authoritative flag is added to the mapping when it was obtained from the Next-Hop-Server (NHS) or the router that maintains the NBMA-to-IP address mapping for that destination. Hence it being trusted and to authoritative.
+-   **implicit -** The implicit flag is added when the mapping was added as a result of an NHRP Resolution request being received or transited. This is common in Phase 2 when the spoke being 'looked up' receives the NHRP Resolution request forwarded from the Hub. This request contains information about the requesting spoke so makes sense to add that info as a Mapping for future reference!
+-   **local -** This indicates a mapping that is local to the router. It is added when a router answers an NHRP Resolution request and are used by the router to store the tunnel IP of all of the other NHRP nodes to which the router has sent this information to.
+-    **nat -** This flag is found on mappings as a result of NHRP Resolution registration packets, where the Next-Hop-Client supports the NHRP NAT extensions that assists when creating spoke-to-spoke tunnels where NAT is involved. This flag is only an indication that the NHC supports the extensions and does not mean that that router is actually behind a NAT device.
+-   **negative -** This flag is used to indicate that the mapping could not be obtained. This is inserted when an NHRP Resolution request is sent to the Hub to prevent the router from sending more requests. It is removed when a response comes in the format of a valid NHRP Resolution reply.
+-   **no socket -** This flag is used when the router does not need nor want to trigger IPsec to set up encryption, because the router does not have data traffic that needs to use this tunnel. If later on there is data that needs to use this tunnel it will be converted from a "no socket" to a "socket" entry and IPsec will be triggered to set up the encryption for this tunnel. Local and implicit NHRP mapping entries are always initially marked as “no socket.”
+-   **registered -** This flag is added to mappings created from NHRP Registrations Requests when the spokes (NHCs) register with the Hub (NHS).
+-   **router -** This flag is added to entries that are for a remote router itself for access to a network or host behind the remote router.
+-   **unique -** This flag is set as default on mappings created from NHRP Registration requests. This means that the mapping cannot be overwritten with a mapping that has the same tunnel IP but a different NBMA address. This needs to be evaluated if you have spokes with public IP addresses that may change. If the spoke NBMA address changes legitimately, then the mapping on the NHS will not be amended to reflect this because of the unique flag. You would have to wait until the mapping aged out. This can be circumvented with configuration on the tunnel interface on the hub if required.
+-   **used -** This flag is used when a mapping is currently in use in the data plane. This flag is re-evaluated every 60s. If the used flag is set and there are more than 120 seconds left until the expiry time, the used flag is removed. If there are fewer than 120 seconds left until the expire time, then this mapping entry is "refreshed" by sending another NHRP Resolution request to the NHS.
+
+And thats all the flags! Some of them are a little hard to comprehend but hopefully this helps if you ever need to troubleshoot mappings and their flags within NHRP.
 
 ------------------------------------------------------------------------
 
