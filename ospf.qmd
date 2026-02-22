@@ -88,6 +88,8 @@ code-block-bg: dark
 
 ## Neighbour States
 
+**D**racula **A**llows **I**mps **2** **E**at **E**very **L**iving **F**airy
+
 1.  **Down -** No Hello's received
 2.  **Attempt -** Only for manually configured neighbours in NBMA networks (Frame-Relay)
 3.  **Init -** Hello packet received from neighbour
