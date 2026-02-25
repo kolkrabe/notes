@@ -72,3 +72,5 @@ Radius Auth default port 1812
 BFD Precedence 7
 
 BFD Echo Default
+
+The `tunnel protection ipsec profile <name> shared` command on Cisco IOS/XE allows multiple GRE tunnels using the same source interface to share a single IPsec Security Association Database (SADB) and cryptographic map

@@ -356,8 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
-  <li><a href="#fec" id="toc-fec" class="nav-link" data-scroll-target="#fec"><strong>FEC</strong></a></li>
+  <li><a href="#fec" id="toc-fec" class="nav-link active" data-scroll-target="#fec"><strong>FEC</strong></a></li>
   <li><a href="#mpls-layer-3-vpn" id="toc-mpls-layer-3-vpn" class="nav-link" data-scroll-target="#mpls-layer-3-vpn">MPLS Layer 3 VPN</a></li>
   <li><a href="#useful-show-commands" id="toc-useful-show-commands" class="nav-link" data-scroll-target="#useful-show-commands">Useful Show Commands</a></li>
   <li><a href="#config" id="toc-config" class="nav-link" data-scroll-target="#config">Config</a></li>
@@ -386,8 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="general-info" class="level2">
-<h2 class="anchored" data-anchor-id="general-info">General Info</h2>
+<p>## General Info</p>
 <ul>
 <li>Protocol that uses labels to determine which path traffic should route</li>
 <li>shim header (<strong>20-bit</strong>) inserted between IP &amp; MAC header (This is the label) - That is to say the MPLS labels appear between the Layer 2 &amp; Layer 3 Headers.</li>
@@ -413,6 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Introduces <code>LIB</code> (Label Information Base) &amp; <code>LFIB</code> (Label Forwarding Information Base)</li>
 <li><strong>LDP</strong> - Label Discovery Protocol
 <ul>
+<li>An LDP label binding is an association between a destination prefix and a label</li>
 <li>Uses all-routers multicast (<strong>224.0.0.2</strong>), <strong>TCP</strong> port <strong>646</strong> src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)</li>
 <li>UDP also used for initial discovery messages <strong>(Using UDP)</strong></li>
 <li>LDP requires <strong>CEF</strong> in order to exchange labels</li>
@@ -460,7 +459,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <hr>
-</section>
 <section id="fec" class="level2">
 <h2 class="anchored" data-anchor-id="fec"><strong>FEC</strong></h2>
 <ul>

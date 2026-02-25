@@ -4,7 +4,7 @@ editor: visual
 code-block-bg: dark
 ---
 
-## General Info
+\## General Info
 
 -   Protocol that uses labels to determine which path traffic should route
 -   shim header (**20-bit**) inserted between IP & MAC header (This is the label) - That is to say the MPLS labels appear between the Layer 2 & Layer 3 Headers.
@@ -21,6 +21,7 @@ code-block-bg: dark
     -   CEF Tables (FIB, LFIB, Adjacency Table)
 -   Introduces `LIB` (Label Information Base) & `LFIB` (Label Forwarding Information Base)
 -   **LDP** - Label Discovery Protocol
+    -   An LDP label binding is an association between a destination prefix and a label
     -   Uses all-routers multicast (**224.0.0.2**), **TCP** port **646** src and dst for Hellos, unicast to neighbors once TCP session established (Also used UDP)
     -   UDP also used for initial discovery messages **(Using UDP)**
     -   LDP requires **CEF** in order to exchange labels
