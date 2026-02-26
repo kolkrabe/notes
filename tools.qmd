@@ -15,4 +15,4 @@ IP Quail - <https://ipquail.com/>
 
 Speed Test (CloudFlare) - <https://Speed.cloudflare.com>
 
-DNS Vis - <https://www.moanmyip.com/>
+DNS Vis - <https://dnsviz.net/>
