@@ -14,6 +14,13 @@ code-block-bg: dark
 **Access-class**: applies an ACL to a `line` (VTY, Console, Aux) etc.
 
 ``` default
+ipv4
+----
 line con 0
- access-class <acl name>
+ access-class <acl name> {in|out}
+ 
+ipv6
+----
+line vty 0
+  ipv6 access-class <ACL name> {in|out}
 ```

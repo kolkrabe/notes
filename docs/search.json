@@ -552,7 +552,7 @@
     "href": "acls.html",
     "title": "IP ACLs",
     "section": "",
-    "text": "IP access-list: Defines traffic - either via permit/deny\nIP Access-group: applies an ACL to a physical interface\n\nip access-group &lt;ACL name&gt; {in|out}\nipv6 traffic-filter &lt;ACL name&gt; {in|out}\n\nAccess-class: applies an ACL to a line (VTY, Console, Aux) etc.\nline con 0\n access-class &lt;acl name&gt;",
+    "text": "IP access-list: Defines traffic - either via permit/deny\nIP Access-group: applies an ACL to a physical interface\n\nip access-group &lt;ACL name&gt; {in|out}\nipv6 traffic-filter &lt;ACL name&gt; {in|out}\n\nAccess-class: applies an ACL to a line (VTY, Console, Aux) etc.\nipv4\n----\nline con 0\n access-class &lt;acl name&gt; {in|out}\n \nipv6\n----\nline vty 0\n  ipv6 access-class &lt;ACL name&gt; {in|out}",
     "crumbs": [
       "CCNP ENARSI",
       "Infrastructure Security",
