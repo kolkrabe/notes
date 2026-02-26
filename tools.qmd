@@ -16,3 +16,5 @@ IP Quail - <https://ipquail.com/>
 Speed Test (CloudFlare) - <https://Speed.cloudflare.com>
 
 DNS Vis - <https://dnsviz.net/>
+
+Regex Calc - <https://regex101.com/>
