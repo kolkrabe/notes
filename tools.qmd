@@ -4,6 +4,15 @@ editor: visual
 ---
 
 HE BGP Toolkit - [https://bgp.he.net/](https://bgp.he.net/){target="_blank"}
+
 Ping Plotter - [https://www.pingplotter.com/](https://www.pingplotter.com/){target="_blank"}
+
 Planner 5D - [https://planner5d.com/](https://planner5d.com/){target="_blank"}
+
 Ping Tracer - [https://github.com/bp2008/pingtracer](https://github.com/bp2008/pingtracer){target="_blank"}
+
+IP Quail - <https://ipquail.com/>
+
+Speed Test (CloudFlare) - <https://Speed.cloudflare.com>
+
+DNS Vis - <https://www.moanmyip.com/>
