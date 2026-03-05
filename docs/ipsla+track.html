@@ -409,13 +409,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="configuration-of-floating-static-using-ip-sla">Configuration of Floating Static using IP SLA</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ip sla 1 </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> icmp-echo 10.44.1.2                                    - pings 10.44.1.2</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> timeout 5000  (ms)                                          - expecting a response within 5000ms</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> frequency 10   (s)                                        - every 10 seconds</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ip sla schedule 1 start-time now life forever          - starts IP SLA</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> timeout 5000  (ms)                                     - expecting a response within 5000ms</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> frequency 10   (s)                                     - every 10 seconds</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> threshold 1000 (ms)                                    - If exceeded, marked as threshold violation but doesn't stop operation</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> control disable                                        - Disable control packets (non SLA configured end point)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>!</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ip sla schedule 1 start-time now life forever          - starts IP SLA</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>!</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> delay down 30 up 20                                   - Track stays up until condition is met for 30 seconds + down until fixed for 20</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="configuration-of-ip-sla-to-monitor-web-connectivity" class="level2">
 <h2 class="anchored" data-anchor-id="configuration-of-ip-sla-to-monitor-web-connectivity">Configuration of IP SLA to monitor web connectivity</h2>

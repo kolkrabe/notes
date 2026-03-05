@@ -28,12 +28,15 @@ code-block-bg: dark
 ``` default
 ip sla 1 
  icmp-echo 10.44.1.2                                    - pings 10.44.1.2
- timeout 5000  (ms)                                          - expecting a response within 5000ms
- frequency 10   (s)                                        - every 10 seconds
+ timeout 5000  (ms)                                     - expecting a response within 5000ms
+ frequency 10   (s)                                     - every 10 seconds
+ threshold 1000 (ms)                                    - If exceeded, marked as threshold violation but doesn't stop operation
+ control disable                                        - Disable control packets (non SLA configured end point)
 !
 ip sla schedule 1 start-time now life forever          - starts IP SLA
 !
 track 1 ip sla 1 reachability                          - tracks whether ip-sla dest is reachable
+ delay down 30 up 20                                   - Track stays up until condition is met for 30 seconds + down until fixed for 20
 ip route 0.0.0.0 0.0.0.0 10.44.1.2 track 1             - the route is installed when Track 1 condition is met
 ```
 

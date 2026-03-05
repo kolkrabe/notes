@@ -80,6 +80,7 @@ code-block-bg: dark
 
     -   Can filter based on Destination. Also requires binding table to be populated.
     -   Blocks traffic coming for an unknown destination
+    -   Minimizes DoS attacks
 
 -   **Prefix Guard**
 

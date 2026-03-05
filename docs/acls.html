@@ -351,8 +351,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General Info</a></li>
+  <li><a href="#time-range" id="toc-time-range" class="nav-link" data-scroll-target="#time-range">Time Range</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -376,6 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="general-info" class="level2">
+<h2 class="anchored" data-anchor-id="general-info">General Info</h2>
 <p><strong>IP access-list</strong>: Defines traffic - either via permit/deny</p>
 <p><strong>IP Access-group</strong>: applies an ACL to a physical <code>interface</code></p>
 <ul>
@@ -392,8 +401,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>----</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>line vty 0</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ipv6 access-class &lt;ACL name&gt; {in|out}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="time-range" class="level2">
+<h2 class="anchored" data-anchor-id="time-range">Time Range</h2>
+<ol type="1">
+<li>Define a Time Range</li>
+</ol>
+<p>Apply the time range in the ACL</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>time-range WORK_HOURS</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> periodic weekdays 08:00 to 17:00</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>time-range WORK_HOURS</code> → name of the time range</p>
+<p><code>periodic weekdays 08:00 to 17:00</code> → applies Monday–Friday, 8 AM to 5 PM</p>
+<p>Other options:</p>
+<p>absolute <start-date> <start-time> to <end-date> <end-time> → one-time period</end-time></end-date></start-time></start-date></p>
+<p>daily <start-time> to <end-time> → every day</end-time></start-time></p>
+<p>monthly <day-of-month> <start-time> to <end-time> → monthly period</end-time></start-time></day-of-month></p>
+<ul>
+<li><code>periodic weekdays 08:00 to 17:00</code> → applies <strong>Monday–Friday, 8 AM to 5 PM</strong></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Other options:</p>
+<ul>
+<li></li>
+<li><p><code>absolute &lt;start-date&gt; &lt;start-time&gt; to &lt;end-date&gt; &lt;end-time&gt;</code> → one-time period</p></li>
+<li></li>
+<li><p><code>daily &lt;start-time&gt; to &lt;end-time&gt;</code> → every day</p></li>
+<li></li>
+<li><p><code>monthly &lt;day-of-month&gt; &lt;start-time&gt; to &lt;end-time&gt;</code> → monthly period</p></li>
+</ul></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
