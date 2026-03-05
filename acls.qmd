@@ -50,30 +50,20 @@ daily <start-time> to <end-time> → every day
 
 monthly <day-of-month> <start-time> to <end-time> → monthly period
 
--   
-
-    `periodic weekdays 08:00 to 17:00` → applies **Monday–Friday, 8 AM to 5 PM**
+-   `periodic weekdays 08:00 to 17:00` → applies **Monday–Friday, 8 AM to 5 PM**
 
 <!-- -->
 
--   
-
-    Other options:
+-   Other options:
 
     -   
 
-    -   
-
-        `absolute <start-date> <start-time> to <end-date> <end-time>` → one-time period
+    -   `absolute <start-date> <start-time> to <end-date> <end-time>` → one-time period
 
     -   
 
-    -   
-
-        `daily <start-time> to <end-time>` → every day
+    -   `daily <start-time> to <end-time>` → every day
 
     -   
 
-    -   
-
-        `monthly <day-of-month> <start-time> to <end-time>` → monthly period
+    -   `monthly <day-of-month> <start-time> to <end-time>` → monthly period
