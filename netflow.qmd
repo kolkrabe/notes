@@ -44,13 +44,10 @@ code-block-bg: dark
 
 **CONFIG STEPS (REMMI)**
 
-1\) Configure Flow Record
-
-2\) Configur Flow Exporter
-
-3\) Configure Flow Monitor
-
-4\) Apply Flow Monitor to interface.
+1.  Configure Flow Record
+2.  Configure Flow Exporter
+3.  Configure Flow Monitor
+4.  Apply Flow Monitor to interface.
 
 ------------------------------------------------------------------------
 
