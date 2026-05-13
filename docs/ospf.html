@@ -407,22 +407,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="general-notes" class="level1">
 <h1>General Notes</h1>
 <ul>
-<li><p>Link State Routing Protocol - makes routing decisions based on the state of links.</p></li>
-<li><p>Once adjacency formed each router has the same <strong>Link State Database.</strong></p></li>
-<li><p>Reacts only to changes, no constant flooding of updates.</p></li>
-<li><p>AD - 110 for Internal &amp; External</p></li>
-<li><p>Process-ID - <strong>Locally</strong> significant.</p></li>
-<li><p>Timers (Default - dead = 4 x Hello)</p>
+<li>Link State Routing Protocol - makes routing decisions based on the state of links.</li>
+<li>Once adjacency formed each router has the same <strong>Link State Database.</strong></li>
+<li>Reacts only to changes, no constant flooding of updates.</li>
+<li>AD - 110 for Internal &amp; External</li>
+<li>Process-ID - <strong>Locally</strong> significant.</li>
+<li>Timers (Default - dead = 4 x Hello)
 <ul>
 <li>Hello - 10</li>
 <li>Dead Interval - 40 (How long local router waits to hear neighbours Hello</li>
 <li>Wait Timer - 40 (How long to wait for DR/BDR to be elected before triggering election)</li>
 <li>Retransmit - 5 (how long to wait to retransmit OSPF packet which hasn’t been acknowledged)</li>
 </ul></li>
-<li><p>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast), <strong>Port 89</strong></p></li>
-<li><p>224.0.0.6 - Broadcast for All Designates Routers, <strong>Port 89</strong></p></li>
-<li><p><strong>DR/BDR Election</strong> - Highest Priority value (0 to remove from election) - Highest Router-ID - Highest IP on Loopback Int - Highest IP on interface that’s UP</p></li>
-<li><p><strong>Metric Calculation</strong></p>
+<li>224.0.0.5 - Broadcast for All OSPF Routers (Broadcast), <strong>Port 89</strong></li>
+<li>224.0.0.6 - Broadcast for All Designates Routers, <strong>Port 89</strong></li>
+<li><strong>DR/BDR Election</strong> - Highest Priority value (0 to remove from election) - Highest Router-ID - Highest IP on Loopback Int - Highest IP on interface that’s UP</li>
+<li><strong>Metric Calculation</strong>
 <ul>
 <li>Bandwidth \ References Bandwidth - Default ref is 100Mb (all interfaces &gt; 100M have same ref cost.
 <ul>
@@ -430,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Should match across topology but won’t stop neighbourships forming.</li>
 </ul></li>
 </ul></li>
-<li><p>Network Type (don’t have to match)</p>
+<li>Network Type (don’t have to match)
 <ul>
 <li>Broadcast - Ethernet -Default for OSPF - <strong>DR/BDR required</strong></li>
 <li>Point-to-Point - Default for non-Frame Relay serial interface, <strong>no DR/BDR required</strong></li>
@@ -438,7 +438,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Point-to-Multipoint - <strong>No DR/BDR required</strong>, (Hello 30 seconds, Dead Interval 120 seconds)</li>
 <li>When mixing - might have to adjust timers.</li>
 </ul></li>
-<li><p>Troubleshooting - <strong>TAN MAT</strong> (<strong>T</strong>imers, <strong>A</strong>rea, <strong>N</strong>etwork Address, <strong>M</strong>TU, <strong>A</strong>uth, <strong>T</strong>ype)</p></li>
+<li>Troubleshooting - <strong>TAN MAT</strong> (<strong>T</strong>imers, <strong>A</strong>rea, <strong>N</strong>etwork Address, <strong>M</strong>TU, <strong>A</strong>uth, <strong>T</strong>ype)</li>
 </ul>
 <hr>
 </section>
@@ -471,8 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Type 1=E1 - Cost the ASBR reports plus cost to ASBR</li>
 <li>Type 2=E2 - Cost of Redistribution metric only, if tie-break cost to ASBR included.</li>
 </ul></li>
-<li><p><strong>Type 7 - NSSA External LSA</strong></p>
-<h2 id="section" class="anchored"></h2>
+<li><p><strong>Type 7 - NSSA External LSA</strong> ##</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
