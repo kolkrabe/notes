@@ -18,3 +18,5 @@ Speed Test (CloudFlare) - <https://Speed.cloudflare.com>
 DNS Vis - <https://dnsviz.net/>
 
 Regex Calc - <https://regex101.com/>
+
+IPv4 Map - <https://ipv4.dev.sarl/>
